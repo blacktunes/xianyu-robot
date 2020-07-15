@@ -1,0 +1,7 @@
+/dist/
+#/*.js
+/test/unit/coverage/
+/test/unit/specs/
+/build/
+/test/
+/node_modules/

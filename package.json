@@ -1,0 +1,29 @@
+{
+  "name": "xianyu-robot",
+  "version": "1.0.0",
+  "description": "基于coolq-robot的酷Q机器人",
+  "main": "dist/main.js",
+  "scripts": {
+    "dev": "nodemon --ext js,ts --exec ts-node index.ts",
+    "build": "rimraf dist && tsc && gulp copy"
+  },
+  "author": "Blacktunes",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^14.0.23",
+    "gulp": "^4.0.2",
+    "nodemon": "^2.0.4",
+    "rimraf": "^3.0.2",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.6"
+  },
+  "dependencies": {
+    "colors": "^1.4.0",
+    "cq-websocket": "^2.1.1",
+    "json5": "^2.1.3",
+    "moment": "^2.27.0"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  }
+}
