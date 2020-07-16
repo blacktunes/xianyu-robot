@@ -1,9 +1,10 @@
-import { CQApp, CQWebSocketInit, printTime, CQLog, CQMsg } from '../cq-robot'
-import CQWebSocket, { CQWebSocketOption } from 'cq-websocket'
-import { robotConfig, appOption } from './option'
+import { CQWebSocketOption } from 'cq-websocket'
+import { CoolQ, CQApp, CQMsg, printTime } from '../cq-robot'
+import { appOption, RobotConfig } from './modules/option'
+import { connect } from './modules/connect'
 
 export class Bot extends CQApp {
-  constructor(config?: robotConfig, debug: boolean = false) {
+  constructor(config?: RobotConfig, debug: boolean = false) {
     super(appOption)
 
     this.CQ.setDebug(debug)
@@ -20,31 +21,15 @@ export class Bot extends CQApp {
       if (config.port) {
         this.CQWebSocketOption.port = config.port
       }
-
-      this.handleMsg = async (...args): Promise<0 | 1> => {
-        if (config.plugins && config.plugins.length > 0) {
-          for (let i in config.plugins) {
-            if (config.plugins[i](...args) === 0) {
-              break
-            }
-            return CQMsg.MSG_INTERCEPT
-          }
-          return CQMsg.MSG_IGNORE
-        }
-      }
-
-      this.enable = (): 0 => {
-        if (config.init && config.init.length > 0) {
-          config.init.forEach(async fn => {
-            await fn()
-          })
-          return 0
-        }
-      }
     }
   }
 
-  CQWebSocketOption: CQWebSocketOption = {
+  config: Object = {}
+
+  private pluginsList: Array<Function> = []
+  private initList: Array<Function> = []
+
+  private CQWebSocketOption: CQWebSocketOption = {
     accessToken: '', // API 访问 token 。见 CQHTTP API 之配置文件说明
     enableAPI: true, // 启用 /api 连线
     enableEvent: true, // 启用 /event 连线
@@ -64,115 +49,90 @@ export class Bot extends CQApp {
     }
   }
 
-  async handleMsg(from: number, fromQQ: number, msg: string, type: 0 | 1): Promise<0 | 1> {
-    return CQMsg.MSG_IGNORE
+  private async handleMsg(app: CoolQ, from: number, fromQQ: number, msg: string, type: 0 | 1): Promise<0 | 1> {
+    if (this.pluginsList.length > 0) {
+      for (let i in this.pluginsList) {
+        if (this.pluginsList[i](app, from, fromQQ, msg, type) === 0) {
+          break
+        }
+        return CQMsg.MSG_INTERCEPT
+      }
+      return CQMsg.MSG_IGNORE
+    }
   }
 
-  async init(): Promise<void> { }
+  private async initPlugin(): Promise<void> {
+    if (this.initList.length > 0) {
+      for (let i in this.initList) {
+        this.initList[i]()
+      }
+    }
+  }
 
   async groupMsg(_subType: string, _msgId: number, fromGroup: number, fromQQ: number, _fromAnonymous: string, msg: string, _font: number): Promise<0 | 1> {
-    return await this.handleMsg(fromGroup, fromQQ, msg, 1)
+    return await this.handleMsg(this.CQ, fromGroup, fromQQ, msg, 1)
   }
 
   async discussMsg(_subType: string, _msgId: number, fromDiscuss: number, fromQQ: number, msg: string, _font: number): Promise<0 | 1> {
-    return await this.handleMsg(fromDiscuss, fromQQ, msg, 0)
+    return await this.handleMsg(this.CQ, fromDiscuss, fromQQ, msg, 0)
   }
 
   enable(): 0 {
-    this.init()
+    this.initPlugin()
     return 0
   }
 
-  start() {
-    // 链接酷Q
-    const bot: CQWebSocket = CQWebSocketInit(this.CQWebSocketOption)
+  /**
+   * 添加消息处理插件
+   * 函数名为apply或带有参数的时候会认为是初始化函数
+   * 需要在初始化函数里再次调用.plugin插入指定函数
+   * @param {Function} fn
+   * @param {Object} config
+   */
+  plugin(fn: Function, config?: Object): this {
+    if (fn.name === 'apply' || config) fn(this, config)
+    else this.applyPlugin(fn)
+    return this
+  }
 
-    this.startup()
-    printTime(`[应用]${this.APP_ID ? ' ' + this.APP_ID + ' ' : '应用'}已载入`, CQLog.LOG_INFO_SUCCESS)
+  private applyPlugin(fn: Function) {
+    this.pluginsList.push(fn)
+  }
 
-    bot.on('ready', () => {
-      printTime('[WebSocket] 连接成功！', CQLog.LOG_INFO)
-      this.enable()
-      printTime(`[应用]${this.APP_ID ? ' ' + this.APP_ID + ' ' : '应用'}已启动`, CQLog.LOG_INFO_SUCCESS)
-    })
+  /**
+   * 添加初始化插件，插件只会在启动时运行一次
+   * 函数名为apply或带有参数的时候会认为是初始化函数
+   * 需要在初始化函数里再次调用.init插入指定函数
+   * @param {Function} fn
+   * @param {Object} config
+   */
+  init(fn: Function, config?: Object): this {
+    if (fn.name === 'apply' || config) fn(this, config)
+    else this.applyInit(fn)
+    return this
+  }
 
-    bot.on('message.private', async (_event, c, _tags) => {
-      printTime(`[接收私聊消息] 类型:${c.sub_type} QQId:${c.user_id} msg:${c.message}`, CQLog.LOG_INFO_RECV)
-      await this.privateMsg(c.sub_type, c.message_id, c.user_id, c.message, c.font)
-    })
+  private applyInit(fn: Function) {
+    this.initList.push(fn)
+  }
 
-    bot.on('message.group', async (_event, c, _tags) => {
-      printTime(`[接收群聊消息] 类型:${c.sub_type} GroupId:${c.group_id} QQId:${c.user_id} msg:${c.message}`, CQLog.LOG_INFO_RECV)
-      let flag = c.anonymous ? c.anonymous.flag : ''
-      await this.groupMsg(c.sub_type, c.message_id, c.group_id, c.user_id, flag, c.message, c.font)
-    })
-
-    bot.on('message.discuss', async (_event, c, _tags) => {
-      printTime(`[接收讨论组消息] discussId:${c.discuss_id} QQId:${c.user_id} msg:${c.message}`, CQLog.LOG_INFO_RECV)
-      await this.discussMsg('discuss', c.message_id, c.discuss_id, c.user_id, c.message, c.font)
-    })
-
-    bot.on('notice.group_upload', async (c) => {
-      printTime(`[群文件上传] groupId:${c.group_id} QQId:${c.user_id} file:${JSON.stringify(c.file)}`, CQLog.LOG_INFO_RECV)
-      await this.groupUpload('group_upload', c.time, c.group_id, c.user_id, c.file)
-    })
-
-    bot.on('notice.group_admin', async (c) => {
-      printTime(`[群管理员变动] 类型:${c.sub_type} GroupId:${c.group_id} QQId:${c.user_id}`, CQLog.LOG_INFO_RECV)
-      await this.groupAdmin(c.sub_type, c.time, c.group_id, c.user_id)
-    })
-
-    bot.on('notice.group_decrease', async (c) => {
-      printTime(`[群成员减少] 类型:${c.sub_type} GroupId:${c.group_id} 操作者QQ:${c.operator_id} 离开者QQ:${c.user_id}`, CQLog.LOG_INFO_RECV)
-      await this.groupDecrease(c.sub_type, c.time, c.group_id, c.operator_id, c.user_id)
-    })
-
-    bot.on('notice.group_increase', async (c) => {
-      printTime(`[群成员增加] 类型:${c.sub_type} GroupId:${c.group_id} 操作者QQ:${c.operator_id} 加入者QQ:${c.user_id}`, CQLog.LOG_INFO_RECV)
-      await this.groupIncrease(c.sub_type, c.time, c.group_id, c.operator_id, c.user_id)
-    })
-
-    bot.on('notice.friend_add', async (c) => {
-      printTime(`[好友添加] QQId:${c.user_id}`, CQLog.LOG_INFO_RECV)
-      await this.friendAdd('friend_add', c.time, c.user_id)
-    })
-
-    bot.on('request.friend', async (c) => {
-      printTime(`[加好友请求] QQId:${c.user_id} 验证信息:${c.comment}`, CQLog.LOG_INFO_RECV)
-      await this.requestAddFriend('request_add_friend', c.time, c.user_id, c.comment, c.flag)
-    })
-
-    bot.on('request.group', async (c) => {
-      printTime(`[加群请求／邀请] 类型:${c.sub_type} GroupId:${c.group_id} QQId:${c.user_id} 验证信息:${c.comment}`, CQLog.LOG_INFO_RECV)
-      await this.requestAddGroup(c.sub_type, c.time, c.group_id, c.user_id, c.comment, c.flag)
-    })
-
-    bot.on('socket.closing', (_attempts) => {
-      if (this.isEnable) {
-        this.disable()
-        printTime(`[应用]${this.APP_ID ? ' ' + this.APP_ID + ' ' : '应用'}已停用`, CQLog.LOG_INFO)
-      }
-    })
-
-    bot.on('socket.close', (_socketType, _attempts) => {
-      this.exit()
-      printTime(`[应用]${this.APP_ID ? ' ' + this.APP_ID + ' ' : '应用'}已关闭`, CQLog.LOG_INFO)
-    })
-
-    bot.on('meta_event.heartbeat', async (_context) => {//响应心跳连接
-      try {
-        let result = await bot('get_status')
-        printTime(`API调用测试：get_status:${result.status}`, CQLog.LOG_DEBUG)
-        if (result.status !== 'ok') {
-          printTime('发生了异常', CQLog.LOG_ERROR)
-        }
-      } catch (error) {
-        printTime('发生了异常', CQLog.LOG_ERROR)
-      }
-    })
-
-    this.start = function () {
-      throw new Error('请勿重复启动')
+  /**
+   * 启动函数，可传入JSON配置的地址读取本地配置
+   * @param dirname
+   */
+  async start(config?: JSON) {
+    this.plugin = () => {
+      throw new Error('请在应用启动前载入插件')
     }
+    this.init = () => {
+      throw new Error('请在应用启动前载入插件')
+    }
+    if (config) {
+      for (let i in config) {
+        this.config[i] = config[i]
+      }
+      printTime('[配置] 本地配置加载成功', 13)
+    }
+    connect(this, this.CQWebSocketOption)
   }
 }

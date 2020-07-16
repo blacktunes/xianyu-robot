@@ -1,7 +1,6 @@
 import { CQWebSocket, CQWebSocketOption } from 'cq-websocket'
 import { printTime } from '../utils'
 import { CQCode, CQLog, CQMessage, CQOption, getAuth, GroupInfo, QQInfo, MemberInfo, HttpApiInfo, HttpApiStatus } from './index'
-import JSON5 = require('json5')
 let bot: CQWebSocket // 建立连接的核心模块
 type LogLevel = 0 | 10 | 11 | 12 | 13 | 20 | 30 | 40
 

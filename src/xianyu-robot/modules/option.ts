@@ -1,12 +1,10 @@
-import { CQOption } from '../cq-robot'
+import { CQOption } from '../../cq-robot'
 
-export interface robotConfig {
+export interface RobotConfig {
   name?: string
   token?: string
   host?: string
   port?: number
-  plugins?: Array<Function>
-  init?: Array<Function>
 }
 
 export const appOption: CQOption = {

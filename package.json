@@ -1,6 +1,6 @@
 {
   "name": "xianyu-robot",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "基于coolq-robot的酷Q机器人",
   "main": "dist/main.js",
   "scripts": {
@@ -22,7 +22,6 @@
   "dependencies": {
     "colors": "^1.4.0",
     "cq-websocket": "^2.1.1",
-    "json5": "^2.1.3",
     "moment": "^2.27.0"
   }
 }
