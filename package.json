@@ -1,6 +1,6 @@
 {
   "name": "xianyu-robot",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "基于coolq-robot的酷Q机器人",
   "main": "dist/main.js",
   "scripts": {

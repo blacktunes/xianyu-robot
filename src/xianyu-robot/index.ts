@@ -4,7 +4,7 @@ import { appOption, RobotConfig } from './modules/option'
 import { connect } from './modules/connect'
 
 export class Bot extends CQApp {
-  constructor(config?: RobotConfig, debug: boolean = false) {
+  constructor(config: RobotConfig = null, debug: boolean = false) {
     super(appOption)
 
     this.CQ.setDebug(debug)
@@ -89,7 +89,7 @@ export class Bot extends CQApp {
    * @param {Function} fn
    * @param {Object} config
    */
-  plugin(fn: Function, config?: Object): this {
+  plugin(fn: Function, config: Object = null): this {
     if (fn.name === 'apply' || config) fn(this, config)
     else this.applyPlugin(fn)
     return this
@@ -106,7 +106,7 @@ export class Bot extends CQApp {
    * @param {Function} fn
    * @param {Object} config
    */
-  init(fn: Function, config?: Object): this {
+  init(fn: Function, config: Object = null): this {
     if (fn.name === 'apply' || config) fn(this, config)
     else this.applyInit(fn)
     return this
@@ -120,7 +120,7 @@ export class Bot extends CQApp {
    * 启动函数，可传入JSON配置的地址读取本地配置
    * @param dirname
    */
-  async start(config?: JSON) {
+  async start(config: JSON = null) {
     this.plugin = () => {
       throw new Error('请在应用启动前载入插件')
     }

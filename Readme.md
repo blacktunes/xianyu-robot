@@ -10,7 +10,15 @@ npm install -S xianyu-robot
 
 #### 使用方法
 ``` js
+// TypeScript
 import App from 'xianyu-robot'
+
+const app = new App()
+
+app.start()
+
+// Node
+const App = require('../dist/main').default
 
 const app = new App()
 
