@@ -17,7 +17,7 @@ const app = new App()
 app.start()
 ```
 
-目前还在开发中，没有附带内置插件，实例化可以增加参数，参数为对象
+目前还在开发中，没有附带内置插件，可以添加对象参数
 
 ```js
 {
@@ -25,7 +25,14 @@ app.start()
   token: string // coolq-http-api的accessToken
   host: string // coolq-http-api的地址
   port: number // coolq-http-api的端口
-  plugins: Array<Function> // 处理消息的插件
-  init: Array<Function> // 初始化插件
 }
+```
+
+可以使用`init`和`plugin`方法载入插件
+
+```js
+// init方法载入的函数会插入到初始化函数中
+app.init(test)
+// plugin方法载入的函数会插入到讨论组和群组消息处理函数中
+app.plugin(test)
 ```
