@@ -2,6 +2,7 @@ import { CQAppAbstract } from './CQAppAbstract'
 import { CQListener } from './CQListener'
 import { CoolQ } from '../entity/CoolQ'
 import { CQFile } from '../entity/CQFile'
+import { CQOption } from '..'
 /**
  *  CQ应用
  *
@@ -23,13 +24,12 @@ export class CQApp extends CQAppAbstract implements CQListener {
      * @param {number} [CQ_API_VER=9] 酷Q API 的版本 一旦版本不匹配将停止加载该应用
      * @memberof CQApp
      */
-    constructor(debug: boolean = false, HTTP_API_VER: number = 4, CQ_API_VER: number = 9) {
+    constructor(appOption: CQOption, debug: boolean = false, HTTP_API_VER: number = 4, CQ_API_VER: number = 9) {
         super()
         this.CQ_API_VER = CQ_API_VER
         this.HTTP_API_VER = HTTP_API_VER
-        this.CQ = new CoolQ(debug)
+        this.CQ = new CoolQ(appOption, debug)
         this.isEnable = false
-        this.appDirectory = this.CQ.getAppDirectory()
     }
     CQ: CoolQ;
     APP_ID: string;
@@ -42,7 +42,6 @@ export class CQApp extends CQAppAbstract implements CQListener {
      * @memberof CQApp
      */
     isEnable: boolean;
-    appDirectory: string;
     // /**
     //  * 本函数请勿继承覆盖
     //  * 返回应用的API_VER、APP_ID、HTTP_API_VER
