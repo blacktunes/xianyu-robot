@@ -1,3 +1,3 @@
-import { Bot } from './xianyu-robot'
+import { Bot } from './xianyu-robot/bot'
 
 export default Bot

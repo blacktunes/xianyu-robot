@@ -9,7 +9,7 @@ npm install -S xianyu-robot
 ```
 
 #### 使用方法
-``` js
+``` ts
 // TypeScript
 import App from 'xianyu-robot'
 
@@ -17,8 +17,8 @@ const app = new App()
 
 app.start()
 
-// Node
-const App = require('../dist/main').default
+// JavaScript
+const App = require('xianyu-robot').default
 
 const app = new App()
 
@@ -36,11 +36,18 @@ app.start()
 }
 ```
 
-可以使用`init`和`plugin`方法载入插件
+可以使用`init`和`plugin`方法载入插件，请在`start`之前载入，否则会报错
 
 ```js
 // init方法载入的函数会插入到初始化函数中
-app.init(test)
+app.init(fn)
 // plugin方法载入的函数会插入到讨论组和群组消息处理函数中
-app.plugin(test)
+app.plugin(fn)
+
+// 载入多个插件可以见写成以下形式
+app
+  .plugin(fn1)
+  .plugin(fn2)
+  .plugin(fn3)
+
 ```

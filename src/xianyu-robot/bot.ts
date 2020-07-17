@@ -4,6 +4,11 @@ import { appOption, RobotConfig } from './modules/option'
 import { connect } from './modules/connect'
 
 export class Bot extends CQApp {
+  /**
+   * 机器人构造函数
+   * @param config
+   * @param debug
+   */
   constructor(config: RobotConfig = null, debug: boolean = false) {
     super(appOption)
 
@@ -85,12 +90,11 @@ export class Bot extends CQApp {
   /**
    * 添加消息处理插件
    * 函数名为apply或带有参数的时候会认为是初始化函数
-   * 需要在初始化函数里再次调用.plugin插入指定函数
+   * 请在初始化函数里再次调用plugin方法插入指定函数
    * @param {Function} fn
-   * @param {Object} config
    */
-  plugin(fn: Function, config: Object = null): this {
-    if (fn.name === 'apply' || config) fn(this, config)
+  plugin(fn: Function, ...arg: any[]): this {
+    if (fn.name === 'apply' || arg.length > 0) fn(this, arg)
     else this.applyPlugin(fn)
     return this
   }
@@ -102,12 +106,11 @@ export class Bot extends CQApp {
   /**
    * 添加初始化插件，插件只会在启动时运行一次
    * 函数名为apply或带有参数的时候会认为是初始化函数
-   * 需要在初始化函数里再次调用.init插入指定函数
+   * 请在初始化函数里再次调用init方法插入指定函数
    * @param {Function} fn
-   * @param {Object} config
    */
-  init(fn: Function, config: Object = null): this {
-    if (fn.name === 'apply' || config) fn(this, config)
+  init(fn: Function, ...arg: any[]): this {
+    if (fn.name === 'apply' || arg.length > 0) fn(this, arg)
     else this.applyInit(fn)
     return this
   }
@@ -120,7 +123,7 @@ export class Bot extends CQApp {
    * 启动函数，可传入JSON配置的地址读取本地配置
    * @param dirname
    */
-  async start(config: JSON = null) {
+  start(config: JSON = null) {
     this.plugin = () => {
       throw new Error('请在应用启动前载入插件')
     }
