@@ -1,5 +1,11 @@
 import { CQOption } from '../../cq-robot'
 
+export interface AdminConfig {
+  type: number,
+  qq: number,
+  id?: number
+}
+
 export interface RobotConfig {
   name?: string
   token?: string

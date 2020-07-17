@@ -13,13 +13,13 @@ type LogLevel = 0 | 10 | 11 | 12 | 13 | 20 | 30 | 40
 export function CQWebSocketInit(option: CQWebSocketOption): CQWebSocket {
     bot = new CQWebSocket(option)
     bot.on('socket.connecting', (socketType, attempts) => {
-        printTime(`[WebSocket] 尝试第${attempts}次连线`, CQLog.LOG_INFO)
+        printTime(`[WebSocket] ${socketType} 尝试第${attempts}次连线`, CQLog.LOG_INFO)
     }).on('socket.connect', (socketType, sock, attempts) => {
-        printTime(`[WebSocket] 第${attempts}次连线尝试成功`, CQLog.LOG_INFO_SUCCESS)
+        printTime(`[WebSocket] ${socketType} 第${attempts}次连线尝试成功`, CQLog.LOG_INFO_SUCCESS)
     }).on('socket.failed', (socketType, attempts) => {
-        printTime(`[WebSocket] 第${attempts}次连线尝试失败 `, CQLog.LOG_WARNING)
+        printTime(`[WebSocket] ${socketType} 第${attempts}次连线尝试失败 `, CQLog.LOG_WARNING)
     }).on('socket.error', (socketType, error) => {
-        printTime('[WebSocket] 连线出现了socket.error错误！！', CQLog.LOG_ERROR)
+        printTime(`[WebSocket] ${socketType} 连线出现了socket.error错误！！`, CQLog.LOG_ERROR)
         console.error(error)
     }).on('error', (error) => {
         printTime('[WebSocket] 连线出现了error！！', CQLog.LOG_FATAL)

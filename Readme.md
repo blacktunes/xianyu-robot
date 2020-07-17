@@ -25,7 +25,7 @@ const app = new App()
 app.start()
 ```
 
-目前还在开发中，没有附带内置插件，可以添加对象参数
+目前还在开发中，没有太多内置插件，可以添加对象参数
 
 ```js
 {
@@ -35,12 +35,22 @@ app.start()
   port: number // coolq-http-api的端口
 }
 ```
+使用`admin`可以设置管理员，可用于指定只有管理员可用的指令和接收通知，请在载入插件和`start`前调用
+```js
+// 设置管理员，用于接收管理员消息
+// type 0-私聊, 1-群组, 2-讨论组
+// qq 管理员Q号
+// id 群组ID
+// type不为0时必须设置id
+app.admin(type, qq, id)
+```
 
 可以使用`init`和`plugin`方法载入插件，请在`start`之前载入，否则会报错
 
 ```js
 // init方法载入的函数会插入到初始化函数中
 app.init(fn)
+
 // plugin方法载入的函数会插入到讨论组和群组消息处理函数中
 app.plugin(fn)
 
@@ -49,5 +59,25 @@ app
   .plugin(fn1)
   .plugin(fn2)
   .plugin(fn3)
+```
+`start`可传入目录地址，会读取该目录下的`./config/config.json`，同时也会把其它插件的通用配置保存到该文件
+```js
+app.start()
+```
+其它内置插件
+```js
+// 创建mysql链接池
+app.createPool()
 
+// 获取格式化后的日期和时间
+app.getTime()
+
+// 利用async/await暂时中断执行
+app.sleep()
+
+// 发送消息
+app.send()
+
+// 将通用设置保存到本地
+app.saveConfig()
 ```
