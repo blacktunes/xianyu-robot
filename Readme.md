@@ -62,7 +62,7 @@ app
 ```
 `start`可传入目录地址，会读取该目录下的`./config/config.json`，同时也会把其它插件的通用配置保存到该文件
 ```js
-app.start()
+app.start(__dirname)
 ```
 其它内置插件
 ```js

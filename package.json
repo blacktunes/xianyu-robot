@@ -1,6 +1,6 @@
 {
   "name": "xianyu-robot",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "基于coolq-robot的酷Q机器人",
   "main": "dist/main.js",
   "scripts": {
@@ -10,12 +10,17 @@
   },
   "author": "Blacktunes",
   "license": "MIT",
+  "keywords": ["coolq", "node", "typescript"],
+  "homepage": "https://github.com/blacktunes/xianyu-robot",
   "files": [
     "dist"
   ],
   "devDependencies": {
+    "@types/js-base64": "^2.3.2",
     "@types/mysql": "^2.15.15",
+    "@types/named-regexp-groups": "^1.0.0",
     "@types/node": "^14.0.23",
+    "@types/node-schedule": "^1.3.0",
     "gulp": "^4.0.2",
     "nodemon": "^2.0.4",
     "rimraf": "^3.0.2",
@@ -25,7 +30,10 @@
   "dependencies": {
     "colors": "^1.4.0",
     "cq-websocket": "^2.1.1",
+    "js-base64": "^3.2.4",
     "moment": "^2.27.0",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "named-regexp-groups": "^1.0.5",
+    "node-schedule": "^1.3.2"
   }
 }
