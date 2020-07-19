@@ -2,7 +2,7 @@ import mysql = require('mysql')
 
 export default class Mysql {
   constructor(config: mysql.PoolConfig) {
-    this.pool = mysql.createPool({
+    this.Pool = mysql.createPool({
       // 允许多条查询
       multipleStatements: true,
       charset: 'utf8mb4',
@@ -10,19 +10,19 @@ export default class Mysql {
     })
   }
 
-  pool: mysql.Pool
+  Pool: mysql.Pool = null
 
   /**
    * 查询语句
    * @param sql
    * @param values
    */
-  query(sql: string, values = '') {
-    return new Promise((resolve, reject) => {
-      if (this.pool === null) {
-        reject(false)
+  query = (sql: string, values = '') => {
+    return new Promise<any>((resolve, reject) => {
+      if (this.Pool === null) {
+        reject(-1)
       } else {
-        this.pool.getConnection((err, conn) => {
+        this.Pool.getConnection((err, conn) => {
           if (err) {
             reject(err)
           } else {

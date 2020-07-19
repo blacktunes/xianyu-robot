@@ -1,19 +1,24 @@
 {
   "name": "xianyu-robot",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "基于coolq-robot的酷Q机器人",
-  "main": "dist/main.js",
+  "main": "lib/main.js",
   "scripts": {
     "dev": "nodemon --ext js,ts --exec ts-node test",
-    "build": "rimraf dist && tsc && gulp copy",
+    "build": "rimraf lib && tsc && gulp copy",
     "rm": "rimraf node_modules"
   },
   "author": "Blacktunes",
   "license": "MIT",
-  "keywords": ["coolq", "node", "typescript"],
+  "keywords": [
+    "coolq",
+    "node",
+    "typescript"
+  ],
   "homepage": "https://github.com/blacktunes/xianyu-robot",
   "files": [
-    "dist"
+    "lib",
+    "src"
   ],
   "devDependencies": {
     "@types/js-base64": "^2.3.2",

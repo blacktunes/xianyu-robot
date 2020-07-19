@@ -1,5 +1,3 @@
-import { Mysql } from "./mysql"
-
 export interface SetuConfig {
   enable: boolean,
   multiservice: {
@@ -76,12 +74,4 @@ export function toNumber(str: any) {
       break
   }
   return num
-}
-
-export function mysqlErr(bot, type, from, fromQQ): boolean {
-  if (Mysql === null) {
-    bot.send(type, from, `${bot.CQCode.at(fromQQ)}好像没有配置本地数据库`)
-    return true
-  }
-  return false
 }

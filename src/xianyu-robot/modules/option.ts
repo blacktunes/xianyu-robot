@@ -1,34 +1,49 @@
-import { CQOption } from '../../cq-robot'
+import { CQOption } from '../cq-robot'
 import { CQWebSocketOption } from 'cq-websocket'
 
+
+export interface BotPlugin {
+  new (...arg: any): void
+}
+
 export interface pluginsConfig {
+  [x: string]: any
   setu?: {
-    enable: boolean,
+    enable: boolean
     multiservice: {
-      enable: boolean,
-      port: number,
+      enable: boolean
+      port: number
       token: string
-    },
-    copy: boolean,
-    copy_times: number,
-    cache: boolean,
+    }
+    copy: boolean
+    copy_times: number
+    cache: boolean
     r18: 0 | 1 | 2,
-    new_pic: boolean,
-    dl_location: string,
-    keyword_1: string,
-    keyword_2: string,
-    star_1: string,
-    star_2: string,
-    default: 0 | 1,
-    api: string,
-    apikey: string,
+    new_pic: boolean
+    dl_location: string
+    keyword_1: string
+    keyword_2: string
+    star_1: string
+    star_2: string
+    default: 0 | 1
+    api: string
+    apikey: string
     limit: number
+  }
+  fudu?: {
+    enable: boolean
+    times: number
+    probability: number
+  }
+  searchPic?: {
+    enable: boolean
+    saucenaoApiKey: string
   }
 }
 
 export interface AdminConfig {
-  type: number,
-  qq: number,
+  type: number
+  qq: number
   id?: number
 }
 

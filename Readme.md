@@ -47,18 +47,21 @@ app.admin(type, qq, id)
 
 可以使用`init`和`plugin`方法载入插件，请在`start`之前载入，否则会报错
 
+插件形式为类，请在插件类的构造函数中调用`applyPlugin`和`applyInit`载入处理消息的方法
+
 ```js
 // init方法载入的函数会插入到初始化函数中
-app.init(fn)
+app.init(Plugin)
 
 // plugin方法载入的函数会插入到讨论组和群组消息处理函数中
-app.plugin(fn)
+app.plugin(Plugin)
 
 // 载入多个插件可以见写成以下形式
 app
-  .plugin(fn1)
-  .plugin(fn2)
-  .plugin(fn3)
+  .plugin(Plugin1)
+  .plugin(Plugin2)
+  .plugin(Plugin3)
+
 ```
 `start`可传入目录地址，会读取该目录下的`./config/config.json`，同时也会把其它插件的通用配置保存到该文件
 ```js

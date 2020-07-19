@@ -1,6 +1,6 @@
 import { CQWebSocketOption } from 'cq-websocket'
-import { CQApp, CQMsg, printTime, CQCode } from '../cq-robot'
-import { botOption, RobotConfig, AdminConfig, botWSOption, pluginsConfig } from './modules/option'
+import { CQApp, CQMsg, printTime, CQCode } from './cq-robot'
+import { botOption, RobotConfig, AdminConfig, botWSOption, pluginsConfig, BotPlugin } from './modules/option'
 import connect from './modules/connect'
 import Mysql from './modules/mysql'
 import { PoolConfig } from '_@types_mysql@2.15.15@@types/mysql'
@@ -8,7 +8,10 @@ import fs = require('fs')
 import path = require('path')
 import schedule = require('node-schedule')
 
+type MsgType = 0 | 1 | 2
+
 export class Bot extends CQApp {
+  [x: string]: any
   /**
    * 机器人构造函数
    * @param config
@@ -35,6 +38,8 @@ export class Bot extends CQApp {
   }
 
   private robotReady: boolean = false
+
+  userId: number
 
   adminData: AdminConfig
 
@@ -158,6 +163,7 @@ export class Bot extends CQApp {
   }
 
   private async initPlugin(): Promise<void> {
+    this.userId = await this.CQ.getLoginQq()
     if (this.initList.length > 0) {
       for (let i in this.initList) {
         this.initList[i](this)
@@ -165,7 +171,7 @@ export class Bot extends CQApp {
     }
   }
 
-  async privateMsg(subType: string, msgId: number, fromQQ: number, msg: string, font: number): Promise<0 | 1> {
+  async privateMsg(_subType: string, _msgId: number, fromQQ: number, msg: string, _font: number): Promise<0 | 1> {
     return await this.handleMsg(null, fromQQ, msg, 0)
   }
 
@@ -186,39 +192,35 @@ export class Bot extends CQApp {
 
   /**
    * 添加消息处理插件
-   * 函数名为apply或带有参数的时候会认为是初始化函数
-   * 请在初始化函数里再次调用plugin方法插入指定函数
-   * @param {Function} fn
+   * 请传入初始化插件，若要直接插入消息处理流程请使用applyPlugin方法
+   * @param {class} plugin
    */
-  plugin(fn: Function, ...arg: any[]): Bot {
+  plugin(plugin: BotPlugin, ...arg: any[]): Bot {
     this.admin = () => {
       throw new Error('请在载入插件前设置管理员')
     }
-    if (fn.name === 'apply' || arg.length > 0) fn(this, ...arg)
-    else this.applyPlugin(fn)
+    new plugin(this, ...arg)
     return this
   }
 
-  private applyPlugin(fn: Function) {
+  applyPlugin(fn: Function) {
     this.pluginsList.push(fn)
   }
 
   /**
-   * 添加初始化插件，插件只会在启动时运行一次
-   * 函数名为apply或带有参数的时候会认为是初始化函数
-   * 请在初始化函数里再次调用init方法插入指定函数
+   * 添加消息处理插件
+   * 请传入初始化插件，若要直接插入消息处理流程请使用applyInit方法
    * @param {Function} fn
    */
   init(fn: Function, ...arg: any[]): Bot {
     this.admin = () => {
       throw new Error('请在载入插件前设置管理员')
     }
-    if (fn.name === 'apply' || arg.length > 0) fn(this, ...arg)
-    else this.applyInit(fn)
+    fn(this, ...arg)
     return this
   }
 
-  private applyInit(fn: Function) {
+  applyInit(fn: Function) {
     this.initList.push(fn)
   }
 
@@ -228,7 +230,7 @@ export class Bot extends CQApp {
    * @param qq 管理员Q号
    * @param id 群组ID
    */
-  admin(type: 0 | 1 | 2, qq: number, id: number = null): Bot {
+  admin(type: MsgType, qq: number, id: number = null): Bot {
     if (type === 0) {
       this.adminData = { type, qq }
     } else {

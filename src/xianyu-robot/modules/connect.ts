@@ -1,5 +1,5 @@
 import CQWebSocket, { CQWebSocketOption } from "cq-websocket"
-import { printTime, CQWebSocketInit, CQLog } from "../../cq-robot"
+import { printTime, CQWebSocketInit, CQLog } from "../cq-robot"
 
 export default function connect(app: any, CQWebSocketOption: CQWebSocketOption) {
   const bot: CQWebSocket = CQWebSocketInit(CQWebSocketOption)
