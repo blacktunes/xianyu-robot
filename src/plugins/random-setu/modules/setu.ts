@@ -1,21 +1,41 @@
 import axios from 'axios'
 import { Base64 } from 'js-base64'
-import Bot, { printTime } from "../../../main"
+import Bot, { CQLog, printTime } from '../../../main'
 import { Database } from './database'
-import { socketSetu } from "./socket"
+import SetuSocket from './socket'
 import schedule = require('node-schedule')
 import fs = require('fs')
 
-export class Setu {
+export class Setu extends SetuSocket {
   Pool: Database = null
 
   restrictedList = {}
 
-  clearRestrictedList = () => {
+  createSchedule = (bot: Bot) => {
     schedule.scheduleJob('0 0 0 * * *', () => {
       this.restrictedList = {}
-      printTime('调用次数已重置', 13)
+      printTime('[setu] 调用次数已重置', CQLog.LOG_INFO)
     })
+    if (this.Pool) {
+      if (bot.config.setu.copy) {
+        if (bot.adminData) {
+          schedule.scheduleJob('0 0 18 * * *', () => {
+            bot.send(bot.adminData.type, bot.adminData.type === 0 ? bot.adminData.qq : bot.adminData.id, `${bot.CQCode.image('dr.jpg')}\n我来自动搬图了`)
+            this.startCopy(bot)
+          })
+        } else {
+          printTime('[setu] 未配置管理员', CQLog.LOG_WARNING)
+        }
+      }
+      if (bot.config.setu.star.length > 0) {
+        bot.config.setu.star.forEach(item => {
+          schedule.scheduleJob('0 59 23 * * *', () => {
+            this.setuStar(bot, item.type, item.id)
+          })
+        })
+        console.log(schedule.scheduledJobs)
+      }
+    }
   }
 
   /**
@@ -52,7 +72,7 @@ export class Setu {
       return
     }
     if (bot.config.setu.multiservice) {
-      if (await socketSetu(bot, from, fromQQ, fromType, fromType === 0 ? bot.config.setu.keyword_1 : bot.config.setu.keyword_2, num, insertId, tag)) {
+      if (await this.socketSetu(bot, from, fromQQ, fromType, fromType === 0 ? bot.config.setu.keyword_1 : bot.config.setu.keyword_2, num, insertId, tag)) {
         return
       }
     }
@@ -82,7 +102,6 @@ export class Setu {
           bot.send(fromType, from, `${bot.CQCode.at(fromQQ)}出现了奇怪的问题`)
         })
     } else {
-      console.log(`${bot.config.setu.api}?${bot.config.setu.apikey ? 'apikey=' + bot.config.setu.apikey : ''}${tag ? '&keyword=' + tag : ''}&size1200=1&num=${num}`)
       let startTime = new Date()
       axios.get(`${bot.config.setu.api}?${bot.config.setu.apikey ? 'apikey=' + bot.config.setu.apikey : ''}${tag ? '&keyword=' + tag : ''}&size1200=1&num=${num}`, {
         timeout: 30 * 1000
@@ -107,7 +126,7 @@ export class Setu {
           }
         })
         .catch(err => {
-          printTime(JSON.stringify(err), 30)
+          console.error(err)
           bot.send(fromType, from, `${bot.CQCode.at(fromQQ)}查不到，就这样吧`)
         })
     }
@@ -130,7 +149,7 @@ export class Setu {
     }
     else {
       bot.send(fromType, from, `${bot.CQCode.at(fromQQ)}出了些奇怪的问题`)
-      printTime(`错误代码：${code}`, 30)
+      printTime(`错误代码：${code}`, CQLog.LOG_ERROR)
     }
   }
 
@@ -189,7 +208,7 @@ export class Setu {
 
   startCopy = (bot: Bot, fromQQ?: number) => {
     if (!this.copying) {
-      printTime(`第${this.times}次请求···`, 10)
+      printTime(`第${this.times}次请求···`, CQLog.LOG_INFO)
       const url = `${bot.config.setu.api}?${bot.config.setu.apikey ? 'apikey=' + bot.config.setu.apikey : ''}&size1200=1&num=10&r18=2`
       axios({
         method: 'get',
@@ -197,7 +216,7 @@ export class Setu {
         url: url
       })
         .then(async res => {
-          printTime(`第${this.times}次请求成功 剩余次数：${res.data.quota}`, 20)
+          printTime(`第${this.times}次请求成功 剩余次数：${res.data.quota}`, CQLog.LOG_INFO_RECV)
           if (res.data.code === 0) {
             await this.formatAndSave(res.data.data)
             if (res.data.quota <= 30) {
@@ -215,11 +234,11 @@ export class Setu {
             this.copySetu(bot, url, fromQQ)
           } else {
             bot.send(bot.adminData.type, bot.adminData.type === 0 ? bot.adminData.qq : bot.adminData.id, `${fromQQ && bot.adminData.type !== 0 ? bot.CQCode.at(fromQQ) : ''}有些奇怪的问题不能开始`)
-            printTime(JSON.stringify(res.data), 30)
+            console.error(res.data)
           }
         })
         .catch(err => {
-          printTime(err.toJSON().message, 30)
+          console.error(err)
           bot.send(bot.adminData.type, bot.adminData.type === 0 ? bot.adminData.qq : bot.adminData.id, `${fromQQ && bot.adminData.type !== 0 ? bot.CQCode.at(fromQQ) : ''}有些奇怪的问题不能开始`)
         })
     } else {
@@ -257,14 +276,14 @@ export class Setu {
     }
     await bot.sleep(2)
     ++this.times
-    printTime(`第${this.times}次请求···`, 10)
+    printTime(`第${this.times}次请求···`, CQLog.LOG_INFO)
     axios({
       method: 'get',
       timeout: 1000 * 15,
       url: url
     })
       .then(async res => {
-        printTime(`第${this.times}次请求成功 剩余次数：${res.data.quota}`, 20)
+        printTime(`第${this.times}次请求成功 剩余次数：${res.data.quota}`, CQLog.LOG_INFO_SUCCESS)
         if (res.data.code === 0) {
           await this.formatAndSave(res.data.data)
           if (res.data.quota <= 30) {
@@ -279,7 +298,7 @@ export class Setu {
       })
       .catch(err => {
         ++this.errTimes
-        printTime(err.toJSON().message, 30)
+        console.error(err)
         this.copySetu(bot, url, fromQQ)
       })
   }
@@ -395,11 +414,11 @@ export class Setu {
       })
       .catch(() => {
         bot.send(bot.adminData.type, bot.adminData.type === 0 ? bot.adminData.qq : bot.adminData.id, `${bot.adminData.type !== 0 ? bot.CQCode.at(bot.adminData.qq) : ''}未缓存信息查询失败`)
-        printTime('未缓存信息查询失败', 30)
+        printTime('未缓存信息查询失败', CQLog.LOG_ERROR)
       })
   }
 
-  async download(bot: Bot, results: any) {
+  download = async (bot: Bot, results: any) => {
     if (results.length < 1) {
       bot.send(bot.adminData.type, bot.adminData.type === 0 ? bot.adminData.qq : bot.adminData.id, `${bot.adminData.type !== 0 ? bot.CQCode.at(bot.adminData.qq) : ''}所有图片已经缓存`)
       return
@@ -419,7 +438,7 @@ export class Setu {
           var dataBuffer = Buffer.from(res.data)
           fs.writeFile(`${bot.config.setu.dl_location}/${data.pid}`, dataBuffer, (err) => {
             if (err) {
-              printTime(JSON.stringify(err), 30)
+              console.error(err)
             } else {
               this.Pool.updateCache(data, 'cache')
             }
@@ -430,12 +449,12 @@ export class Setu {
             this.Pool.updateCache(data, '404')
             ++delNum
           } else {
-            printTime(`[${err.response.status}][ID:${data.id}] - ${data.url}`, 20)
+            printTime(`[${err.response.status}][ID:${data.id}] - ${data.url}`, CQLog.LOG_ERROR)
             ++errNum
           }
         })
         .catch(() => {
-          printTime(`[TIMEOUT][ID:${data.id}] - ${data.url}`, 20)
+          printTime(`[TIMEOUT][ID:${data.id}] - ${data.url}`, CQLog.LOG_ERROR)
           ++timeoutNum
         })
     }

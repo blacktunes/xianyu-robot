@@ -234,10 +234,12 @@ export class CoolQ {
                     if (opName.startsWith('send_')) {
                         return result
                     } else if (opName.startsWith('get_')) {
-                        printTime(`执行函数 ${opName} , 参数:${JSON.stringify(param)} , 执行结果:${JSON.stringify(result)}`, CQLog.LOG_INFO_SUCCESS)
+                        // printTime(`执行函数 ${opName} , 参数:${JSON.stringify(param)} , 执行结果:${JSON.stringify(result)}`, CQLog.LOG_INFO_SUCCESS)
+                        printTime(`执行函数 ${opName} , 参数:${JSON.stringify(param)} , 执行结果: 成功`, CQLog.LOG_INFO_SUCCESS)
                         return result
                     } else {
-                        printTime(`执行函数 ${opName} , 参数:${JSON.stringify(param)} , 执行结果:${JSON.stringify(result)}`, CQLog.LOG_INFO_SUCCESS)
+                        // printTime(`执行函数 ${opName} , 参数:${JSON.stringify(param)} , 执行结果:${JSON.stringify(result)}`, CQLog.LOG_INFO_SUCCESS)
+                        printTime(`执行函数 ${opName} , 参数:${JSON.stringify(param)} , 执行结果: 成功`, CQLog.LOG_INFO_SUCCESS)
                         return result.retcode
                     }
                 } else {

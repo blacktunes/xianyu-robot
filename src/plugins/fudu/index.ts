@@ -1,4 +1,4 @@
-import Bot from '../../main'
+import Bot, { printTime, CQLog } from '../../main'
 
 export interface FuduConfig {
   enable: boolean,
@@ -27,8 +27,8 @@ export default class Fudu {
     } else {
       bot.config.fudu = { ...config }
     }
-    bot.msgList = {}
     bot.applyPlugin(this.fudu)
+    printTime(`[插件] 复读已载入`, CQLog.LOG_INFO_SUCCESS)
     this.initFudu = () => {
       throw new Error('请勿重复初始化')
     }

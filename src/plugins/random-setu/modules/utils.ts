@@ -15,6 +15,10 @@ export interface SetuConfig {
   keyword_2: string,
   star_1: string,
   star_2: string,
+  star: Array<{
+    type: 1 | 2,
+    id: number
+  }>,
   default: 0 | 1,
   api: string,
   apikey: string,

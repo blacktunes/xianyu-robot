@@ -1,5 +1,5 @@
 import { CQWebSocketOption } from 'cq-websocket'
-import { CQApp, CQMsg, printTime, CQCode } from './cq-robot'
+import { CQApp, CQMsg, printTime, CQCode, CQLog } from './cq-robot'
 import { botOption, RobotConfig, AdminConfig, botWSOption, pluginsConfig, BotPlugin } from './modules/option'
 import connect from './modules/connect'
 import Mysql from './modules/mysql'
@@ -11,7 +11,6 @@ import schedule = require('node-schedule')
 type MsgType = 0 | 1 | 2
 
 export class Bot extends CQApp {
-  [x: string]: any
   /**
    * 机器人构造函数
    * @param config
@@ -69,7 +68,7 @@ export class Bot extends CQApp {
       if (index != -1) {
         this.blacklist.splice(index, 1)
       }
-      console.log(`${fromQQ}已解除禁用`)
+      printTime(`${fromQQ}已解除禁用`, CQLog.LOG_WARNING)
       this.send(fromType, fromType === 0 ? fromQQ : from, `${fromType === 0 ? this.CQCode.at(fromQQ) : ''}放过你了，下次别这样了`)
     })
   }
@@ -136,13 +135,13 @@ export class Bot extends CQApp {
   saveConfig() {
     if (this.dirname) {
       const str = JSON.stringify(this.config)
-      if (!fs.existsSync(path.join(this.dirname, './conf/'))) {
-        fs.mkdirSync(path.join(this.dirname, './conf/'))
+      if (!fs.existsSync(this.dirname)) {
+        fs.mkdirSync(this.dirname, './conf/')
       }
-      fs.writeFile(path.join(this.dirname, './conf/config.json'), str, (err) => {
+      fs.writeFile(path.join(this.dirname, './config.json'), str, (err) => {
         if (err) {
           console.log(err)
-          console.error('数据未写入JSON')
+          printTime('数据未写入JSON', CQLog.LOG_ERROR)
         }
       })
     }
@@ -237,7 +236,7 @@ export class Bot extends CQApp {
       if (id) {
         this.adminData = { type, qq, id }
       } else {
-        console.error('类型不为0时必须输入群组ID')
+        printTime('类型不为0时必须输入群组ID', CQLog.LOG_ERROR)
       }
     }
     return this
@@ -261,13 +260,13 @@ export class Bot extends CQApp {
     if (dirname) {
       this.dirname = dirname
       let setting: any
-      if (fs.existsSync(path.join(dirname, './conf/config.json'))) {
-        setting = JSON.parse(fs.readFileSync(path.join(dirname, './conf/config.json')).toString())
+      if (fs.existsSync(path.join(dirname, './config.json'))) {
+        setting = JSON.parse(fs.readFileSync(path.join(dirname, './config.json')).toString())
       }
       for (let i in setting) {
         this.config[i] = setting[i]
       }
-      printTime('[配置] 本地配置加载成功', 13)
+      printTime('[配置] 本地配置加载成功', CQLog.LOG_INFO_SUCCESS)
     }
     connect(this, this.CQWebSocketOption)
   }

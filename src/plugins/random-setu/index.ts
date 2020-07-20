@@ -1,13 +1,11 @@
-import Bot from '../../main'
-import { printTime } from '../../xianyu-robot/cq-robot'
+import Bot, { CQLog, printTime } from '../../main'
 import { Database } from './modules/database'
 import { Setu } from './modules/setu'
-import { createSetuServer } from './modules/socket'
 import { SetuConfig, toNumber } from './modules/utils'
 import NamedRegExp = require('named-regexp-groups')
 
 export default class Sutu extends Setu {
-  constructor(bot: Bot, setuConfig: SetuConfig, mysqlConfig: any) {
+  constructor(bot: Bot, mysqlConfig: any, setuConfig: SetuConfig) {
     super()
     if (mysqlConfig) this.Pool = new Database(bot, mysqlConfig)
     this.initSetu(bot, setuConfig)
@@ -33,6 +31,7 @@ export default class Sutu extends Setu {
       keyword_2: '色图',
       star_1: '每日色胚',
       star_2: '每日色胚',
+      star: [],
       default: 0,
       api: 'https://api.lolicon.app/setu',
       apikey: '',
@@ -49,8 +48,10 @@ export default class Sutu extends Setu {
       bot.config.setu = { ...config }
     }
     bot.applyPlugin(this.handelMsg)
-    bot.applyInit(createSetuServer)
-    this.clearRestrictedList()
+    bot.applyInit(this.createSetuServer)
+    bot.applyInit(this.createSchedule)
+    this.createSchedule(bot)
+    printTime(`[插件] 随机色图已载入`, CQLog.LOG_INFO_SUCCESS)
     this.initSetu = () => {
       throw new Error('请勿重复初始化')
     }
@@ -89,13 +90,13 @@ export default class Sutu extends Setu {
         // 自动搬图
         if (msg === '咸鱼王，开始干活' || msg === '-copy') {
           if (this.mysqlErr(bot, from, fromQQ, type)) return 0
-          printTime('开始从API搬运', 10)
+          printTime('尝试开始从API搬运', CQLog.LOG_INFO)
           bot.send(type, type === 0 ? fromQQ : from, `${type !== 0 ? bot.CQCode.at(fromQQ) : ''}哦`)
           this.startCopy(bot, fromQQ)
           return 0
         } else if (msg === '停下吧' || msg === '-end') {
           if (this.mysqlErr(bot, from, fromQQ, type)) return 0
-          printTime('停止从API搬运', 10)
+          printTime('尝试停止从API搬运', CQLog.LOG_INFO)
           this.stopCopy()
           return 0
         }

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import Bot, { printTime } from '../../../main'
+import Bot, { printTime, CQLog } from '../../../main'
 
 /**
  * 使用whatanime搜图
@@ -9,9 +9,9 @@ import Bot, { printTime } from '../../../main'
  * @param {string} msg
  */
 export function whatanime(bot: Bot, type: 1 | 2, fromID: number, fromQQ: number, msg: string) {
-  printTime(`${fromQQ}触发whatanime搜图`, 10)
+  printTime(`${fromQQ}触发whatanime搜图`, CQLog.LOG_INFO)
   const imgURL = msg.match(/(?<=url=).*?(?=\])/)[0]
-  printTime(`已获取图片URL`, 10)
+  printTime(`已获取图片URL`, CQLog.LOG_INFO)
   axios({
     url: 'https://trace.moe/api/search',
     method: 'GET',
@@ -51,7 +51,7 @@ export function whatanime(bot: Bot, type: 1 | 2, fromID: number, fromQQ: number,
       }
     })
     .catch(err => {
-      printTime(JSON.stringify(err), 30)
+      console.error(err)
       bot.send(type, fromID, `${bot.CQCode.at(fromQQ)}出现了奇怪的错误`)
     })
 }

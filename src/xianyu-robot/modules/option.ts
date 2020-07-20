@@ -1,44 +1,26 @@
 import { CQOption } from '../cq-robot'
 import { CQWebSocketOption } from 'cq-websocket'
+import { TimingConfig } from '../../plugins/timing'
+import { SetuConfig } from '../../plugins/random-setu/modules/utils'
+import { FuduConfig } from '../../plugins/fudu'
+import { SearchPicConfig } from '../../plugins/search-pic'
+import { PcrConfig } from '../../plugins/pcr'
+import { LiveConfig } from '../../plugins/live'
 
 
 export interface BotPlugin {
-  new (...arg: any): void
+  new(...arg: any): void
 }
 
 export interface pluginsConfig {
   [x: string]: any
-  setu?: {
-    enable: boolean
-    multiservice: {
-      enable: boolean
-      port: number
-      token: string
-    }
-    copy: boolean
-    copy_times: number
-    cache: boolean
-    r18: 0 | 1 | 2,
-    new_pic: boolean
-    dl_location: string
-    keyword_1: string
-    keyword_2: string
-    star_1: string
-    star_2: string
-    default: 0 | 1
-    api: string
-    apikey: string
-    limit: number
-  }
-  fudu?: {
-    enable: boolean
-    times: number
-    probability: number
-  }
-  searchPic?: {
-    enable: boolean
-    saucenaoApiKey: string
-  }
+  setu?: SetuConfig
+  fudu?: FuduConfig
+  searchPic?: SearchPicConfig
+  remind?: boolean
+  timing?: TimingConfig
+  pcr?: PcrConfig
+  live?: LiveConfig
 }
 
 export interface AdminConfig {

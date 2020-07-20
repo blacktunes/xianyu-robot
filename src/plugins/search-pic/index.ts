@@ -1,8 +1,8 @@
-import Bot from '../../main'
+import Bot, { printTime, CQLog } from '../../main'
 import { saucenao } from './modules/saucenao'
 import { whatanime } from './modules/whatanime'
 
-interface SearchPicConfig {
+export interface SearchPicConfig {
   enable: boolean,
   saucenaoApiKey: string
 }
@@ -28,6 +28,7 @@ export default class SearchPic {
       bot.config.searchPic = { ...config }
     }
     bot.applyPlugin(this.searchPic)
+    printTime(`[插件] 搜图已载入`, CQLog.LOG_INFO_SUCCESS)
     this.initSearchPic = () => {
       throw new Error('请勿重复初始化')
     }

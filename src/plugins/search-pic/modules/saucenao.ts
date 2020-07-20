@@ -1,5 +1,5 @@
 import axios from 'axios'
-import Bot, { printTime } from '../../../main'
+import Bot, { printTime, CQLog } from '../../../main'
 
 // 只显示P站、动画、电影结果
 var whiteList = [5, 21, 23]
@@ -12,9 +12,9 @@ var whiteList = [5, 21, 23]
  * @param {string} msg
  */
 export function saucenao(bot: Bot, type: 1 | 2, from: number, fromQQ: number, msg: string) {
-  printTime(`${fromQQ}触发saucenao搜图`, 10)
+  printTime(`${fromQQ}触发saucenao搜图`, CQLog.LOG_INFO)
   const imgURL = msg.match(/(?<=url=).*?(?=\])/)[0]
-  printTime(`已获取图片URL`, 10)
+  printTime(`已获取图片URL`, CQLog.LOG_INFO)
   axios({
     url: 'https://saucenao.com/search.php',
     method: 'POST',
