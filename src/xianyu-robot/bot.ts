@@ -50,6 +50,7 @@ export class Bot extends CQApp {
 
   private pluginsList: Array<Function> = []
   private initList: Array<Function> = []
+  private scheduleList: Array<Function> = []
 
   private CQWebSocketOption: CQWebSocketOption = botWSOption
 
@@ -60,7 +61,7 @@ export class Bot extends CQApp {
  * @param {number} fromQQ
  * @param {number} time
  */
-  ban(fromType: number, from: number, fromQQ: number, time: number) {
+  ban = (fromType: number, from: number, fromQQ: number, time: number) => {
     this.send(fromType, fromType === 0 ? fromQQ : from, `${fromType === 0 ? this.CQCode.at(fromQQ) : ''}无路赛，禁用你所有功能${time}分钟`)
     this.blacklist.push(fromQQ)
     schedule.scheduleJob(new Date(Date.now() + time * 60 * 1000), () => {
@@ -80,7 +81,7 @@ export class Bot extends CQApp {
    * @param message 需要发送的信息
    * @returns {Promise<number>} 成功返回message_id，失败返回retcode
    */
-  send(type: number, id: number, message: string): Promise<number> {
+  send = (type: number, id: number, message: string): Promise<number> => {
     return new Promise(resolve => {
       if (type === 0) {
         this.CQ.sendPrivateMsg(id, message).then(code => {
@@ -102,7 +103,7 @@ export class Bot extends CQApp {
    * 格式化Date对象
    * @param date Date对象
    */
-  getTime(date: any) {
+  getTime = (date: any) => {
     return {
       date: `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`,
       time: `${date.getHours() < 10 ? '0' + date.getHours().toString() : date.getHours()}:${date.getMinutes() < 10 ? '0' + date.getMinutes().toString() : date.getMinutes()}:${date.getSeconds() < 10 ? '0' + date.getSeconds().toString() : date.getSeconds()}`
@@ -113,7 +114,7 @@ export class Bot extends CQApp {
  * 使用await暂停运行
  * @param {number} interval 暂停秒数
  */
-  sleep(interval: number) {
+  sleep = (interval: number) => {
     return new Promise(resolve => {
       setTimeout(() => {
         resolve()
@@ -126,13 +127,13 @@ export class Bot extends CQApp {
    * 创建mysql链接池
    * @param config host, user, password, database
    */
-  createPool(config: PoolConfig) {
+  createPool = (config: PoolConfig) => {
     return new Mysql(config)
   }
 
   dirname: string
 
-  saveConfig() {
+  saveConfig = () => {
     if (this.dirname) {
       const str = JSON.stringify(this.config)
       if (!fs.existsSync(this.dirname)) {
@@ -140,14 +141,14 @@ export class Bot extends CQApp {
       }
       fs.writeFile(path.join(this.dirname, './config.json'), str, (err) => {
         if (err) {
-          console.log(err)
+          console.error(err)
           printTime('数据未写入JSON', CQLog.LOG_ERROR)
         }
       })
     }
   }
 
-  private async handleMsg(from: number, fromQQ: number, msg: string, type: 0 | 1 | 2): Promise<0 | 1> {
+  private handleMsg = async (from: number, fromQQ: number, msg: string, type: 0 | 1 | 2): Promise<0 | 1> => {
     let CODE: 0 | 1 = CQMsg.MSG_IGNORE
     if (!this.robotReady || this.blacklist.includes(fromQQ)) return CODE
     if (this.pluginsList.length > 0) {
@@ -161,28 +162,52 @@ export class Bot extends CQApp {
     }
   }
 
-  private async initPlugin(): Promise<void> {
+  private initPlugin = async (): Promise<void> => {
     this.userId = await this.CQ.getLoginQq()
     if (this.initList.length > 0) {
       for (let i in this.initList) {
         this.initList[i](this)
       }
     }
+    this.initSchedule()
   }
 
-  async privateMsg(_subType: string, _msgId: number, fromQQ: number, msg: string, _font: number): Promise<0 | 1> {
+  /**
+   * 定时任务由node-schedule实现，所以会取消所有定时任务
+   * 当多个机器人都使用了定时任务的时候请请谨慎使用
+   */
+  cancelAllJob = (): boolean => {
+    let status = true
+    for (let i in schedule.scheduledJobs) {
+      if (schedule.scheduledJobs[i].cancel() === false) {
+        status = false
+        break
+      }
+    }
+    return status
+  }
+
+  initSchedule = () => {
+    if (this.scheduleList.length > 0) {
+      for (let i in this.scheduleList) {
+        this.scheduleList[i](this)
+      }
+    }
+  }
+
+  privateMsg = async (_subType: string, _msgId: number, fromQQ: number, msg: string, _font: number): Promise<0 | 1> => {
     return await this.handleMsg(null, fromQQ, msg, 0)
   }
 
-  async groupMsg(_subType: string, _msgId: number, fromGroup: number, fromQQ: number, _fromAnonymous: string, msg: string, _font: number): Promise<0 | 1> {
+  groupMsg = async (_subType: string, _msgId: number, fromGroup: number, fromQQ: number, _fromAnonymous: string, msg: string, _font: number): Promise<0 | 1> => {
     return await this.handleMsg(fromGroup, fromQQ, msg, 1)
   }
 
-  async discussMsg(_subType: string, _msgId: number, fromDiscuss: number, fromQQ: number, msg: string, _font: number): Promise<0 | 1> {
+  discussMsg = async (_subType: string, _msgId: number, fromDiscuss: number, fromQQ: number, msg: string, _font: number): Promise<0 | 1> => {
     return await this.handleMsg(fromDiscuss, fromQQ, msg, 2)
   }
 
-  enable(): 0 {
+  enable = (): 0 => {
     this.initPlugin()
     this.robotReady = true
     this.saveConfig()
@@ -194,7 +219,7 @@ export class Bot extends CQApp {
    * 请传入初始化插件，若要直接插入消息处理流程请使用applyPlugin方法
    * @param {class} plugin
    */
-  plugin(plugin: BotPlugin, ...arg: any[]): Bot {
+  plugin = (plugin: BotPlugin, ...arg: any[]): Bot => {
     this.admin = () => {
       throw new Error('请在载入插件前设置管理员')
     }
@@ -202,25 +227,25 @@ export class Bot extends CQApp {
     return this
   }
 
-  applyPlugin(fn: Function) {
+  /**
+   * 把方法插入到消息处理
+   */
+  applyPlugin = (fn: Function) => {
     this.pluginsList.push(fn)
   }
 
   /**
-   * 添加消息处理插件
-   * 请传入初始化插件，若要直接插入消息处理流程请使用applyInit方法
-   * @param {Function} fn
+   * 把方法插入到启动函数
    */
-  init(fn: Function, ...arg: any[]): Bot {
-    this.admin = () => {
-      throw new Error('请在载入插件前设置管理员')
-    }
-    fn(this, ...arg)
-    return this
+  applyInit = (fn: Function) => {
+    this.initList.push(fn)
   }
 
-  applyInit(fn: Function) {
-    this.initList.push(fn)
+  /**
+   * 把方法插入到定时任务
+   */
+  applySchedule = (fn: Function) => {
+    this.scheduleList.push(fn)
   }
 
   /**
@@ -249,9 +274,6 @@ export class Bot extends CQApp {
    */
   start(dirname: string = null) {
     this.plugin = () => {
-      throw new Error('请在应用启动前载入插件')
-    }
-    this.init = () => {
       throw new Error('请在应用启动前载入插件')
     }
     this.admin = () => {

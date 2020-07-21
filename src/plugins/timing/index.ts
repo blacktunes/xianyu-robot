@@ -31,7 +31,7 @@ export default class Timing {
     } else {
       bot.config.timing = { ...config }
     }
-    bot.applyInit(this.createSchedule)
+    bot.applySchedule(this.createSchedule)
     printTime(`[插件] 定时任务已载入`, CQLog.LOG_INFO_SUCCESS)
     this.initTiming = () => {
       throw new Error('请勿重复初始化')
@@ -74,20 +74,4 @@ export default class Timing {
       })
     }
   }
-
-  /**
-   * 取消所有定时任务，请谨慎使用
-   */
-  cancelJob() {
-    return new Promise(resolve => {
-      for (let i in schedule.scheduledJobs) {
-        if (schedule.scheduledJobs[i].cancel() === false) {
-          resolve(false)
-          break
-        }
-      }
-      resolve(true)
-    })
-  }
-
 }

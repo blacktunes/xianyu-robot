@@ -1,4 +1,5 @@
 import Bot, { printTime, CQLog } from '../../../main'
+import IO = require('socket.io')
 
 export default class SetuSocket {
   setuServer = null
@@ -12,10 +13,10 @@ export default class SetuSocket {
       })
       res.end()
     }).listen(bot.config.setu.multiservice.port)
-    this.setuIo = require('socket.io').listen(this.setuServer)
+    this.setuIo = IO.listen(this.setuServer)
     printTime(`[setu] 辅助服务器已创建`, CQLog.LOG_INFO_SUCCESS)
 
-    this.setuIo.use((socket, next) => {
+    this.setuIo.use((socket: any, next: Function) => {
       if (socket.handshake.query.token === bot.config.setu.multiservice.token) {
         next()
       } else {
@@ -24,7 +25,7 @@ export default class SetuSocket {
       }
     })
 
-    this.setuIo.on('connection', socket => {
+    this.setuIo.on('connection', (socket: any) => {
       this.connList.push(socket.id)
       printTime(`[setu] 辅助服务${socket.id}已连接`, CQLog.LOG_INFO_SUCCESS)
 
@@ -34,6 +35,8 @@ export default class SetuSocket {
         bot.send(0, bot.adminData.qq, `${new Date().toLocaleString()}\n辅助服务已断开 - ${this.connList.length}`)
       })
     })
+
+    this.createSetuServer = () => { }
   }
 
   index = 0

@@ -33,7 +33,6 @@ export class Setu extends SetuSocket {
             this.setuStar(bot, item.type, item.id)
           })
         })
-        console.log(schedule.scheduledJobs)
       }
     }
   }

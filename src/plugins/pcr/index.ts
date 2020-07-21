@@ -7,8 +7,7 @@ export interface PcrConfig {
   enable: boolean,
   gvg: boolean,
   id: number,
-  other: boolean,
-  setu: boolean
+  other: boolean
 }
 
 export default class Pcr {
@@ -22,7 +21,6 @@ export default class Pcr {
       gvg: false,
       id: null,
       other: false,
-      setu: false
     }
     if (pcrConfig) {
       for (let i in config) {
@@ -35,7 +33,7 @@ export default class Pcr {
       bot.config.pcr = { ...config }
     }
     bot.applyInit(this.initData)
-    bot.applyInit(this.createSchedule)
+    bot.applySchedule(this.createSchedule)
     bot.applyPlugin(this.pcr)
     printTime(`[插件] PCR已载入`, CQLog.LOG_INFO_SUCCESS)
     this.initTiming = () => {
@@ -332,6 +330,8 @@ export default class Pcr {
       return 0
     }
 
-    return 0
+    if (!bot.config.pcr.other) {
+      return 0
+    }
   }
 }

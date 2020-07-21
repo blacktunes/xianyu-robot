@@ -15,7 +15,7 @@ export default class Remind {
   initRemind(bot: Bot, enable: boolean) {
     bot.config.remind = enable
     bot.applyPlugin(this.handelMsg)
-    bot.applyInit(this.createSchedule)
+    bot.applySchedule(this.createSchedule)
     printTime(`[插件] 提醒已载入`, CQLog.LOG_INFO_SUCCESS)
     this.initRemind = () => {
       throw new Error('请勿重复初始化')

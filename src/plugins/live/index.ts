@@ -35,7 +35,7 @@ export default class Live {
     } else {
       bot.config.live = { ...config }
     }
-    bot.applyInit(this.createSchedule)
+    bot.applySchedule(this.createSchedule)
     printTime(`[插件] 开播提醒已载入`, CQLog.LOG_INFO_SUCCESS)
     this.initLiveWatch = () => {
       throw new Error('请勿重复初始化')
