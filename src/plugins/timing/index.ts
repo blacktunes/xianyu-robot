@@ -13,10 +13,6 @@ export interface TimingConfig {
 
 export default class Timing {
   constructor(bot: Bot, timingConfig: TimingConfig) {
-    this.initTiming(bot, timingConfig)
-  }
-
-  initTiming = (bot: Bot, timingConfig: TimingConfig) => {
     const config: TimingConfig = {
       enable: true,
       list: []
@@ -33,10 +29,8 @@ export default class Timing {
     }
     bot.applySchedule(this.createSchedule)
     printTime(`[插件] 定时任务已载入`, CQLog.LOG_INFO_SUCCESS)
-    this.initTiming = () => {
-      throw new Error('请勿重复初始化')
-    }
   }
+
   /**
    * 定时任务
    */

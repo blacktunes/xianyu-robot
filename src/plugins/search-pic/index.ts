@@ -9,10 +9,6 @@ export interface SearchPicConfig {
 
 export default class SearchPic {
   constructor(bot: Bot, searchPicConfig: SearchPicConfig) {
-    this.initSearchPic(bot, searchPicConfig)
-  }
-
-  initSearchPic(bot: Bot, searchPicConfig: SearchPicConfig) {
     const config: SearchPicConfig = {
       enable: true,
       saucenaoApiKey: ''
@@ -29,9 +25,6 @@ export default class SearchPic {
     }
     bot.applyPlugin(this.searchPic)
     printTime(`[插件] 搜图已载入`, CQLog.LOG_INFO_SUCCESS)
-    this.initSearchPic = () => {
-      throw new Error('请勿重复初始化')
-    }
   }
 
   searchImgList = {}

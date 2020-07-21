@@ -1,9 +1,9 @@
 import { CQWebSocketOption } from 'cq-websocket'
-import { CQApp, CQMsg, printTime, CQCode, CQLog } from './cq-robot'
-import { botOption, RobotConfig, AdminConfig, botWSOption, pluginsConfig, BotPlugin } from './modules/option'
+import { PoolConfig } from 'mysql'
+import { CQApp, CQCode, CQLog, CQMsg, printTime } from './cq-robot'
 import connect from './modules/connect'
 import Mysql from './modules/mysql'
-import { PoolConfig } from '_@types_mysql@2.15.15@@types/mysql'
+import { AdminConfig, botOption, BotPlugin, botWSOption, pluginsConfig, RobotConfig } from './modules/option'
 import fs = require('fs')
 import path = require('path')
 import schedule = require('node-schedule')

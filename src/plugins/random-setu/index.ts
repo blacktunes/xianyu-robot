@@ -8,12 +8,6 @@ export default class Sutu extends Setu {
   constructor(bot: Bot, mysqlConfig: any, setuConfig: SetuConfig) {
     super()
     if (mysqlConfig) this.Pool = new Database(bot, mysqlConfig)
-    this.initSetu(bot, setuConfig)
-  }
-
-  Pool: Database = null
-
-  initSetu(bot: Bot, setuConfig: SetuConfig) {
     const config: SetuConfig = {
       enable: true,
       multiservice: {
@@ -52,10 +46,9 @@ export default class Sutu extends Setu {
     bot.applySchedule(this.createSchedule)
     this.createSchedule(bot)
     printTime(`[插件] 随机色图已载入`, CQLog.LOG_INFO_SUCCESS)
-    this.initSetu = () => {
-      throw new Error('请勿重复初始化')
-    }
   }
+
+  Pool: Database = null
 
   mysqlErr(bot: Bot, from: number, fromQQ: number, type: 0 | 1 | 2): boolean {
     if (this.Pool === null) {

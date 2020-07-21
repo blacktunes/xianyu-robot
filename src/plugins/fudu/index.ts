@@ -8,10 +8,6 @@ export interface FuduConfig {
 
 export default class Fudu {
   constructor(bot: Bot, fuduConfig: FuduConfig)  {
-    this.initFudu(bot, fuduConfig)
-  }
-
-  initFudu(bot: Bot, fuduConfig: FuduConfig) {
     const config: FuduConfig = {
       enable: true,
       times: 2,
@@ -29,9 +25,6 @@ export default class Fudu {
     }
     bot.applyPlugin(this.fudu)
     printTime(`[插件] 复读已载入`, CQLog.LOG_INFO_SUCCESS)
-    this.initFudu = () => {
-      throw new Error('请勿重复初始化')
-    }
   }
 
   msgList = {}

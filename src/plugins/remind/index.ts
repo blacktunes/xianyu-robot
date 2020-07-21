@@ -9,17 +9,10 @@ var remindReg = new NamedRegExp('(?<tomorrow>^明天|^)((?<h0>[0-9]|1[0-9]|2[0-3
 
 export default class Remind {
   constructor(bot: Bot, enable: boolean = true) {
-    this.initRemind(bot, enable)
-  }
-
-  initRemind(bot: Bot, enable: boolean) {
     bot.config.remind = enable
     bot.applyPlugin(this.handelMsg)
     bot.applySchedule(this.createSchedule)
     printTime(`[插件] 提醒已载入`, CQLog.LOG_INFO_SUCCESS)
-    this.initRemind = () => {
-      throw new Error('请勿重复初始化')
-    }
   }
 
   handelMsg = (bot: Bot, from: number, fromQQ: number, msg: string, type: 0 | 1 | 2) => {

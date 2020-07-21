@@ -17,10 +17,6 @@ export interface LiveConfig {
 
 export default class Live {
   constructor(bot: Bot, liveConfig: LiveConfig) {
-    this.initLiveWatch(bot, liveConfig)
-  }
-
-  initLiveWatch(bot: Bot, liveConfig: LiveConfig) {
     const config: LiveConfig = {
       enable: true,
       list: []
@@ -37,9 +33,6 @@ export default class Live {
     }
     bot.applySchedule(this.createSchedule)
     printTime(`[插件] 开播提醒已载入`, CQLog.LOG_INFO_SUCCESS)
-    this.initLiveWatch = () => {
-      throw new Error('请勿重复初始化')
-    }
   }
 
   createSchedule = (bot:Bot) => {

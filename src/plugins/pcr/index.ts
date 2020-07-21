@@ -12,10 +12,6 @@ export interface PcrConfig {
 
 export default class Pcr {
   constructor(bot: Bot, pcrConfig: PcrConfig) {
-    this.initTiming(bot, pcrConfig)
-  }
-
-  initTiming = (bot: Bot, pcrConfig: PcrConfig) => {
     const config: PcrConfig = {
       enable: false,
       gvg: false,
@@ -36,9 +32,6 @@ export default class Pcr {
     bot.applySchedule(this.createSchedule)
     bot.applyPlugin(this.pcr)
     printTime(`[插件] PCR已载入`, CQLog.LOG_INFO_SUCCESS)
-    this.initTiming = () => {
-      throw new Error('请勿重复初始化')
-    }
   }
 
   pcrData = {
