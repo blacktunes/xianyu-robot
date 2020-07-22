@@ -5,6 +5,7 @@ import { Database } from './database'
 import SetuSocket from './socket'
 import schedule = require('node-schedule')
 import fs = require('fs')
+import request = require('request')
 
 export class Setu extends SetuSocket {
   Pool: Database = null
@@ -209,37 +210,44 @@ export class Setu extends SetuSocket {
     if (!this.copying) {
       printTime(`第${this.times}次请求···`, CQLog.LOG_INFO)
       const url = `${bot.config.setu.api}?${bot.config.setu.apikey ? 'apikey=' + bot.config.setu.apikey : ''}&size1200=1&num=10&r18=2`
-      axios({
-        method: 'get',
-        timeout: 1000 * 15,
-        url: url
-      })
-        .then(async res => {
-          printTime(`第${this.times}次请求成功 剩余次数：${res.data.quota}`, CQLog.LOG_INFO_RECV)
-          if (res.data.code === 0) {
-            await this.formatAndSave(res.data.data)
-            if (res.data.quota <= 30) {
-              bot.send(bot.adminData.type, bot.adminData.type === 0 ? bot.adminData.qq : bot.adminData.id, `${fromQQ && bot.adminData.type !== 0 ? bot.CQCode.at(fromQQ) : ''}剩余次数过少`)
-              this.copying = false
-              return
-            }
-            this.initialNum = (await this.Pool.setuTotal())[0]
-            bot.send(bot.adminData.type, bot.adminData.type === 0 ? bot.adminData.qq : bot.adminData.id, `${fromQQ && bot.adminData.type !== 0 ? bot.CQCode.at(fromQQ) : ''}开始搬图，剩余次数${res.data.quota}`)
-            this.copying = true
-            this.startTime = new Date()
-            schedule.scheduleJob('copy', new Date(Date.now() + 30 * 60 * 1000), () => {
-              this.timeout = true
-            })
-            this.copySetu(bot, url, fromQQ)
-          } else {
-            bot.send(bot.adminData.type, bot.adminData.type === 0 ? bot.adminData.qq : bot.adminData.id, `${fromQQ && bot.adminData.type !== 0 ? bot.CQCode.at(fromQQ) : ''}有些奇怪的问题不能开始`)
-            console.error(res.data)
-          }
-        })
-        .catch(err => {
-          console.error(err)
+      request({
+        url: url,
+        timeout: 1000 * 20
+      }, async (err, res, body) => {
+        if (err) {
           bot.send(bot.adminData.type, bot.adminData.type === 0 ? bot.adminData.qq : bot.adminData.id, `${fromQQ && bot.adminData.type !== 0 ? bot.CQCode.at(fromQQ) : ''}有些奇怪的问题不能开始`)
-        })
+          printTime(err.code, CQLog.LOG_ERROR)
+        } else {
+          let data: any
+          try {
+            data = JSON.parse(body)
+            printTime(`第${this.times}次请求成功 剩余次数：${data.quota}`, CQLog.LOG_INFO_SUCCESS)
+            if (data.code === 0) {
+              await this.formatAndSave(data.data)
+              if (data.quota <= 30) {
+                bot.send(bot.adminData.type, bot.adminData.type === 0 ? bot.adminData.qq : bot.adminData.id, `${fromQQ && bot.adminData.type !== 0 ? bot.CQCode.at(fromQQ) : ''}剩余次数过少`)
+                this.copying = false
+                return
+              }
+              this.initialNum = (await this.Pool.setuTotal())[0]
+              bot.send(bot.adminData.type, bot.adminData.type === 0 ? bot.adminData.qq : bot.adminData.id, `${fromQQ && bot.adminData.type !== 0 ? bot.CQCode.at(fromQQ) : ''}开始搬图，剩余次数${data.quota}`)
+              this.copying = true
+              this.startTime = new Date()
+              schedule.scheduleJob('copy', new Date(Date.now() + 60 * 60 * 1000), () => {
+                this.timeout = true
+              })
+              this.copySetu(bot, url, fromQQ)
+            } else {
+              bot.send(bot.adminData.type, bot.adminData.type === 0 ? bot.adminData.qq : bot.adminData.id, `${fromQQ && bot.adminData.type !== 0 ? bot.CQCode.at(fromQQ) : ''}有些奇怪的问题不能开始`)
+              console.error(data.msg)
+            }
+          }
+          catch (err) {
+            bot.send(bot.adminData.type, bot.adminData.type === 0 ? bot.adminData.qq : bot.adminData.id, `${fromQQ && bot.adminData.type !== 0 ? bot.CQCode.at(fromQQ) : ''}有些奇怪的问题不能开始`)
+            printTime(err.code, CQLog.LOG_ERROR)
+          }
+        }
+      })
     } else {
       bot.send(bot.adminData.type, bot.adminData.type === 0 ? bot.adminData.qq : bot.adminData.id, `${fromQQ && bot.adminData.type !== 0 ? bot.CQCode.at(fromQQ) : ''}已在搬图`)
     }
@@ -261,7 +269,7 @@ export class Setu extends SetuSocket {
       this.copyEnd(bot, 0, fromQQ)
       return
     }
-    if (this.errTimes >= 5) {
+    if (this.errTimes >= 25) {
       this.copyEnd(bot, 2, fromQQ)
       return
     }
@@ -276,30 +284,37 @@ export class Setu extends SetuSocket {
     await bot.sleep(2)
     ++this.times
     printTime(`第${this.times}次请求···`, CQLog.LOG_INFO)
-    axios({
-      method: 'get',
-      timeout: 1000 * 15,
-      url: url
-    })
-      .then(async res => {
-        printTime(`第${this.times}次请求成功 剩余次数：${res.data.quota}`, CQLog.LOG_INFO_SUCCESS)
-        if (res.data.code === 0) {
-          await this.formatAndSave(res.data.data)
-          if (res.data.quota <= 30) {
-            this.copyEnd(bot, 1, fromQQ)
-            return
+    request({
+      url: url,
+      timeout: 1000 * 20
+    }, async (err, res, body) => {
+      if (err) {
+        ++this.errTimes
+        printTime(err.code, CQLog.LOG_ERROR)
+        this.copySetu(bot, url, fromQQ)
+      } else {
+        try {
+          let data = JSON.parse(body)
+          printTime(`第${this.times}次请求成功 剩余次数：${data.quota}`, CQLog.LOG_INFO_SUCCESS)
+          if (data.code === 0) {
+            await this.formatAndSave(data.data)
+            if (data.quota <= 30) {
+              this.copyEnd(bot, 1, fromQQ)
+              return
+            }
+            this.copySetu(bot, url, fromQQ)
+          } else {
+            ++this.errTimes
+            this.copySetu(bot, url, fromQQ)
           }
-          this.copySetu(bot, url, fromQQ)
-        } else {
+        }
+        catch (err) {
           ++this.errTimes
+          printTime(err.code, CQLog.LOG_ERROR)
           this.copySetu(bot, url, fromQQ)
         }
-      })
-      .catch(err => {
-        ++this.errTimes
-        console.error(err)
-        this.copySetu(bot, url, fromQQ)
-      })
+      }
+    })
   }
 
   /**
