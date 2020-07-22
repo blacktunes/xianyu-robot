@@ -46,7 +46,7 @@ export class Setu extends SetuSocket {
    * @param {number} fromType 0-私聊消息, 1-群组消息, 2-讨论组消息
    * @param {string} tag 可选参数，指定作者或者tag
    */
-  setu = async (bot: Bot, from: number, fromQQ: number, num: number, fromType: 0 | 1 | 2, tag?: string) => {
+  setu = async (bot: Bot, from: number, fromQQ: number, num: number, fromType: 1 | 2, tag?: string) => {
     const insertId = bot.CQ.getDebug ? 0 : await this.Pool.recoed(bot, fromQQ, from, fromType, num)
     if (fromType === 1 && fromQQ != bot.adminData.qq) {
       if (this.restrictedList[fromQQ]) {
@@ -72,7 +72,7 @@ export class Setu extends SetuSocket {
       return
     }
     if (bot.config.setu.multiservice) {
-      if (await this.socketSetu(bot, from, fromQQ, fromType, fromType === 0 ? bot.config.setu.keyword_1 : bot.config.setu.keyword_2, num, insertId, tag)) {
+      if (await this.socketSetu(bot, from, fromQQ, fromType, fromType === 1 ? bot.config.setu.keyword_1 : bot.config.setu.keyword_2, num, insertId, tag)) {
         return
       }
     }

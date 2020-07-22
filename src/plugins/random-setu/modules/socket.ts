@@ -32,16 +32,18 @@ export default class SetuSocket {
       socket.on('disconnect', () => {
         this.connList.splice(this.connList.indexOf(socket.id), 1)
         printTime(`[setu] 辅助服务${socket.id}已断开`, CQLog.LOG_WARNING)
-        bot.send(0, bot.adminData.qq, `${new Date().toLocaleString()}\n辅助服务已断开 - ${this.connList.length}`)
+        if (bot.adminData) bot.send(0, bot.adminData.qq, `${new Date().toLocaleString()}\n辅助服务已断开 - ${this.connList.length}`)
       })
     })
 
-    this.createSetuServer = () => { }
+    this.createSetuServer = () => {
+      throw new Error('请勿重复创建')
+    }
   }
 
   index = 0
 
-  socketSetu = (bot: Bot, from: number, fromQQ: number, fromType: 0 | 1 | 2, keyword: string, num: number, insertId: number, tag?: string) => {
+  socketSetu = (bot: Bot, from: number, fromQQ: number, fromType:  1 | 2, keyword: string, num: number, insertId: number, tag?: string) => {
     return new Promise(resolve => {
       if (this.setuIo === null) {
         resolve(false)

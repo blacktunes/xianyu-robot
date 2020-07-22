@@ -61,7 +61,7 @@ export default class Live {
             }
           })
           .catch(err => {
-            console.error(err)
+            console.error(err.code)
           })
       })
     }
