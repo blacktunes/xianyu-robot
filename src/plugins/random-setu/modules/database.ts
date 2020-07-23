@@ -32,7 +32,7 @@ export class Database {
     }
     catch (err) {
       console.error(err)
-      return
+      return 0
     }
   }
 

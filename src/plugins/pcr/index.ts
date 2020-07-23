@@ -109,12 +109,34 @@ export default class Pcr {
    * @param {string} msg
    * @param {number} type 消息来源, 0为讨论组, 1为群
    */
-  pcr = (bot: Bot, from: number, fromQQ: number, msg: string, type: 0 | 1 | 2) => {
+  pcr = async (bot: Bot, from: number, fromQQ: number, msg: string, type: 0 | 1 | 2) => {
     if (from !== bot.config.pcr.id) return
-    if (bot.adminData && fromQQ === bot.adminData.qq && msg === '强制刷新') {
-      this.resetNum(bot)
-      bot.send(type, from, '数据已重置')
-      return 0
+    if (bot.adminData && fromQQ === bot.adminData.qq) {
+      if (msg === '强制刷新') {
+        this.resetNum(bot)
+        bot.send(type, from, '数据已重置')
+        return 0
+      }
+
+      if (msg === '刷新列表') {
+        await this.getGroupList(bot)
+        bot.send(type, from, '群员列表已刷新')
+        return 0
+      }
+
+      if (msg === '公会战on') {
+        if (!bot.config.pcr.gvg) {
+          bot.config.pcr.gvg = true
+          bot.send(type, from, '来了来了')
+        }
+      }
+
+      if (msg === '公会战off') {
+        if (bot.config.pcr.gvg) {
+          bot.config.pcr.gvg = false
+          bot.send(type, from, '溜了溜了')
+        }
+      }
     }
 
     if (!bot.config.pcr.gvg && msg.indexOf('会长') != -1) {

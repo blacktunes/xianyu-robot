@@ -47,7 +47,7 @@ export class Setu extends SetuSocket {
    * @param {string} tag 可选参数，指定作者或者tag
    */
   setu = async (bot: Bot, from: number, fromQQ: number, num: number, fromType: 1 | 2, tag?: string) => {
-    const insertId = bot.CQ.getDebug ? 0 : await this.Pool.recoed(bot, fromQQ, from, fromType, num)
+    const insertId = bot.CQ.getDebug() ? 0 : await this.Pool.recoed(bot, fromQQ, from, fromType, num)
     if (fromType === 1 && fromQQ != bot.adminData.qq) {
       if (this.restrictedList[fromQQ]) {
         this.restrictedList[fromQQ] += 1
@@ -91,7 +91,7 @@ export class Setu extends SetuSocket {
                 } else if (code == -11) {
                   bot.send(fromType, from, `${bot.CQCode.at(fromQQ)}这张图好像已经被删除了`)
                 } else if (code > 0) {
-                  if (!bot.CQ.getDebug) this.Pool.viewed(data.title, data.sql, insertId, 1, res.length)
+                  if (!bot.CQ.getDebug()) this.Pool.viewed(data.title, data.sql, insertId, 1, res.length)
                 }
               })
           } else {
@@ -118,7 +118,7 @@ export class Setu extends SetuSocket {
                 } else if (code == -11) {
                   bot.send(fromType, from, `${bot.CQCode.at(fromQQ)}这张图好像已经被删除了`)
                 } else if (code > 0) {
-                  if (!bot.CQ.getDebug) this.Pool.viewed(data.title, data.sql, insertId, 0, res.data.data.length)
+                  if (!bot.CQ.getDebug()) this.Pool.viewed(data.title, data.sql, insertId, 0, res.data.data.length)
                 }
               })
           } else {

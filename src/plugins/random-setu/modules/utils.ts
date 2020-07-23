@@ -1,3 +1,18 @@
+export interface SocketData {
+  r18: 0 | 1 | 2
+  cache: boolean
+  new_pic: boolean
+  default: 0 | 1
+  from: number
+  fromQQ: number
+  keyword: string
+  fromType: 1 | 2
+  num: number
+  insertId: number
+  tag: string
+  debug: boolean
+}
+
 export interface SetuConfig {
   enable: boolean,
   multiservice: {

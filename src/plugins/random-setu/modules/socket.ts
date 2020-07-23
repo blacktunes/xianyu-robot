@@ -1,5 +1,6 @@
 import Bot, { printTime, CQLog } from '../../../main'
 import IO = require('socket.io')
+import { SocketData } from './utils'
 
 export default class SetuSocket {
   setuServer = null
@@ -43,7 +44,7 @@ export default class SetuSocket {
 
   index = 0
 
-  socketSetu = (bot: Bot, from: number, fromQQ: number, fromType:  1 | 2, keyword: string, num: number, insertId: number, tag?: string) => {
+  socketSetu = (bot: Bot, from: number, fromQQ: number, fromType: 1 | 2, keyword: string, num: number, insertId: number, tag?: string) => {
     return new Promise(resolve => {
       if (this.setuIo === null) {
         resolve(false)
@@ -53,7 +54,7 @@ export default class SetuSocket {
       }
       let id = this.connList[this.index]
       if (this.setuIo.sockets.connected[id]) {
-        this.setuIo.sockets.connected[id].emit('setu', {
+        let data: SocketData = {
           r18: bot.config.setu.r18,
           cache: bot.config.setu.cache,
           new_pic: bot.config.setu.new_pic,
@@ -64,8 +65,10 @@ export default class SetuSocket {
           fromType: fromType,
           num: num,
           insertId: insertId,
-          tag: tag
-        })
+          tag: tag,
+          debug: bot.CQ.getDebug()
+        }
+        this.setuIo.sockets.connected[id].emit('setu', data)
         printTime(`[setu] 任务分配至${id}`, CQLog.LOG_DEBUG)
         this.index++
         resolve(true)

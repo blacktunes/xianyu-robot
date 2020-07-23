@@ -4,7 +4,7 @@ import { PoolConfig } from 'mysql'
 import Bot, { CQLog, printTime } from '../../main'
 import Mysql from '../../xianyu-robot/modules/mysql'
 import IO = require('socket.io-client')
-import { SetuConfig } from './modules/utils'
+import { SetuConfig, SocketData } from './modules/utils'
 
 export default class Multiservice {
   constructor(bot: Bot, mysqlConfig: PoolConfig, socketConfig: { url: string, token: string }, setuConfiig: SetuConfig) {
@@ -13,23 +13,26 @@ export default class Multiservice {
      */
     if (mysqlConfig) this.Pool = bot.createPool(mysqlConfig)
     bot.config.setu = setuConfiig
-    this.createSocket(bot, socketConfig)
+    this.linkSocket(bot, socketConfig)
+    printTime('[插件] 随机色图已载入', CQLog.LOG_INFO_SUCCESS)
+    printTime('该插件为辅助插件，不推荐跟其它插件一起使用', CQLog.LOG_WARNING)
   }
 
   Pool: Mysql = null
 
   socket = null
 
-  createSocket(bot: Bot, socketConfig: { url: any; token: any }) {
+  linkSocket(bot: Bot, socketConfig: { url: string; token: string }) {
     this.socket = IO(`${socketConfig.url}?token=${socketConfig.token}`, {
       reconnectionAttempts: 20
     })
-    this.socket.on('setu', (data: { default: 0 | 1; r18: 0 | 1 | 2; cache: boolean; new_pic: boolean; from: number; fromQQ: number; fromType: 1 | 2; keyword: string; num: number; insertId: number; tag?: string }) => {
+    this.socket.on('setu', (data: SocketData) => {
       printTime('[setu] 已接受主服务任务', CQLog.LOG_INFO_RECV)
       bot.config.setu.default = data.default
       bot.config.setu.r18 = data.r18
       bot.config.setu.cache = data.cache
       bot.config.setu.new_pic = data.new_pic
+      bot.CQ.setDebug(data.debug)
       this.setu(bot, data.from, data.fromQQ, data.fromType, data.keyword, data.num, data.insertId, data.tag)
     })
     this.socket.on('connect', () => {
@@ -140,7 +143,7 @@ export default class Multiservice {
                 } else if (code == -11) {
                   bot.send(fromType, from, `${bot.CQCode.at(fromQQ)}这张图好像已经被删除了`)
                 } else if (code > 0) {
-                  if (!bot.CQ.getDebug) this.viewed(data.title, data.sql, insertId, 1, res.length)
+                  if (!bot.CQ.getDebug()) this.viewed(data.title, data.sql, insertId, 1, res.length)
                 }
               })
           } else {
@@ -166,7 +169,7 @@ export default class Multiservice {
                 } else if (code == -11) {
                   bot.send(fromType, from, `${bot.CQCode.at(fromQQ)}这张图好像已经被删除了`)
                 } else if (code > 0) {
-                  if (!bot.CQ.getDebug) this.viewed(data.title, data.sql, insertId, 0, res.data.length)
+                  if (!bot.CQ.getDebug()) this.viewed(data.title, data.sql, insertId, 0, res.data.length)
                 }
               })
           } else {

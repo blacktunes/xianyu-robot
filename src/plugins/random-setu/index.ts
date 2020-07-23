@@ -44,7 +44,6 @@ export default class Sutu extends Setu {
     bot.applyPlugin(this.handelMsg)
     bot.applyInit(this.createSetuServer)
     bot.applySchedule(this.createSchedule)
-    this.createSchedule(bot)
     printTime(`[插件] 随机色图已载入`, CQLog.LOG_INFO_SUCCESS)
   }
 
