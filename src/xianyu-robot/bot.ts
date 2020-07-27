@@ -122,7 +122,6 @@ export class Bot extends CQApp {
     })
   }
 
-
   /**
    * 创建mysql链接池
    * @param config host, user, password, database
@@ -151,6 +150,12 @@ export class Bot extends CQApp {
   private handleMsg = async (from: number, fromQQ: number, msg: string, type: 0 | 1 | 2): Promise<0 | 1> => {
     let CODE: 0 | 1 = CQMsg.MSG_IGNORE
     if (!this.robotReady || this.blacklist.includes(fromQQ)) return CODE
+    if (this.adminData && fromQQ === this.adminData.qq) {
+      if (msg.includes('/send')) {
+        const data = msg.split(' ')
+        this.send(Number(data[1]), Number(data[2]), data[3])
+      }
+    }
     if (this.pluginsList.length > 0) {
       for (let i in this.pluginsList) {
         if (await this.pluginsList[i](this, from, fromQQ, msg, type) === 0) {

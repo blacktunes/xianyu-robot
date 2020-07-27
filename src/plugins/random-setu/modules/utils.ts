@@ -40,9 +40,9 @@ export interface SetuConfig {
   limit: number
 }
 
-export function toNumber(str: any) {
+export function toNumber(str: string): number {
   if (/^[1-9]\d*$/.test(str)) {
-    return str
+    return Number(str)
   }
   let num: number
   switch (str) {

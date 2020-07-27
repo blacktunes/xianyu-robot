@@ -20,12 +20,12 @@ export class Database {
    * @param {number} fromType 消息来源, 0为讨论组, 1为群
    * @param {number} num 图片数量
    */
-  recoed = async (bot: Bot, qq: number, from: number, fromType: number, num: number): Promise<number> => {
+  record = async (bot: Bot, qq: number, from: number, fromType: number, num: number): Promise<number> => {
     if (this.Pool === null) return
     const date = bot.getTime(new Date())
     const time1 = date.date
     const time2 = date.time
-    const type = fromType === 0 ? 'discuss' : 'group'
+    const type = fromType === 2 ? 'discuss' : 'group'
     try {
       const data = await this.Pool.query(`INSERT INTO record (qq, \`from\`, fromType, date, time, num, source) VALUE (${qq}, ${from}, '${type}', '${time1}', '${time2}', ${num}, ${bot.config.setu.default})`)
       return data.insertId

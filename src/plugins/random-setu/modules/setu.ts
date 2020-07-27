@@ -47,7 +47,7 @@ export class Setu extends SetuSocket {
    * @param {string} tag 可选参数，指定作者或者tag
    */
   setu = async (bot: Bot, from: number, fromQQ: number, num: number, fromType: 1 | 2, tag?: string) => {
-    const insertId = bot.CQ.getDebug() ? 0 : await this.Pool.recoed(bot, fromQQ, from, fromType, num)
+    const insertId = bot.CQ.getDebug() ? 0 : await this.Pool.record(bot, fromQQ, from, fromType, num)
     if (fromType === 1 && fromQQ != bot.adminData.qq) {
       if (this.restrictedList[fromQQ]) {
         this.restrictedList[fromQQ] += 1
