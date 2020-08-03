@@ -154,6 +154,7 @@ export class Bot extends CQApp {
       if (msg.includes('/send')) {
         const data = msg.split(' ')
         this.send(Number(data[1]), Number(data[2]), data[3])
+        return CQMsg.MSG_INTERCEPT
       }
     }
     if (this.pluginsList.length > 0) {

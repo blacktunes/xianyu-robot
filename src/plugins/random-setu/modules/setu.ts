@@ -353,7 +353,7 @@ export class Setu extends SetuSocket {
     this.initialNum = null
     this.startTime = null
     this.timeout = false
-    this.downloadCache(bot)
+    this.downloadCache(bot, fromQQ)
   }
 
   formatAndSave = async (data: any) => {
@@ -416,28 +416,28 @@ export class Setu extends SetuSocket {
   /**
    * 把数据库里的图片下载到酷Q文件夹里
    */
-  downloadCache = (bot: Bot) => {
+  downloadCache = (bot: Bot, fromQQ?: number) => {
     if (this.downliading) {
-      bot.send(bot.adminData.type, bot.adminData.type === 0 ? bot.adminData.qq : bot.adminData.id, `${bot.adminData.type !== 0 ? bot.CQCode.at(bot.adminData.qq) : ''}已在下载缓存`)
+      bot.send(bot.adminData.type, bot.adminData.type === 0 ? bot.adminData.qq : bot.adminData.id, `${fromQQ && bot.adminData.type !== 0 ? bot.CQCode.at(fromQQ) : ''}已在下载缓存`)
       return
     }
     this.Pool.cacheNum()
       .then(results => {
         this.downliading = true
-        this.download(bot, results)
+        this.download(bot, results, fromQQ)
       })
       .catch(() => {
-        bot.send(bot.adminData.type, bot.adminData.type === 0 ? bot.adminData.qq : bot.adminData.id, `${bot.adminData.type !== 0 ? bot.CQCode.at(bot.adminData.qq) : ''}未缓存信息查询失败`)
+        bot.send(bot.adminData.type, bot.adminData.type === 0 ? bot.adminData.qq : bot.adminData.id, `${fromQQ && bot.adminData.type !== 0 ? bot.CQCode.at(fromQQ) : ''}未缓存信息查询失败`)
         printTime('未缓存信息查询失败', CQLog.LOG_ERROR)
       })
   }
 
-  download = async (bot: Bot, results: any) => {
+  download = async (bot: Bot, results: any, fromQQ?: number) => {
     if (results.length < 1) {
-      bot.send(bot.adminData.type, bot.adminData.type === 0 ? bot.adminData.qq : bot.adminData.id, `${bot.adminData.type !== 0 ? bot.CQCode.at(bot.adminData.qq) : ''}所有图片已经缓存`)
+      bot.send(bot.adminData.type, bot.adminData.type === 0 ? bot.adminData.qq : bot.adminData.id, `${fromQQ && bot.adminData.type !== 0 ? bot.CQCode.at(fromQQ) : ''}所有图片已经缓存`)
       return
     }
-    bot.send(bot.adminData.type, bot.adminData.type === 0 ? bot.adminData.qq : bot.adminData.id, `${bot.adminData.type !== 0 ? bot.CQCode.at(bot.adminData.qq) : ''}开始下载${results.length}张未缓存图片`)
+    bot.send(bot.adminData.type, bot.adminData.type === 0 ? bot.adminData.qq : bot.adminData.id, `${fromQQ && bot.adminData.type !== 0 ? bot.CQCode.at(fromQQ) : ''}开始下载${results.length}张未缓存图片`)
     const startTime = new Date()
     let timeoutNum = 0
     let delNum = 0
@@ -473,7 +473,7 @@ export class Setu extends SetuSocket {
         })
     }
     const endTime = new Date()
-    bot.send(bot.adminData.type, bot.adminData.type === 0 ? bot.adminData.qq : bot.adminData.id, `${bot.adminData.type !== 0 ? bot.CQCode.at(bot.adminData.qq) : ''}缓存下载完成\n用时${(endTime.getTime() - startTime.getTime()) / 1000}s${timeoutNum ? `\n超时:${timeoutNum}` : ''}${errNum ? `\n异常:${errNum}` : ''}${delNum ? `\n被删除:${delNum}` : ''}`)
+    bot.send(bot.adminData.type, bot.adminData.type === 0 ? bot.adminData.qq : bot.adminData.id, `${fromQQ && bot.adminData.type !== 0 ? bot.CQCode.at(fromQQ) : ''}缓存下载完成\n用时${(endTime.getTime() - startTime.getTime()) / 1000}s${timeoutNum ? `\n超时:${timeoutNum}` : ''}${errNum ? `\n异常:${errNum}` : ''}${delNum ? `\n被删除:${delNum}` : ''}`)
     this.downliading = false
   }
 }
