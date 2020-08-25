@@ -33,7 +33,7 @@ export default class Multiservice {
       bot.config.setu.cache = data.cache
       bot.config.setu.new_pic = data.new_pic
       bot.CQ.setDebug(data.debug)
-      this.setu(bot, data.from, data.fromQQ, data.fromType, data.keyword, data.num, data.insertId, data.tag)
+      this.setu(bot, data.from, data.fromQQ, data.fromType, data.keyword, data.num, data.insertId, data.tag, data.all)
     })
     this.socket.on('connect', () => {
       printTime('[socket.io] 已连接主服务', CQLog.LOG_INFO_SUCCESS)
@@ -82,12 +82,12 @@ export default class Multiservice {
   * @param {number} num 需要获取的图数
   * @param {string} tag 可选参数，指定作者或者tag
   */
-  getSetu = (bot: Bot, num: number = 1, tag?: string) => {
+  getSetu = (bot: Bot, num: number = 1, tag?: string, all?: boolean) => {
     if (this.Pool === null) return
     return new Promise<Array<any>>((resolve, reject) => {
       let r18 = bot.config.setu.r18 === 0 ? ' and r18=0 ' : bot.config.setu.r18 === 1 ? ' and r18=1 ' : ''
       let cache = bot.config.setu.cache ? ' and \`cache\`=1 and \`404\`=0 ' : ''
-      let newPic = bot.config.setu.new_pic ? ' and num=0 ' : ''
+      let newPic = bot.config.setu.new_pic && !all ? ' and num=0 ' : ''
       let tagSql = tag ? ` and (author like '%${tag}%' or from_base64(title) like '%${tag}%' or from_base64(tags) like '%${tag}%') ` : ''
       this.Pool.query(`SELECT title,pid,author,url FROM setu where id > 0${r18}${cache}${newPic}${tagSql}ORDER BY RAND() LIMIT ${num}`)
         .then((results: any[] | PromiseLike<any[]>) => {
@@ -129,9 +129,9 @@ export default class Multiservice {
    * @param {number} num 请求图数
    * @param {string} tag 可选参数，指定作者或者tag
    */
-  setu = (bot: Bot, from: number, fromQQ: number, fromType: 1 | 2, keyword: string, num: number, insertId: number, tag?: string) => {
+  setu = (bot: Bot, from: number, fromQQ: number, fromType: 1 | 2, keyword: string, num: number, insertId: number, tag?: string, all?: boolean) => {
     if (bot.config.setu.default === 1 && this.Pool) {
-      this.getSetu(bot, num, tag)
+      this.getSetu(bot, num, tag, all)
         .then(res => {
           const data = this.formatData(bot, res, 1)
           if (res.length > 0) {

@@ -58,12 +58,12 @@ export class Database {
    * @param {number} num 需要获取的图数
    * @param {string} tag 可选参数，指定作者或者tag
    */
-  getSetu = (bot: Bot, num: number = 1, tag?: string) => {
+  getSetu = (bot: Bot, num: number = 1, tag?: string, all?: boolean) => {
     if (this.Pool === null) return
     return new Promise<Array<any>>((resolve, reject) => {
       let r18 = bot.config.setu.r18 === 0 ? ' and r18=0 ' : bot.config.setu.r18 === 1 ? ' and r18=1 ' : ''
       let cache = bot.config.setu.cache ? ' and \`cache\`=1 and \`404\`=0 ' : ''
-      let newPic = bot.config.setu.new_pic ? ' and num=0 ' : ''
+      let newPic = bot.config.setu.new_pic && !all ? ' and num=0 ' : ''
       let tagSql = tag ? ` and (author like '%${tag}%' or from_base64(title) like '%${tag}%' or from_base64(tags) like '%${tag}%') ` : ''
       this.Pool.query(`SELECT title,pid,author,url FROM setu where id > 0${r18}${cache}${newPic}${tagSql}ORDER BY RAND() LIMIT ${num}`)
         .then((results: any[] | PromiseLike<any[]>) => {
@@ -169,13 +169,12 @@ export class Database {
    * 根据关键词查询图库数量
    * @param {string} keyword 关键词
    */
-  setuNum = (bot: Bot, keyword: string) => {
+  setuNum = (bot: Bot, keyword: string, all?: boolean) => {
     if (this.Pool === null) return
     return new Promise((resolve, reject) => {
-      let r18 = bot.config.setu.r18 === 0 ? ' and r18=0 ' : bot.config.setu.r18 === 1 ? ' and r18=1 ' : ''
+      let r18 = all ? '' : bot.config.setu.r18 === 0 ? ' and r18=0 ' : bot.config.setu.r18 === 1 ? ' and r18=1 ' : ''
       let cache = bot.config.setu.cache ? ' and \`cache\`=1 and \`404\`=0 ' : ' and \`404\`=0 '
       let newPic = ' and num=0 '
-      let tag = ` and author like '%${keyword}%' or from_base64(title) like '%${keyword}%' or from_base64(tags) like '%${keyword}%' `
       this.Pool.query(`select COUNT(*) from setu where author like '%${keyword}%'${r18}${cache};select COUNT(*) from setu where author like '%${keyword}%'${r18}${cache}${newPic};select COUNT(*) from setu where from_base64(title) like '%${keyword}%'${r18}${cache};select COUNT(*) from setu where from_base64(title) like '%${keyword}%'${r18}${cache}${newPic};select COUNT(*) from setu where from_base64(tags) like '%${keyword}%'${r18}${cache};select COUNT(*) from setu where from_base64(tags) like '%${keyword}%'${r18}${cache}${newPic}`)
         .then((data: { [x: string]: any }[][]) => {
           const msg = `作者匹配数：${data[1][0]['COUNT(*)']}/${data[0][0]['COUNT(*)']}\n标题匹配数：${data[3][0]['COUNT(*)']}/${data[2][0]['COUNT(*)']}\n标签匹配数：${data[5][0]['COUNT(*)']}/${data[4][0]['COUNT(*)']}`

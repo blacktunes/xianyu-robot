@@ -103,24 +103,29 @@ export default class Sutu extends Setu {
 
     if (type === 0) return
 
-    let setuReg_1 = new NamedRegExp(`[来发给](?<text>((?<num>([1-9]|10)|[一二两三四五六七八九十])?[张份幅])|点)(?<tag>.*?)?的?${bot.config.setu.keyword_1}`)
-    let setuReg_2 = new NamedRegExp(`[来发给](?<text>((?<num>([1-9]|10)|[一二两三四五六七八九十])?[张份幅])|点)(?<tag>.*?)?的?(${bot.config.setu.keyword_1}|${bot.config.setu.keyword_2})`)
+    let setuReg_1 = new NamedRegExp(`[来发给](?<text>((?<num>([1-5])|[一二两三四五])?[张份幅])|点)(?<tag>.*?)?的?${bot.config.setu.keyword_1}( +)?(?<all>(-all))?`)
+    let setuReg_2 = new NamedRegExp(`[来发给](?<text>((?<num>([1-5])|[一二两三四五])?[张份幅])|点)(?<tag>.*?)?的?(${bot.config.setu.keyword_1}|${bot.config.setu.keyword_2})( +)?(?<all>(-all))?`)
 
     if (bot.config.setu.enable) {
-      if ((type === 1 && setuReg_1.test(msg)) || (type === 2 && setuReg_2.test(msg))) {
-        const data = type === 1 ? setuReg_1.exec(msg).groups : type === 2 ? setuReg_2.exec(msg).groups : null
+      if ((type === 1 && setuReg_1.test(msg)) || (bot.adminData && from === bot.adminData.id && setuReg_2.test(msg))) {
+        const data = bot.adminData && from === bot.adminData.id ? setuReg_2.exec(msg).groups : setuReg_1.exec(msg).groups
         const tag = data.tag ? data.tag : null
         const num = data.num ? toNumber(data.num) : toNumber(data.text)
+        const all = data.all ? true : false
         if (bot.config.setu.default === 1 && this.mysqlErr(bot, from, fromQQ, type)) return 0
-        this.setu(bot, from, fromQQ, num, type, tag)
+        this.setu(bot, from, fromQQ, num, type, tag, all)
         return 0
       }
 
-      if (msg.includes('查询 ')) {
+      let selectReg = new NamedRegExp('查询 (?<keyword>\\S*)( +)?(?<all>(-all))?')
+
+      if (selectReg.test(msg)) {
         if (this.mysqlErr(bot, from, fromQQ, type)) return 0
-        const keyword = msg.split('查询 ')[1]
+        const keyword = selectReg.exec(msg).groups.keyword
+        const all = selectReg.exec(msg).groups.all ? true : false
+
         if (keyword && keyword.length > 0) {
-          this.Pool.setuNum(bot, keyword)
+          this.Pool.setuNum(bot, keyword, all)
             .then(msg => {
               bot.send(type, from, `${bot.CQCode.at(fromQQ)}\n${msg}`)
             })

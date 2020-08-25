@@ -10,6 +10,7 @@ export interface SocketData {
   num: number
   insertId: number
   tag: string
+  all: boolean
   debug: boolean
 }
 
@@ -86,7 +87,7 @@ export function toNumber(str: string): number {
       num = 1
       break
     case '点':
-      num = Math.floor(Math.random() * 10 + 1)
+      num = Math.floor(Math.random() * 5) + 1
       break
     default:
       num = null

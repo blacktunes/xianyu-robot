@@ -8,6 +8,7 @@ export default class SetuSocket {
   connList = []
 
   createSetuServer = (bot: Bot) => {
+    if (!bot.config.setu.multiservice) return
     this.setuServer = require('http').createServer((_req: any, res: any) => {
       res.writeHead(403, {
         'content-type': 'text/plain'
@@ -44,7 +45,7 @@ export default class SetuSocket {
 
   index = 0
 
-  socketSetu = (bot: Bot, from: number, fromQQ: number, fromType: 1 | 2, keyword: string, num: number, insertId: number, tag?: string) => {
+  socketSetu = (bot: Bot, from: number, fromQQ: number, fromType: 1 | 2, keyword: string, num: number, insertId: number, tag?: string, all?: boolean) => {
     return new Promise(resolve => {
       if (this.setuIo === null) {
         resolve(false)
@@ -66,6 +67,7 @@ export default class SetuSocket {
           num: num,
           insertId: insertId,
           tag: tag,
+          all: all,
           debug: bot.CQ.getDebug()
         }
         this.setuIo.sockets.connected[id].emit('setu', data)

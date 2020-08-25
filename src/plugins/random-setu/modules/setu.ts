@@ -38,6 +38,24 @@ export class Setu extends SetuSocket {
     }
   }
 
+  restricted = (bot: Bot, from: number, fromQQ: number, fromType: 1 | 2) => {
+    if (this.restrictedList[fromQQ]) {
+      this.restrictedList[fromQQ] += 1
+    } else {
+      this.restrictedList[fromQQ] = 1
+    }
+    if (this.restrictedList[fromQQ] > bot.config.setu.limit) {
+      if (this.restrictedList[fromQQ] > (bot.config.setu.limit + 3)) {
+        bot.ban(fromType, from, fromQQ, 720)
+      } else {
+        bot.send(fromType, from, `${bot.CQCode.at(fromQQ)}呵`)
+      }
+      return true
+    } else {
+      return false
+    }
+  }
+
   /**
    * 从api或数据库获得的数据并发送到讨论组
    * @param {number} from 来源群号或讨论组ID
@@ -46,22 +64,20 @@ export class Setu extends SetuSocket {
    * @param {number} fromType 0-私聊消息, 1-群组消息, 2-讨论组消息
    * @param {string} tag 可选参数，指定作者或者tag
    */
-  setu = async (bot: Bot, from: number, fromQQ: number, num: number, fromType: 1 | 2, tag?: string) => {
+  setu = async (bot: Bot, from: number, fromQQ: number, num: number, fromType: 1 | 2, tag?: string, all?: boolean) => {
     const insertId = bot.CQ.getDebug() ? 0 : await this.Pool.record(bot, fromQQ, from, fromType, num)
-    if (fromType === 1 && fromQQ != bot.adminData.qq) {
-      if (this.restrictedList[fromQQ]) {
-        this.restrictedList[fromQQ] += 1
-      } else {
-        this.restrictedList[fromQQ] = 1
-      }
-      if (this.restrictedList[fromQQ] > bot.config.setu.limit) {
-        if (this.restrictedList[fromQQ] > (bot.config.setu.limit + 3)) {
-          bot.ban(fromType, from, fromQQ, 720)
-        } else {
-          bot.send(fromType, from, `${bot.CQCode.at(fromQQ)}呵`)
+    if (bot.adminData) {
+      if (fromQQ != bot.adminData.qq && from != bot.adminData.id) {
+        if (this.restricted(bot, from, fromQQ, fromType)) {
+          return
         }
+      }
+    } else {
+      if (this.restricted(bot, from, fromQQ, fromType)) {
         return
       }
+    }
+    if (fromQQ != bot.adminData.qq && from != bot.adminData.id) {
     }
     if (typeof num !== 'number') {
       bot.send(fromType, from, `${bot.CQCode.at(fromQQ)}看不懂`)
@@ -72,13 +88,13 @@ export class Setu extends SetuSocket {
       return
     }
     if (bot.config.setu.multiservice) {
-      if (await this.socketSetu(bot, from, fromQQ, fromType, fromType === 1 ? bot.config.setu.keyword_1 : bot.config.setu.keyword_2, num, insertId, tag)) {
+      if (await this.socketSetu(bot, from, fromQQ, fromType, fromType === 1 ? bot.config.setu.keyword_1 : bot.config.setu.keyword_2, num, insertId, tag, all)) {
         return
       }
     }
 
     if (bot.config.setu.default === 1) {
-      this.Pool.getSetu(bot, num, tag)
+      this.Pool.getSetu(bot, num, tag, all)
         .then(res => {
           const data = this.formatData(bot, res, 1)
           if (res.length > 0) {
@@ -371,14 +387,12 @@ export class Setu extends SetuSocket {
   }
 
   setuStar = (bot: Bot, fromType: 1 | 2, id: number) => {
+    const keyword = bot.adminData && bot.adminData.id === id ? bot.config.setu.keyword_1 : bot.config.setu.keyword_2
+    const star = bot.adminData && bot.adminData.id === id ? bot.config.setu.star_1 : bot.config.setu.star_2
     this.Pool.setuWatchNum(id)
       .then(data => {
         if (data.length < 1) {
-          if (fromType === 2) {
-            bot.send(fromType, id, `今天还没有人看${bot.config.setu.keyword_2}`)
-          } else if (fromType === 1) {
-            bot.send(fromType, id, `今天还没有人看${bot.config.setu.keyword_1}`)
-          }
+          bot.send(fromType, id, `今天还没有人看${keyword}`)
           return
         }
         let temp = {}
@@ -396,18 +410,10 @@ export class Setu extends SetuSocket {
           numList.push(temp[i])
         }
         var indexOfMax = numList.indexOf(Math.max(...numList))
-        if (fromType === 2) {
-          bot.send(fromType, id, `${bot.CQCode.at(qqList[indexOfMax])}今天看了${numList[indexOfMax]}张${bot.config.setu.keyword_2}荣获${bot.config.setu.star_2}`)
-        } else if (fromType === 1) {
-          bot.send(fromType, id, `${bot.CQCode.at(qqList[indexOfMax])}今天看了${numList[indexOfMax]}张${bot.config.setu.keyword_1}荣获${bot.config.setu.star_1}`)
-        }
+        bot.send(fromType, id, `${bot.CQCode.at(qqList[indexOfMax])}今天看了${numList[indexOfMax]}张${keyword}荣获${star}`)
       })
       .catch(() => {
-        if (fromType === 2) {
-          bot.send(fromType, id, `我也不知道今天谁拿了${bot.config.setu.star_2}`)
-        } else if (fromType === 1) {
-          bot.send(fromType, id, `我也不知道今天谁拿了${bot.config.setu.star_1}`)
-        }
+        bot.send(fromType, id, `我也不知道今天谁拿了${star}`)
       })
   }
 

@@ -1,7 +1,8 @@
 # xianyu-robot
 
 本项目基于[node-cq-robot](https://github.com/CaoMeiYouRen/node-cq-robot)
-酷Q端需要安装[coolq-http-api](https://github.com/richardchien/coolq-http-api)插件
+~~酷Q端需要安装[coolq-http-api](https://github.com/richardchien/coolq-http-api)插件~~
+因酷Q已停运，请改用[cqhttp-mirai](https://github.com/yyuueexxiinngg/cqhttp-mirai)
 
 #### npm
 ```
