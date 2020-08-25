@@ -1,6 +1,6 @@
 {
   "name": "@blacktunes/xianyu-robot",
-  "version": "1.0.18",
+  "version": "1.0.19",
   "description": "基于coolq-robot的酷Q机器人",
   "main": "lib/main.js",
   "scripts": {

@@ -132,20 +132,33 @@ export default class Multiservice {
   setu = (bot: Bot, from: number, fromQQ: number, fromType: 1 | 2, keyword: string, num: number, insertId: number, tag?: string, all?: boolean) => {
     if (bot.config.setu.default === 1 && this.Pool) {
       this.getSetu(bot, num, tag, all)
-        .then(res => {
-          const data = this.formatData(bot, res, 1)
+        .then(async res => {
           if (res.length > 0) {
-            bot.send(fromType, from, `${bot.CQCode.at(fromQQ)}拿走你的${res.length}张${tag ? tag : ''}${keyword}\n${data.title}`)
-            bot.send(fromType, from, data.img)
-              .then(code => {
-                if (code == -1 || code == -1100) {
-                  bot.send(fromType, from, `${bot.CQCode.at(fromQQ)}发生了奇怪的事情所以发送失败了`)
-                } else if (code == -11) {
-                  bot.send(fromType, from, `${bot.CQCode.at(fromQQ)}这张图好像已经被删除了`)
-                } else if (code > 0) {
-                  if (!bot.CQ.getDebug()) this.viewed(data.title, data.sql, insertId, 1, res.length)
+            bot.send(fromType, from, `${bot.CQCode.at(fromQQ)}抽到了${res.length}张${tag ? tag : ''}${keyword}`)
+            let title = ''
+            let sql = ''
+            for (let i = 0; i < res.length; i++) {
+              const item = res[i]
+              const titleTemp = `${Base64.decode(item.title)} - ${item.author}`
+              if (i === 0) {
+                title += titleTemp
+              } else {
+                title += '\n' + titleTemp
+              }
+              const code = await bot.send(fromType, from, `${Base64.decode(item.title)} - ${item.author}\n${bot.config.setu.cache ? bot.CQCode.image(item.pid) : bot.CQCode.image(item.url)}`)
+              if (code == -1 || code == -1100) {
+                bot.send(fromType, from, `${bot.CQCode.at(fromQQ)}发生了奇怪的事情所以发送失败了`)
+              } else if (code == -11) {
+                bot.send(fromType, from, `${bot.CQCode.at(fromQQ)}这张图好像已经被删除了`)
+              } else if (code >= 0) {
+                if (i === 0) {
+                  sql += `${item.pid}`
+                } else {
+                  sql += `,${item.pid}`
                 }
-              })
+              }
+            }
+            if (!bot.CQ.getDebug()) this.viewed(title, sql, insertId, 1, res.length)
           } else {
             bot.send(fromType, from, `${bot.CQCode.at(fromQQ)}好像没有符合要求的${keyword}`)
           }
@@ -156,28 +169,55 @@ export default class Multiservice {
         })
     } else {
       let startTime = new Date()
-      axios.get(`${bot.config.setu.api}?${bot.config.setu.apikey ? 'apikey=' + bot.config.setu.apikey : ''}${tag ? '&keyword=' + tag : ''}&size1200=1&num=${num}`)
-        .then((res) => {
+      axios.get(`${bot.config.setu.api}?${bot.config.setu.apikey ? 'apikey=' + bot.config.setu.apikey : ''}${tag ? '&keyword=' + tag : ''}&size1200=1&num=${num}`, {
+        timeout: 30 * 1000
+      })
+        .then(async (res) => {
           if (res.data.code === 0) {
-            const data = this.formatData(bot, res.data.data, 0)
-            this.saveSetu(data.saveSql)
-            bot.send(fromType, from, `${bot.CQCode.at(fromQQ)}查询完成,用时${(data.endTime.getTime() - startTime.getTime()) / 1000}s\n剩余调用次数:${res.data.quota}\n${data.title}`)
-            bot.send(fromType, from, data.img)
-              .then(code => {
+            const endTime = new Date()
+
+            if (res.data.data.length > 0) {
+              bot.send(fromType, from, `${bot.CQCode.at(fromQQ)}查询完成,用时${(endTime.getTime() - startTime.getTime()) / 1000}s\n剩余调用次数:${res.data.quota}\n找到了${res.data.data.length}张${tag ? tag : ''}${keyword}`)
+
+              let title = ''
+              let sql = ''
+              let saveSql = ''
+              const time = endTime.toLocaleString('chinese', { hour12: false })
+
+              for (let i = 0; i < res.data.data.length; i++) {
+                const item = res.data.data[i]
+                const titleTemp = `${item.title} - ${item.author}`
+                if (i === 0) {
+                  title += titleTemp
+                  saveSql += `('${time}', '${JSON.stringify([item.pid, item.p])}', ${item.uid}, '${Base64.encode(item.title)}', '${item.author}', ${item.r18}, '${item.url}', ${item.width}, ${item.height}, '${Base64.encode(JSON.stringify(item.tags))}')`
+                } else {
+                  title += '\n' + titleTemp
+                  saveSql += `,('${time}', '${JSON.stringify([item.pid, item.p])}', ${item.uid}, '${Base64.encode(item.title)}', '${item.author}', ${item.r18}, '${item.url}', ${item.width}, ${item.height}, '${Base64.encode(JSON.stringify(item.tags))}')`
+                }
+                const code = await bot.send(fromType, from, `${item.title} - ${item.author}\n${bot.CQCode.image(item.url)}`)
                 if (code == -1 || code == -1100) {
                   bot.send(fromType, from, `${bot.CQCode.at(fromQQ)}发生了奇怪的事情所以发送失败了`)
                 } else if (code == -11) {
                   bot.send(fromType, from, `${bot.CQCode.at(fromQQ)}这张图好像已经被删除了`)
-                } else if (code > 0) {
-                  if (!bot.CQ.getDebug()) this.viewed(data.title, data.sql, insertId, 0, res.data.length)
+                } else if (code >= 0) {
+                  if (i === 0) {
+                    sql += `[${item.pid},${item.p}]`
+                  } else {
+                    sql += `,[${item.pid},${item.p}]`
+                  }
                 }
-              })
+              }
+              this.saveSetu(saveSql)
+              if (!bot.CQ.getDebug()) this.viewed(title, sql, insertId, 0, res.data.data.length)
+            } else {
+              bot.send(fromType, from, `${bot.CQCode.at(fromQQ)}查询完成,用时${(endTime.getTime() - startTime.getTime()) / 1000}s\n剩余调用次数:${res.data.quota}\n好像没有符合要求的${keyword}`)
+            }
           } else {
             this.handleErr(bot, res.data.code, res.data.quota_min_ttl, from, fromQQ, fromType)
           }
         })
         .catch(err => {
-          printTime(JSON.stringify(err), CQLog.LOG_ERROR)
+          console.error(err)
           bot.send(fromType, from, `${bot.CQCode.at(fromQQ)}查不到，就这样吧`)
         })
     }
@@ -201,47 +241,6 @@ export default class Multiservice {
     else {
       bot.send(fromType, from, `${bot.CQCode.at(fromQQ)}出了些奇怪的问题`)
       printTime(`错误代码：${code}`, CQLog.LOG_ERROR)
-    }
-  }
-
-  formatData = (bot: Bot, data: Array<any>, type: 0 | 1) => {
-    if (type === 0) {
-      let endTime = new Date()
-      let saveSql = ''
-      let url = ''
-      let title = ''
-      let sql = ''
-      const time = endTime.toLocaleString('chinese', { hour12: false })
-      data.forEach((item: any, index: number) => {
-        if (index === 0) {
-          url += `${bot.CQCode.image(item.url)}`
-          title += `${item.title} - ${item.author}`
-          saveSql += `('${time}', '${JSON.stringify([item.pid, item.p])}', ${item.uid}, '${Base64.encode(item.title)}', '${item.author}', ${item.r18}, '${item.url}', ${item.width}, ${item.height}, '${Base64.encode(JSON.stringify(item.tags))}')`
-          sql += `'[${item.pid},${item.p}]'`
-        } else {
-          url += `\n${bot.CQCode.image(item.url)}`
-          title += `\n${item.title} - ${item.author}`
-          saveSql += `,('${time}', '${JSON.stringify([item.pid, item.p])}', ${item.uid}, '${Base64.encode(item.title)}', '${item.author}', ${item.r18}, '${item.url}', ${item.width}, ${item.height}, '${Base64.encode(JSON.stringify(item.tags))}')`
-          sql += `,'[${item.pid},${item.p}]'`
-        }
-      })
-      return { endTime, saveSql, sql, url, title }
-    } else {
-      let img = ''
-      let title = ''
-      let sql = ''
-      data.forEach((item: any, index: number) => {
-        if (index === 0) {
-          img += `${bot.config.setu.cache ? bot.CQCode.image(item.pid) : bot.CQCode.image(item.url)}`
-          title += `${Base64.decode(item.title)} - ${item.author}`
-          sql += `'${item.pid}'`
-        } else {
-          img += `\n${bot.config.setu.cache ? bot.CQCode.image(item.pid) : bot.CQCode.image(item.url)}`
-          title += `\n${Base64.decode(item.title)} - ${item.author}`
-          sql += `,'${item.pid}'`
-        }
-      })
-      return { img, title, sql }
     }
   }
 }
