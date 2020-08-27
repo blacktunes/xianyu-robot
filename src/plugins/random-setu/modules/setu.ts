@@ -88,7 +88,7 @@ export class Setu extends SetuSocket {
       return
     }
     if (bot.config.setu.multiservice) {
-      if (await this.socketSetu(bot, from, fromQQ, fromType, fromType === 1 ? bot.config.setu.keyword_1 : bot.config.setu.keyword_2, num, insertId, tag, all)) {
+      if (await this.socketSetu(bot, from, fromQQ, fromType, bot.adminData && from === bot.adminData.id ? bot.config.setu.keyword_2 : bot.config.setu.keyword_1, num, insertId, tag, all)) {
         return
       }
     }
@@ -97,7 +97,7 @@ export class Setu extends SetuSocket {
       this.Pool.getSetu(bot, num, tag, all)
         .then(async res => {
           if (res.length > 0) {
-            bot.send(fromType, from, `${bot.CQCode.at(fromQQ)}抽到了${res.length}张${tag ? tag : ''}${bot.adminData && from === bot.adminData.id ? bot.config.setu.keyword_2 : bot.config.setu.keyword_1}`)
+            bot.send(fromType, from, `${bot.CQCode.at(fromQQ)}给你找到了${res.length}张${tag ? tag : ''}${bot.adminData && from === bot.adminData.id ? bot.config.setu.keyword_2 : bot.config.setu.keyword_1}`)
             let title = ''
             let sql = ''
             for (let i = 0; i < res.length; i++) {
@@ -115,12 +115,14 @@ export class Setu extends SetuSocket {
                 bot.send(fromType, from, `${bot.CQCode.at(fromQQ)}这张图好像已经被删除了`)
               } else if (code >= 0) {
                 if (i === 0) {
-                  sql += `${item.pid}`
+                  sql += `'${item.pid}'`
                 } else {
-                  sql += `,${item.pid}`
+                  sql += `,'${item.pid}'`
                 }
               }
             }
+            console.log(sql)
+            bot.send(fromType, from, `${bot.CQCode.at(fromQQ)}发完了`)
             if (!bot.CQ.getDebug()) this.Pool.viewed(title, sql, insertId, 1, res.length)
           } else {
             bot.send(fromType, from, `${bot.CQCode.at(fromQQ)}好像没有符合要求的${bot.adminData && from === bot.adminData.id ? bot.config.setu.keyword_2 : bot.config.setu.keyword_1}`)
@@ -169,6 +171,7 @@ export class Setu extends SetuSocket {
                   }
                 }
               }
+              bot.send(fromType, from, `${bot.CQCode.at(fromQQ)}发完了`)
               this.Pool.saveSetu(saveSql)
               if (!bot.CQ.getDebug()) this.Pool.viewed(title, sql, insertId, 0, res.data.data.length)
             } else {
@@ -378,8 +381,8 @@ export class Setu extends SetuSocket {
   }
 
   setuStar = (bot: Bot, fromType: 1 | 2, id: number) => {
-    const keyword = bot.adminData && bot.adminData.id === id ? bot.config.setu.keyword_1 : bot.config.setu.keyword_2
-    const star = bot.adminData && bot.adminData.id === id ? bot.config.setu.star_1 : bot.config.setu.star_2
+    const keyword = bot.adminData && bot.adminData.id === id ? bot.config.setu.keyword_2 : bot.config.setu.keyword_1
+    const star = bot.adminData && bot.adminData.id === id ? bot.config.setu.star_2 : bot.config.setu.star_1
     this.Pool.setuWatchNum(id)
       .then(data => {
         if (data.length < 1) {

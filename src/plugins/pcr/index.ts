@@ -75,7 +75,7 @@ export default class Pcr {
 
   savePcrData = (bot: Bot) => {
     const str = JSON.stringify(this.pcrData)
-    fs.writeFile(path.join(bot.dirname, './pcrData.json'), str, (err) => {
+    fs.writeFile(path.join(bot.dirname, './pcrdata.json'), str, (err) => {
       if (err) {
         console.error(err)
         printTime('任务未写入JSON', CQLog.LOG_ERROR)

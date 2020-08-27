@@ -134,7 +134,7 @@ export default class Multiservice {
       this.getSetu(bot, num, tag, all)
         .then(async res => {
           if (res.length > 0) {
-            bot.send(fromType, from, `${bot.CQCode.at(fromQQ)}抽到了${res.length}张${tag ? tag : ''}${keyword}`)
+            bot.send(fromType, from, `${bot.CQCode.at(fromQQ)}给你找到了${res.length}张${tag ? tag : ''}${keyword}`)
             let title = ''
             let sql = ''
             for (let i = 0; i < res.length; i++) {
@@ -152,12 +152,14 @@ export default class Multiservice {
                 bot.send(fromType, from, `${bot.CQCode.at(fromQQ)}这张图好像已经被删除了`)
               } else if (code >= 0) {
                 if (i === 0) {
-                  sql += `${item.pid}`
+                  sql += `'${item.pid}'`
                 } else {
-                  sql += `,${item.pid}`
+                  sql += `,'${item.pid}'`
                 }
               }
             }
+            console.log(sql)
+            bot.send(fromType, from, `${bot.CQCode.at(fromQQ)}发完了`)
             if (!bot.CQ.getDebug()) this.viewed(title, sql, insertId, 1, res.length)
           } else {
             bot.send(fromType, from, `${bot.CQCode.at(fromQQ)}好像没有符合要求的${keyword}`)
@@ -207,6 +209,7 @@ export default class Multiservice {
                   }
                 }
               }
+              bot.send(fromType, from, `${bot.CQCode.at(fromQQ)}发完了`)
               this.saveSetu(saveSql)
               if (!bot.CQ.getDebug()) this.viewed(title, sql, insertId, 0, res.data.data.length)
             } else {

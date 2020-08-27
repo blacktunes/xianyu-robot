@@ -169,7 +169,6 @@ export class Bot extends CQApp {
   }
 
   private initPlugin = async (): Promise<void> => {
-    this.userId = await this.CQ.getLoginQq()
     if (this.initList.length > 0) {
       for (let i in this.initList) {
         this.initList[i](this)
@@ -213,11 +212,11 @@ export class Bot extends CQApp {
     return await this.handleMsg(fromDiscuss, fromQQ, msg, 2)
   }
 
-  enable = (): 0 => {
+  enable = async () => {
+    this.userId = await this.CQ.getLoginQq()
     this.initPlugin()
     this.robotReady = true
     this.saveConfig()
-    return 0
   }
 
   /**
@@ -260,7 +259,7 @@ export class Bot extends CQApp {
    * @param qq 管理员Q号
    * @param id 群组ID
    */
-  admin(type: MsgType, qq: number, id: number = null): Bot {
+  admin = (type: MsgType, qq: number, id: number = null): Bot => {
     if (type === 0) {
       this.adminData = { type, qq }
     } else {
@@ -278,24 +277,28 @@ export class Bot extends CQApp {
    * 传入地址后配置会本地储存
    * @param dirname
    */
-  start(dirname: string = null) {
-    this.plugin = () => {
-      throw new Error('请在应用启动前载入插件')
-    }
-    this.admin = () => {
-      throw new Error('请在应用启动前设置管理员')
-    }
-    if (dirname) {
-      this.dirname = dirname
-      let setting: any
-      if (fs.existsSync(path.join(dirname, './config.json'))) {
-        setting = JSON.parse(fs.readFileSync(path.join(dirname, './config.json')).toString())
+  start = (dirname: string = null) => {
+    return new Promise<void>(resolve => {
+      this.plugin = () => {
+        throw new Error('请在应用启动前载入插件')
       }
-      for (let i in setting) {
-        this.config[i] = setting[i]
+      this.admin = () => {
+        throw new Error('请在应用启动前设置管理员')
       }
-      printTime('[配置] 本地配置加载成功', CQLog.LOG_INFO_SUCCESS)
-    }
-    connect(this, this.CQWebSocketOption)
+      if (dirname) {
+        this.dirname = dirname
+        let setting: any
+        if (fs.existsSync(path.join(dirname, './config.json'))) {
+          setting = JSON.parse(fs.readFileSync(path.join(dirname, './config.json')).toString())
+        }
+        for (let i in setting) {
+          this.config[i] = setting[i]
+        }
+        printTime('[配置] 本地配置加载成功', CQLog.LOG_INFO_SUCCESS)
+      }
+      connect(this, this.CQWebSocketOption).then(() => {
+        resolve()
+      })
+    })
   }
 }

@@ -35,7 +35,7 @@ export interface CQListener extends IVer {
      * @returns {0}请固定返回0。
      * @memberof CQListener
      */
-    enable(): 0
+    enable(): any
     /**
     * Type=1004 应用将被停用
      * 本函数会在连接断开前执行，可以在此执行插件退出代码

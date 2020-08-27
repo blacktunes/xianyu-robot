@@ -1,16 +1,19 @@
 import CQWebSocket, { CQWebSocketOption } from 'cq-websocket'
 import { printTime, CQWebSocketInit, CQLog } from '../cq-robot'
+import { Bot } from '../bot'
 
-export default function connect(app: any, CQWebSocketOption: CQWebSocketOption) {
-  const bot: CQWebSocket = CQWebSocketInit(CQWebSocketOption)
+export default function connect(app: Bot, CQWebSocketOption: CQWebSocketOption) {
+  return new Promise<void>(resolve => {
+    const bot: CQWebSocket = CQWebSocketInit(CQWebSocketOption)
 
     app.startup()
-    printTime(`[应用]${app.APP_ID ? ' ' + app.APP_ID + ' ' : '应用'}已载入`, CQLog.LOG_INFO_SUCCESS)
+    printTime(`[应用] ${app.APP_ID ? ' ' + app.APP_ID + ' ' : '应用'}已载入`, CQLog.LOG_INFO_SUCCESS)
 
-    bot.on('ready', () => {
+    bot.on('ready', async () => {
       printTime('[WebSocket] 连接成功！', CQLog.LOG_INFO)
-      app.enable()
-      printTime(`[应用]${app.APP_ID ? ' ' + app.APP_ID + ' ' : '应用'}已启动`, CQLog.LOG_INFO_SUCCESS)
+      await app.enable()
+      resolve()
+      printTime(`[应用] ${app.APP_ID ? ' ' + app.APP_ID + ' ' : '应用'}已启动`, CQLog.LOG_INFO_SUCCESS)
     })
 
     bot.on('message.private', async (_event, c, _tags) => {
@@ -91,4 +94,6 @@ export default function connect(app: any, CQWebSocketOption: CQWebSocketOption) 
     app.start = function () {
       throw new Error('请勿重复启动')
     }
+
+  })
 }

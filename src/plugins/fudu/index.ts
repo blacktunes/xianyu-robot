@@ -1,10 +1,14 @@
 import Bot, { printTime, CQLog } from '../../main'
+import NamedRegExp = require('named-regexp-groups')
 
 export interface FuduConfig {
   enable: boolean,
   times: number,
   probability: number
 }
+
+const imgFuduReg = new NamedRegExp('url=http://gchat.qpic.cn/((gchatpic_new)||(gchatpic))/[0-9]*/(?<img>.*)')
+const imgReg = new NamedRegExp('(^\\[CQ:image).*(/0\\?term=2\\]$)')
 
 export default class Fudu {
   constructor(bot: Bot, fuduConfig: FuduConfig)  {
@@ -39,7 +43,7 @@ export default class Fudu {
   fudu = (bot: Bot, from: number, fromQQ: number, msg: string, type: 0 | 1 | 2) => {
     if (type === 0) return
     if (Object.keys(this.msgList).includes(`${from}`)) {
-      if (this.msgList[from].msg === msg) {
+      if (this.msgList[from].msg === msg || ((imgReg.test(this.msgList[from].msg) && imgReg.test(msg)) && (imgFuduReg.exec(this.msgList[from].msg).groups.img === imgFuduReg.exec(msg).groups.img))) {
         if (this.msgList[from].fromQQ !== fromQQ) {
           this.msgList[from].num += 1
         }

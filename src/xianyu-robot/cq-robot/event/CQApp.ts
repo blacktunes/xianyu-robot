@@ -66,7 +66,7 @@ export class CQApp extends CQAppAbstract implements CQListener {
     exit(): 0 {
         return 0
     }
-    enable(): 0 {
+    enable(): any {
         return 0
     }
     disable(): 0 {

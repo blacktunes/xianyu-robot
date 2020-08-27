@@ -103,8 +103,8 @@ export default class Sutu extends Setu {
 
     if (type === 0) return
 
-    let setuReg_1 = new NamedRegExp(`[来发给](?<text>((?<num>([1-5])|[一二两三四五])?[张份幅])|点)(?<tag>.*?)?的?${bot.config.setu.keyword_1}( +)?(?<all>(-all))?`)
-    let setuReg_2 = new NamedRegExp(`[来发给](?<text>((?<num>([1-5])|[一二两三四五])?[张份幅])|点)(?<tag>.*?)?的?(${bot.config.setu.keyword_1}|${bot.config.setu.keyword_2})( +)?(?<all>(-all))?`)
+    let setuReg_1 = new NamedRegExp(`[来发给](?<text>((?<num>([1-9]\d*)|[一二两三四五六七八九十])?[张份幅])|点)(?<tag>.*?)?的?${bot.config.setu.keyword_1}( +)?(?<all>(-all))?`)
+    let setuReg_2 = new NamedRegExp(`[来发给](?<text>((?<num>([1-9]\d*)|[一二两三四五六七八九十])?[张份幅])|点)(?<tag>.*?)?的?(${bot.config.setu.keyword_1}|${bot.config.setu.keyword_2})( +)?(?<all>(-all))?`)
 
     if (bot.config.setu.enable) {
       if ((type === 1 && setuReg_1.test(msg)) || (bot.adminData && from === bot.adminData.id && setuReg_2.test(msg))) {
