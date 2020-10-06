@@ -1,6 +1,5 @@
 # xianyu-robot
 
-本项目基于[node-cq-robot](https://github.com/CaoMeiYouRen/node-cq-robot)
 ~~酷Q端需要安装[coolq-http-api](https://github.com/richardchien/coolq-http-api)插件~~
 因酷Q已停运，请改用[cqhttp-mirai](https://github.com/yyuueexxiinngg/cqhttp-mirai)
 
@@ -26,7 +25,7 @@ const app = new App()
 app.start()
 ```
 
-目前还在开发中，没有太多内置插件，可以添加对象参数
+构造函数可以添加对象参数
 
 ```js
 {
@@ -64,24 +63,9 @@ app
   .plugin(Plugin3)
 
 ```
-`start`可传入目录地址，会读取该目录下的`./config/config.json`，同时也会把其它插件的通用配置保存到该文件
+`start`可传入目录地址，会读取该目录下的`./config/**机器人Q号**.json`，同时也会把其它插件的通用配置保存到该文件
 ```js
 app.start(__dirname)
 ```
-其它内置插件
-```js
-// 创建mysql链接池
-app.createPool()
 
-// 获取格式化后的日期和时间
-app.getTime()
-
-// 利用async/await暂时中断执行
-app.sleep()
-
-// 发送消息
-app.send()
-
-// 将通用设置保存到本地
-app.saveConfig()
-```
+本项目参考自[node-cq-robot](https://github.com/CaoMeiYouRen/node-cq-robot)
