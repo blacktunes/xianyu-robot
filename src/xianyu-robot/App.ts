@@ -5,8 +5,9 @@ import { CQCODE, CQCode } from './modules/Bot/modules/CQCode'
 import { CQMessage } from './modules/Bot/modules/option'
 import connect from './modules/connect'
 import Mysql from './modules/mysql'
-import { AdminConfig, BotPlugin, botWSOption, pluginsConfig, RobotConfig } from './modules/option'
-import { Log, printLog } from './modules/printLog'
+import { AdminConfig, BotPluginClass, botWSOption, Msg, pluginsConfig, RobotConfig } from './modules/option'
+import { BotPlugin } from './modules/plugin'
+import { logError, logInfoSuccess, logWarning } from './modules/printLog'
 import fs = require('fs')
 import path = require('path')
 import schedule = require('node-schedule')
@@ -18,11 +19,13 @@ export enum MsgType {
 
 export class App extends BotApp {
   /**
-   * 机器人构造函数
+   * BOT构造函数
    * @param config
    * @param debug
+   * @param dirname
+   * @param nolisten 是否监听聊天信息
    */
-  constructor(config: RobotConfig = null, debug: boolean = false) {
+  constructor(config: RobotConfig = null, debug: boolean = false, dirname: string = __dirname, nolisten: boolean = false) {
     super(debug)
 
     if (config) {
@@ -37,12 +40,30 @@ export class App extends BotApp {
       if (config.port) {
         this.CQWebSocketOption.port = config.port
       }
+
+      if (dirname) {
+        const dir = path.join(dirname, './config/')
+        if (!fs.existsSync(dir)) {
+          fs.mkdirSync(dir)
+        }
+        this.dirname = dir
+      }
+
+      this.nolisten = nolisten
+
+      this.name = config.name || 'Bot'
     }
   }
 
   private robotReady: boolean = false
 
+  readonly nolisten: boolean = false
+
+  readonly name: string
+
   userId: number
+
+  readonly dirname: string
 
   adminData: AdminConfig
 
@@ -52,19 +73,17 @@ export class App extends BotApp {
 
   CQCode: CQCODE = CQCode
 
-  private pluginsList: Array<Function> = []
-  private initList: Array<Function> = []
-  private scheduleList: Array<Function> = []
+  private pluginsList: Array<BotPlugin> = []
 
   private CQWebSocketOption: CQWebSocketOption = botWSOption
 
   /**
- * 禁用所有功能
- * @param {number} fromType
- * @param {number} from
- * @param {number} fromQQ
- * @param {number} time
- */
+   * 禁用所有功能
+   * @param {number} fromType
+   * @param {number} from
+   * @param {number} fromQQ
+   * @param {number} time
+   */
   ban = (fromType: 0 | 1, from: number, fromQQ: number, time: number) => {
     this.send(fromType, fromType === MsgType.privateMsg ? fromQQ : from, `${fromType === MsgType.privateMsg ? this.CQCode.at(fromQQ) : ''}无路赛，禁用你所有功能${time}分钟`)
     this.blacklist.push(fromQQ)
@@ -73,24 +92,24 @@ export class App extends BotApp {
       if (index != -1) {
         this.blacklist.splice(index, 1)
       }
-      printLog(`${fromQQ}已解除禁用`, Log.WARNING)
-      this.send(fromType, MsgType.privateMsg === 0 ? fromQQ : from, `${MsgType.privateMsg === 0 ? this.CQCode.at(fromQQ) : ''}放过你了，下次别这样了`)
+      logWarning(`${fromQQ}已解除禁用`, this.name)
+      this.send(fromType, fromType === MsgType.privateMsg ? fromQQ : from, `${fromType === MsgType.privateMsg ? this.CQCode.at(fromQQ) : ''}放过你了，下次别这样了`)
     })
   }
 
   /**
    * 发送消息
-   * @param type 0-私聊消息, 1-群组消息, 2-讨论组消息
+   * @param type 0-私聊消息, 1-群组消息
    * @param id 群组ID或Q号
    * @param message 需要发送的信息
    * @returns {Promise<number>} 成功返回message_id，失败返回retcode
    */
   send = async (type: 0 | 1, id: number, message: string | CQMessage | CQMessage[]): Promise<number> => {
-      if (type === MsgType.privateMsg) {
-        return await this.API.sendPrivateMsg(id, message)
-      } else if (type === MsgType.groupMsg) {
-        return await this.API.sendGroupMsg(id, message)
-      }
+    if (type === MsgType.privateMsg) {
+      return await this.API.sendPrivateMsg(id, message)
+    } else if (type === MsgType.groupMsg) {
+      return await this.API.sendGroupMsg(id, message)
+    }
   }
 
   /**
@@ -124,33 +143,44 @@ export class App extends BotApp {
     return new Mysql(config)
   }
 
-  dirname: string
-
   saveConfig = () => {
     if (this.dirname) {
       const str = JSON.stringify(this.config)
       fs.writeFile(path.join(this.dirname, `./${this.userId}.json`), str, (err) => {
         if (err) {
           console.error(err)
-          printLog('数据未写入JSON', Log.ERROR)
+          logError('数据未写入JSON', this.name)
         }
       })
     }
   }
 
-  private handleMsg = async (from: number, fromQQ: number, msg: string, type: 0 | 1, msgId: number): Promise<void> => {
+  private handleMsg = async (from: number, fromQQ: number, msg: string, msgId: number): Promise<void> => {
     if (!this.robotReady || this.blacklist.includes(fromQQ)) return
-    // 功能待完善
-    // if (this.adminData && fromQQ === this.adminData.qq) {
-    //   if (msg.includes('/send')) {
-    //     const data = msg.split(' ')
-    //     this.send(Number(data[1]) as 0 | 1, Number(data[2]), data[3])
-    //     return
-    //   }
-    // }
+    if (this.adminData && fromQQ === this.adminData.qq) {
+      if (msg.includes('/send')) {
+        const data = msg.split(' ')
+        if (Number(data[1]) === 0 || Number(data[1]) === 1) {
+          this.send(Number(data[1]) as 0 | 1, Number(data[2]), data[3])
+        }
+        return
+      }
+    }
+    if (this.adminData && fromQQ === this.adminData.qq && msg === '-debug') {
+      let botDebug: string = `BOT:\n应用名: ${this.name}\nID: ${this.userId}`
+      let pluginDebug = ''
+
+      if (this.pluginsList.length > 0) {
+        for (let i in this.pluginsList) {
+          pluginDebug += `\n\n${this.pluginsList[i].name}: \n${this.pluginsList[i].debug(this)}`
+        }
+      }
+      const type = from ? MsgType.groupMsg : MsgType.privateMsg
+      this.send(type, type === MsgType.privateMsg ? fromQQ : from, botDebug + pluginDebug)
+    }
     if (this.pluginsList.length > 0) {
       for (let i in this.pluginsList) {
-        if (await this.pluginsList[i](this, from, fromQQ, msg, type, msgId) === 0) {
+        if (await this.pluginsList[i].handelMsg(this, from, fromQQ, msg, msgId) === Msg.MSG_IGNORE) {
           break
         }
       }
@@ -159,9 +189,9 @@ export class App extends BotApp {
   }
 
   private initPlugin = async (): Promise<void> => {
-    if (this.initList.length > 0) {
-      for (let i in this.initList) {
-        this.initList[i](this)
+    if (this.pluginsList.length > 0) {
+      for (let i in this.pluginsList) {
+        this.pluginsList[i].initPlugin(this)
       }
     }
     this.initSchedule()
@@ -183,19 +213,19 @@ export class App extends BotApp {
   }
 
   initSchedule = () => {
-    if (this.scheduleList.length > 0) {
-      for (let i in this.scheduleList) {
-        this.scheduleList[i](this)
+    if (this.pluginsList.length > 0) {
+      for (let i in this.pluginsList) {
+        this.pluginsList[i].createSchedule(this)
       }
     }
   }
 
   privateMsg = async (_subType: string, msgId: number, fromQQ: number, msg: string): Promise<void> => {
-    return this.handleMsg(null, fromQQ, msg, 0, msgId)
+    return this.handleMsg(null, fromQQ, msg, msgId)
   }
 
   groupMsg = async (_subType: string, msgId: number, fromGroup: number, fromQQ: number, _fromAnonymous: string, msg: string): Promise<void> => {
-    return this.handleMsg(fromGroup, fromQQ, msg, 1, msgId)
+    return this.handleMsg(fromGroup, fromQQ, msg, msgId)
   }
 
   enable = async () => {
@@ -208,7 +238,7 @@ export class App extends BotApp {
       for (let i in setting) {
         this.config[i] = setting[i]
       }
-      printLog('[配置] 本地配置加载成功', Log.INFO_SUCCESS)
+      logInfoSuccess('本地配置加载成功', this.name)
     }
     this.initPlugin()
     this.robotReady = true
@@ -217,36 +247,16 @@ export class App extends BotApp {
 
   /**
    * 添加消息处理插件
-   * 请传入初始化插件，若要直接插入消息处理流程请使用applyPlugin方法
    * @param {class} plugin
    */
-  plugin = (plugin: BotPlugin, ...arg: any[]): App => {
+  plugin = (plugin: BotPluginClass, ...arg: any[]): App => {
     this.admin = () => {
       throw new Error('请在载入插件前设置管理员')
     }
-    new plugin(this, ...arg)
+    const _plugin = new plugin(this, ...arg)
+    this.pluginsList.push(_plugin)
+    logInfoSuccess(`[${_plugin.name}] 已载入`, '插件')
     return this
-  }
-
-  /**
-   * 把方法插入到消息处理
-   */
-  applyPlugin = (fn: Function) => {
-    this.pluginsList.push(fn)
-  }
-
-  /**
-   * 把方法插入到启动函数
-   */
-  applyInit = (fn: Function) => {
-    this.initList.push(fn)
-  }
-
-  /**
-   * 把方法插入到定时任务
-   */
-  applySchedule = (fn: Function) => {
-    this.scheduleList.push(fn)
   }
 
   /**
@@ -255,16 +265,8 @@ export class App extends BotApp {
    * @param qq 管理员Q号
    * @param id 群组ID
    */
-  admin = (type: 0 | 1, qq: number, id: number = null): App => {
-    if (type === MsgType.privateMsg) {
-      this.adminData = { type, qq }
-    } else {
-      if (id) {
-        this.adminData = { type, qq, id }
-      } else {
-        printLog('类型不为0时必须输入群组ID', Log.ERROR)
-      }
-    }
+  admin = (qq: number, id: number = null): App => {
+    this.adminData = { qq, id }
     return this
   }
 
@@ -273,20 +275,13 @@ export class App extends BotApp {
    * 传入地址后配置会本地储存
    * @param dirname
    */
-  start = (dirname: string = __dirname) => {
+  start = () => {
     return new Promise<void>(resolve => {
       this.plugin = () => {
         throw new Error('请在应用启动前载入插件')
       }
       this.admin = () => {
         throw new Error('请在应用启动前设置管理员')
-      }
-      if (dirname) {
-        const dir = path.join(dirname, './config/')
-        if (!fs.existsSync(dir)) {
-          fs.mkdirSync(dir)
-        }
-        this.dirname = dir
       }
       connect(this, this.CQWebSocketOption).then(() => {
         resolve()

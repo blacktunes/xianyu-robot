@@ -1,7 +1,18 @@
 import { CQWebSocketOption } from 'cq-websocket'
 
-export interface BotPlugin {
-  new(...arg: any): void
+export enum Msg {
+  /**
+   * 拦截消息不传递给下一个插件
+   */
+  MSG_IGNORE,
+  /**
+   * 继续传递给下一个插件
+   */
+  MSG_INTERCEPT
+}
+
+export interface BotPluginClass {
+  new(...arg: any): any
 }
 
 export interface pluginsConfig {
@@ -9,7 +20,6 @@ export interface pluginsConfig {
 }
 
 export interface AdminConfig {
-  type: 0 | 1
   qq: number
   id?: number
 }
