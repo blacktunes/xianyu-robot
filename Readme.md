@@ -2,6 +2,7 @@
 
 ~~酷Q端需要安装[coolq-http-api](https://github.com/richardchien/coolq-http-api)插件~~
 因酷Q已停运，请改用[cqhttp-mirai](https://github.com/yyuueexxiinngg/cqhttp-mirai)
+**可能会改用mirai-go，会面临下一次大改**
 
 #### npm
 ```
@@ -52,9 +53,6 @@ app.admin(qq, id)
 可以使用`init`和`plugin`方法载入插件，请在`start`之前载入，否则会报错
 
 ```js
-// init方法载入的函数会插入到初始化函数中
-app.init(Plugin)
-
 // plugin方法载入的函数会插入到讨论组和群组消息处理函数中
 app.plugin(Plugin)
 
@@ -67,5 +65,18 @@ app
 
 插件为类的形式，请继承`BotPlugin`编写
 
+也可不使用插件直接使用方法处理消息
+使用`message`方法会在接收到消息时触发
+```ts
+app.message((from: number, fromQQ: number, msg: string, msgId: number) => {
+  // function
+})
+```
+使用`init`方法将会在bot链接成功后触发
+```ts
+app.init(() => {
+  // function
+})
+```
 
 本项目参考自[node-cq-robot](https://github.com/CaoMeiYouRen/node-cq-robot)

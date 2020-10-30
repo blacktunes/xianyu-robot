@@ -1,21 +1,16 @@
 import { CQWebSocketOption } from 'cq-websocket'
+import { BotPlugin } from './plugin'
 
-export enum Msg {
-  /**
-   * 拦截消息不传递给下一个插件
-   */
-  MSG_IGNORE,
-  /**
-   * 继续传递给下一个插件
-   */
-  MSG_INTERCEPT
-}
+/**
+ * 是否阻止消息传递
+ */
+export type Prevent = Promise<boolean | void> | boolean | void
 
 export interface BotPluginClass {
-  new(...arg: any): any
+  new(...arg: any): BotPlugin
 }
 
-export interface pluginsConfig {
+export interface PluginsConfig {
   [x: string]: any
 }
 

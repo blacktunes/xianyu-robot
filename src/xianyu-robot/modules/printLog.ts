@@ -72,13 +72,13 @@ export function printLog(msg: string, level: Log = 0) {
       console.log(time, '->', colors.green(msg))
       break
     case Log.WARNING:
-      console.log(time, '->', colors.yellow(msg))
+      console.warn(time, '->', colors.yellow(msg))
       break
     case Log.ERROR:
-      console.log(time, '->', colors.red(msg))
+      console.error(time, '->', colors.red(msg))
       break
     case Log.FATAL:
-      console.log(time, '->', colors.magenta(msg))
+      console.error(time, '->', colors.magenta(msg))
       break
   }
 }

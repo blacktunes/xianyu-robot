@@ -1,6 +1,5 @@
 import CQWebSocket, { CQWebSocketOption } from 'cq-websocket'
 import { App } from '../App'
-import { botWSOption } from './option'
 import { Log, printLog } from './printLog'
 
 export default function connect(app: App, CQWebSocketOption: CQWebSocketOption) {

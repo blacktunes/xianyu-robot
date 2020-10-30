@@ -5,7 +5,7 @@ import { CQCODE, CQCode } from './modules/Bot/modules/CQCode'
 import { CQMessage } from './modules/Bot/modules/option'
 import connect from './modules/connect'
 import Mysql from './modules/mysql'
-import { AdminConfig, BotPluginClass, botWSOption, Msg, pluginsConfig, RobotConfig } from './modules/option'
+import { AdminConfig, BotPluginClass, botWSOption, PluginsConfig, Prevent, RobotConfig } from './modules/option'
 import { BotPlugin } from './modules/plugin'
 import { logError, logInfoSuccess, logWarning } from './modules/printLog'
 import fs = require('fs')
@@ -23,7 +23,7 @@ export class App extends BotApp {
    * @param config
    * @param debug
    * @param dirname
-   * @param nolisten 是否监听聊天信息
+   * @param nolisten 是否不监听聊天信息
    */
   constructor(config: RobotConfig = null, debug: boolean = false, dirname: string = __dirname, nolisten: boolean = false) {
     super(debug)
@@ -57,23 +57,50 @@ export class App extends BotApp {
 
   private robotReady: boolean = false
 
+  /**
+   * 是否监听聊天信息
+   */
   readonly nolisten: boolean = false
 
+  /**
+   * bot名称
+   */
   readonly name: string
 
+  /**
+   * bot的登录QQ
+   */
   userId: number
 
-  readonly dirname: string
-
+  /**
+   * bot管理员信息
+   */
   adminData: AdminConfig
 
-  config: pluginsConfig = {}
+  /**
+   * 本地设置保存位置
+   */
+  readonly dirname: string
 
+  /**
+   * 插件设置
+   */
+  config: PluginsConfig = {}
+
+  /**
+   * 插件列表
+   */
+  private pluginsList: Array<BotPlugin> = []
+
+  /**
+   * 黑名单
+   */
   blacklist: Array<number> = []
 
+  /**
+   * CQ码对象
+   */
   CQCode: CQCODE = CQCode
-
-  private pluginsList: Array<BotPlugin> = []
 
   private CQWebSocketOption: CQWebSocketOption = botWSOption
 
@@ -85,8 +112,9 @@ export class App extends BotApp {
    * @param {number} time
    */
   ban = (fromType: 0 | 1, from: number, fromQQ: number, time: number) => {
-    this.send(fromType, fromType === MsgType.privateMsg ? fromQQ : from, `${fromType === MsgType.privateMsg ? this.CQCode.at(fromQQ) : ''}无路赛，禁用你所有功能${time}分钟`)
+    this.send(fromType, fromType === MsgType.privateMsg ? fromQQ : from, `${fromType === MsgType.privateMsg ? '' : this.CQCode.at(fromQQ)}无路赛，禁用你所有功能${time}分钟`)
     this.blacklist.push(fromQQ)
+    logWarning(`${fromQQ}被禁用${time}分钟`, this.name)
     schedule.scheduleJob(new Date(Date.now() + time * 60 * 1000), () => {
       let index = this.blacklist.indexOf(fromQQ)
       if (index != -1) {
@@ -99,6 +127,7 @@ export class App extends BotApp {
 
   /**
    * 发送消息
+   * @deprecated
    * @param type 0-私聊消息, 1-群组消息
    * @param id 群组ID或Q号
    * @param message 需要发送的信息
@@ -109,6 +138,21 @@ export class App extends BotApp {
       return await this.API.sendPrivateMsg(id, message)
     } else if (type === MsgType.groupMsg) {
       return await this.API.sendGroupMsg(id, message)
+    }
+  }
+
+  /**
+   * 发送消息
+   * 只有qq则发送私聊消息，只有group则发送群里消息
+   * 若同时存在则发送临时会话（暂未实现）
+   * @param message 需要发送的信息
+   * @returns {Promise<number>} 成功返回message_id，失败返回retcode
+   */
+  sendMsg = async (qq: number | null, group: number | null, message: string | CQMessage | CQMessage[]): Promise<number> => {
+    if (qq) {
+      return await this.API.sendPrivateMsg(qq, message)
+    } else if (group) {
+      return await this.API.sendGroupMsg(group, message)
     }
   }
 
@@ -146,16 +190,16 @@ export class App extends BotApp {
   saveConfig = () => {
     if (this.dirname) {
       const str = JSON.stringify(this.config)
-      fs.writeFile(path.join(this.dirname, `./${this.userId}.json`), str, (err) => {
-        if (err) {
-          console.error(err)
-          logError('数据未写入JSON', this.name)
-        }
-      })
+      try {
+        fs.writeFileSync(path.join(this.dirname, `./${this.userId}.json`), str)
+      } catch (err) {
+        console.error(err)
+        logError('数据未写入JSON', this.name)
+      }
     }
   }
 
-  private handleMsg = async (from: number, fromQQ: number, msg: string, msgId: number): Promise<void> => {
+  readonly handleMsg = async (from: number, fromQQ: number, msg: string, msgId: number = -1): Promise<void> => {
     if (!this.robotReady || this.blacklist.includes(fromQQ)) return
     if (this.adminData && fromQQ === this.adminData.qq) {
       if (msg.includes('/send')) {
@@ -165,36 +209,51 @@ export class App extends BotApp {
         }
         return
       }
-    }
-    if (this.adminData && fromQQ === this.adminData.qq && msg === '-debug') {
-      let botDebug: string = `BOT:\n应用名: ${this.name}\nID: ${this.userId}`
-      let pluginDebug = ''
-
-      if (this.pluginsList.length > 0) {
-        for (let i in this.pluginsList) {
-          pluginDebug += `\n\n${this.pluginsList[i].name}: \n${this.pluginsList[i].debug(this)}`
+      if (msg.includes('-debug ')) {
+        const type = from ? MsgType.groupMsg : MsgType.privateMsg
+        if (this.pluginsList.length > 0) {
+          const name = msg.split('-debug ')[1]
+          if (name) {
+            for (let i in this.pluginsList) {
+              if (this.pluginsList[i].name === name) {
+                this.send(type, type === MsgType.privateMsg ? fromQQ : from, `${this.pluginsList[i].name}：\n${this.pluginsList[i].debug(this) || '没有配置debug输出'}`)
+                break
+              }
+            }
+          }
+        } else {
+          this.send(type, type === MsgType.privateMsg ? fromQQ : from, '好像没有已载入的插件')
         }
+        return
       }
-      const type = from ? MsgType.groupMsg : MsgType.privateMsg
-      this.send(type, type === MsgType.privateMsg ? fromQQ : from, botDebug + pluginDebug)
+      if (msg.includes('/ban')) {
+        const data = msg.split(' ')
+        if (Number(data[2]) !== this.adminData.qq) {
+          this.ban(1, Number(data[1]), Number(data[2]), Number(data[3]))
+        }
+        return
+      }
+    }
+    if (this.tempMessage) {
+      if (this.tempMessage(from, fromQQ, msg, msgId)) {
+        return
+      }
     }
     if (this.pluginsList.length > 0) {
       for (let i in this.pluginsList) {
-        if (await this.pluginsList[i].handelMsg(this, from, fromQQ, msg, msgId) === Msg.MSG_IGNORE) {
+        if (await this.pluginsList[i].message(this, from, fromQQ, msg, msgId)) {
           break
         }
       }
-      return
     }
   }
 
-  private initPlugin = async (): Promise<void> => {
+  private initPlugin = (): void => {
     if (this.pluginsList.length > 0) {
       for (let i in this.pluginsList) {
-        this.pluginsList[i].initPlugin(this)
+        this.pluginsList[i].init(this)
       }
     }
-    this.initSchedule()
   }
 
   /**
@@ -212,14 +271,6 @@ export class App extends BotApp {
     return status
   }
 
-  initSchedule = () => {
-    if (this.pluginsList.length > 0) {
-      for (let i in this.pluginsList) {
-        this.pluginsList[i].createSchedule(this)
-      }
-    }
-  }
-
   privateMsg = async (_subType: string, msgId: number, fromQQ: number, msg: string): Promise<void> => {
     return this.handleMsg(null, fromQQ, msg, msgId)
   }
@@ -228,7 +279,7 @@ export class App extends BotApp {
     return this.handleMsg(fromGroup, fromQQ, msg, msgId)
   }
 
-  enable = async () => {
+  readonly enable = async () => {
     this.userId = await this.API.getLoginQq()
     if (this.dirname) {
       let setting: any
@@ -240,13 +291,25 @@ export class App extends BotApp {
       }
       logInfoSuccess('本地配置加载成功', this.name)
     }
+    if (this.tempInit) {
+      this.tempInit(this)
+    }
     this.initPlugin()
-    this.robotReady = true
     this.saveConfig()
+    this.robotReady = true
+  }
+
+  private tempMessage: (from: number, fromQQ: number, msg: string, msgId: number) => Prevent
+  /**
+   * 载入接收到消息时会执行的方法
+   */
+  message = (fn: (from: number, fromQQ: number, msg: string, msgId: number) => Prevent) => {
+    this.tempMessage = fn
+    return this
   }
 
   /**
-   * 添加消息处理插件
+   * 载入插件
    * @param {class} plugin
    */
   plugin = (plugin: BotPluginClass, ...arg: any[]): App => {
@@ -259,6 +322,14 @@ export class App extends BotApp {
     return this
   }
 
+  private tempInit: Function
+  /**
+   * 载入bot链接成功后会立刻执行的方法
+   */
+  init = (fn: Function) => {
+    this.tempInit = fn
+    return this
+  }
   /**
    * 设置管理员，用于接收管理员消息
    * @param type 0-私聊, 1-群组
@@ -271,14 +342,19 @@ export class App extends BotApp {
   }
 
   /**
-   * 启动函数，可传入JSON配置的地址读取本地配置
-   * 传入地址后配置会本地储存
+   * 启动函数
    * @param dirname
    */
   start = () => {
     return new Promise<void>(resolve => {
+      this.message = () => {
+        throw new Error('请在应用启动前载入方法')
+      }
       this.plugin = () => {
         throw new Error('请在应用启动前载入插件')
+      }
+      this.init = () => {
+        throw new Error('请在应用启动前载入初始化方法')
       }
       this.admin = () => {
         throw new Error('请在应用启动前设置管理员')

@@ -1,7 +1,7 @@
 {
   "name": "@blacktunes/xianyu-robot",
-  "version": "3.0.0",
-  "description": "基于coolq-robot的酷Q机器人",
+  "version": "3.1.0",
+  "description": "可使用HTTPAPI的node机器人",
   "main": "lib/index.js",
   "scripts": {
     "dev": "nodemon --ext js,ts --exec ts-node test",
