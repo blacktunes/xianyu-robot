@@ -64,12 +64,10 @@ export class Connect {
         }
       }
     }
-    const test = Date.now()
     this.client.onmessage = async (message) => {
       const data = JSON.parse(CQCode.decode((JSON.stringify(JSON.parse(message.data.toString())))))
       if (data.post_type) {
         if (data.post_type === 'message') {
-          console.log(test)
           for (const event of this.messageEventList.message) {
             if (event.type === `message.${data.message_type}`) {
               if (await event.fn(data)) break
