@@ -1,6 +1,6 @@
 import mysql = require('mysql')
 
-export default class Mysql {
+export class Mysql {
   constructor(config: mysql.PoolConfig) {
     this.Pool = mysql.createPool({
       // 允许多条查询
@@ -17,7 +17,7 @@ export default class Mysql {
    * @param sql
    * @param values
    */
-  query = (sql: string, values = '') => {
+  readonly query = (sql: string, values = '') => {
     return new Promise<any>((resolve, reject) => {
       if (this.Pool === null) {
         reject(-1)
