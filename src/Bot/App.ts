@@ -68,21 +68,22 @@ export class App {
 
   private initBot = async () => {
     this.Bot.userId = (await this.Bot.Api.getLoginInfo()).user_id
+
+    let setting: any = {}
+    if (fs.existsSync(path.join(this.Bot.Plugin.dirname, `./${this.Bot.userId}.json`))) {
+      setting = JSON.parse(fs.readFileSync(path.join(this.Bot.Plugin.dirname, `./${this.Bot.userId}.json`)).toString())
+    }
+    for (let i in setting) {
+      this.Bot.Plugin.config[i] = setting[i]
+    }
+    PrintLog.logNotice('本地配置加载成功', this.Bot.name)
+
     this._pluginsList.forEach(item => {
       const _plugin = new item.plugin(this.Bot, ...item.arg)
       this.Bot.Plugin.pluginsList.push(_plugin)
       PrintLog.logNotice(`[${_plugin.name}] 已载入`, '插件')
     })
-    if (this.Bot.Plugin.dirname) {
-      let setting: any
-      if (fs.existsSync(path.join(this.Bot.Plugin.dirname, `./${this.Bot.userId}.json`))) {
-        setting = JSON.parse(fs.readFileSync(path.join(this.Bot.Plugin.dirname, `./${this.Bot.userId}.json`)).toString())
-      }
-      for (let i in setting) {
-        this.Bot.Plugin.config[i] = setting[i]
-      }
-      PrintLog.logNotice('本地配置加载成功', this.Bot.name)
-    }
+
     if (this.tempInitList.length > 0) {
       for (const i in this.tempInitList) {
         this.tempInitList[i](this)
