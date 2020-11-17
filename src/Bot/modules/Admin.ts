@@ -16,6 +16,10 @@ export class Admin {
     this.adminList.add(adminId)
   }
 
+  readonly isAdmin = (id: number) => {
+    return this.adminList.has(id)
+  }
+
   /**
    * 黑名单
    */

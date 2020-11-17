@@ -82,6 +82,7 @@ export class Event {
         .on('notice.group_card', async (event) => {
           PrintLog.logNotice(`群(${colors.white(event.group_id.toString())}) - ${colors.white(event.card_old)}(${colors.white(event.user_id.toString())})群名片修改为${colors.white(event.card_new)}`, 'EVENT')
         })
+      PrintLog.logNotice('开始监听事件', 'EVENT')
     }
   }
 

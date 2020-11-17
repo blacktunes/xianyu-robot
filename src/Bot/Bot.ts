@@ -6,7 +6,7 @@ import { Event } from './modules/Event'
 import { Plugin } from './modules/Plugin'
 
 export class Bot {
-  constructor(name: string = null, dirname: string) {
+  constructor(name: string, dirname: string) {
     this.name = name
     this.Plugin = new Plugin(this, dirname)
     this.Admin = new Admin(this)

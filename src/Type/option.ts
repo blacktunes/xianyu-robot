@@ -1,29 +1,18 @@
 import { Bot } from '../Bot/Bot'
 import { BotPlugin } from '../Tools/Plugin'
 
-export interface BotConfig {
-  ws?: WSOption
-  debug?: boolean
-  nolisten?: boolean
-}
 
 /**
  * 是否阻止消息传递
  */
 export type Prevent = Promise<boolean | void> | boolean | void
 
-export interface BotPluginClass {
-  new(bot: Bot, ...arg: any): BotPlugin
+export interface PluginConfig {
+  [name: string]: any
 }
 
-export interface MysqlConfig {
-  [x: string]: any
-  host: string
-  user: string
-  password: string
-  database: string
-  multipleStatements?: boolean
-  charset?: string
+export interface Plugin<T> {
+  new(bot: Bot, config: T): BotPlugin
 }
 
 export interface WSOption {

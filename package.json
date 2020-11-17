@@ -1,6 +1,6 @@
 {
   "name": "@blacktunes/xianyu-robot",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "description": "可使用HTTPAPI的node机器人",
   "main": "lib/index.js",
   "scripts": {
@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "colors": "^1.4.0",
+    "fs-extra": "^9.0.1",
     "moment": "^2.27.0",
     "mysql": "^2.18.1",
     "node-schedule": "^1.3.2",

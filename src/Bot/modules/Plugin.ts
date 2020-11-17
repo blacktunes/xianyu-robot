@@ -1,6 +1,7 @@
+import { PluginConfig } from './../../Type/option';
 import { BotPlugin } from '../..'
 import { Bot } from '../Bot'
-import fs = require('fs')
+import fs = require('fs-extra')
 import path = require('path')
 import { PrintLog } from '../../Tools'
 
@@ -17,9 +18,13 @@ export class Plugin {
   /**
    * 插件设置
    */
-  config: {
-    [name: string]: any
-  } = {}
+  config: PluginConfig = {}
+
+  setConfig = <T>(name: string, config: T) => {
+    this.config[name] = {
+      ...config
+    }
+  }
 
   /**
    * 插件列表
@@ -28,9 +33,10 @@ export class Plugin {
 
   readonly saveConfig = () => {
     if (this.dirname) {
-      const str = JSON.stringify(this.config)
       try {
-        fs.writeFileSync(path.join(this.dirname, `./${this.bot.userId}.json`), str)
+        fs.writeJSONSync(path.join(this.dirname, `./${this.bot.userId}-config.json`), this.config, {
+          spaces: 2
+        })
       } catch (err) {
         console.error(err)
         PrintLog.logError('数据未写入JSON', '插件')

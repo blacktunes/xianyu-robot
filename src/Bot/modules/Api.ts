@@ -72,7 +72,7 @@ export class Api {
    */
   readonly sendGroupMsg = async (group_id: number, message: Message): Promise<number> => {
     if (this.debug) {
-      PrintLog.logDebug(`发送消息至群(${group_id}): ${colors.white(JSON.stringify(message))}`)
+      PrintLog.logDebug(`发送消息至群(${group_id}): ${JSON.stringify(message)}`)
       return 0
     }
     const result = await this.bot.Conn.useAPI('send_group_msg', {
