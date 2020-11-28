@@ -4,29 +4,34 @@ import { PrintLog } from '../../Tools'
 import { Bot } from '../Bot'
 
 export class Event {
-  constructor(Bot: Bot, nolisten: boolean) {
+  constructor(Bot: Bot, nolisten: boolean | number[]) {
     this.Bot = Bot
     this.init(nolisten)
   }
   private Bot: Bot
-  private init = (nolisten: boolean) => {
-    if (!nolisten) {
+  private init = (nolisten: boolean | number[]) => {
+    if (nolisten !== true) {
       this
         .on('message.private', (event) => {
+          if (Array.isArray(nolisten) && nolisten.includes(event.user_id)) return
           PrintLog.logInfoRecv(`收到${colors.white(event.sender.nickname)}(${colors.white(event.user_id.toString())})的消息: ${colors.white(event.message)} (${colors.white(event.message_id.toString())})`, 'EVENT')
           return this.Bot.Admin.isBan(null, event.user_id)
         })
         .on('message.group', (event) => {
+          if (Array.isArray(nolisten) && nolisten.includes(event.group_id)) return
           PrintLog.logInfoRecv(`收到群(${colors.cyan(event.group_id.toString())}) - ${colors.cyan(event.sender.card || event.sender.nickname)}(${colors.cyan(event.user_id.toString())})的消息: ${colors.cyan(event.message)} (${colors.cyan(event.message_id.toString())})`, 'EVENT')
           return this.Bot.Admin.isBan(event.group_id, event.user_id)
         })
         .on('notice.group_recall', (event) => {
+          if (Array.isArray(nolisten) && nolisten.includes(event.group_id)) return
           PrintLog.logWarning(`群(${colors.magenta(event.group_id.toString())}) - (${colors.magenta(event.operator_id.toString())}) 撤回了 (${colors.magenta(event.user_id.toString())}) 的一条消息 (${colors.magenta(event.message_id.toString())})`, 'EVENT')
         })
         .on('notice.friend_recall', (event) => {
+          if (Array.isArray(nolisten) && nolisten.includes(event.user_id)) return
           PrintLog.logWarning(`(${colors.magenta(event.user_id.toString())}) 撤回了一条消息 (${colors.magenta(event.message_id.toString())})`, 'EVENT')
         })
         .on('notice.notify', (event) => {
+          if (Array.isArray(nolisten) && nolisten.includes(event.group_id)) return
           if (event.sub_type === 'poke') {
             PrintLog.logNotice(`群(${colors.white(event.group_id.toString())}) - (${colors.white(event.user_id.toString())}) 戳了戳 (${colors.white(event.target_id.toString())})`, 'EVENT')
           } else if (event.sub_type === 'lucky_king') {
@@ -37,6 +42,7 @@ export class Event {
           }
         })
         .on('notice.group_admin', async (event) => {
+          if (Array.isArray(nolisten) && nolisten.includes(event.group_id)) return
           if (event.sub_type === 'set') {
             PrintLog.logNotice(`群(${colors.white(event.group_id.toString())}) - (${colors.white(event.user_id.toString())}) 成为了管理员`, 'EVENT')
           } else if (event.sub_type === 'unset') {
@@ -44,6 +50,7 @@ export class Event {
           }
         })
         .on('notice.group_decrease', async (event) => {
+          if (Array.isArray(nolisten) && nolisten.includes(event.group_id)) return
           if (event.sub_type === 'kick') {
             PrintLog.logWarning(`群(${colors.magenta(event.group_id.toString())}) - (${colors.magenta(event.user_id.toString())}) 被 (${colors.magenta(event.operator_id.toString())}) 踢出群聊`, 'EVENT')
           } else if (event.sub_type === 'leave') {
@@ -53,6 +60,7 @@ export class Event {
           }
         })
         .on('notice.group_increase', async (event) => {
+          if (Array.isArray(nolisten) && nolisten.includes(event.group_id)) return
           if (event.sub_type === 'approve') {
             PrintLog.logNotice(`群(${colors.white(event.group_id.toString())}) - (${colors.white(event.operator_id.toString())}) 同意 (${colors.white(event.user_id.toString())}) 加入群聊`, 'EVENT')
           } else if (event.sub_type === 'invite') {
@@ -60,6 +68,7 @@ export class Event {
           }
         })
         .on('notice.group_ban', async (event) => {
+          if (Array.isArray(nolisten) && nolisten.includes(event.group_id)) return
           if (event.sub_type === 'ban') {
             PrintLog.logWarning(`群(${colors.magenta(event.group_id.toString())}) - (${colors.magenta(event.user_id.toString())}) 被 (${colors.magenta(event.operator_id.toString())}) 禁言 ${event.duration}秒`, 'EVENT')
           } else if (event.sub_type === 'lift_ban') {
@@ -67,6 +76,7 @@ export class Event {
           }
         })
         .on('notice.group_upload', async (event) => {
+          if (Array.isArray(nolisten) && nolisten.includes(event.group_id)) return
           PrintLog.logNotice(`群(${colors.white(event.group_id.toString())}) - (${colors.white(event.user_id.toString())}) 上传了 ${colors.white(event.file.name)}`, 'EVENT')
         })
         .on('request.friend', async (event) => {
@@ -80,6 +90,7 @@ export class Event {
           }
         })
         .on('notice.group_card', async (event) => {
+          if (Array.isArray(nolisten) && nolisten.includes(event.group_id)) return
           PrintLog.logNotice(`群(${colors.white(event.group_id.toString())}) - ${colors.white(event.card_old)}(${colors.white(event.user_id.toString())})群名片修改为${colors.white(event.card_new)}`, 'EVENT')
         })
       PrintLog.logNotice('开始监听事件', 'EVENT')

@@ -13,7 +13,7 @@ export class App {
    * @param name 插件名
    * @param dirname 插件设置保存位置
    */
-  constructor(name: string = 'Bot', dirname: string = __dirname) {
+  constructor(name: string = 'Bot', dirname: string = require.main.path) {
     const dir = path.join(dirname, './config/')
     if (dirname) {
       if (!fs.existsSync(dir)) {
@@ -112,7 +112,7 @@ export class App {
   /**
    * 启动函数
    */
-  readonly start = (ws: WSOption, debug = false, nolisten = false): Promise<void> => {
+  readonly start = (ws: WSOption, debug = false, nolisten: boolean | number[]): Promise<void> => {
     this.checkStart('请勿重复启动')
     this.isStart = true
     return new Promise(resolve => {
@@ -121,13 +121,13 @@ export class App {
         this.Bot.Api = new Api(this.Bot, debug)
         this.Bot.Event = new Event(this.Bot, nolisten)
         this.Bot.Event
-        .on('ws.close', () => {
-          PrintLog.logWarning(`${this.Bot.name}已关闭`, 'WS')
-        })
-        .on('meta_event.heartbeat', async () => {
-          // 响应心跳连接
-          this.Bot.Api.getApiStatus()
-        })
+          .on('ws.close', () => {
+            PrintLog.logWarning(`${this.Bot.name}已关闭`, 'WS')
+          })
+          .on('meta_event.heartbeat', async () => {
+            // 响应心跳连接
+            this.Bot.Api.getApiStatus()
+          })
         await this.initBot()
         PrintLog.logNotice('应用已启动', this.Bot.name)
         resolve()
