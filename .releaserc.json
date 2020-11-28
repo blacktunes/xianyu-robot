@@ -22,8 +22,7 @@
     [
       "@semantic-release/npm",
       {
-        "npmPublish": true,
-        "tarballDir": "lib"
+        "npmPublish": true
       }
     ],
     [

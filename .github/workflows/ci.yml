@@ -1,4 +1,4 @@
-name: CI
+name: 自动构建版本和日志
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 jobs:
-  run-ci:
+  CI:
     runs-on: ubuntu-latest
     steps:
        - name: Checkout master
