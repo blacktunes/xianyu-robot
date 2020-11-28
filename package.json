@@ -13,7 +13,7 @@
     "changelog": "conventional-changelog -p cmyr-config -i CHANGELOG.md -s -r 0"
   },
   "author": "Blacktunes",
-  "license": "MIT",
+  "license": "GPL-3.0",
   "keywords": [
     "qq-robot",
     "go-cqhttp",
@@ -59,8 +59,5 @@
   "changelog": {
     "language": "zh",
     "authorName": true
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
   }
 }
