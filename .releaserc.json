@@ -1,0 +1,43 @@
+{
+  "plugins": [
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        "config": "conventional-changelog-cmyr-config"
+      }
+    ],
+    [
+      "@semantic-release/release-notes-generator",
+      {
+        "config": "conventional-changelog-cmyr-config"
+      }
+    ],
+    [
+      "@semantic-release/changelog",
+      {
+        "changelogFile": "CHANGELOG.md",
+        "changelogTitle": "# Xianyu-robot(咸鱼王)"
+      }
+    ],
+    [
+      "@semantic-release/npm",
+      {
+        "npmPublish": true,
+        "tarballDir": "lib"
+      }
+    ],
+    [
+      "@semantic-release/github"
+    ],
+    [
+      "@semantic-release/git",
+      {
+        "assets": [
+          "src",
+          "CHANGELOG.md",
+          "package.json"
+        ]
+      }
+    ]
+  ]
+}
