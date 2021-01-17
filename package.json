@@ -1,7 +1,7 @@
 {
   "name": "xianyu-robot",
   "version": "4.2.0",
-  "description": "可使用HTTPAPI的node机器人",
+  "description": "可使用HTTP API的node机器人",
   "main": "lib/index.js",
   "scripts": {
     "dev": "nodemon --ext js,ts --exec ts-node test",
@@ -58,6 +58,6 @@
   },
   "changelog": {
     "language": "zh",
-    "authorName": true
+    "authorName": false
   }
 }
