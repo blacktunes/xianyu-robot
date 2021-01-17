@@ -102,6 +102,14 @@ export class CQCODE {
   }
 
   /**
+   * 合并转发
+   * @param id 合并转发ID, 需要通过 /get_forward_msg API获取转发的具体内容
+   */
+  forward(id: number): string {
+    return `[CQ:forward,id=${id}]`
+  }
+
+  /**
    * 合并转发消息节点
    * 需要使用单独的API /send_group_forward_msg 发送，并且由于消息段较为复杂，仅支持Array形式入参。
    * @param id 转发消息id
