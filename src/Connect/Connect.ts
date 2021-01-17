@@ -6,7 +6,9 @@ import { CQCode } from './../Tools/CQCode';
 type MessageEvent = { type: string, fn: (data: any) => Promise<boolean | void> | boolean | void }[]
 
 export class Connect {
-  constructor(option?: WSOption) {
+  constructor(whitelist: number[], blacklist: number[], option?: WSOption) {
+    this.whitelist = whitelist
+    this.blacklist = blacklist
     if (option) {
       for (const key in option) {
         this[key] = option[key]
@@ -28,6 +30,9 @@ export class Connect {
 
   private connectTimes = 0
   private messageID = 1
+
+  private whitelist: number[] = []
+  private blacklist: number[] = []
 
   private connect = () => {
     if (this.connectTimes > 0) {
@@ -66,6 +71,11 @@ export class Connect {
     }
     this.client.onmessage = async (message) => {
       const data = JSON.parse(CQCode.decode((JSON.stringify(JSON.parse(message.data.toString())))))
+      if (data.group_id) {
+        if ((this.whitelist.length > 0 && !this.whitelist.includes(data.group_id)) || (this.blacklist.length > 0 && this.blacklist.includes(data.group_id))) {
+          return
+        }
+      }
       if (data.post_type) {
         if (data.post_type === 'message') {
           for (const event of this.messageEventList.message) {
@@ -198,6 +208,9 @@ export class Connect {
     })
   }
   private APIList = new Map<number, Function>()
+  readonly getMessageNum = () => {
+    return this.APIList.size
+  }
 
   readonly useAPI = async (apiName: string, params?: any): Promise<ApiRes> => {
     if (this.isConnect()) {

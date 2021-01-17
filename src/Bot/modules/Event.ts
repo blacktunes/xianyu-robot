@@ -13,7 +13,7 @@ export class Event {
     if (nolisten !== true) {
       this
         .on('message.private', (event) => {
-          if (Array.isArray(nolisten) && nolisten.includes(event.user_id)) return
+          if (event.user_id === this.Bot.userId) return
           PrintLog.logInfoRecv(`收到${colors.white(event.sender.nickname)}(${colors.white(event.user_id.toString())})的消息: ${colors.white(event.message)} (${colors.white(event.message_id.toString())})`, 'EVENT')
           return this.Bot.Admin.isBan(null, event.user_id)
         })

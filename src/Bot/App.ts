@@ -32,6 +32,35 @@ export class App {
 
   readonly Bot: Bot
 
+  private WhiteList: number[] = []
+  private BlackList: number[] = []
+
+  /**
+   * 增加白名单列表，请勿和黑名单同时使用
+   * @param list 白名单列表
+   */
+  readonly white = (list: number[]) => {
+    this.checkStart('请在应用启动前加载白名单')
+    if (this.BlackList.length > 0) {
+      throw new Error('请勿和黑名单同时使用')
+    }
+    this.WhiteList = [...this.WhiteList, ...list]
+    return this
+  }
+
+  /**
+   * 增加黑名单列表，请勿和白名单同时使用
+   * @param list 黑名单列表
+   */
+  readonly black = (list: number[]) => {
+    this.checkStart('请在应用启动前加载白名单')
+    if (this.WhiteList.length > 0) {
+      throw new Error('请勿和白名单同时使用')
+    }
+    this.BlackList = [...this.BlackList, ...list]
+    return this
+  }
+
   /**
    * 载入bot链接成功后会立刻执行的方法
    */
@@ -69,8 +98,6 @@ export class App {
   }
 
   private initBot = async () => {
-    this.Bot.userId = (await this.Bot.Api.getLoginInfo()).user_id
-
     this._pluginsList.forEach(item => {
       const _plugin = new item.plugin(this.Bot, item.config)
       this.Bot.Plugin.pluginsList.push(_plugin)
@@ -112,13 +139,14 @@ export class App {
   /**
    * 启动函数
    */
-  readonly start = (ws: WSOption, debug = false, nolisten: boolean | number[]): Promise<void> => {
+  readonly start = (ws: WSOption, debug = false, nolisten: boolean | number[] = false): Promise<void> => {
     this.checkStart('请勿重复启动')
     this.isStart = true
     return new Promise(resolve => {
-      this.Bot.Conn = new Connect(ws)
+      this.Bot.Conn = new Connect(this.WhiteList, this.BlackList, ws)
       this.Bot.Conn.addEvent('ws.ready', async () => {
         this.Bot.Api = new Api(this.Bot, debug)
+        this.Bot.userId = (await this.Bot.Api.getLoginInfo()).user_id
         this.Bot.Event = new Event(this.Bot, nolisten)
         this.Bot.Event
           .on('ws.close', () => {
