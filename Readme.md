@@ -39,3 +39,6 @@ app.start()
 开发中大量参考了以下项目，在此表示感谢
 * [node-cq-robot](https://github.com/CaoMeiYouRen/node-cq-robot)
 * [cq-websocket](https://github.com/momocow/node-cq-websocket)
+
+### LICENSE
+若使用了本项目为**范本**开发项目或使用了项目代码请在**明显位置**声明**原作者**(https://github.com/blacktunes) 以及**本仓库**(https://github.com/blacktunes/xianyu-robot).
