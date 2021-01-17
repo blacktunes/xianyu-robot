@@ -1,3 +1,4 @@
+import { CQCode } from '..'
 import moment = require('moment')
 import colors = require('colors')
 
@@ -89,7 +90,7 @@ class LOG {
    * @param {string} content
    */
   sendLog(level: Log, content: string, type?: string) {
-    this.printLog(`${type ? `[${type}]` : '[日志]'} ${content}`, level)
+    this.printLog(`${type ? `[${type}]` : '[日志]'} ${CQCode.decode(content)}`, level)
   }
 
   /**

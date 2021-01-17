@@ -93,17 +93,17 @@ export class Api {
    * @param group_id 群号
    * @param messages 自定义转发消息
    */
-  readonly sendGroupForwardMsg = async (group_id: number, messages: NodeMessage[]) => {
+  readonly sendGroupForwardMsg = async (group_id: number, messages: NodeMessage[]): Promise<number> => {
     if (this.debug) {
       PrintLog.logDebug(`发送合并转发至群(${group_id})`)
       return 0
     }
-    const result = await this.bot.Conn.useAPI('send_group_msg', {
+    const result = await this.bot.Conn.useAPI('send_group_forward_msg', {
       group_id,
       messages
     })
     if (result.status === 'ok') {
-      PrintLog.logInfoSend(`发送合并转发至群(${colors.white(group_id.toString())})成功`, 'API')
+      PrintLog.logInfoSend(`发送合并转发至群(${colors.white(group_id.toString())})成功(${colors.white(result.data.message_id.toString())})`, 'API')
       return result.data.message_id
     } else {
       PrintLog.logError(`发送合并转发至群(${colors.white(group_id.toString())})失败`, 'API')
