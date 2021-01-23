@@ -14,10 +14,10 @@ export abstract class BotPlugin {
   /**
    * Bot对象
    */
-  Bot: Bot
+  protected Bot: Bot
   /**
-   * 该方法会在Bot初始化完成后执行
    * 初始化方法
+   * 该方法会在Bot初始化完成后执行，请勿重复执行
    */
   init(): void | Promise<void> {}
   /**

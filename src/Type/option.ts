@@ -11,8 +11,8 @@ export interface PluginConfig {
   [name: string]: any
 }
 
-export interface Plugin<T> {
-  new(bot: Bot, config: T): BotPlugin
+export interface Plugin {
+  new(bot: Bot, config?: any): BotPlugin
 }
 
 export interface WSOption {

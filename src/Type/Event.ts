@@ -1,5 +1,6 @@
 import { GroupFile } from '.'
 
+export type BotEvent = 'ws.ready' | 'ws.close' | 'ws.connect' | 'ws.error' | 'message.private' | 'message.group' | 'notice.group_recall' | 'notice.friend_recall' | 'notice.notify' | 'notice.group_admin' | 'notice.group_decrease' | 'notice.group_increase' | 'notice.group_ban' | 'notice.group_upload' | 'notice.group_card' | 'request.friend' | 'request.group' | 'meta_event.heartbeat' | 'other'
 export interface PrivateMsg {
   /**
    * 事件发生的时间戳

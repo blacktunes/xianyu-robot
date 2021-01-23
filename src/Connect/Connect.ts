@@ -1,9 +1,9 @@
 import { w3cwebsocket } from 'websocket';
-import { ApiRes, WSOption } from '..';
-import { PrintLog } from '../Tools/PrintLog';
-import { CQCode } from './../Tools/CQCode';
+import { ApiRes, BotEvent, Prevent, WSOption } from '..'
+import { PrintLog } from '../Tools/PrintLog'
+import { CQCode } from './../Tools/CQCode'
 
-type MessageEvent = { type: string, fn: (data: any) => Promise<boolean | void> | boolean | void }[]
+type MessageEvent = { type: string, fn: (data: any) => Promise<boolean | void> | boolean | void }
 
 export class Connect {
   constructor(whitelist: number[], blacklist: number[], option?: WSOption) {
@@ -135,11 +135,11 @@ export class Connect {
   private errorEventList: ((error: Error) => void)[] = []
   private closeEventList: (() => void)[] = []
   private messageEventList: {
-    message: MessageEvent
-    notice: MessageEvent
-    request: MessageEvent
-    meta_event: MessageEvent
-    other: MessageEvent
+    message: (MessageEvent & { uid: number })[]
+    notice: MessageEvent[]
+    request: MessageEvent[]
+    meta_event: MessageEvent[]
+    other: MessageEvent[]
   } = {
       message: [],
       notice: [],
@@ -148,7 +148,7 @@ export class Connect {
       other: []
     }
 
-  readonly addEvent = (type: string, fn: any) => {
+  readonly addEvent = (type: BotEvent, fn: (e?: any) => Prevent, uid?: number) => {
     if (type === 'ws.ready') {
       this.ready = fn
     } else if (type === 'ws.connect') {
@@ -160,7 +160,11 @@ export class Connect {
     } else if (type.startsWith('message.')) {
       this.messageEventList.message.push({
         type,
-        fn
+        fn,
+        uid: uid || Date.now()
+      })
+      this.messageEventList.message.sort((a, b) => {
+        return a.uid - b.uid
       })
     } else if (type.startsWith('notice.')) {
       this.messageEventList.notice.push({

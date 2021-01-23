@@ -6,6 +6,7 @@ import { Api } from './modules/Api'
 import { Event } from './modules/Event'
 import fs = require('fs-extra')
 import path = require('path')
+import colors = require('colors')
 
 export class App {
   /**
@@ -30,7 +31,7 @@ export class App {
     }
   }
 
-  readonly Bot: Bot
+  private Bot: Bot
 
   private WhiteList: number[] = []
   private BlackList: number[] = []
@@ -64,22 +65,22 @@ export class App {
   /**
    * 载入bot链接成功后会立刻执行的方法
    */
-  readonly init = (fn: (...arg: any[]) => any) => {
+  readonly init = (fn: (bot: Bot) => void) => {
     this.checkStart('请在应用启动前载入init方法')
     this.tempInitList.push(fn)
     return this
   }
-  private tempInitList: ((...arg: any[]) => any)[] = []
+  private tempInitList: ((bot: Bot) => void)[] = []
   private _pluginsList: {
     config: any
-    plugin: Plugin<any>
+    plugin: Plugin
   }[] = []
 
   /**
    * 载入插件
    * @param plugin 插件类
    */
-  readonly plugin = <T>(plugin: Plugin<T>, config?: T): App => {
+  readonly plugin = <T extends Plugin>(plugin: T, config?: ConstructorParameters<T>[1]): App => {
     this.checkStart('请在应用启动前载入插件')
     this._pluginsList.push({
       plugin: plugin,
@@ -87,13 +88,36 @@ export class App {
     })
     return this
   }
+
+  readonly command = (name: string) => {
+    return this.Bot.Command.command(name)
+  }
+
   private initPlugin = async () => {
     if (this.Bot.Plugin.pluginsList.length > 0) {
       PrintLog.logInfo('开始初始化插件', this.Bot.name)
       for (let i in this.Bot.Plugin.pluginsList) {
         await this.Bot.Plugin.pluginsList[i].init()
+        this.Bot.Plugin.pluginsList[i].init = () => {
+          throw new Error('请勿重复init')
+        }
+        PrintLog.logNotice(`${colors.yellow(this.Bot.Plugin.pluginsList[i].name)} 已加载`, '插件')
       }
       PrintLog.logNotice('插件初始化完成', this.Bot.name)
+    }
+  }
+
+  private initCommand = () => {
+    if (this.Bot.Command.commandsList.length > 0) {
+      PrintLog.logInfo('开始初始化指令', this.Bot.name)
+      for (let i in this.Bot.Command.commandsList) {
+        this.Bot.Command.commandsList[i].init(this.Bot.Event)
+        this.Bot.Command.commandsList[i].init = () => {
+          throw new Error('请勿重复init')
+        }
+        PrintLog.logNotice(`${colors.yellow(this.Bot.Command.commandsList[i].comm)} 已加载`, '指令')
+      }
+      PrintLog.logNotice('指令初始化完成', this.Bot.name)
     }
   }
 
@@ -101,7 +125,6 @@ export class App {
     this._pluginsList.forEach(item => {
       const _plugin = new item.plugin(this.Bot, item.config)
       this.Bot.Plugin.pluginsList.push(_plugin)
-      PrintLog.logNotice(`[${_plugin.name}] 已载入`, '插件')
     })
 
     let setting: any = {}
@@ -120,10 +143,11 @@ export class App {
 
     if (this.tempInitList.length > 0) {
       for (const i in this.tempInitList) {
-        this.tempInitList[i](this)
+        this.tempInitList[i](this.Bot)
       }
     }
     await this.initPlugin()
+    this.initCommand()
     this.Bot.Plugin.saveConfig()
   }
 
@@ -139,7 +163,7 @@ export class App {
   /**
    * 启动函数
    */
-  readonly start = (ws: WSOption, debug = false, nolisten: boolean | number[] = false): Promise<void> => {
+  readonly start = (ws: WSOption, debug = false, nolisten: boolean | number[] = false): Promise<Bot> => {
     this.checkStart('请勿重复启动')
     this.isStart = true
     return new Promise(resolve => {
@@ -158,7 +182,7 @@ export class App {
           })
         await this.initBot()
         PrintLog.logNotice('应用已启动', this.Bot.name)
-        resolve()
+        resolve(this.Bot)
       })
     })
   }

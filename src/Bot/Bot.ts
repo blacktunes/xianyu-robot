@@ -2,6 +2,7 @@ import { CQCODE, CQCode } from '..'
 import { Connect } from '../Connect/Connect'
 import { Admin } from './modules/Admin'
 import { Api } from './modules/Api'
+import { Command } from './modules/Command'
 import { Event } from './modules/Event'
 import { Plugin } from './modules/Plugin'
 
@@ -27,6 +28,10 @@ export class Bot {
    * 插件对象
    */
   Plugin: Plugin
+  /**
+   * 命令对象
+   */
+  Command: Command = new Command()
   /**
    * 管理员命令
    */

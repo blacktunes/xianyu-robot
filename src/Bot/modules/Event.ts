@@ -1,4 +1,4 @@
-import { PrivateMsg, GroupMsg, GroupRecall, FriendRecall, GroupNotify, GroupAdmin, GroupDecrease, GroupIncrease, GroupBan, GroupUpload, GroupCard, Friend, Group, Prevent } from '../..'
+import { PrivateMsg, GroupMsg, GroupRecall, FriendRecall, GroupNotify, GroupAdmin, GroupDecrease, GroupIncrease, GroupBan, GroupUpload, GroupCard, Friend, Group, Prevent, BotEvent } from '../..'
 import colors = require('colors')
 import { PrintLog } from '../../Tools'
 import { Bot } from '../Bot'
@@ -16,12 +16,12 @@ export class Event {
           if (event.user_id === this.Bot.userId) return
           PrintLog.logInfoRecv(`收到${colors.white(event.sender.nickname)}(${colors.white(event.user_id.toString())})的消息: ${colors.white(event.message)} (${colors.white(event.message_id.toString())})`, 'EVENT')
           return this.Bot.Admin.isBan(null, event.user_id)
-        })
+        }, 1)
         .on('message.group', (event) => {
           if (Array.isArray(nolisten) && nolisten.includes(event.group_id)) return
           PrintLog.logInfoRecv(`收到群(${colors.cyan(event.group_id.toString())}) - ${colors.cyan(event.sender.card || event.sender.nickname)}(${colors.cyan(event.user_id.toString())})的消息: ${colors.cyan(event.message)} (${colors.cyan(event.message_id.toString())})`, 'EVENT')
           return this.Bot.Admin.isBan(event.group_id, event.user_id)
-        })
+        }, 1)
         .on('notice.group_recall', (event) => {
           if (Array.isArray(nolisten) && nolisten.includes(event.group_id)) return
           PrintLog.logWarning(`群(${colors.magenta(event.group_id.toString())}) - (${colors.magenta(event.operator_id.toString())}) 撤回了 (${colors.magenta(event.user_id.toString())}) 的一条消息 (${colors.magenta(event.message_id.toString())})`, 'EVENT')
@@ -93,7 +93,7 @@ export class Event {
           if (Array.isArray(nolisten) && nolisten.includes(event.group_id)) return
           PrintLog.logNotice(`群(${colors.white(event.group_id.toString())}) - ${colors.white(event.card_old)}(${colors.white(event.user_id.toString())})群名片修改为${colors.white(event.card_new)}`, 'EVENT')
         })
-      PrintLog.logNotice('开始监听事件', 'EVENT')
+      PrintLog.logInfo('开始监听事件', 'EVENT')
     }
   }
 
@@ -108,65 +108,65 @@ export class Event {
   /**
    * 私聊信息
    */
-  on(type: 'message.private', fn: (data: PrivateMsg) => Prevent): this
+  on(type: 'message.private', fn: (e: PrivateMsg) => Prevent, uid?: number): this
   /**
    * 群消息
    */
-  on(type: 'message.group', fn: (data: GroupMsg) => Prevent): this
+  on(type: 'message.group', fn: (e: GroupMsg) => Prevent, uid?: number): this
   /**
    * 群消息撤回(拓展Event)
    */
-  on(type: 'notice.group_recall', fn: (data: GroupRecall) => Prevent): this
+  on(type: 'notice.group_recall', fn: (e: GroupRecall) => Prevent): this
   /**
    * 好友消息撤回(拓展Event)
    */
-  on(type: 'notice.friend_recall', fn: (data: FriendRecall) => Prevent): this
+  on(type: 'notice.friend_recall', fn: (e: FriendRecall) => Prevent): this
   /**
    * 群内提示事件(拓展Event)(龙王等事件)
    */
-  on(type: 'notice.notify', fn: (data: GroupNotify) => Prevent): this
+  on(type: 'notice.notify', fn: (e: GroupNotify) => Prevent): this
   /**
    * 群管理员变动
    */
-  on(type: 'notice.group_admin', fn: (data: GroupAdmin) => Prevent): this
+  on(type: 'notice.group_admin', fn: (e: GroupAdmin) => Prevent): this
   /**
    * 群成员增加
    */
-  on(type: 'notice.group_decrease', fn: (data: GroupDecrease) => Prevent): this
+  on(type: 'notice.group_decrease', fn: (e: GroupDecrease) => Prevent): this
   /**
    * 群成员增加
    */
-  on(type: 'notice.group_increase', fn: (data: GroupIncrease) => Prevent): this
+  on(type: 'notice.group_increase', fn: (e: GroupIncrease) => Prevent): this
   /**
    * 群禁言
    */
-  on(type: 'notice.group_ban', fn: (data: GroupBan) => Prevent): this
+  on(type: 'notice.group_ban', fn: (e: GroupBan) => Prevent): this
   /**
    * 群文件上传
    */
-  on(type: 'notice.group_upload', fn: (data: GroupUpload) => Prevent): this
+  on(type: 'notice.group_upload', fn: (e: GroupUpload) => Prevent): this
   /**
    * 群成员名片更新
    */
-  on(type: 'notice.group_card', fn: (data: GroupCard) => Prevent): this
+  on(type: 'notice.group_card', fn: (e: GroupCard) => Prevent): this
   /**
    * 加好友请求
    */
-  on(type: 'request.friend', fn: (data: Friend) => Prevent): this
+  on(type: 'request.friend', fn: (e: Friend) => Prevent): this
   /**
    * 加群请求/邀请
    */
-  on(type: 'request.group', fn: (data: Group) => Prevent): this
+  on(type: 'request.group', fn: (e: Group) => Prevent): this
   /**
    * 心跳事件
    */
-  on(type: 'meta_event.heartbeat', fn: (data: any) => Prevent): this
+  on(type: 'meta_event.heartbeat', fn: (e?: any) => Prevent): this
   /**
    * 列表外事件
    */
-  on(type: 'other', fn: (data: any) => Prevent): this
-  on(type: any, fn: any) {
-    this.Bot.Conn.addEvent(type, fn)
+  on(type: 'other', fn: (e: any) => Prevent): this
+  on(type: BotEvent, fn: (e: any) => Prevent, uid?:number) {
+    this.Bot.Conn.addEvent(type, fn, uid)
     return this
   }
 }
