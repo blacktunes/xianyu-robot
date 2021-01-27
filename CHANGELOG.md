@@ -1,5 +1,12 @@
 # Xianyu-robot(咸鱼王)
 
+# [4.5.0](https://github.com/blacktunes/xianyu-robot/compare/v4.4.0...v4.5.0) (2021-01-27)
+
+
+### ✨ 新功能
+
+* 日志增加群名显示 ([cbb0754](https://github.com/blacktunes/xianyu-robot/commit/cbb0754))
+
 # [4.4.0](https://github.com/blacktunes/xianyu-robot/compare/v4.3.0...v4.4.0) (2021-01-23)
 
 
