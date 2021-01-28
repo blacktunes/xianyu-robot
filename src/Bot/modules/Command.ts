@@ -35,8 +35,8 @@ export class Command {
       /**
        * 增加命令处理方法，可添加多个
        */
-      action(type: 'group', fn: (e: PrivateMsg) => Prevent): this
-      action(type: 'private', fn: (e: GroupMsg) => Prevent): this
+      action(type: 'private', fn: (e: PrivateMsg) => Prevent): this
+      action(type: 'group', fn: (e: GroupMsg) => Prevent): this
       action(type: 'group' | 'private', fn: (e: any) => Prevent) {
         if (repeat) return this
         if (type === 'group') {
@@ -52,6 +52,7 @@ export class Command {
       reg(reg: RegExp | NamedRegExp) {
         if (repeat) return this
         comm.reg = reg
+        return this
       }
       /**
        * 增加白名单列表，请勿和黑名单同时使用
@@ -99,15 +100,15 @@ class Comm {
 
   init = (event: Event) => {
     event.on('message.group', e => {
-      if ((this.reg && !this.reg.test(e.message)) || (!this.reg && e.message !== this.comm)) return
       if ((this.blackList.length > 0 && this.blackList.includes(e.group_id)) || (this.whiteList.length > 0 && !this.whiteList.includes(e.group_id))) return
+      if ((this.reg && !this.reg.test(e.message)) || (!this.reg && e.message !== this.comm)) return
       for (const i in this.fn.group) {
         return this.fn.group[i](e)
       }
     }, this.uid)
     event.on('message.private', e => {
-      if ((this.reg && !this.reg.test(e.message)) || (!this.reg && e.message !== this.comm)) return
       if ((this.blackList.length > 0 && this.blackList.includes(e.sender.user_id)) || (this.whiteList.length > 0 && !this.whiteList.includes(e.sender.user_id))) return
+      if ((this.reg && !this.reg.test(e.message)) || (!this.reg && e.message !== this.comm)) return
       for (const i in this.fn.private) {
         return this.fn.private[i](e)
       }
