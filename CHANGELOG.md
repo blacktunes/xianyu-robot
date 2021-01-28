@@ -1,5 +1,12 @@
 # Xianyu-robot(咸鱼王)
 
+## [4.5.1](https://github.com/blacktunes/xianyu-robot/compare/v4.5.0...v4.5.1) (2021-01-28)
+
+
+### 🐛 Bug 修复
+
+* 修复指令功能参数类型和返回值错误 ([182972b](https://github.com/blacktunes/xianyu-robot/commit/182972b))
+
 # [4.5.0](https://github.com/blacktunes/xianyu-robot/compare/v4.4.0...v4.5.0) (2021-01-27)
 
 
