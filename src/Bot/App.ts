@@ -7,6 +7,8 @@ import { Event } from './modules/Event'
 import fs = require('fs-extra')
 import path = require('path')
 import colors = require('colors')
+import os = require('os-utils')
+import { secondsFormat } from '..'
 
 export class App {
   /**
@@ -108,14 +110,14 @@ export class App {
   }
 
   private initCommand = () => {
-    if (this.Bot.Command.commandsList.length > 0) {
+    if (this.Bot.Command.list.length > 0) {
       PrintLog.logInfo('开始初始化指令', this.Bot.name)
-      for (let i in this.Bot.Command.commandsList) {
-        this.Bot.Command.commandsList[i].init(this.Bot.Event)
-        this.Bot.Command.commandsList[i].init = () => {
+      for (let i in this.Bot.Command.list) {
+        this.Bot.Command.list[i].init(this.Bot.Event, this.Bot.Admin)
+        this.Bot.Command.list[i].init = () => {
           throw new Error('请勿重复init')
         }
-        PrintLog.logNotice(`${colors.yellow(this.Bot.Command.commandsList[i].comm)} 已加载`, '指令')
+        PrintLog.logNotice(`${colors.yellow(this.Bot.Command.list[i].comm)} 已加载`, '指令')
       }
       PrintLog.logNotice('指令初始化完成', this.Bot.name)
     }
@@ -160,10 +162,75 @@ export class App {
     return this
   }
 
+  private setSysCommand = (noCommand:  number[] = []) => {
+    this.Bot.Command
+      .command('--help')
+      .group('内置指令')
+      .black(noCommand)
+      .desc('查询所有可用指令')
+      .action('group', e => {
+        let msg = ''
+        const list = {}
+        this.Bot.Command.list.forEach(comm => {
+          if ((comm.blackList.length > 0 && comm.blackList.includes(e.group_id)) || (comm.whiteList.length > 0 && !comm.whiteList.includes(e.group_id))) return
+
+          if (comm.group) {
+            if (list[comm.group]) {
+              list[comm.group] += `\n${comm.comm}${comm.desc ? ` ${comm.desc}` : ''}${comm.admin ? ' (管理员)' : ''}`
+            } else {
+              list[comm.group] = `${comm.comm}${comm.desc ? ` ${comm.desc}` : ''}${comm.admin ? ' (管理员)' : ''}`
+            }
+          } else {
+            if (list['other']) {
+              list['other'] += `\n${comm.comm}${comm.desc ? ` ${comm.desc}` : ''}${comm.admin ? ' (管理员)' : ''}`
+            } else {
+              list['other'] = `${comm.comm}${comm.desc ? ` ${comm.desc}` : ''}${comm.admin ? ' (管理员)' : ''}`
+            }
+          }
+        })
+        for (const i in list) {
+          if (i !== 'other') {
+            if (msg) {
+              msg += '\n'
+            }
+            msg += `${i}：\n${list[i]}\n----------`
+          }
+        }
+        msg += `\n其它指令：\n${list['other']}` || ''
+        this.Bot.Api.sendGroupMsg(e.group_id, msg)
+        return true
+      })
+
+    this.Bot.Command
+      .command('--sys')
+      .admin()
+      .desc('查询BOT运行状态')
+      .group('内置指令')
+      .black(noCommand)
+      .action('group', e => {
+        os.cpuUsage(cpuUsage => {
+          const freeMem = os.freemem() / 1024
+          const totalMem = os.totalmem() / 1024
+          const data = {
+            cpuUsage: (cpuUsage * 100.0).toFixed(2) + '%',
+            useMem: (totalMem - freeMem).toFixed(2) + 'GB',
+            totalMem: totalMem.toFixed(2) + 'GB',
+            MemUsage: ((totalMem - freeMem) / totalMem * 100.0).toFixed(2) + '%',
+          }
+          this.Bot.Api.sendGroupMsg(e.group_id, `${this.Bot.name}\n----------\n已加载插件：${this.Bot.Plugin.pluginsList.length}\n已加载命令：${this.Bot.Command.list.length}\n运行时长：${secondsFormat(Math.floor(process.uptime()))}\n----------\nCPU：${data.cpuUsage}\n内存：${data.useMem}/${data.totalMem}(${data.MemUsage})\nBOT占用内存：${((process.memoryUsage().rss) / 1024 / 1024).toFixed(2) + 'MB'}`)
+        })
+        return true
+      })
+  }
+
   /**
    * 启动函数
+   * @param ws 链接设置
+   * @param debug 是否开启debug
+   * @param nolisten 是否在控制台输出日志
+   * @param noCommand 指定群组禁用内置指令
    */
-  readonly start = (ws: WSOption, debug = false, nolisten: boolean | number[] = false): Promise<Bot> => {
+   readonly start = (ws: WSOption, debug = false, nolisten: boolean | number[] = false, noCommand: number[] = []): Promise<Bot> => {
     this.checkStart('请勿重复启动')
     this.isStart = true
     return new Promise(resolve => {
@@ -180,6 +247,7 @@ export class App {
             // 响应心跳连接
             this.Bot.Api.getApiStatus()
           })
+        this.setSysCommand(noCommand)
         await this.initBot()
         PrintLog.logNotice('应用已启动', this.Bot.name)
         resolve(this.Bot)

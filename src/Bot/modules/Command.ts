@@ -3,18 +3,19 @@ import { PrintLog } from './../../Tools/PrintLog'
 import { Event } from './Event'
 import NamedRegExp = require('named-regexp-groups')
 import colors = require('colors')
+import { Admin } from './Admin'
 
 export class Command {
   /**
    * 命令列表
    */
-  commandsList: Comm[] = []
+  list: Comm[] = []
 
   /**
    * 增加命令
    */
   command = (name: string) => {
-    const repeat = this.commandsList.some(item => {
+    const repeat = this.list.some(item => {
       return item.comm === name
     })
     if (repeat) {
@@ -22,7 +23,7 @@ export class Command {
     }
 
     const comm = new Comm(name)
-    this.commandsList.push(comm)
+    this.list.push(comm)
     return new class {
       /**
        * 增加命令描述，重复调用会被覆盖
@@ -30,6 +31,29 @@ export class Command {
       desc(text: string) {
         comm.desc = text
         delete this.desc
+        return this
+      }
+      /**
+       * 增加正则规则，调用后命令名将会失效
+       */
+      reg(reg: RegExp | NamedRegExp) {
+        if (repeat) return this
+        comm.reg = reg
+        comm.comm += '(正则指令)'
+        return this
+      }
+      /**
+       * 是否为管理员指令
+       */
+      admin(flag = true) {
+        comm.admin = flag
+        return this
+      }
+      /**
+       * 设置命令分类
+       */
+      group(name: string) {
+        comm.group = name
         return this
       }
       /**
@@ -44,14 +68,6 @@ export class Command {
         } else if (type === 'private') {
           comm.fn.private.push(fn)
         }
-        return this
-      }
-      /**
-       * 增加正则规则，调用后命令名将会失效
-       */
-      reg(reg: RegExp | NamedRegExp) {
-        if (repeat) return this
-        comm.reg = reg
         return this
       }
       /**
@@ -85,7 +101,10 @@ class Comm {
     this.comm = name
   }
   comm: string
+  reg: RegExp | NamedRegExp
+  admin: boolean = false
   desc: string = '暂无描述'
+  group: string
   fn: {
     group: ((e: GroupMsg) => Prevent)[]
     private: ((e: PrivateMsg) => Prevent)[]
@@ -93,13 +112,13 @@ class Comm {
       group: [],
       private: []
     }
-  reg: RegExp | NamedRegExp
   whiteList: number[] = []
   blackList: number[] = []
   uid = Date.now()
 
-  init = (event: Event) => {
+  init = (event: Event, admin: Admin) => {
     event.on('message.group', e => {
+      if (this.admin && !admin.isAdmin(e.sender.user_id)) return
       if ((this.blackList.length > 0 && this.blackList.includes(e.group_id)) || (this.whiteList.length > 0 && !this.whiteList.includes(e.group_id))) return
       if ((this.reg && !this.reg.test(e.message)) || (!this.reg && e.message !== this.comm)) return
       for (const i in this.fn.group) {
@@ -107,6 +126,7 @@ class Comm {
       }
     }, this.uid)
     event.on('message.private', e => {
+      if (this.admin && !admin.isAdmin(e.sender.user_id)) return
       if ((this.blackList.length > 0 && this.blackList.includes(e.sender.user_id)) || (this.whiteList.length > 0 && !this.whiteList.includes(e.sender.user_id))) return
       if ((this.reg && !this.reg.test(e.message)) || (!this.reg && e.message !== this.comm)) return
       for (const i in this.fn.private) {
