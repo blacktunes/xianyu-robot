@@ -1,5 +1,13 @@
 # Xianyu-robot(咸鱼王)
 
+# [4.6.0](https://github.com/blacktunes/xianyu-robot/compare/v4.5.1...v4.6.0) (2021-01-30)
+
+
+### ✨ 新功能
+
+* 优化指令系统和增加内置指令 ([ca54538](https://github.com/blacktunes/xianyu-robot/commit/ca54538))
+* 增加测试用方法 ([c0dcb7b](https://github.com/blacktunes/xianyu-robot/commit/c0dcb7b))
+
 ## [4.5.1](https://github.com/blacktunes/xianyu-robot/compare/v4.5.0...v4.5.1) (2021-01-28)
 
 
