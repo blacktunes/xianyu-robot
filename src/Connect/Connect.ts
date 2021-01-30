@@ -1,4 +1,4 @@
-import { w3cwebsocket } from 'websocket';
+import { w3cwebsocket } from 'websocket'
 import { ApiRes, BotEvent, Prevent, WSOption } from '..'
 import { PrintLog } from '../Tools/PrintLog'
 import { CQCode } from './../Tools/CQCode'
@@ -237,6 +237,63 @@ export class Connect {
       return this.client.readyState === this.client.OPEN
     } else {
       return false
+    }
+  }
+
+  async groupMsgTest(msg: string, user_id: number = 1, group_id: number = 1) {
+    for (const event of this.messageEventList.message) {
+      if (event.type === 'message.group') {
+        if (await event.fn({
+          time: Date.now(),
+          self_id: 0,
+          post_type: 'message',
+          message_type: 'group',
+          sub_type: 'normal',
+          message_id: 1,
+          group_id: group_id,
+          user_id: user_id,
+          anonymous: null,
+          message: msg,
+          raw_message: msg,
+          font: 0,
+          sender: {
+            user_id: user_id,
+            nickname: 'test',
+            card: '',
+            sex: 'unknown',
+            age: 0,
+            area: '',
+            level: '',
+            role: 'member',
+            title: ''
+          }
+        })) break
+      }
+    }
+  }
+
+  async privateMsgTest(msg: string, user_id: number = 1) {
+    for (const event of this.messageEventList.message) {
+      if (event.type === 'message.private') {
+        if (await event.fn({
+          time: Date.now(),
+          self_id: 0,
+          post_type: 'message',
+          message_type: 'private',
+          sub_type: 'friend',
+          message_id: 1,
+          user_id: user_id,
+          message: msg,
+          raw_message: msg,
+          font: 0,
+          sender: {
+            user_id: user_id,
+            nickname: 'test',
+            sex: 'unknown',
+            age: 0
+          }
+        })) break
+      }
     }
   }
 }
