@@ -1,10 +1,12 @@
 import { Bot } from '../Bot/Bot'
+import { Command } from './Command'
 
 export abstract class BotPlugin {
   constructor(name: string, bot: Bot) {
     this.name = name
     if (bot) {
       this.Bot = bot
+      this.Command = new Command(this.name, this.Bot)
     }
   }
   /**
@@ -15,6 +17,11 @@ export abstract class BotPlugin {
    * Bot对象
    */
   protected Bot: Bot
+  /**
+   * 插件命令
+   * 与Bot.Command基本相同，但能设置统一设置
+   */
+  protected Command: Command
   /**
    * 初始化方法
    * 该方法会在Bot初始化完成后执行，请勿重复执行

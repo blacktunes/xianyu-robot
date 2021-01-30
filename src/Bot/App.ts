@@ -164,7 +164,7 @@ export class App {
 
   private setSysCommand = (noCommand:  number[] = []) => {
     this.Bot.Command
-      .command('--help')
+      .command('#help')
       .group('内置指令')
       .black(noCommand)
       .desc('查询所有可用指令')
@@ -202,7 +202,7 @@ export class App {
       })
 
     this.Bot.Command
-      .command('--sys')
+      .command('#sys')
       .admin()
       .desc('查询BOT运行状态')
       .group('内置指令')

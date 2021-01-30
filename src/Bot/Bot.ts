@@ -11,6 +11,12 @@ export class Bot {
     this.name = name
     this.Plugin = new Plugin(this, dirname)
     this.Admin = new Admin(this)
+    this.Command = new Command(this)
+  }
+  private eventNum = 0
+  addEvent = () => {
+    this.eventNum += 1
+    return this.eventNum
   }
   /**
    * bot名称
@@ -31,7 +37,7 @@ export class Bot {
   /**
    * 命令对象
    */
-  Command: Command = new Command()
+  Command: Command
   /**
    * 管理员命令
    */

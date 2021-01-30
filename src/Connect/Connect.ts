@@ -134,7 +134,7 @@ export class Connect {
   private connEventList: (() => void)[] = []
   private errorEventList: ((error: Error) => void)[] = []
   private closeEventList: (() => void)[] = []
-  private messageEventList: {
+  messageEventList: {
     message: (MessageEvent & { uid: number })[]
     notice: MessageEvent[]
     request: MessageEvent[]
@@ -161,7 +161,7 @@ export class Connect {
       this.messageEventList.message.push({
         type,
         fn,
-        uid: uid || Date.now()
+        uid: uid
       })
       this.messageEventList.message.sort((a, b) => {
         return a.uid - b.uid

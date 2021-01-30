@@ -1,34 +1,63 @@
-import { GroupMsg, Prevent, PrivateMsg } from '../..'
-import { PrintLog } from './../../Tools/PrintLog'
-import { Event } from './Event'
-import NamedRegExp = require('named-regexp-groups')
+import { PrintLog } from '.'
+import { GroupMsg, Prevent, PrivateMsg } from '..'
+import { Bot } from '../Bot/Bot'
+import { Admin } from '../Bot/modules/Admin'
+import { Event } from './../Bot/modules/Event'
 import colors = require('colors')
-import { Admin } from './Admin'
-import { Bot } from '../Bot'
+import NamedRegExp = require('named-regexp-groups')
 
 export class Command {
-  constructor(Bot: Bot) {
+  constructor(name: string, Bot: Bot) {
+    this.name = name
     this.Bot = Bot
+    this.setting = {
+      group: this.name,
+      whiteList: [],
+      blackList: [],
+    }
   }
+  private name: string
   private Bot: Bot
+  private setting: {
+    group: string
+    whiteList: number[]
+    blackList: number[]
+  }
+
   /**
-   * 命令列表
+   * 为插件指令增加白名单列表，请勿和黑名单同时使用
    */
-  list: Comm[] = []
+  white(list: number[]) {
+    if (this.setting.blackList.length > 0) {
+      throw new Error('请勿和黑名单同时使用')
+    }
+    this.setting.whiteList = [...this.setting.whiteList, ...list]
+    return this
+  }
+  /**
+   * 为插件指令增加黑名单列表，请勿和白名单同时使用
+   */
+  black(list: number[]) {
+    if (this.setting.whiteList.length > 0) {
+      throw new Error('请勿和白名单同时使用')
+    }
+    this.setting.blackList = [...this.setting.blackList, ...list]
+    return this
+  }
 
   /**
    * 增加命令
    */
   command = (name: string) => {
-    const repeat = this.list.some(item => {
+    const repeat = this.Bot.Command.list.some(item => {
       return item.comm === name
     })
     if (repeat) {
       PrintLog.logWarning(`发现重复指令 ${colors.white(name)}`, '指令')
     }
 
-    const comm = new Comm(name, this.Bot.addEvent())
-    this.list.push(comm)
+    const comm = new Comm(name, this.Bot.addEvent(), this.setting.group, this.setting.whiteList, this.setting.blackList)
+    this.Bot.Command.list.push(comm)
     return new class {
       /**
        * 增加命令描述，重复调用会被覆盖
@@ -55,13 +84,6 @@ export class Command {
         return this
       }
       /**
-       * 设置命令分类
-       */
-      group(name: string) {
-        comm.group = name
-        return this
-      }
-      /**
        * 增加命令处理方法，可添加多个
        */
       action(type: 'private', fn: (e: PrivateMsg) => Prevent): this
@@ -75,36 +97,17 @@ export class Command {
         }
         return this
       }
-      /**
-       * 增加白名单列表，请勿和黑名单同时使用
-       */
-      white(list: number[]) {
-        if (repeat) return this
-        if (comm.blackList.length > 0) {
-          throw new Error('请勿和黑名单同时使用')
-        }
-        comm.whiteList = [...comm.whiteList, ...list]
-        return this
-      }
-      /**
-       * 增加黑名单列表，请勿和白名单同时使用
-       */
-      black(list: number[]) {
-        if (repeat) return this
-        if (comm.whiteList.length > 0) {
-          throw new Error('请勿和白名单同时使用')
-        }
-        comm.blackList = [...comm.blackList, ...list]
-        return this
-      }
     }
   }
 }
 
 class Comm {
-  constructor(name: string, uid: number) {
+  constructor(name: string, uid: number, group: string, whiteList: number[], blackList: number[]) {
     this.comm = name
     this.uid = uid
+    this.group = group
+    this.whiteList = whiteList
+    this.blackList = blackList
   }
   comm: string
   reg: RegExp | NamedRegExp

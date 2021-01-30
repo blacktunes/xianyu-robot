@@ -187,7 +187,7 @@ export class Event {
    */
   on(type: 'other', fn: (e: any) => Prevent): this
   on(type: BotEvent, fn: (e: any) => Prevent, uid?: number) {
-    this.Bot.Conn.addEvent(type, fn, uid)
+    this.Bot.Conn.addEvent(type, fn, uid? uid : this.Bot.addEvent())
     return this
   }
 }
