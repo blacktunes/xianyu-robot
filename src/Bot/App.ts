@@ -96,14 +96,14 @@ export class App {
   }
 
   private initPlugin = async () => {
-    if (this.Bot.Plugin.pluginsList.length > 0) {
+    if (this.Bot.Plugin.list.length > 0) {
       PrintLog.logInfo('开始初始化插件', this.Bot.name)
-      for (let i in this.Bot.Plugin.pluginsList) {
-        await this.Bot.Plugin.pluginsList[i].init()
-        this.Bot.Plugin.pluginsList[i].init = () => {
+      for (let i in this.Bot.Plugin.list) {
+        await this.Bot.Plugin.list[i].init()
+        this.Bot.Plugin.list[i].init = () => {
           throw new Error('请勿重复init')
         }
-        PrintLog.logNotice(`${colors.yellow(this.Bot.Plugin.pluginsList[i].name)} 已加载`, '插件')
+        PrintLog.logNotice(`${colors.yellow(this.Bot.Plugin.list[i].name)} 已加载`, '插件')
       }
       PrintLog.logNotice('插件初始化完成', this.Bot.name)
     }
@@ -126,7 +126,7 @@ export class App {
   private initBot = async () => {
     this._pluginsList.forEach(item => {
       const _plugin = new item.plugin(this.Bot, item.config)
-      this.Bot.Plugin.pluginsList.push(_plugin)
+      this.Bot.Plugin.list.push(_plugin)
     })
 
     let setting: any = {}
@@ -176,15 +176,15 @@ export class App {
 
           if (comm.group) {
             if (list[comm.group]) {
-              list[comm.group] += `\n${comm.comm}${comm.desc ? ` ${comm.desc}` : ''}${comm.admin ? ' (管理员)' : ''}`
+              list[comm.group] += `\n${comm.comm}${comm.desc ? ` ${comm.desc}` : ''}${comm.admin ? ' [管理员]' : ''}`
             } else {
-              list[comm.group] = `${comm.comm}${comm.desc ? ` ${comm.desc}` : ''}${comm.admin ? ' (管理员)' : ''}`
+              list[comm.group] = `${comm.comm}${comm.desc ? ` ${comm.desc}` : ''}${comm.admin ? ' [管理员]' : ''}`
             }
           } else {
             if (list['other']) {
-              list['other'] += `\n${comm.comm}${comm.desc ? ` ${comm.desc}` : ''}${comm.admin ? ' (管理员)' : ''}`
+              list['other'] += `\n${comm.comm}${comm.desc ? ` ${comm.desc}` : ''}${comm.admin ? ' [管理员]' : ''}`
             } else {
-              list['other'] = `${comm.comm}${comm.desc ? ` ${comm.desc}` : ''}${comm.admin ? ' (管理员)' : ''}`
+              list['other'] = `${comm.comm}${comm.desc ? ` ${comm.desc}` : ''}${comm.admin ? ' [管理员]' : ''}`
             }
           }
         })
@@ -217,7 +217,7 @@ export class App {
             totalMem: totalMem.toFixed(2) + 'GB',
             MemUsage: ((totalMem - freeMem) / totalMem * 100.0).toFixed(2) + '%',
           }
-          this.Bot.Api.sendGroupMsg(e.group_id, `${this.Bot.name}\n----------\n已加载插件：${this.Bot.Plugin.pluginsList.length}\n已加载命令：${this.Bot.Command.list.length}\n运行时长：${secondsFormat(Math.floor(process.uptime()))}\n----------\nCPU：${data.cpuUsage}\n内存：${data.useMem}/${data.totalMem}(${data.MemUsage})\nBOT占用内存：${((process.memoryUsage().rss) / 1024 / 1024).toFixed(2) + 'MB'}`)
+          this.Bot.Api.sendGroupMsg(e.group_id, `${this.Bot.name}\n----------\n已加载插件：${this.Bot.Plugin.list.length}\n已加载命令：${this.Bot.Command.list.length}\n运行时长：${secondsFormat(Math.floor(process.uptime()))}\n----------\nCPU：${data.cpuUsage}\n内存：${data.useMem}/${data.totalMem}(${data.MemUsage})\nBOT占用内存：${((process.memoryUsage().rss) / 1024 / 1024).toFixed(2) + 'MB'}`)
         })
         return true
       })

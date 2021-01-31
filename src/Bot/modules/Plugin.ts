@@ -29,7 +29,7 @@ export class Plugin {
   /**
    * 插件列表
    */
-  pluginsList: BotPlugin[] = []
+  list: BotPlugin[] = []
 
   readonly saveConfig = () => {
     if (this.dirname) {
@@ -45,9 +45,9 @@ export class Plugin {
   }
 
   readonly debug = (name: string) => {
-    for (const i in this.pluginsList) {
-      if (this.pluginsList[i].name === name) {
-        return this.pluginsList[i].debug()
+    for (const i in this.list) {
+      if (this.list[i].name === name) {
+        return this.list[i].debug()
       }
     }
   }
