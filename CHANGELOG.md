@@ -1,5 +1,12 @@
 # Xianyu-robot(咸鱼王)
 
+# [4.8.0](https://github.com/blacktunes/xianyu-robot/compare/v4.7.0...v4.8.0) (2021-01-31)
+
+
+### ✨ 新功能
+
+* 增加指令触发控制台显示 ([bc30dde](https://github.com/blacktunes/xianyu-robot/commit/bc30dde))
+
 # [4.7.0](https://github.com/blacktunes/xianyu-robot/compare/v4.6.0...v4.7.0) (2021-01-30)
 
 

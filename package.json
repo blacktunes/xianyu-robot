@@ -1,6 +1,6 @@
 {
   "name": "xianyu-robot",
-  "version": "4.7.0",
+  "version": "4.8.0",
   "description": "可使用HTTP API的node机器人",
   "main": "lib/index.js",
   "scripts": {
