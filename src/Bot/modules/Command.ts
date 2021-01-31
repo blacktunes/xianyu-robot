@@ -44,7 +44,7 @@ export class Command {
       reg(reg: RegExp | NamedRegExp) {
         if (repeat) return this
         comm.reg = reg
-        comm.comm += '(正则指令)'
+        comm.comm += '[正则指令]'
         return this
       }
       /**
@@ -127,6 +127,7 @@ class Comm {
       if (this.admin && !admin.isAdmin(e.sender.user_id)) return
       if ((this.blackList.length > 0 && this.blackList.includes(e.group_id)) || (this.whiteList.length > 0 && !this.whiteList.includes(e.group_id))) return
       if ((this.reg && !this.reg.test(e.message)) || (!this.reg && e.message !== this.comm)) return
+      PrintLog.logNotice(`群${colors.white(event.groupList[e.group_id] || '')}(${colors.white(e.group_id.toString())}) - ${colors.white(e.sender.card || e.sender.nickname)}(${colors.white(e.user_id.toString())})触发${colors.yellow(this.comm)}指令`, '指令')
       for (const i in this.fn.group) {
         return this.fn.group[i](e)
       }
@@ -135,6 +136,7 @@ class Comm {
       if (this.admin && !admin.isAdmin(e.sender.user_id)) return
       if ((this.blackList.length > 0 && this.blackList.includes(e.sender.user_id)) || (this.whiteList.length > 0 && !this.whiteList.includes(e.sender.user_id))) return
       if ((this.reg && !this.reg.test(e.message)) || (!this.reg && e.message !== this.comm)) return
+      PrintLog.logNotice(`${colors.white(e.sender.nickname)}(${colors.white(e.user_id.toString())})触发${colors.yellow(this.comm)}指令`, '指令')
       for (const i in this.fn.private) {
         return this.fn.private[i](e)
       }
