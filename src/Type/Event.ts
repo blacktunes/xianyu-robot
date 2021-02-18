@@ -1,7 +1,13 @@
-import { GroupFile } from '.'
+import { GroupFile, Prevent } from '.'
 
 export type BotEvent = 'ws.ready' | 'ws.close' | 'ws.connect' | 'ws.error' | 'message.private' | 'message.group' | 'notice.group_recall' | 'notice.friend_recall' | 'notice.notify' | 'notice.group_admin' | 'notice.group_decrease' | 'notice.group_increase' | 'notice.group_ban' | 'notice.group_upload' | 'notice.group_card' | 'request.friend' | 'request.group' | 'meta_event.heartbeat' | 'other'
-export interface PrivateMsg {
+
+export type PrivateMsg = _PrivateMsg & {
+  nextMessage: (fn: (msg: string, event: PrivateMsg, prevEvent: _PrivateMsg) => Prevent) => void
+}
+
+// eslint-disable-next-line typescript/class-name-casing
+interface _PrivateMsg {
   /**
    * 事件发生的时间戳
    */
@@ -67,7 +73,12 @@ export interface PrivateSender {
   age: number
 }
 
-export interface GroupMsg {
+export type GroupMsg = _GroupMsg & {
+  nextMessage: (fn: (msg: string, event: GroupMsg, prevEvent: _GroupMsg) => Prevent) => void
+}
+
+// eslint-disable-next-line typescript/class-name-casing
+interface _GroupMsg {
   /**
    * 事件发生的时间戳
    */

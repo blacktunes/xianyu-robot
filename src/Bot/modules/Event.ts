@@ -37,12 +37,12 @@ export class Event {
           if (event.user_id === this.Bot.userId) return
           PrintLog.logInfoRecv(`收到${colors.white(event.sender.nickname)}(${colors.white(event.user_id.toString())})的消息: ${colors.white(event.message)} (${colors.white(event.message_id.toString())})`, 'EVENT')
           return this.Bot.Admin.isBan(null, event.user_id)
-        }, 1)
+        }, 0)
         .on('message.group', (event) => {
           if (Array.isArray(nolisten) && nolisten.includes(event.group_id)) return
           PrintLog.logInfoRecv(`收到群${colors.cyan(this.groupList[event.group_id] || '')}(${colors.cyan(event.group_id.toString())}) - ${colors.cyan(event.sender.card || event.sender.nickname)}(${colors.cyan(event.user_id.toString())})的消息: ${colors.cyan(event.message)} (${colors.cyan(event.message_id.toString())})`, 'EVENT')
           return this.Bot.Admin.isBan(event.group_id, event.user_id)
-        }, 1)
+        }, 0)
         .on('notice.group_recall', (event) => {
           if (Array.isArray(nolisten) && nolisten.includes(event.group_id)) return
           PrintLog.logWarning(`群${colors.magenta(this.groupList[event.group_id] || '')}(${colors.magenta(event.group_id.toString())}) - (${colors.magenta(event.operator_id.toString())}) 撤回了 (${colors.magenta(event.user_id.toString())}) 的一条消息 (${colors.magenta(event.message_id.toString())})`, 'EVENT')
@@ -187,7 +187,7 @@ export class Event {
    */
   on(type: 'other', fn: (e: any) => Prevent): this
   on(type: BotEvent, fn: (e: any) => Prevent, uid?: number) {
-    this.Bot.Conn.addEvent(type, fn, uid? uid : this.Bot.addEvent())
+    this.Bot.Conn.addEvent(type, fn, (uid === 0 || uid) ? uid : this.Bot.addEvent())
     return this
   }
 }

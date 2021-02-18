@@ -2,8 +2,17 @@ import { w3cwebsocket } from 'websocket'
 import { ApiRes, BotEvent, Prevent, WSOption } from '..'
 import { PrintLog } from '../Tools/PrintLog'
 import { CQCode } from './../Tools/CQCode'
+import { GroupMsg, PrivateMsg } from './../Type/Event'
 
-type MessageEvent = { type: string, fn: (data: any) => Promise<boolean | void> | boolean | void }
+type MessageEvent = { type: string, fn: (data: any) => Prevent }
+
+interface NextMessageEvent {
+  message_id: number
+  type: string
+  group_id?: number
+  user_id: number
+  fn: (e: any) => Promise<void> | void
+}
 
 export class Connect {
   constructor(whitelist: number[], blacklist: number[], option?: WSOption) {
@@ -30,9 +39,28 @@ export class Connect {
 
   private connectTimes = 0
   private messageID = 1
+  private nextMessageID = 1
 
   private whitelist: number[] = []
   private blacklist: number[] = []
+
+  private setNextMessage = (data: PrivateMsg | GroupMsg, event: MessageEvent & { uid: number } | NextMessageEvent) => {
+    return (fn: (msg: string, event: any, prevEvent: any) => Prevent) => {
+      const id = this.nextMessageID
+      ++this.nextMessageID
+      this.nextMessageEventList[id] = {
+        message_id: data.message_id,
+        type: event.type,
+        group_id: data['group_id'] || null,
+        user_id: data.user_id,
+        fn: async (e) => {
+          if (!(await fn(e.message, e, data))) {
+            delete this.nextMessageEventList[id]
+          }
+        }
+      }
+    }
+  }
 
   private connect = () => {
     if (this.connectTimes > 0) {
@@ -78,8 +106,28 @@ export class Connect {
       }
       if (data.post_type) {
         if (data.post_type === 'message') {
+          for (const event of this.messageLogEvent) {
+            if (event.type === `message.${data.message_type}`) {
+              if (await event.fn(data)) break
+            }
+          }
+          for (const i in this.nextMessageEventList) {
+            data.nextMessage = this.setNextMessage(data, this.nextMessageEventList[i])
+            if (this.nextMessageEventList[i].type === 'message.private') {
+              if (this.nextMessageEventList[i].user_id === data.sender.user_id) {
+                await this.nextMessageEventList[i].fn(data)
+                return
+              }
+            } else if (this.nextMessageEventList[i].type === 'message.group') {
+              if (this.nextMessageEventList[i].user_id === data.sender.user_id && this.nextMessageEventList[i].group_id === data.group_id) {
+                await this.nextMessageEventList[i].fn(data)
+                return
+              }
+            }
+          }
           for (const event of this.messageEventList.message) {
             if (event.type === `message.${data.message_type}`) {
+              data.nextMessage = this.setNextMessage(data, event)
               if (await event.fn(data)) break
             }
           }
@@ -134,7 +182,7 @@ export class Connect {
   private connEventList: (() => void)[] = []
   private errorEventList: ((error: Error) => void)[] = []
   private closeEventList: (() => void)[] = []
-  messageEventList: {
+  private messageEventList: {
     message: (MessageEvent & { uid: number })[]
     notice: MessageEvent[]
     request: MessageEvent[]
@@ -147,7 +195,16 @@ export class Connect {
       meta_event: [],
       other: []
     }
+  private messageLogEvent: MessageEvent[] = []
+  private nextMessageEventList: {
+    [id: number]: NextMessageEvent
+  } = {}
 
+  /**
+   * 增加事件监听
+   * message消息可填入uid控制消息顺序，uid为0时为log事件，不会被拦截
+   * 推荐使用Event类中的方法
+   */
   readonly addEvent = (type: BotEvent, fn: (e?: any) => Prevent, uid?: number) => {
     if (type === 'ws.ready') {
       this.ready = fn
@@ -158,14 +215,28 @@ export class Connect {
     } else if (type === 'ws.close') {
       this.closeEventList.push(fn)
     } else if (type.startsWith('message.')) {
-      this.messageEventList.message.push({
-        type,
-        fn,
-        uid: uid
-      })
-      this.messageEventList.message.sort((a, b) => {
-        return a.uid - b.uid
-      })
+      if (uid === 0) {
+        this.messageLogEvent.push({
+          type,
+          fn
+        })
+      } else {
+        if (!uid) {
+          if (this.messageEventList.message.length > 0 && this.messageEventList.message[this.messageEventList.message.length - 1].uid) {
+            uid = this.messageEventList.message[this.messageEventList.message.length - 1].uid + 1
+          } else {
+            uid = 1
+          }
+        }
+        this.messageEventList.message.push({
+          type,
+          fn,
+          uid: uid
+        })
+        this.messageEventList.message.sort((a, b) => {
+          return a.uid - b.uid
+        })
+      }
     } else if (type.startsWith('notice.')) {
       this.messageEventList.notice.push({
         type,
@@ -211,11 +282,19 @@ export class Connect {
       })
     })
   }
+
   private APIList = new Map<number, Function>()
+  /**
+   * 获取队列中未完成的消息数量
+   */
   readonly getMessageNum = () => {
     return this.APIList.size
   }
 
+  /**
+   * 使用HTTP API
+   * 推荐使用API类中的方法
+   */
   readonly useAPI = async (apiName: string, params?: any): Promise<ApiRes> => {
     if (this.isConnect()) {
       const id = this.messageID
@@ -240,6 +319,9 @@ export class Connect {
     }
   }
 
+  /**
+   * 可以用于群消息相功能的简单测试
+   */
   async groupMsgTest(msg: string, user_id: number = 1, group_id: number = 1) {
     for (const event of this.messageEventList.message) {
       if (event.type === 'message.group') {
@@ -272,6 +354,9 @@ export class Connect {
     }
   }
 
+  /**
+   * 可以用于私聊消息相功能的简单测试
+   */
   async privateMsgTest(msg: string, user_id: number = 1) {
     for (const event of this.messageEventList.message) {
       if (event.type === 'message.private') {

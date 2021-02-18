@@ -1,8 +1,8 @@
-import { NodeMessage } from '../../Type/Message';
+import { NodeMessage } from '../../Type/Message'
 import { PrintLog } from '../../Tools/PrintLog'
 import colors = require('colors')
 import { GroupInfo, ImageInfo, MemberInfo, Message, QQInfo } from '../../Type'
-import { Bot } from '../Bot';
+import { Bot } from '../Bot'
 
 export class Api {
   /**
