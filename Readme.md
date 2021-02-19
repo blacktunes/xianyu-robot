@@ -6,11 +6,9 @@
 **客户端请使用[go-cqhttp](https://github.com/Mrs4s/go-cqhttp)**
 
 #### 安装方法
-```
+```sh
 npm install -S xianyu-robot
-```
-```
-yarn add xianyu-robot
+# yarn add xianyu-robot
 ```
 
 #### 使用方法
@@ -32,7 +30,7 @@ app.start()
 ```
 
 #### 文档
-**文档编写中···**
+[详细文档](https://blacktunes.github.io/xianyu-robot-doc/)
 
 
 #### 项目参考
