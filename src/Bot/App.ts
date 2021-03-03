@@ -7,7 +7,7 @@ import { Event } from './modules/Event'
 import fs = require('fs-extra')
 import path = require('path')
 import colors = require('colors')
-import os = require('os-utils')
+import os = require('node-os-utils')
 import { secondsFormat } from '..'
 
 export class App {
@@ -207,18 +207,10 @@ export class App {
       .desc('查询BOT运行状态')
       .group('内置指令')
       .black(noCommand)
-      .action('group', e => {
-        os.cpuUsage(cpuUsage => {
-          const freeMem = os.freemem() / 1024
-          const totalMem = os.totalmem() / 1024
-          const data = {
-            cpuUsage: (cpuUsage * 100.0).toFixed(2) + '%',
-            useMem: (totalMem - freeMem).toFixed(2) + 'GB',
-            totalMem: totalMem.toFixed(2) + 'GB',
-            MemUsage: ((totalMem - freeMem) / totalMem * 100.0).toFixed(2) + '%',
-          }
-          this.Bot.Api.sendGroupMsg(e.group_id, `${this.Bot.name}\n----------\n已加载插件：${this.Bot.Plugin.list.length}\n已加载命令：${this.Bot.Command.list.length}\n运行时长：${secondsFormat(Math.floor(process.uptime()))}\n----------\nCPU：${data.cpuUsage}\n内存：${data.useMem}/${data.totalMem}(${data.MemUsage})\nBOT占用内存：${((process.memoryUsage().rss) / 1024 / 1024).toFixed(2) + 'MB'}`)
-        })
+      .action('group', async e => {
+        const cpuUsage = await os.cpu.usage()
+        const mem = await os.mem.info()
+        this.Bot.Api.sendGroupMsg(e.group_id, `${this.Bot.name}\n----------\n已加载插件：${this.Bot.Plugin.list.length}\n已加载命令：${this.Bot.Command.list.length}\n运行时长：${secondsFormat(Math.floor(process.uptime()))}\n----------\nCPU：${cpuUsage}%\n内存：${mem.usedMemMb}/${mem.totalMemMb}(${(mem.usedMemMb / mem.totalMemMb * 100.0).toFixed(2)}%)\nBOT占用内存：${((process.memoryUsage().rss) / 1024 / 1024).toFixed(2)}MB`)
         return true
       })
   }

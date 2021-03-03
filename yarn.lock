@@ -1164,6 +1164,11 @@
   resolved "https://registry.yarnpkg.com/@types/named-regexp-groups/-/named-regexp-groups-1.0.0.tgz#9842eef10cdb1dd47648fe5d3ad1f612a6ff03c9"
   integrity sha512-POi5TpvJ8obKWDb8o5Yn4jH/wngpGvfawOErHwtaLMM5viPa6EYaR45FYzXh59FOnr9AH1O+ixxZ52zXvxbP2Q==
 
+"@types/node-os-utils@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@types/node-os-utils/-/node-os-utils-1.2.0.tgz#d03286eca0642f861cbee506bc1f4dd868a15826"
+  integrity sha512-sstDo2s8gQR/Qh2Bd6yNQ5xJv+D4ttyB9ZVjB3mBm3VkGl2RoqjV7fiw9mIHLbshHSRm2m8uf0XrIRQNWB/z6A==
+
 "@types/node-schedule@^1.3.0":
   version "1.3.1"
   resolved "https://registry.npmjs.org/@types/node-schedule/-/node-schedule-1.3.1.tgz#6785ea71b12b0b8899c3fce0650b2ef5a7ea9d1e"
@@ -1185,11 +1190,6 @@
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/@types/normalize-package-data/-/normalize-package-data-2.4.0.tgz#e486d0d97396d79beedd0a6e33f4534ff6b4973e"
   integrity sha512-f5j5b/Gf71L+dbqxIpQ4Z2WlmI/mPJ0fOkGGmFgtb6sAu97EPczzbS3/tJKxmcYDj55OX6ssqwDAWOHIYDRDGA==
-
-"@types/os-utils@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@types/os-utils/-/os-utils-0.0.1.tgz#f1ec7830c60be563d6e9566a0ae3b23ea5497493"
-  integrity sha512-r5a1I4xr8e25GFiLdpHV+jHUawtbmtuCQHR1P3SH/Y1gmRy0KLjBVGe5uUkODU/6GntoGPhOu05jv+sBdAVpog==
 
 "@types/parse-json@^4.0.0":
   version "4.0.0"
@@ -8175,6 +8175,11 @@ node-libs-browser@^2.2.1:
     util "^0.11.0"
     vm-browserify "^1.0.1"
 
+node-os-utils@^1.3.5:
+  version "1.3.5"
+  resolved "https://registry.yarnpkg.com/node-os-utils/-/node-os-utils-1.3.5.tgz#d34a22c7d15af76f13e4c1e05634b905e780b3cf"
+  integrity sha512-bIJIlk+hA+7/ATnu3sQMtF697iw9T/JksDhKMe9uENG0OhzIG7hLM6fbcyu18bOuajlYWnSlj0IhDo2q7k0ebg==
+
 node-releases@^1.1.70:
   version "1.1.70"
   resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.1.70.tgz#66e0ed0273aa65666d7fe78febe7634875426a08"
@@ -8779,11 +8784,6 @@ os-tmpdir@^1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/os-tmpdir/-/os-tmpdir-1.0.2.tgz#bbe67406c79aa85c5cfec766fe5734555dfa1274"
   integrity sha1-u+Z0BseaqFxc/sdm/lc0VV36EnQ=
-
-os-utils@^0.0.14:
-  version "0.0.14"
-  resolved "https://registry.yarnpkg.com/os-utils/-/os-utils-0.0.14.tgz#29e511697b1982b8c627722175fe39797ef64156"
-  integrity sha1-KeURaXsZgrjGJ3Ihdf45eX72QVY=
 
 osenv@^0.1.4, osenv@^0.1.5:
   version "0.1.5"
