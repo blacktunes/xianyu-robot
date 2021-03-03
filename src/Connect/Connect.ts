@@ -108,7 +108,7 @@ export class Connect {
         if (data.post_type === 'message') {
           for (const event of this.messageLogEvent) {
             if (event.type === `message.${data.message_type}`) {
-              if (await event.fn(data)) break
+              if (await event.fn(data)) return
             }
           }
           for (const i in this.nextMessageEventList) {
@@ -202,7 +202,7 @@ export class Connect {
 
   /**
    * 增加事件监听
-   * message消息可填入uid控制消息顺序，uid为0时为log事件，不会被拦截
+   * message消息可填入uid控制消息顺序，uid为0时为log事件，有最高优先度
    * 推荐使用Event类中的方法
    */
   readonly addEvent = (type: BotEvent, fn: (e?: any) => Prevent, uid?: number) => {

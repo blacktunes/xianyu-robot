@@ -151,7 +151,7 @@ export class Event {
    */
   on(type: 'notice.group_admin', fn: (e: GroupAdmin) => Prevent): this
   /**
-   * 群成员增加
+   * 群成员减少
    */
   on(type: 'notice.group_decrease', fn: (e: GroupDecrease) => Prevent): this
   /**

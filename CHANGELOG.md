@@ -68,4 +68,4 @@
 
 ### ✨ 新功能
 
-* 增加控制台忽略指定群组的消息日志 ([f1c0e6f](https://github.com/blacktunes/xianyu-robot/commit/f1c0e6f)) by: ****
+* 增加控制台忽略指定群组的消息日志 ([f1c0e6f](https://github.com/blacktunes/xianyu-robot/commit/f1c0e6f))
