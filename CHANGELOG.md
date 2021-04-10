@@ -1,5 +1,12 @@
 # Xianyu-robot(咸鱼王)
 
+# [4.10.0](https://github.com/blacktunes/xianyu-robot/compare/v4.9.1...v4.10.0) (2021-04-10)
+
+
+### ✨ 新功能
+
+* 优化框架和增加消息发送完成事件 ([4a10776](https://github.com/blacktunes/xianyu-robot/commit/4a10776))
+
 ## [4.9.1](https://github.com/blacktunes/xianyu-robot/compare/v4.9.0...v4.9.1) (2021-03-03)
 
 
