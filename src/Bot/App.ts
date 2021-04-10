@@ -97,7 +97,7 @@ export class App {
 
   private initPlugin = async () => {
     if (this.Bot.Plugin.list.length > 0) {
-      PrintLog.logInfo('开始初始化插件', this.Bot.name)
+      PrintLog.logInfo('开始初始化插件', this.Bot.Data.name)
       for (let i in this.Bot.Plugin.list) {
         await this.Bot.Plugin.list[i].init()
         this.Bot.Plugin.list[i].init = () => {
@@ -105,21 +105,21 @@ export class App {
         }
         PrintLog.logNotice(`${colors.yellow(this.Bot.Plugin.list[i].name)} 已加载`, '插件')
       }
-      PrintLog.logNotice('插件初始化完成', this.Bot.name)
+      PrintLog.logNotice('插件初始化完成', this.Bot.Data.name)
     }
   }
 
   private initCommand = () => {
     if (this.Bot.Command.list.length > 0) {
-      PrintLog.logInfo('开始初始化指令', this.Bot.name)
+      PrintLog.logInfo('开始初始化指令', this.Bot.Data.name)
       for (let i in this.Bot.Command.list) {
-        this.Bot.Command.list[i].init(this.Bot.Event, this.Bot.Admin)
+        this.Bot.Command.list[i].init(this.Bot.Event, this.Bot.Admin, this.Bot.Data)
         this.Bot.Command.list[i].init = () => {
           throw new Error('请勿重复init')
         }
         PrintLog.logNotice(`${colors.yellow(this.Bot.Command.list[i].comm)} 已加载`, '指令')
       }
-      PrintLog.logNotice('指令初始化完成', this.Bot.name)
+      PrintLog.logNotice('指令初始化完成', this.Bot.Data.name)
     }
   }
 
@@ -130,16 +130,16 @@ export class App {
     })
 
     let setting: any = {}
-    const configPath = path.join(this.Bot.Plugin.dirname, `./${this.Bot.userId}-config.json`)
+    const configPath = path.join(this.Bot.Plugin.dirname, `./${this.Bot.Data.getUserId()}-config.json`)
     if (fs.existsSync(configPath)) {
       try {
         setting = fs.readJSONSync(configPath)
         for (let i in setting) {
           this.Bot.Plugin.config[i] = setting[i]
         }
-        PrintLog.logNotice('本地配置加载成功', this.Bot.name)
+        PrintLog.logNotice('本地配置加载成功', this.Bot.Data.name)
       } catch {
-        PrintLog.logError('本地配置加载失败', this.Bot.name)
+        PrintLog.logError('本地配置加载失败', this.Bot.Data.name)
       }
     }
 
@@ -150,7 +150,9 @@ export class App {
     }
     await this.initPlugin()
     this.initCommand()
-    this.Bot.Plugin.saveConfig()
+    if (!this.Bot.Data.getDebug()) {
+      this.Bot.Plugin.saveConfig()
+    }
   }
 
   /**
@@ -210,7 +212,7 @@ export class App {
       .action('group', async e => {
         const cpuUsage = await os.cpu.usage()
         const mem = await os.mem.info()
-        this.Bot.Api.sendGroupMsg(e.group_id, `${this.Bot.name}\n----------\n已加载插件：${this.Bot.Plugin.list.length}\n已加载命令：${this.Bot.Command.list.length}\n运行时长：${secondsFormat(Math.floor(process.uptime()))}\n----------\nCPU：${cpuUsage}%\n内存：${mem.usedMemMb}/${mem.totalMemMb}(${(mem.usedMemMb / mem.totalMemMb * 100.0).toFixed(2)}%)\nBOT占用内存：${((process.memoryUsage().rss) / 1024 / 1024).toFixed(2)}MB`)
+        this.Bot.Api.sendGroupMsg(e.group_id, `${this.Bot.Data.name}\n----------\n已加载插件：${this.Bot.Plugin.list.length}\n已加载命令：${this.Bot.Command.list.length}\n队列中的消息：${this.Bot.Conn.getMessageNum()}\n消息监听器数量：${this.Bot.Conn.getEventNum()}\n运行时长：${secondsFormat(Math.floor(process.uptime()))}\n----------\nCPU：${cpuUsage}%\n内存：${mem.usedMemMb}/${mem.totalMemMb}(${(mem.usedMemMb / mem.totalMemMb * 100.0).toFixed(2)}%)\nBOT占用内存：${((process.memoryUsage().rss) / 1024 / 1024).toFixed(2)}MB`)
         return true
       })
   }
@@ -228,12 +230,13 @@ export class App {
     return new Promise(resolve => {
       this.Bot.Conn = new Connect(this.WhiteList, this.BlackList, ws)
       this.Bot.Conn.addEvent('ws.ready', async () => {
-        this.Bot.Api = new Api(this.Bot, debug)
-        this.Bot.userId = (await this.Bot.Api.getLoginInfo()).user_id
+        this.Bot.Data.setDebug(debug)
+        this.Bot.Api = new Api(this.Bot)
+        this.Bot.Data.setUserId((await this.Bot.Api.getLoginInfo()).user_id)
         this.Bot.Event = new Event(this.Bot, nolisten)
         this.Bot.Event
           .on('ws.close', () => {
-            PrintLog.logWarning(`${this.Bot.name}已关闭`, 'WS')
+            PrintLog.logWarning(`${this.Bot.Data.name}已关闭`, 'WS')
           })
           .on('meta_event.heartbeat', async () => {
             // 响应心跳连接
@@ -241,7 +244,7 @@ export class App {
           })
         this.setSysCommand(noCommand)
         await this.initBot()
-        PrintLog.logNotice('应用已启动', this.Bot.name)
+        PrintLog.logNotice('应用已启动', this.Bot.Data.name)
         resolve(this.Bot)
       })
     })

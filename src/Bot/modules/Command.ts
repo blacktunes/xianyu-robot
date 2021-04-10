@@ -1,3 +1,4 @@
+import { Data } from './Data';
 import { GroupMsg, Prevent, PrivateMsg } from '../..'
 import { PrintLog } from './../../Tools/PrintLog'
 import { Event } from './Event'
@@ -27,7 +28,7 @@ export class Command {
       PrintLog.logWarning(`发现重复指令 ${colors.white(name)}`, '指令')
     }
 
-    const comm = new Comm(name, this.Bot.addEvent())
+    const comm = new Comm(name, this.Bot.Event.updateEventID())
     this.list.push(comm)
     return new class {
       /**
@@ -122,12 +123,12 @@ class Comm {
   blackList: number[] = []
   readonly uid: number
 
-  init = (event: Event, admin: Admin) => {
+  init = (event: Event, admin: Admin, data: Data) => {
     event.on('message.group', e => {
       if (this.admin && !admin.isAdmin(e.sender.user_id)) return
       if ((this.blackList.length > 0 && this.blackList.includes(e.group_id)) || (this.whiteList.length > 0 && !this.whiteList.includes(e.group_id))) return
       if ((this.reg && !this.reg.test(e.message)) || (!this.reg && e.message !== this.comm)) return
-      PrintLog.logNotice(`群${colors.white(event.groupList[e.group_id] || '')}(${colors.white(e.group_id.toString())}) - ${colors.white(e.sender.card || e.sender.nickname)}(${colors.white(e.user_id.toString())})触发${colors.yellow(this.comm)}指令`, '指令')
+      PrintLog.logNotice(`群${colors.white(data.groupList[e.group_id] || '')}(${colors.white(e.group_id.toString())}) - ${colors.white(e.sender.card || e.sender.nickname)}(${colors.white(e.user_id.toString())})触发${colors.yellow(this.comm)}指令`, '指令')
       for (const i in this.fn.group) {
         return this.fn.group[i](e)
       }

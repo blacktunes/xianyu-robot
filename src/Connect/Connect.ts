@@ -283,6 +283,13 @@ export class Connect {
     })
   }
 
+  /**
+   * 获取消息监听器数量
+   */
+  readonly getEventNum = () => {
+    return this.messageEventList.message.length
+  }
+
   private APIList = new Map<number, Function>()
   /**
    * 获取队列中未完成的消息数量

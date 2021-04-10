@@ -5,27 +5,19 @@ import { Api } from './modules/Api'
 import { Command } from './modules/Command'
 import { Event } from './modules/Event'
 import { Plugin } from './modules/Plugin'
+import { Data } from './modules/Data'
 
 export class Bot {
   constructor(name: string, dirname: string) {
-    this.name = name
+    this.Data = new Data(this, name)
     this.Plugin = new Plugin(this, dirname)
     this.Admin = new Admin(this)
     this.Command = new Command(this)
   }
-  private eventNum = 0
-  addEvent = () => {
-    this.eventNum += 1
-    return this.eventNum
-  }
   /**
-   * bot名称
+   * Bot的部分属性
    */
-  readonly name: string
-  /**
-   * bot的登录QQ
-   */
-  userId: number = -1
+  Data: Data
   /**
    * CQ码
    */

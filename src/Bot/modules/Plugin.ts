@@ -7,10 +7,10 @@ import { PrintLog } from '../../Tools'
 
 export class Plugin {
   constructor(bot: Bot, dir: string) {
-    this.bot = bot
+    this.Bot = bot
     this.dirname = dir
   }
-  private bot: Bot
+  private Bot: Bot
   /**
    * 本地设置保存位置
    */
@@ -34,7 +34,7 @@ export class Plugin {
   readonly saveConfig = () => {
     if (this.dirname) {
       try {
-        fs.writeJSONSync(path.join(this.dirname, `./${this.bot.userId}-config.json`), this.config, {
+        fs.writeJSONSync(path.join(this.dirname, `./${this.Bot.Data.getUserId()}-config.json`), this.config, {
           spaces: 2
         })
       } catch (err) {
