@@ -1,4 +1,4 @@
-var gulp = require('gulp')
+const gulp = require('gulp')
 
 gulp.task('copy', () => {//将json和jsonc文件复制到dist目录下
   return gulp.src(['src/**/*.json', '!*.ts'])

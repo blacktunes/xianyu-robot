@@ -1,7 +1,7 @@
 {
   "name": "xianyu-robot",
   "version": "4.10.0",
-  "description": "可使用HTTP API的node机器人",
+  "description": "使用HTTP API的node机器人框架",
   "main": "lib/index.js",
   "scripts": {
     "dev": "nodemon --ext js,ts --exec ts-node test",
@@ -11,6 +11,7 @@
     "push": "npm run build && npm publish",
     "lint": "eslint src --ext .ts",
     "changelog": "conventional-changelog -p cmyr-config -i CHANGELOG.md -s -r 0",
+    "docs": "rimraf docs && typedoc src/ --out ./docs"
   },
   "author": "Blacktunes",
   "license": "GPL-3.0",
@@ -33,6 +34,7 @@
   "devDependencies": {
     "@semantic-release/changelog": "^5.0.1",
     "@semantic-release/git": "^9.0.0",
+    "@types/fs-extra": "^9.0.11",
     "@types/mysql": "^2.15.15",
     "@types/named-regexp-groups": "^1.0.0",
     "@types/node": "^14.0.23",
@@ -48,6 +50,9 @@
     "rimraf": "^3.0.2",
     "semantic-release": "^17.3.0",
     "ts-node": "^8.10.2",
+    "typedoc": "^0.20.35",
+    "typedoc-plugin-markdown": "^3.7.1",
+    "typescript": "^3.9.6"
   },
   "dependencies": {
     "colors": "^1.4.0",
