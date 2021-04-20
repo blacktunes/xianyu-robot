@@ -1,11 +1,12 @@
-import { CQCODE, CQCode } from '..'
 import { Connect } from '../Connect/Connect'
+import { Log, PrintLog } from '../Tools'
+import { CQCODE, CQCode } from '../Tools/CQCode'
 import { Admin } from './modules/Admin'
 import { Api } from './modules/Api'
 import { Command } from './modules/Command'
+import { Data } from './modules/Data'
 import { Event } from './modules/Event'
 import { Plugin } from './modules/Plugin'
-import { Data } from './modules/Data'
 
 export class Bot {
   constructor(name: string, dirname: string) {
@@ -18,6 +19,10 @@ export class Bot {
    * Bot的部分属性
    */
   Data: Data
+  /**
+   * 日志对象
+   */
+  Log: Log = PrintLog
   /**
    * CQ码
    */

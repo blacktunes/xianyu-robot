@@ -3,6 +3,9 @@ import { Command } from './Command'
 
 export abstract class BotPlugin {
   constructor(name: string, bot: Bot) {
+    if (name === '匿名插件') {
+      throw new Error('不允许插件命名为\"匿名插件\"')
+    }
     this.name = name
     if (bot) {
       this.Bot = bot
@@ -30,5 +33,5 @@ export abstract class BotPlugin {
   /**
    * debug本文输出
    */
-  debug(): string | void {}
+  debug(): void {}
 }

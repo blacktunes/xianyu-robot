@@ -1,7 +1,7 @@
 /**
  * 群信息
  */
-export class GroupInfo {
+export interface GroupInfo {
   /**
    *群号
    */
@@ -10,6 +10,18 @@ export class GroupInfo {
    *群名称
    */
   group_name: string
+  /**
+   * 群备注
+   */
+  group_memo: string
+  /**
+   * 群创建时间
+   */
+  group_create_time: number
+  /**
+   * 群等级
+   */
+  group_level: number
   /**
    * 成员数
    */
@@ -23,7 +35,7 @@ export class GroupInfo {
 /**
  * 群成员信息
  */
-export class MemberInfo {
+export interface MemberInfo {
   /**
    * 群号
    */

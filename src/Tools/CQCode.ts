@@ -1,76 +1,39 @@
-import { Message, NodeMessage } from "../Type"
+import { Message, NodeMessage } from '../Type'
+import { encode } from './Tools'
 
 /**
  * CQ码
  */
 export class CQCODE {
   /**
-   * 特殊字符，转义，避免冲突
-   * @param {string} code 要转义的字符串
-   * @param {boolean} [isComma=true] 是否转义逗号，默认为true
-   * @returns {string} 转义后的字符串
-   */
-  encode(code: string, isComma: boolean = true): string {
-    code = code.replace('&', '&amp;')
-    code = code.replace('[', '&#91;')
-    code = code.replace(']', '&#93;')
-    if (isComma) {
-      code = code.replace(',', '&#44;')
-    }
-    return code
-  }
-  /**
-   * 特殊字符，反转义
-   * @param {string} code stringReplace
-   * @returns {string} 反转义后的字符串
-   */
-  decode(code: string): string {
-    code = code.replace('&amp;', '&')
-    code = code.replace('&#91;', '[')
-    code = code.replace('&#93;', ']')
-    code = code.replace('&#44;', ',')
-    return code
-  }
-
-  /**
-   * 发送图片(发送私聊时可能会失败)
-   * @param file 图片文件名或URL
-   * @param cache 只在通过网络 URL 发送时有效，表示是否使用已缓存的文件，默认 1
-   * @param type 图片类型，flash 表示闪照，show 表示秀图，默认普通图片
-   * @param id 发送秀图时的特效id，默认为40000
-   */
-  image(file: string, cache: 0 | 1 = 1, type?: 'flash' | 'show', id: 40000 | 40001 | 40002 | 40003 | 40004 | 40005 = 40000): string {
-    if (type === 'flash') {
-      return `[CQ:image,file=${this.encode(file)},type=flash]`
-    } else if (type === 'show') {
-      return `[CQ:image,file=${this.encode(file)},type=show,id=${id}]`
-    } else {
-      return `[CQ:image,file=${this.encode(file)},cache=${cache}]`
-    }
-  }
-
-  /**
-   * 发送语音(需要ffmpeg)
-   * @param file 文件路径
-   */
-  record(file: string): string {
-    return `[CQ:record,file=${this.encode(file)}]`
-  }
-
-  /**
-   * 发送视频
-   * @param file 文件路径
-   */
-  video(file: string): string {
-    return `[CQ:video,file=${this.encode(file)}]`
-  }
-
-  /**
-   * 发送QQ表情
+   * QQ表情
+   * https://github.com/kyubotics/coolq-http-api/wiki/%E8%A1%A8%E6%83%85-CQ-%E7%A0%81-ID-%E8%A1%A8
    * @param id 表情id
    */
   face(id: number): string {
     return `[CQ:face,file=${id}]`
+  }
+
+  /**
+   * 语音
+   * @param file 语音文件名
+   * @param magic 发送时可选, 默认 0, 设置为 1 表示变声
+   * @param cache 只在通过网络 URL 发送时有效, 表示是否使用已缓存的文件, 默认 1
+   * @param proxy 只在通过网络 URL 发送时有效, 表示是否通过代理下载文件 ( 需通过环境变量或配置文件配置代理 ) , 默认 1
+   * @param timeout 只在通过网络 URL 发送时有效, 单位秒, 表示下载网络文件的超时时间 , 默认不超时
+   */
+  record(file: string, magic: 0 | 1 = 0, cache: 0 | 1 = 1, proxy: 0 | 1 = 1, timeout?: number): string {
+    return `[CQ:record,file=${encode(file)}${magic === 1 ? ',magic=1' : ''}${cache === 0 ? ',cache=0' : ''}${proxy === 0 ? ',proxy=0' : ''}${timeout ? ',timeout=' + timeout : ''}]`
+  }
+
+  /**
+   * 短视频
+   * @param file 视频地址, 支持http和file发送
+   * @param cover 视频封面, 支持http, file和base64发送, 格式必须为jpg
+   * @param c 通过网络下载视频时的线程数, 默认单线程. (在资源不支持并发时会自动处理)
+   */
+  video(file: string, cover?: string, c?: 2 | 3): string {
+    return `[CQ:video,file=${encode(file)}${cover ? ',cover' + encode(cover) : ''}${c ? ',c=' + c : ''}]`
   }
 
   /**
@@ -83,14 +46,53 @@ export class CQCODE {
   }
 
   /**
-   * 发送分享
+   * 链接分享
    * @param url 分享的链接
    * @param title 分享的标题
    * @param content 分享的简介
    * @param image 分享的图片链接
    */
-  share(url: string, title: string = '', content: string = '', image: string = ''): string {
-    return `[CQ:share,url=${this.encode(url)},title=${this.encode(title)},content=${this.encode(content)},image=${this.encode(image)}]`
+  share(url: string, title: string = '', content?: string, image?: string): string {
+    return `[CQ:share,url=${encode(url)},title=${encode(title)}${content ? `,content=${encode(content)}` : ''}${image ? `,image=${encode(image)}` : ''}]`
+  }
+
+  /**
+   * 音乐分享
+   * @param type 分别表示使用 QQ 音乐、网易云音乐、虾米音乐
+   * @param id 歌曲 ID
+   */
+  music(type: 'qq' | '163' | 'qq', id: number): string {
+    return `[CQ:music,id=${id},type=${type}]`
+  }
+
+  /**
+   * 音乐自定义分享
+   * @param url 点击后跳转目标 URL
+   * @param audio 音乐 URL
+   * @param title 标题
+   * @param content 发送时可选, 内容描述
+   * @param image 发送时可选, 图片 URL
+   */
+  customMusic(url: string, audio: string, title: string, content?: string, image?: string): string {
+    return `[CQ:music,type=custom,url=${encode(url)},audio=${encode(audio)},title=${encode(title)}${content ? `,content=${encode(content)}` : ''}${image ? `,image=${encode(image)}` : ''}]`
+  }
+
+  /**
+   * 图片
+   * @param file 图片文件名或URL
+   * @param cache 只在通过网络 URL 发送时有效，表示是否使用已缓存的文件，默认 1
+   * @param type 图片类型，flash 表示闪照，show 表示秀图，默认普通图片
+   * @param id 发送秀图时的特效id，默认为40000
+   * @param c 通过网络下载图片时的线程数, 默认单线程. (在资源不支持并发时会自动处理)
+   */
+  image(file: string, cache: 0 | 1 = 1, type?: 'flash' | 'show', id: 40000 | 40001 | 40002 | 40003 | 40004 | 40005 = 40000, c?: 2 | 3): string {
+    if (type === 'flash') {
+      return `[CQ:image,file=${encode(file)},type=flash${cache === 0 ? ',cache=0' : ''}${c ? ',c=' + c : ''}]`
+    } else if (type === 'show') {
+      return `[CQ:image,file=${encode(file)},type=show,id=${id}${cache === 0 ? ',cache=0' : ''}${c ? ',c=' + c : ''}]`
+    } else {
+      return `[CQ:image,file=${encode(file)}${cache === 0 ? ',cache=0' : ''}${c ? ',c=' + c : ''}]`
+    }
   }
 
   /**
@@ -99,6 +101,57 @@ export class CQCODE {
    */
   reply(id: number): string {
     return `[CQ:reply,id=${id}]`
+  }
+
+  /**
+   * 自定义回复
+   * @param text 	自定义回复的信息
+   * @param qq 自定义回复时的自定义QQ
+   * @param time 自定义回复时的时间, 格式为Unix时间
+   * @param seq 起始消息序号, 可通过 get_msg 获得
+   */
+  customReply(text: string, qq: number, time?: number, seq?: number): string {
+    return `[CQ:reply,text=${encode(text)},qq=${qq}${time ? `,time=${time}` : ''}${seq ? `,seq=${seq}` : ''}]`
+  }
+
+  /**
+   * 红包
+   * @param title 祝福语/口令
+   */
+  redbag(title: string): string {
+    return `[CQ:redbag,title=${encode(title)}]`
+  }
+
+  /**
+   * 戳一戳(仅群聊)
+   * @param qq 需要戳的成员
+   */
+  poke(qq: number): string {
+    return `[CQ:poke,qq=${qq}]`
+  }
+
+  /**
+   * 发送礼物
+   * 仅支持免费礼物,发送群礼物消息无法撤回
+   * @param qq 接收礼物的成员
+   * @param id 	礼物的类型
+   * 0 甜Wink
+   * 1 快乐肥宅水
+   * 2 幸运手链
+   * 3 卡布奇诺
+   * 4 猫咪手表
+   * 5 绒绒手套
+   * 6 彩虹糖果
+   * 7 坚强
+   * 8 告白话筒
+   * 9 牵你的手
+   * 10 可爱猫咪
+   * 11 神秘面具
+   * 12 我超忙的
+   * 13 爱心口罩
+   */
+  gift(qq: number, id: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13): string {
+    return `[CQ:gift,qq=${qq},id=${id}]`
   }
 
   /**
@@ -142,65 +195,20 @@ export class CQCODE {
   }
 
   /**
-   * 发送礼物
-   * 仅支持免费礼物,发送群礼物消息无法撤回
-   * @param qq 接收礼物的成员
-   * @param id 	礼物的类型
-   * 0 甜Wink
-   * 1 快乐肥宅水
-   * 2 幸运手链
-   * 3 卡布奇诺
-   * 4 猫咪手表
-   * 5 绒绒手套
-   * 6 彩虹糖果
-   * 7 坚强
-   * 8 告白话筒
-   */
-  gift(qq: number, id: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8): string {
-    return `[CQ:gift,qq=${qq},id=${id}]`
-  }
-
-  /**
-   * 文本转语音
-   * 通过TX的TTS接口，采用的音源与登录账号的性别有关
-   * @param test 内容
-   */
-  tts(test: string): string {
-    return `[CQ:tts,text=${this.encode(test)}]`
-  }
-
-  /**
-   * 发送音乐(music)
-   * @param musicId 音乐的歌曲数字ID
-   * @param type 目前支持 qq/QQ音乐 163/网易云音乐 xiami/虾米音乐，默认为qq
-   * @param style 启用新版样式，目前仅 QQ音乐 支持
-   */
-  music(musicId: number, type: '' | 'qq' | '163' | 'xiami' = '', style: boolean = false): string {
-    return `[CQ:music,id=${musicId},type=${type ? type : 'qq'}${style ? ',style=1' : ''}]`
-  }
-
-  /**
-   * 戳一戳(仅群聊)
-   * @param qq 需要戳的成员
-   */
-  poke(qq: number): string {
-    return `[CQ:poke,qq=${qq}]`
-  }
-
-  /**
    * 发送xml卡片
    * @param data xml内容，xml中的value部分，记得实体化处理
    */
   xml(data: string): string {
-    return `[CQ:xml,data=${this.encode(data)}]`
+    return `[CQ:xml,data=${encode(data)}]`
   }
 
   /**
    * 发送json卡片
    * @param data json内容，json的所有字符串记得实体化处理
+   * @param resid 默认不填为0, 走小程序通道, 填了走富文本通道发送
    */
-  json(data: string): string {
-    return `[CQ:json,data=${this.encode(data)}]`
+  json(data: string, resid: number = 0): string {
+    return `[CQ:json,data=${encode(data)}${resid !== 0 ? `,resid=${resid}` : ''}]`
   }
 
   /**
@@ -214,7 +222,16 @@ export class CQCODE {
    * @param icon 分享来源的icon图标url，可以留空
    */
   cardimage(file: string, minwidth: number = 400, minheight: number = 400, maxwidth: number = 500, maxheight: number = 1000, source: string = '', icon: string = ''): string {
-    return `[CQ:cardimage,file=${this.encode(file)},minwidth=${minwidth},minheight=${minheight},maxwidth=${maxwidth},maxheight=${maxheight},source=${this.encode(source)},icon=${this.encode(icon)}]`
+    return `[CQ:cardimage,file=${encode(file)},minwidth=${minwidth},minheight=${minheight},maxwidth=${maxwidth},maxheight=${maxheight},source=${encode(source)},icon=${encode(icon)}]`
+  }
+
+  /**
+   * 文本转语音
+   * 通过TX的TTS接口，采用的音源与登录账号的性别有关
+   * @param text 内容
+   */
+  tts(text: string): string {
+    return `[CQ:tts,text=${encode(text)}]`
   }
 }
 

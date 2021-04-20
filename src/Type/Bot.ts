@@ -1,9 +1,9 @@
 import { Bot } from '../Bot/Bot'
-import { BotPlugin } from '../Tools/Plugin'
-
+import { BotPlugin } from '../Plugin/Plugin'
 
 /**
  * 是否阻止消息传递
+ * true为阻止
  */
 export type Prevent = Promise<boolean | void> | boolean | void
 
@@ -15,7 +15,14 @@ export interface Plugin {
   new(bot: Bot, config?: any): BotPlugin
 }
 
-export interface WSOption {
+export type PluginFunction = (bot: Bot) => void | Promise<void>
+
+export interface AnonymousPlugin {
+  name: '匿名插件'
+  init: PluginFunction
+}
+
+export interface WebSocketConfig {
   wss?: boolean
   /**
    * API访问token

@@ -1,6 +1,6 @@
-import { GroupFile, Prevent } from '.'
-
-export type BotEvent = 'ws.ready' | 'ws.close' | 'ws.connect' | 'ws.error' | 'message.private' | 'message.group' | 'notice.group_recall' | 'notice.friend_recall' | 'notice.notify' | 'notice.group_admin' | 'notice.group_decrease' | 'notice.group_increase' | 'notice.group_ban' | 'notice.group_upload' | 'notice.group_card' | 'request.friend' | 'request.group' | 'meta_event.heartbeat' | 'other'
+import { Prevent } from './Bot'
+import { File, GroupFile } from './File'
+import { Device } from './QQ'
 
 export type PrivateMsg = _PrivateMsg & {
   nextMessage: (fn: (msg: string, event: PrivateMsg, prevEvent: _PrivateMsg) => Prevent) => void
@@ -257,11 +257,11 @@ export interface GroupNotify {
   /**
    * 接受者id
    */
-  target_id: number | null
+  target_id: number | undefined
   /**
    * 荣誉类型
    */
-  honor_type: string | null
+  honor_type: string | undefined
 }
 
 export interface GroupAdmin {
@@ -530,4 +530,92 @@ export interface GroupCard {
    * 旧名片
    */
   card_old: any
+}
+
+export interface FriendAdd {
+  /**
+   * 	事件发生的时间戳
+   */
+  time: number
+  /**
+   * 收到事件的机器人 QQ 号
+   */
+  self_id: number
+  /**
+   * 	上报类型
+   */
+  post_type: 'post_type'
+  /**
+   * 通知类型
+   */
+  notice_type: 'friend_add'
+  /**
+   * 新添加好友 QQ 号
+   */
+  user_id: number
+}
+
+export interface OfflineFile {
+  /**
+   * 上报类型
+   */
+  post_type: 'notice'
+  /**
+   * 消息类型
+   */
+  notice_type: 'offline_file'
+  /**
+   * 发送者id
+   */
+  user_id: number
+  /**
+   * 文件数据
+   */
+  file: File
+}
+
+export interface ClientStatus {
+  /**
+   * 上报类型
+   */
+  post_type: 'notice'
+  /**
+   * 消息类型
+   */
+  notice_type: '	client_status'
+  /**
+   * 客户端信息
+   */
+  client: Device
+  /**
+   * 当前是否在线
+   */
+  online: boolean
+}
+
+export interface Essence {
+  /**
+   * 上报类型
+   */
+  post_type: 'notice'
+  /**
+   * 消息类型
+   */
+  notice_type: 'essence'
+  /**
+   * 添加为add, 移出为delete
+   */
+  sub_type: 'add' | 'delete'
+  /**
+   * 消息发送者ID
+   */
+  sender_id: number
+  /**
+   * 操作者ID
+   */
+  operator_id: number
+  /**
+   * 消息ID
+   */
+  message_id: number
 }

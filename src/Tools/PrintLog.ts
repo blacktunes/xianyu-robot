@@ -1,11 +1,11 @@
-import { CQCode } from '..'
+import { blue, cyan, gray, green, magenta, red, yellow } from 'colors'
+import { decode } from './Tools'
 import moment = require('moment')
-import colors = require('colors')
 
 /**
  * 日志级别常量
  */
-export enum Log {
+export enum LogColor {
   /**
    * 级别：调试
    * 颜色：灰色
@@ -52,33 +52,33 @@ export enum Log {
    */
 }
 
-class LOG {
-  private printLog(msg: string, level: Log = 0) {
+export class Log {
+  private printLog(msg: string, level: LogColor = 0) {
     const time = moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
     switch (level) {
-      case Log.DEBUG:
-        console.log(time, '->', colors.gray(msg))
+      case LogColor.DEBUG:
+        console.log(time, '->', gray(msg))
         break
-      case Log.INFO:
+      case LogColor.INFO:
         console.log(time, '->', msg)
         break
-      case Log.INFO_NOTICE:
-        console.log(time, '->', colors.cyan(msg))
+      case LogColor.INFO_NOTICE:
+        console.log(time, '->', cyan(msg))
         break
-      case Log.INFO_RECV:
-        console.log(time, '->', colors.blue(msg))
+      case LogColor.INFO_RECV:
+        console.log(time, '->', blue(msg))
         break
-      case Log.INFO_SEND:
-        console.log(time, '->', colors.green(msg))
+      case LogColor.INFO_SEND:
+        console.log(time, '->', green(msg))
         break
-      case Log.WARNING:
-        console.warn(time, '->', colors.yellow(msg))
+      case LogColor.WARNING:
+        console.warn(time, '->', yellow(msg))
         break
-      case Log.ERROR:
-        console.error(time, '->', colors.red(msg))
+      case LogColor.ERROR:
+        console.error(time, '->', red(msg))
         break
-      case Log.FATAL:
-        console.error(time, '->', colors.magenta(msg))
+      case LogColor.FATAL:
+        console.error(time, '->', magenta(msg))
         break
     }
   }
@@ -89,8 +89,8 @@ class LOG {
    * @param {string} type
    * @param {string} content
    */
-  sendLog(level: Log, content: string, type?: string) {
-    this.printLog(`${type ? `[${type}]` : '[日志]'} ${CQCode.decode(content)}`, level)
+  sendLog(level: LogColor, content: string, type?: string) {
+    this.printLog(`${type ? `[${type}]` : '[日志]'} ${decode(content)}`, level)
   }
 
   /**
@@ -99,7 +99,7 @@ class LOG {
    * @param {string} content
    */
   logDebug(content: string, type: string = 'DEBUG') {
-    this.sendLog(Log.DEBUG, content, type)
+    this.sendLog(LogColor.DEBUG, content, type)
   }
 
   /**
@@ -108,7 +108,7 @@ class LOG {
    * @param {string} content
    */
   logInfo(content: string, type?: string) {
-    this.sendLog(Log.INFO, content, type)
+    this.sendLog(LogColor.INFO, content, type)
   }
 
   /**
@@ -117,7 +117,7 @@ class LOG {
    * @param {string} content
    */
   logInfoRecv(content: string, type?: string) {
-    this.sendLog(Log.INFO_RECV, content, type)
+    this.sendLog(LogColor.INFO_RECV, content, type)
   }
 
   /**
@@ -126,7 +126,7 @@ class LOG {
    * @param {string} content
    */
   logInfoSend(content: string, type?: string) {
-    this.sendLog(Log.INFO_SEND, content, type)
+    this.sendLog(LogColor.INFO_SEND, content, type)
   }
 
   /**
@@ -135,7 +135,7 @@ class LOG {
    * @param {string} content
    */
   logNotice(content: string, type?: string) {
-    this.sendLog(Log.INFO_NOTICE, content, type)
+    this.sendLog(LogColor.INFO_NOTICE, content, type)
   }
 
   /**
@@ -144,7 +144,7 @@ class LOG {
    * @param {string} content
    */
   logWarning(content: string, type?: string) {
-    this.sendLog(Log.WARNING, content, type)
+    this.sendLog(LogColor.WARNING, content, type)
   }
 
   /**
@@ -153,7 +153,7 @@ class LOG {
    * @param {string} content
    */
   logError(content: string, type?: string) {
-    this.sendLog(Log.ERROR, content, type)
+    this.sendLog(LogColor.ERROR, content, type)
   }
 
   /**
@@ -162,8 +162,8 @@ class LOG {
    * @param {string} content
    */
   logFatal(content: string, type?: string) {
-    this.sendLog(Log.FATAL, content, type)
+    this.sendLog(LogColor.FATAL, content, type)
   }
 }
 
-export const PrintLog = new LOG()
+export const PrintLog = new Log()

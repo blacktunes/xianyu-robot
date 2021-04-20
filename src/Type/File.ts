@@ -1,4 +1,4 @@
-export class ImageInfo {
+export interface ImageInfo {
   /**
    * 图片源文件大小
    */
@@ -30,4 +30,19 @@ export interface GroupFile {
    * busid（目前不清楚有什么作用）
    */
   busid: number
+}
+
+export interface File {
+  /**
+   * 文件名
+   */
+  name: string
+  /**
+   * 文件大小
+   */
+  size: number
+  /**
+   * 下载链接
+   */
+  url: string
 }

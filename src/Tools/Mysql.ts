@@ -1,8 +1,8 @@
-import mysql = require('mysql')
+import { createPool, Pool, PoolConfig } from 'mysql'
 
 export class Mysql {
-  constructor(config: mysql.PoolConfig) {
-    this.Pool = mysql.createPool({
+  constructor(config: PoolConfig) {
+    this.Pool = createPool({
       // 允许多条查询
       multipleStatements: true,
       charset: 'utf8mb4',
@@ -10,7 +10,7 @@ export class Mysql {
     })
   }
 
-  Pool: mysql.Pool = null
+  Pool: Pool = null
 
   /**
    * 查询语句

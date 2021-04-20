@@ -1,37 +1,84 @@
 import { magenta, white, yellow } from 'colors'
-import { GroupMsg, Prevent, PrintLog, PrivateMsg } from '../..'
-import { Bot } from '../Bot'
+import { GroupMsg, Prevent, PrintLog, PrivateMsg } from '..'
+import { Bot } from '../Bot/Bot'
+import { Comm } from '../Bot/modules/Command'
 import NamedRegExp = require('named-regexp-groups')
 
 export class Command {
-  constructor(Bot: Bot) {
+  constructor(group: string, Bot: Bot) {
+    this.group = group
     this.Bot = Bot
   }
   private Bot: Bot
+  private group: string
+
+  private _whitelist: Set<number> = new Set<number>()
+  set whitelist(list: number[]) {
+    this._whitelist = new Set(([...this._whitelist, ...list]))
+    this.Bot.Command.list.forEach(item => {
+      if (item.group === this.group) {
+        item.whitelist = new Set([...this._whitelist, ...item.whitelist])
+      }
+    })
+  }
+  private _blacklist: Set<number> = new Set<number>()
+  set blacklist(list: number[]) {
+    this._blacklist = new Set(([...this._blacklist, ...list]))
+    this.Bot.Command.list.forEach(item => {
+      if (item.group === this.group) {
+        item.blacklist = new Set([...this._blacklist, ...item.blacklist])
+      }
+    })
+  }
+
   /**
-   * 命令列表
+   * 为插件指令增加白名单列表，请勿和黑名单同时使用
    */
-  list: Comm[] = []
+  white(list: number[]) {
+    if (list.length < 1) return this
+    if (this._blacklist.size > 0) {
+      PrintLog.logWarning(`${magenta(this.group)} 已设置黑名单，该白名单${magenta(list.toString())}设置无效`, 'Admin')
+      return this
+    }
+    this.whitelist = list
+    return this
+  }
+  /**
+   * 为插件指令增加黑名单列表，请勿和白名单同时使用
+   */
+  black(list: number[]) {
+    if (list.length < 1) return this
+    if (this._whitelist.size > 0) {
+      PrintLog.logWarning(`${magenta(this.group)} 已设置白名单，该黑名单 ${magenta(list.toString())} 设置无效`, 'Admin')
+      return this
+    }
+    this.blacklist = list
+    return this
+  }
 
   /**
    * 增加命令
    */
-  command(name: string) {
-    const repeat = this.list.some(item => {
+  command = (name: string) => {
+    const repeat = this.Bot.Command.list.some(item => {
       return item.comm === name
     })
     if (repeat) {
-      PrintLog.logWarning(`发现重复指令 ${white(name)}`, '指令')
+      this.Bot.Log.logWarning(`发现重复指令 ${white(name)}`, '指令')
     }
 
     const comm = new Comm(name)
-    this.list.push(comm)
+    comm.group = this.group
+    comm.whitelist = this._whitelist
+    comm.blacklist = this._blacklist
+    this.Bot.Command.list.push(comm)
+
     this.Bot.Event.on('message.group', async e => {
       if (comm.fn.group.length < 1) return
       if (comm.admin && !this.Bot.Admin.isAdmin(e.sender.user_id)) return
       if ((comm.blacklist.size > 0 && comm.blacklist.has(e.group_id)) || (comm.whitelist.size > 0 && !comm.whitelist.has(e.group_id))) return
       if ((comm.reg && !comm.reg.test(e.message)) || (!comm.reg && e.message !== comm.comm)) return
-      PrintLog.logNotice(`群${white(this.Bot.Data.groupList[e.group_id] || '')}(${white(e.group_id.toString())}) - ${white(e.sender.card || e.sender.nickname)}(${white(e.user_id.toString())})触发${yellow(comm.comm)}指令`, '指令')
+      this.Bot.Log.logNotice(`群${white(this.Bot.Data.groupList[e.group_id] || '')}(${white(e.group_id.toString())}) - ${white(e.sender.card || e.sender.nickname)}(${white(e.user_id.toString())})触发${yellow(comm.comm)}指令`, '指令')
       for (const i in comm.fn.group) {
         if (await comm.fn.group[i](e)) return true
       }
@@ -41,12 +88,12 @@ export class Command {
       if (comm.admin && !this.Bot.Admin.isAdmin(e.sender.user_id)) return
       if ((comm.blacklist.size > 0 && comm.blacklist.has(e.sender.user_id)) || (comm.whitelist.size > 0 && !comm.whitelist.has(e.sender.user_id))) return
       if ((comm.reg && !comm.reg.test(e.message)) || (!comm.reg && e.message !== comm.comm)) return
-      PrintLog.logNotice(`${white(e.sender.nickname)}(${white(e.user_id.toString())})触发${yellow(comm.comm)}指令`, '指令')
+      this.Bot.Log.logNotice(`${white(e.sender.nickname)}(${white(e.user_id.toString())})触发${yellow(comm.comm)}指令`, '指令')
       for (const i in comm.fn.private) {
         if (await comm.fn.private[i](e)) return true
       }
     })
-    PrintLog.logNotice(`${comm.group ? `${yellow(comm.group)} - ` : ''}${yellow(name)} 已加载`, '指令')
+    this.Bot.Log.logNotice(`${yellow(this.group)} - ${yellow(name)} 已加载`, '指令')
 
     return new class {
       /**
@@ -73,13 +120,6 @@ export class Command {
         return this
       }
       /**
-       * 设置命令分类
-       */
-      group(name: string) {
-        comm.group = name
-        return this
-      }
-      /**
        * 增加命令处理方法，可添加多个
        */
       action(type: 'private', fn: (e: PrivateMsg) => Prevent): this
@@ -99,7 +139,7 @@ export class Command {
       white(list: number[]) {
         if (repeat || list.length < 1) return this
         if (comm.blacklist.size > 0) {
-          PrintLog.logWarning(`${magenta(comm.comm)} 已设置黑名单，该白名单 ${magenta(list.toString())} 设置无效`, '插件')
+          PrintLog.logWarning(`${magenta(comm.comm)} 已设置黑名单，该白名单 ${magenta(list.toString())} 设置无效`, 'Admin')
           return this
         }
         comm.whitelist = new Set(([...comm.whitelist, ...list]))
@@ -111,7 +151,7 @@ export class Command {
       black(list: number[]) {
         if (repeat || list.length < 1) return this
         if (comm.whitelist.size > 0) {
-          PrintLog.logWarning(`${magenta(comm.comm)} 已设置白名单，该黑名单 ${magenta(list.toString())} 设置无效`, '插件')
+          PrintLog.logWarning(`${magenta(comm.comm)} 已设置白名单，该黑名单 ${magenta(list.toString())} 设置无效`, 'Admin')
           return this
         }
         comm.blacklist = new Set(([...comm.blacklist, ...list]))
@@ -119,24 +159,4 @@ export class Command {
       }
     }
   }
-}
-
-export class Comm {
-  constructor(name: string) {
-    this.comm = name
-  }
-  comm: string
-  reg: RegExp | NamedRegExp
-  admin: boolean = false
-  desc: string = '暂无描述'
-  group: string
-  fn: {
-    group: ((e: GroupMsg) => Prevent)[]
-    private: ((e: PrivateMsg) => Prevent)[]
-  } = {
-      group: [],
-      private: []
-    }
-  whitelist: Set<number> = new Set<number>()
-  blacklist: Set<number> = new Set<number>()
 }

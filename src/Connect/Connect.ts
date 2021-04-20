@@ -1,8 +1,8 @@
+import { white } from 'colors'
 import { w3cwebsocket } from 'websocket'
-import { ApiRes, BotEvent, Prevent, WSOption } from '..'
-import { PrintLog } from '../Tools/PrintLog'
-import { CQCode } from './../Tools/CQCode'
-import { GroupMsg, PrivateMsg } from './../Type/Event'
+import { ApiRes, Prevent, WebSocketConfig } from '..'
+import { decode, PrintLog } from '../Tools'
+import { GroupMsg, PrivateMsg } from '../Type'
 
 type MessageEvent = { type: string, fn: (data: any) => Prevent }
 
@@ -15,9 +15,7 @@ interface NextMessageEvent {
 }
 
 export class Connect {
-  constructor(whitelist: number[], blacklist: number[], option?: WSOption) {
-    this.whitelist = whitelist
-    this.blacklist = blacklist
+  constructor(option?: WebSocketConfig) {
     if (option) {
       for (const key in option) {
         this[key] = option[key]
@@ -33,18 +31,21 @@ export class Connect {
   private reconnection = true
   private reconnectionAttempts = 1000
   private reconnectionDelay = 1000
-  private timeout = 120000
+  // private timeout = 120000
 
   private ready: () => void
 
   private connectTimes = 0
-  private messageID = 1
+  private _messageID = 1
+  private get messageID(): number {
+    return this._messageID++
+  }
   private nextMessageID = 1
 
-  private whitelist: number[] = []
-  private blacklist: number[] = []
+  whitelist: Set<number> = new Set<number>()
+  blacklist: Set<number> = new Set<number>()
 
-  private setNextMessage = (data: PrivateMsg | GroupMsg, event: MessageEvent & { uid: number } | NextMessageEvent) => {
+  private setNextMessage = (data: PrivateMsg | GroupMsg, event: MessageEvent | NextMessageEvent) => {
     return (fn: (msg: string, event: any, prevEvent: any) => Prevent) => {
       const id = this.nextMessageID
       ++this.nextMessageID
@@ -60,6 +61,38 @@ export class Connect {
         }
       }
     }
+  }
+
+  private handleMessage = async (data: any) => {
+    for (const event of this.messageLogEvent) {
+      if (event.type === `message.${data.message_type}`) {
+        if (await event.fn(data)) return
+      }
+    }
+    for (const i in this.nextMessageEventList) {
+      data.nextMessage = this.setNextMessage(data, this.nextMessageEventList[i])
+      if (this.nextMessageEventList[i].type === 'message.private') {
+        if (this.nextMessageEventList[i].user_id === data.sender.user_id) {
+          await this.nextMessageEventList[i].fn(data)
+          return
+        }
+      } else if (this.nextMessageEventList[i].type === 'message.group') {
+        if (this.nextMessageEventList[i].user_id === data.sender.user_id && this.nextMessageEventList[i].group_id === data.group_id) {
+          await this.nextMessageEventList[i].fn(data)
+          return
+        }
+      }
+    }
+    for (const event of this.messageEventList.message) {
+      if (event.type === `message.${data.message_type}`) {
+        data.nextMessage = this.setNextMessage(data, event)
+        if (await event.fn(data)) break
+      }
+    }
+  }
+
+  private isSkip = (group_id: number) => {
+    return (this.whitelist.size > 0 && !this.whitelist.has(group_id)) || (this.blacklist.size > 0 && this.blacklist.has(group_id))
   }
 
   private connect = () => {
@@ -98,39 +131,11 @@ export class Connect {
       }
     }
     this.client.onmessage = async (message) => {
-      const data = JSON.parse(CQCode.decode((JSON.stringify(JSON.parse(message.data.toString())))))
-      if (data.group_id) {
-        if ((this.whitelist.length > 0 && !this.whitelist.includes(data.group_id)) || (this.blacklist.length > 0 && this.blacklist.includes(data.group_id))) {
-          return
-        }
-      }
+      const data = JSON.parse(decode((JSON.stringify(JSON.parse(message.data.toString())))))
+      if (data.group_id && this.isSkip(data.group_id)) return
       if (data.post_type) {
         if (data.post_type === 'message') {
-          for (const event of this.messageLogEvent) {
-            if (event.type === `message.${data.message_type}`) {
-              if (await event.fn(data)) return
-            }
-          }
-          for (const i in this.nextMessageEventList) {
-            data.nextMessage = this.setNextMessage(data, this.nextMessageEventList[i])
-            if (this.nextMessageEventList[i].type === 'message.private') {
-              if (this.nextMessageEventList[i].user_id === data.sender.user_id) {
-                await this.nextMessageEventList[i].fn(data)
-                return
-              }
-            } else if (this.nextMessageEventList[i].type === 'message.group') {
-              if (this.nextMessageEventList[i].user_id === data.sender.user_id && this.nextMessageEventList[i].group_id === data.group_id) {
-                await this.nextMessageEventList[i].fn(data)
-                return
-              }
-            }
-          }
-          for (const event of this.messageEventList.message) {
-            if (event.type === `message.${data.message_type}`) {
-              data.nextMessage = this.setNextMessage(data, event)
-              if (await event.fn(data)) break
-            }
-          }
+          this.handleMessage(data)
         } else if (data.post_type === 'notice') {
           for (const event of this.messageEventList.notice) {
             if (event.type === `notice.${data.notice_type}`) {
@@ -183,7 +188,7 @@ export class Connect {
   private errorEventList: ((error: Error) => void)[] = []
   private closeEventList: (() => void)[] = []
   private messageEventList: {
-    message: (MessageEvent & { uid: number })[]
+    message: MessageEvent[]
     notice: MessageEvent[]
     request: MessageEvent[]
     meta_event: MessageEvent[]
@@ -202,10 +207,10 @@ export class Connect {
 
   /**
    * 增加事件监听
-   * message消息可填入uid控制消息顺序，uid为0时为log事件，有最高优先度
+   * message消息的log参数true时有最高优先度，同时用于控制被Ban拦截
    * 推荐使用Event类中的方法
    */
-  readonly addEvent = (type: BotEvent, fn: (e?: any) => Prevent, uid?: number) => {
+  addEvent(type: string, fn: (e?: any) => Prevent, log?: boolean) {
     if (type === 'ws.ready') {
       this.ready = fn
     } else if (type === 'ws.connect') {
@@ -215,26 +220,15 @@ export class Connect {
     } else if (type === 'ws.close') {
       this.closeEventList.push(fn)
     } else if (type.startsWith('message.')) {
-      if (uid === 0) {
+      if (log) {
         this.messageLogEvent.push({
           type,
           fn
         })
       } else {
-        if (!uid) {
-          if (this.messageEventList.message.length > 0 && this.messageEventList.message[this.messageEventList.message.length - 1].uid) {
-            uid = this.messageEventList.message[this.messageEventList.message.length - 1].uid + 1
-          } else {
-            uid = 1
-          }
-        }
         this.messageEventList.message.push({
           type,
-          fn,
-          uid: uid
-        })
-        this.messageEventList.message.sort((a, b) => {
-          return a.uid - b.uid
+          fn
         })
       }
     } else if (type.startsWith('notice.')) {
@@ -286,7 +280,7 @@ export class Connect {
   /**
    * 获取消息监听器数量
    */
-  readonly getEventNum = () => {
+  getEventNum() {
     return this.messageEventList.message.length
   }
 
@@ -294,7 +288,7 @@ export class Connect {
   /**
    * 获取队列中未完成的消息数量
    */
-  readonly getMessageNum = () => {
+  getMessageNum() {
     return this.APIList.size
   }
 
@@ -302,23 +296,29 @@ export class Connect {
    * 使用HTTP API
    * 推荐使用API类中的方法
    */
-  readonly useAPI = async (apiName: string, params?: any): Promise<ApiRes> => {
+  async useAPI(apiName: string, params?: any, errorLog: boolean = true): Promise<ApiRes> {
     if (this.isConnect()) {
       const id = this.messageID
-      ++this.messageID
       this.client.send(JSON.stringify({
         action: apiName,
         params,
         echo: id
       }))
-      return await this.getRes(id)
+      const res = await this.getRes(id)
+      if (errorLog && res.status !== 'ok') {
+        PrintLog.logError(`${white(apiName)} 调用失败 recode: ${white(res.retcode.toString())} msg: ${white(res.msg || '未知错误')}`, 'WS')
+      }
+      return res
     } else {
-      PrintLog.logError('WebSocket连接还未建立，无法调用http-api', 'WS')
-      return { retcode: 404, status: 'failed', msg: 'websocket尚未链接' }
+      PrintLog.logError(`WebSocket连接还未建立，无法调用 ${white(apiName)}`, 'WS')
+      return { retcode: 500, status: 'failed', msg: 'WebSocket尚未链接' }
     }
   }
 
-  readonly isConnect = () => {
+  /**
+   * WebSocket收否已经连接
+   */
+  isConnect() {
     if (this.client) {
       return this.client.readyState === this.client.OPEN
     } else {
@@ -330,62 +330,57 @@ export class Connect {
    * 可以用于群消息相功能的简单测试
    */
   async groupMsgTest(msg: string, user_id: number = 1, group_id: number = 1) {
-    for (const event of this.messageEventList.message) {
-      if (event.type === 'message.group') {
-        if (await event.fn({
-          time: Date.now(),
-          self_id: 0,
-          post_type: 'message',
-          message_type: 'group',
-          sub_type: 'normal',
-          message_id: 1,
-          group_id: group_id,
-          user_id: user_id,
-          anonymous: null,
-          message: msg,
-          raw_message: msg,
-          font: 0,
-          sender: {
-            user_id: user_id,
-            nickname: 'test',
-            card: '',
-            sex: 'unknown',
-            age: 0,
-            area: '',
-            level: '',
-            role: 'member',
-            title: ''
-          }
-        })) break
+    if (this.isSkip(group_id)) return
+    const test = {
+      time: Date.now(),
+      self_id: 0,
+      post_type: 'message',
+      message_type: 'group',
+      sub_type: 'normal',
+      message_id: 1,
+      group_id: group_id,
+      user_id: user_id,
+      anonymous: null,
+      message: msg,
+      raw_message: msg,
+      font: 0,
+      sender: {
+        user_id: user_id,
+        nickname: 'test',
+        card: '',
+        sex: 'unknown',
+        age: 0,
+        area: '',
+        level: '',
+        role: 'member',
+        title: ''
       }
     }
+    this.handleMessage(test)
   }
 
   /**
    * 可以用于私聊消息相功能的简单测试
    */
   async privateMsgTest(msg: string, user_id: number = 1) {
-    for (const event of this.messageEventList.message) {
-      if (event.type === 'message.private') {
-        if (await event.fn({
-          time: Date.now(),
-          self_id: 0,
-          post_type: 'message',
-          message_type: 'private',
-          sub_type: 'friend',
-          message_id: 1,
-          user_id: user_id,
-          message: msg,
-          raw_message: msg,
-          font: 0,
-          sender: {
-            user_id: user_id,
-            nickname: 'test',
-            sex: 'unknown',
-            age: 0
-          }
-        })) break
+    const test = {
+      time: Date.now(),
+      self_id: 0,
+      post_type: 'message',
+      message_type: 'private',
+      sub_type: 'friend',
+      message_id: 1,
+      user_id: user_id,
+      message: msg,
+      raw_message: msg,
+      font: 0,
+      sender: {
+        user_id: user_id,
+        nickname: 'test',
+        sex: 'unknown',
+        age: 0
       }
     }
+    this.handleMessage(test)
   }
 }
