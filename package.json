@@ -11,8 +11,6 @@
     "push": "npm run build && npm publish",
     "lint": "eslint src --ext .ts",
     "changelog": "conventional-changelog -p cmyr-config -i CHANGELOG.md -s -r 0",
-    "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
   },
   "author": "Blacktunes",
   "license": "GPL-3.0",
@@ -50,8 +48,6 @@
     "rimraf": "^3.0.2",
     "semantic-release": "^17.3.0",
     "ts-node": "^8.10.2",
-    "typescript": "^3.9.6",
-    "vuepress": "^1.8.2"
   },
   "dependencies": {
     "colors": "^1.4.0",
