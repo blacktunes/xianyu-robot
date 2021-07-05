@@ -1,5 +1,12 @@
 # Xianyu-robot(咸鱼王)
 
+# [4.13.0](https://github.com/blacktunes/xianyu-robot/compare/v4.12.0...v4.13.0) (2021-07-05)
+
+
+### ✨ 新功能
+
+* 添加插件指令管理方法 ([244f685](https://github.com/blacktunes/xianyu-robot/commit/244f685))
+
 # [4.12.0](https://github.com/blacktunes/xianyu-robot/compare/v4.11.0...v4.12.0) (2021-07-05)
 
 
