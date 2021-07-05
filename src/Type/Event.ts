@@ -7,7 +7,7 @@ export type PrivateMsg = _PrivateMsg & {
 }
 
 // eslint-disable-next-line typescript/class-name-casing
-interface _PrivateMsg {
+export interface _PrivateMsg {
   /**
    * 事件发生的时间戳
    */
@@ -78,7 +78,7 @@ export type GroupMsg = _GroupMsg & {
 }
 
 // eslint-disable-next-line typescript/class-name-casing
-interface _GroupMsg {
+export interface _GroupMsg {
   /**
    * 事件发生的时间戳
    */

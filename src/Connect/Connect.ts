@@ -2,7 +2,7 @@ import { white } from 'colors'
 import { w3cwebsocket } from 'websocket'
 import { ApiRes, Prevent, WebSocketConfig } from '..'
 import { decode, PrintLog } from '../Tools'
-import { GroupMsg, PrivateMsg } from '../Type'
+import { GroupMsg, PrivateMsg, _GroupMsg, _PrivateMsg } from '../Type'
 
 type MessageEvent = { type: string, fn: (data: any) => Prevent }
 
