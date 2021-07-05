@@ -54,6 +54,9 @@ export enum LogColor {
 
 export class Log {
   private printLog(msg: string, level: LogColor = 0) {
+    if (msg.length > 500) {
+      msg = msg.slice(0, 500) + '...'
+    }
     const time = moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
     switch (level) {
       case LogColor.DEBUG:
