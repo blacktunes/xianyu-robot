@@ -30,8 +30,8 @@ export class Api {
    * @returns {Promise<number>} 成功返回message_id，失败返回retcode(100)
    */
   async sendPrivateMsg(user_id: number, message: Message, auto_escape: boolean = false): Promise<number> {
-    if (this.Bot.Data.debug) {
       this.Bot.Log.logDebug(`发送消息至(${user_id}): ${JSON.stringify(message)}`)
+    if (this.Bot.Debug.debug) {
       return 0
     }
 
@@ -62,8 +62,8 @@ export class Api {
    * @returns 成功返回message_id，失败返回retcode(100)
    */
   async sendGroupMsg(group_id: number, message: Message, auto_escape: boolean = false): Promise<number> {
-    if (this.Bot.Data.debug) {
       this.Bot.Log.logDebug(`发送消息至群(${group_id}): ${JSON.stringify(message)}`)
+    if (this.Bot.Debug.debug) {
       return 0
     }
 
@@ -92,7 +92,7 @@ export class Api {
    * @param messages 自定义转发消息
    */
   async sendGroupForwardMsg(group_id: number, messages: NodeMessage[]): Promise<number> {
-    if (this.Bot.Data.debug) {
+    if (this.Bot.Debug.debug) {
       this.Bot.Log.logDebug(`发送合并转发至群(${group_id})`)
       return 0
     }
@@ -118,7 +118,7 @@ export class Api {
    * @param message_id 消息 ID
    */
   deleteMsg(message_id: number): void {
-    if (this.Bot.Data.debug) {
+    if (this.Bot.Debug.debug) {
       this.Bot.Log.logDebug(`撤回信息 (${message_id})`)
     }
 
@@ -134,7 +134,7 @@ export class Api {
    * @param message_id 消息 ID
    */
   async getMsg(message_id: number): Promise<Msg | undefined> {
-    if (this.Bot.Data.debug) {
+    if (this.Bot.Debug.debug) {
       this.Bot.Log.logDebug(`获取消息 (${message_id})`)
       return {
         message_id: 1,
@@ -173,7 +173,7 @@ export class Api {
    * @param message_id 消息 ID
    */
   async getForwardMsg(message_id: number): Promise<Message[] | undefined> {
-    if (this.Bot.Data.debug) {
+    if (this.Bot.Debug.debug) {
       this.Bot.Log.logDebug(`获取合并转发内容 ${message_id}`)
       return []
     }
@@ -195,7 +195,7 @@ export class Api {
    * @param file 图片缓存文件名
    */
   async getImage(file: string): Promise<ImageInfo | undefined> {
-    if (this.Bot.Data.debug) {
+    if (this.Bot.Debug.debug) {
       this.Bot.Log.logDebug(`获取图片信息 (${file})`)
       return {
         size: 0,
@@ -223,7 +223,7 @@ export class Api {
    * @param reject_add_request 拒绝此人的加群请求
    */
   setGroupKick(group_id: number, user_id: number, reject_add_request = false): void {
-    if (this.Bot.Data.debug) {
+    if (this.Bot.Debug.debug) {
       this.Bot.Log.logDebug(`将 (${group_id}) - (${user_id}) 移出群聊`)
     }
 
@@ -246,7 +246,7 @@ export class Api {
    * @param duration 禁言时长，单位秒，0 表示取消禁言
    */
   setGroupBan(group_id: number, user_id: number, duration = 60 * 30): void {
-    if (this.Bot.Data.debug) {
+    if (this.Bot.Debug.debug) {
       this.Bot.Log.logDebug(`${duration === 0 ? '解除' : '禁言'} (${group_id}) - (${user_id}) ${duration === 0 ? '禁言' : `${duration.toString()}秒`}`)
     }
 
@@ -269,7 +269,7 @@ export class Api {
    * @param duration 禁言时长, 单位秒, 无法取消匿名用户禁言
    */
   setGroupAnonymousBan(group_id: number, anonymous_flag: string, duration: number = 30 * 60): void {
-    if (this.Bot.Data.debug) {
+    if (this.Bot.Debug.debug) {
       this.Bot.Log.logDebug(`禁言 (${group_id}) - 匿名用户 ${duration}秒`)
     }
 
@@ -290,7 +290,7 @@ export class Api {
    * @param enable 是否禁言
    */
   setGroupWholeBan(group_id: number, enable = true): void {
-    if (this.Bot.Data.debug) {
+    if (this.Bot.Debug.debug) {
       this.Bot.Log.logDebug(`${enable ? '设置' : '解除'}群 (${group_id}) 禁言`)
     }
 
@@ -311,7 +311,7 @@ export class Api {
    * @param enable true 为设置, false 为取消
    */
   setGroupAdmin(group_id: number, user_id: number, enable: boolean = true): void {
-    if (this.Bot.Data.debug) {
+    if (this.Bot.Debug.debug) {
       this.Bot.Log.logDebug(`${enable ? '设置' : '取消'}管理员 (${group_id}) - (${user_id})`)
     }
 
@@ -335,7 +335,7 @@ export class Api {
    * @param card 群名片内容，不填或空字符串表示删除群名片
    */
   setGroupCard(group_id: number, user_id: number, card: string): void {
-    if (this.Bot.Data.debug) {
+    if (this.Bot.Debug.debug) {
       this.Bot.Log.logDebug(`设置 (${group_id}) - (${user_id}) 群名片为 ${card || '空'}`)
     }
     this.Bot.Conn.useAPI('set_group_card', {
@@ -357,7 +357,7 @@ export class Api {
    * @param group_name 新群名
    */
   setGroupName(group_id: number, group_name: string): void {
-    if (this.Bot.Data.debug) {
+    if (this.Bot.Debug.debug) {
       this.Bot.Log.logDebug(`设置 (${group_id}) 群名为 ${group_name}`)
     }
 
@@ -377,7 +377,7 @@ export class Api {
    * @param is_dismiss 是否解散，如果登录号是群主，则仅在此项为 true 时能够解散
    */
   setGroupLeave(group_id: number, is_dismiss = false): void {
-    if (this.Bot.Data.debug) {
+    if (this.Bot.Debug.debug) {
       this.Bot.Log.logDebug(`${is_dismiss ? '解散' : '退出'}群组 (${group_id})`)
     }
 
@@ -399,7 +399,7 @@ export class Api {
    * @param duration 专属头衔有效期，单位秒，-1 表示永久，不过此项似乎没有效果，可能是只有某些特殊的时间长度有效，有待测试
    */
   setGroupSpecialTitle(group_id: number, user_id: number, special_title: string, duration: number = -1): void {
-    if (this.Bot.Data.debug) {
+    if (this.Bot.Debug.debug) {
       this.Bot.Log.logDebug(`设置 (${group_id}) - (${user_id}) 专属头衔为 ${special_title}`)
     }
 
@@ -423,7 +423,7 @@ export class Api {
    * @param remark 添加后的好友备注（仅在同意时有效）
    */
   setFriendAddRequest(flag: string, approve: boolean, remark: string): void {
-    if (this.Bot.Data.debug) {
+    if (this.Bot.Debug.debug) {
       this.Bot.Log.logDebug(`${approve ? '同意' : '拒绝'}好友请求`)
     }
     this.Bot.Conn.useAPI('set_friend_add_request', {
@@ -443,7 +443,7 @@ export class Api {
    * @param reason 拒绝理由（仅在拒绝时有效）
    */
   setGroupAddRequest(flag: string, sub_type: 'add' | 'invite', approve = true, reason: string): void {
-    if (this.Bot.Data.debug) {
+    if (this.Bot.Debug.debug) {
       this.Bot.Log.logDebug(`${approve ? '同意' : '拒绝'}加群${sub_type === 'invite' ? '邀请' : '请求'}`)
     }
     this.Bot.Conn.useAPI('set_group_add_request', {
@@ -469,7 +469,7 @@ export class Api {
      */
     nickname: string
   }> {
-    if (this.Bot.Data.debug) {
+    if (this.Bot.Debug.debug) {
       this.Bot.Log.logDebug('获取登录号信息')
       return {
         user_id: 1,
@@ -497,7 +497,7 @@ export class Api {
    * @param no_cache 是否不使用缓存（使用缓存可能更新不及时, 但响应更快）
    */
   async getStrangerInfo(user_id: number, no_cache: boolean = false): Promise<(PrivateSender & { qid?: number }) | undefined> {
-    if (this.Bot.Data.debug) {
+    if (this.Bot.Debug.debug) {
       this.Bot.Log.logDebug(`获取 (${user_id}) 信息`)
       return {
         user_id: 1,
@@ -524,7 +524,7 @@ export class Api {
    * 获取好友列表
    */
   async getFriendList(): Promise<QQInfo[]> {
-    if (this.Bot.Data.debug) {
+    if (this.Bot.Debug.debug) {
       this.Bot.Log.logDebug('获取好友列表')
       return []
     }
@@ -546,7 +546,7 @@ export class Api {
    * @param no_cache 是否不使用缓存（使用缓存可能更新不及时，但响应更快）
    */
   async getGroupInfo(group_id: number, no_cache = false): Promise<GroupInfo | undefined> {
-    if (this.Bot.Data.debug) {
+    if (this.Bot.Debug.debug) {
       this.Bot.Log.logDebug(`获取群 (${group_id}) 信息`)
       return {
         group_id: 1,
@@ -578,7 +578,7 @@ export class Api {
    * 获取群列表
    */
   async getGroupList(): Promise<GroupInfo[]> {
-    if (this.Bot.Data.debug) {
+    if (this.Bot.Debug.debug) {
       this.Bot.Log.logDebug('获取群列表')
       return []
     }
@@ -601,7 +601,7 @@ export class Api {
    * @param no_cache 是否不使用缓存（使用缓存可能更新不及时，但响应更快）
    */
   async getGroupMemberInfo(group_id: number, user_id: number, no_cache = false): Promise<MemberInfo | undefined> {
-    if (this.Bot.Data.debug) {
+    if (this.Bot.Debug.debug) {
       this.Bot.Log.logDebug(`获取群成员 (${group_id}) - (${user_id}) 信息`)
       return {
         group_id: 1,
@@ -644,7 +644,7 @@ export class Api {
    * @param group_id 群号
    */
   async getGroupMemberList(group_id: number): Promise<MemberInfo[]> {
-    if (this.Bot.Data.debug) {
+    if (this.Bot.Debug.debug) {
       this.Bot.Log.logDebug(`获取群 (${group_id}) 成员列表`)
       return []
     }
@@ -670,7 +670,7 @@ export class Api {
    * @param type 要获取的群荣誉类型, 可传入 talkative performer legend strong_newbie emotion 以分别获取单个类型的群荣誉数据, 或传入 all 获取所有数据
    */
   async getGroupHonorInfo<T extends HonorType>(group_id: number, type: T): Promise<(HonorInfo & HonorItem[T]) | undefined> {
-    if (this.Bot.Data.debug) {
+    if (this.Bot.Debug.debug) {
       const group = {
         group_id: 1
       }
@@ -735,7 +735,7 @@ export class Api {
    * 获取版本信息
    */
   async getVersionInfo(): Promise<VersionInfo | undefined> {
-    if (this.Bot.Data.debug) {
+    if (this.Bot.Debug.debug) {
       this.Bot.Log.logDebug('获取版本信息')
     }
 
@@ -753,7 +753,7 @@ export class Api {
    * 获取运行状态
    */
   async getStatus(): Promise<Status | undefined> {
-    if (this.Bot.Data.debug) {
+    if (this.Bot.Debug.debug) {
       this.Bot.Log.logDebug('获取运行状态')
     }
 
@@ -785,7 +785,7 @@ export class Api {
      */
     remain_at_all_count_for_uin: number
   } | undefined> {
-    if (this.Bot.Data.debug) {
+    if (this.Bot.Debug.debug) {
       this.Bot.Log.logDebug(`获取群 (${group_id}) @全体成员 剩余次数`)
     }
 
@@ -809,7 +809,7 @@ export class Api {
    * @param no_cache 是否无视缓存
    */
   async getOnlineClients(no_cache: boolean = false): Promise<{ clients: Device[] }> {
-    if (this.Bot.Data.debug) {
+    if (this.Bot.Debug.debug) {
       this.Bot.Log.logDebug('获取当前账号在线客户端列表')
       return { clients: [] }
     }
@@ -833,7 +833,7 @@ export class Api {
    * @param message_seq 起始消息序号, 可通过 get_msg 获得
    */
   async getGroupMsgHistory(group_id: number, message_seq?: number): Promise<{ messages: Message[] }> {
-    if (this.Bot.Data.debug) {
+    if (this.Bot.Debug.debug) {
       this.Bot.Log.logDebug('获取群消息历史记录')
       return { messages: [] }
     }
@@ -859,7 +859,7 @@ export class Api {
    * @param message_id 消息ID
    */
   setEssenceMsg(message_id: number): void {
-    if (this.Bot.Data.debug) {
+    if (this.Bot.Debug.debug) {
       this.Bot.Log.logDebug(`设置 (${message_id}) 为精华消息`)
     }
 
@@ -875,7 +875,7 @@ export class Api {
    * @param message_id 消息ID
    */
   deleteEssenceMsg(message_id: number): void {
-    if (this.Bot.Data.debug) {
+    if (this.Bot.Debug.debug) {
       this.Bot.Log.logDebug(`取消 (${message_id}) 精华消息`)
     }
 
@@ -891,7 +891,7 @@ export class Api {
    * @param group_id 群号
    */
   async getEssenceMsgList(group_id: number): Promise<EssenceMsg[]> {
-    if (this.Bot.Data.debug) {
+    if (this.Bot.Debug.debug) {
       this.Bot.Log.logDebug(`获取群 (${group_id}) 精华消息列表`)
       return []
     }
@@ -917,7 +917,7 @@ export class Api {
    * @param url 需要检查的链接
    */
   async checkUrlSafely(url: string): Promise<{ level: 1 | 2 | 3 }> {
-    if (this.Bot.Data.debug) {
+    if (this.Bot.Debug.debug) {
       this.Bot.Log.logDebug(`检查 (${url}) 安全性`)
       return { level: 2 }
     }

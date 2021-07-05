@@ -152,7 +152,7 @@ export class App {
       this.Bot.Admin.addBlacklist([...this.blacklist])
 
       this.Bot.Conn.addEvent('ws.ready', async () => {
-        this.Bot.Data.debug = debug
+        this.Bot.Debug.debug = debug
         this.Bot.Api = new Api(this.Bot)
         this.Bot.Data.userId = (await this.Bot.Api.getLoginInfo()).user_id
         this.getData()
@@ -271,7 +271,7 @@ export class App {
     }
 
     await this.initPlugin()
-    if (!this.Bot.Data.debug) {
+    if (!this.Bot.Debug.debug) {
       this.Bot.Plugin.saveConfig()
     }
   }

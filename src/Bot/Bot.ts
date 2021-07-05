@@ -5,6 +5,7 @@ import { Admin } from './modules/Admin'
 import { Api } from './modules/Api'
 import { Command } from './modules/Command'
 import { Data } from './modules/Data'
+import { Debug } from './modules/Debug'
 import { Event } from './modules/Event'
 import { Plugin } from './modules/Plugin'
 
@@ -14,6 +15,7 @@ export class Bot {
     this.Plugin = new Plugin(this, dirname)
     this.Admin = new Admin(this)
     this.Command = new Command(this)
+    this.Debug = new Debug(this)
   }
   /**
    * Bot的部分属性
@@ -51,4 +53,8 @@ export class Bot {
    * 消息事件
    */
   Event: Event
+  /**
+   * 测试类
+   */
+  Debug: Debug
 }

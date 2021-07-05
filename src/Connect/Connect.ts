@@ -326,61 +326,8 @@ export class Connect {
     }
   }
 
-  /**
-   * 可以用于群消息相功能的简单测试
-   */
-  async groupMsgTest(msg: string, user_id: number = 1, group_id: number = 1) {
-    if (this.isSkip(group_id)) return
-    const test = {
-      time: Date.now(),
-      self_id: 0,
-      post_type: 'message',
-      message_type: 'group',
-      sub_type: 'normal',
-      message_id: 1,
-      group_id: group_id,
-      user_id: user_id,
-      anonymous: null,
-      message: msg,
-      raw_message: msg,
-      font: 0,
-      sender: {
-        user_id: user_id,
-        nickname: 'test',
-        card: '',
-        sex: 'unknown',
-        age: 0,
-        area: '',
-        level: '',
-        role: 'member',
-        title: ''
-      }
-    }
-    this.handleMessage(test)
-  }
-
-  /**
-   * 可以用于私聊消息相功能的简单测试
-   */
-  async privateMsgTest(msg: string, user_id: number = 1) {
-    const test = {
-      time: Date.now(),
-      self_id: 0,
-      post_type: 'message',
-      message_type: 'private',
-      sub_type: 'friend',
-      message_id: 1,
-      user_id: user_id,
-      message: msg,
-      raw_message: msg,
-      font: 0,
-      sender: {
-        user_id: user_id,
-        nickname: 'test',
-        sex: 'unknown',
-        age: 0
-      }
-    }
-    this.handleMessage(test)
+  eventTest = (data: _PrivateMsg | _GroupMsg): void => {
+    if (data['group_id'] && this.isSkip(data['group_id'])) return
+    this.handleMessage(data)
   }
 }
