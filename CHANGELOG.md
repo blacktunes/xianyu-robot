@@ -1,5 +1,24 @@
 # Xianyu-robot(咸鱼王)
 
+# [4.12.0](https://github.com/blacktunes/xianyu-robot/compare/v4.11.0...v4.12.0) (2021-07-05)
+
+
+### ♻ 代码重构
+
+* 提取Debug方法 ([a52fd0e](https://github.com/blacktunes/xianyu-robot/commit/a52fd0e))
+
+
+### ✨ 新功能
+
+* 添加无效事件警告 ([2bb53a5](https://github.com/blacktunes/xianyu-robot/commit/2bb53a5))
+* 添加日志最大字数限制 ([1f81421](https://github.com/blacktunes/xianyu-robot/commit/1f81421))
+* 重构指令系统和添加指令别名 ([806bd77](https://github.com/blacktunes/xianyu-robot/commit/806bd77))
+
+
+### 🐛 Bug 修复
+
+* 补充遗漏的类型 ([2b7da60](https://github.com/blacktunes/xianyu-robot/commit/2b7da60))
+
 # [4.11.0](https://github.com/blacktunes/xianyu-robot/compare/v4.10.0...v4.11.0) (2021-04-20)
 
 
