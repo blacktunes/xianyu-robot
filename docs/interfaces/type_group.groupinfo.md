@@ -26,7 +26,7 @@
 
 群创建时间
 
-Defined in: [Type/Group.ts:20](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Group.ts#L20)
+Defined in: Type/Group.ts:20
 
 ___
 
@@ -36,7 +36,7 @@ ___
 
 群号
 
-Defined in: [Type/Group.ts:8](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Group.ts#L8)
+Defined in: Type/Group.ts:8
 
 ___
 
@@ -46,7 +46,7 @@ ___
 
 群等级
 
-Defined in: [Type/Group.ts:24](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Group.ts#L24)
+Defined in: Type/Group.ts:24
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 群备注
 
-Defined in: [Type/Group.ts:16](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Group.ts#L16)
+Defined in: Type/Group.ts:16
 
 ___
 
@@ -66,7 +66,7 @@ ___
 
 群名称
 
-Defined in: [Type/Group.ts:12](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Group.ts#L12)
+Defined in: Type/Group.ts:12
 
 ___
 
@@ -76,7 +76,7 @@ ___
 
 最大成员数
 
-Defined in: [Type/Group.ts:32](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Group.ts#L32)
+Defined in: Type/Group.ts:32
 
 ___
 
@@ -86,4 +86,4 @@ ___
 
 成员数
 
-Defined in: [Type/Group.ts:28](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Group.ts#L28)
+Defined in: Type/Group.ts:28

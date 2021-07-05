@@ -24,6 +24,8 @@
 - [GroupUpload](../interfaces/type_event.groupupload.md)
 - [OfflineFile](../interfaces/type_event.offlinefile.md)
 - [PrivateSender](../interfaces/type_event.privatesender.md)
+- [\_GroupMsg](../interfaces/type_event._groupmsg.md)
+- [\_PrivateMsg](../interfaces/type_event._privatemsg.md)
 
 ### Type aliases
 
@@ -34,14 +36,14 @@
 
 ### GroupMsg
 
-Ƭ **GroupMsg**: \_GroupMsg & { `nextMessage`: (`fn`: (`msg`: *string*, `event`: [*GroupMsg*](type_event.md#groupmsg), `prevEvent`: \_GroupMsg) => [*Prevent*](type_bot.md#prevent)) => *void*  }
+Ƭ **GroupMsg**: [*\_GroupMsg*](../interfaces/type_event._groupmsg.md) & { `nextMessage`: (`fn`: (`msg`: *string*, `event`: [*GroupMsg*](type_event.md#groupmsg), `prevEvent`: [*\_GroupMsg*](../interfaces/type_event._groupmsg.md)) => [*Prevent*](type_bot.md#prevent)) => *void*  }
 
-Defined in: [Type/Event.ts:76](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Event.ts#L76)
+Defined in: Type/Event.ts:76
 
 ___
 
 ### PrivateMsg
 
-Ƭ **PrivateMsg**: \_PrivateMsg & { `nextMessage`: (`fn`: (`msg`: *string*, `event`: [*PrivateMsg*](type_event.md#privatemsg), `prevEvent`: \_PrivateMsg) => [*Prevent*](type_bot.md#prevent)) => *void*  }
+Ƭ **PrivateMsg**: [*\_PrivateMsg*](../interfaces/type_event._privatemsg.md) & { `nextMessage`: (`fn`: (`msg`: *string*, `event`: [*PrivateMsg*](type_event.md#privatemsg), `prevEvent`: [*\_PrivateMsg*](../interfaces/type_event._privatemsg.md)) => [*Prevent*](type_bot.md#prevent)) => *void*  }
 
-Defined in: [Type/Event.ts:5](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Event.ts#L5)
+Defined in: Type/Event.ts:5

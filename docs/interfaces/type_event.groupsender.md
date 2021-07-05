@@ -26,7 +26,7 @@
 
 年龄
 
-Defined in: [Type/Event.ts:171](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Event.ts#L171)
+Defined in: Type/Event.ts:171
 
 ___
 
@@ -36,7 +36,7 @@ ___
 
 地区
 
-Defined in: [Type/Event.ts:175](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Event.ts#L175)
+Defined in: Type/Event.ts:175
 
 ___
 
@@ -46,7 +46,7 @@ ___
 
 群名片／备注
 
-Defined in: [Type/Event.ts:163](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Event.ts#L163)
+Defined in: Type/Event.ts:163
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 成员等级
 
-Defined in: [Type/Event.ts:179](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Event.ts#L179)
+Defined in: Type/Event.ts:179
 
 ___
 
@@ -66,17 +66,17 @@ ___
 
 昵称
 
-Defined in: [Type/Event.ts:159](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Event.ts#L159)
+Defined in: Type/Event.ts:159
 
 ___
 
 ### role
 
-• **role**: ``"owner"`` \| ``"admin"`` \| ``"member"``
+• **role**: ``"admin"`` \| ``"owner"`` \| ``"member"``
 
 角色，owner 或 admin 或 member
 
-Defined in: [Type/Event.ts:183](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Event.ts#L183)
+Defined in: Type/Event.ts:183
 
 ___
 
@@ -86,7 +86,7 @@ ___
 
 性别，male 或 female 或 unknown
 
-Defined in: [Type/Event.ts:167](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Event.ts#L167)
+Defined in: Type/Event.ts:167
 
 ___
 
@@ -96,7 +96,7 @@ ___
 
 专属头衔
 
-Defined in: [Type/Event.ts:187](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Event.ts#L187)
+Defined in: Type/Event.ts:187
 
 ___
 
@@ -106,4 +106,4 @@ ___
 
 发送者 QQ 号
 
-Defined in: [Type/Event.ts:155](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Event.ts#L155)
+Defined in: Type/Event.ts:155

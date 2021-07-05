@@ -29,7 +29,7 @@
 
 Ƭ **HonorType**: ``"talkative"`` \| ``"performer"`` \| ``"legend"`` \| ``"strong_newbie"`` \| ``"emotion"`` \| ``"all"``
 
-Defined in: [Type/Message.ts:46](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Message.ts#L46)
+Defined in: Type/Message.ts:46
 
 ___
 
@@ -37,4 +37,4 @@ ___
 
 Ƭ **Message**: *string* \| [*CQMessage*](../interfaces/type_message.cqmessage.md) \| [*CQMessage*](../interfaces/type_message.cqmessage.md)[]
 
-Defined in: [Type/Message.ts:10](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Message.ts#L10)
+Defined in: Type/Message.ts:10

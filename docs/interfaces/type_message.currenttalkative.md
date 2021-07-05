@@ -21,7 +21,7 @@
 
 头像 URL
 
-Defined in: [Type/Message.ts:98](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Message.ts#L98)
+Defined in: Type/Message.ts:98
 
 ___
 
@@ -31,7 +31,7 @@ ___
 
 持续天数
 
-Defined in: [Type/Message.ts:102](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Message.ts#L102)
+Defined in: Type/Message.ts:102
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 昵称
 
-Defined in: [Type/Message.ts:94](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Message.ts#L94)
+Defined in: Type/Message.ts:94
 
 ___
 
@@ -51,4 +51,4 @@ ___
 
 QQ 号
 
-Defined in: [Type/Message.ts:90](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Message.ts#L90)
+Defined in: Type/Message.ts:90

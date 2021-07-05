@@ -38,7 +38,7 @@
 
 **Returns:** [*Plugin*](bot_modules_plugin.plugin.md)
 
-Defined in: [Bot/modules/Plugin.ts:6](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Plugin.ts#L6)
+Defined in: Bot/modules/Plugin.ts:6
 
 ## Properties
 
@@ -46,7 +46,7 @@ Defined in: [Bot/modules/Plugin.ts:6](https://github.com/blacktunes/xianyu-robot
 
 • `Private` **Bot**: [*Bot*](bot_bot.bot.md)
 
-Defined in: [Bot/modules/Plugin.ts:11](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Plugin.ts#L11)
+Defined in: Bot/modules/Plugin.ts:11
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 插件设置
 
-Defined in: [Bot/modules/Plugin.ts:25](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Plugin.ts#L25)
+Defined in: Bot/modules/Plugin.ts:25
 
 ___
 
@@ -66,7 +66,7 @@ ___
 
 本地设置保存位置
 
-Defined in: [Bot/modules/Plugin.ts:21](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Plugin.ts#L21)
+Defined in: Bot/modules/Plugin.ts:21
 
 ___
 
@@ -76,7 +76,7 @@ ___
 
 插件列表
 
-Defined in: [Bot/modules/Plugin.ts:16](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Plugin.ts#L16)
+Defined in: Bot/modules/Plugin.ts:16
 
 ## Methods
 
@@ -98,7 +98,7 @@ Defined in: [Bot/modules/Plugin.ts:16](https://github.com/blacktunes/xianyu-robo
 
 **Returns:** *Pick*<T, Exclude<keyof T, ``"init"``\>\>
 
-Defined in: [Bot/modules/Plugin.ts:46](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Plugin.ts#L46)
+Defined in: Bot/modules/Plugin.ts:46
 
 ___
 
@@ -108,7 +108,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: [Bot/modules/Plugin.ts:33](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Plugin.ts#L33)
+Defined in: Bot/modules/Plugin.ts:33
 
 ___
 
@@ -131,4 +131,4 @@ ___
 
 **Returns:** *void*
 
-Defined in: [Bot/modules/Plugin.ts:27](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Plugin.ts#L27)
+Defined in: Bot/modules/Plugin.ts:27

@@ -26,6 +26,10 @@
 
 - [black](plugin_command.command.md#black)
 - [command](plugin_command.command.md#command)
+- [getBlacklist](plugin_command.command.md#getblacklist)
+- [getWhitelist](plugin_command.command.md#getwhitelist)
+- [removeBlacklist](plugin_command.command.md#removeblacklist)
+- [removeWhitelist](plugin_command.command.md#removewhitelist)
 - [white](plugin_command.command.md#white)
 
 ## Constructors
@@ -43,7 +47,7 @@
 
 **Returns:** [*Command*](plugin_command.command.md)
 
-Defined in: Plugin/Command.ts:7
+Defined in: Plugin/Command.ts:6
 
 ## Properties
 
@@ -51,7 +55,7 @@ Defined in: Plugin/Command.ts:7
 
 • `Private` **Bot**: [*Bot*](bot_bot.bot.md)
 
-Defined in: Plugin/Command.ts:12
+Defined in: Plugin/Command.ts:11
 
 ___
 
@@ -59,7 +63,7 @@ ___
 
 • `Private` **\_blacklist**: *Set*<number\>
 
-Defined in: Plugin/Command.ts:24
+Defined in: Plugin/Command.ts:54
 
 ___
 
@@ -67,7 +71,7 @@ ___
 
 • `Private` **\_whitelist**: *Set*<number\>
 
-Defined in: Plugin/Command.ts:15
+Defined in: Plugin/Command.ts:14
 
 ___
 
@@ -75,13 +79,13 @@ ___
 
 • `Private` **group**: *string*
 
-Defined in: Plugin/Command.ts:13
+Defined in: Plugin/Command.ts:12
 
 ## Accessors
 
 ### blacklist
 
-• set **blacklist**(`list`: *number*[]): *void*
+• `Private`set **blacklist**(`list`: *number*[]): *void*
 
 #### Parameters:
 
@@ -91,13 +95,13 @@ Defined in: Plugin/Command.ts:13
 
 **Returns:** *void*
 
-Defined in: Plugin/Command.ts:25
+Defined in: Plugin/Command.ts:55
 
 ___
 
 ### whitelist
 
-• set **whitelist**(`list`: *number*[]): *void*
+• `Private`set **whitelist**(`list`: *number*[]): *void*
 
 #### Parameters:
 
@@ -107,7 +111,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: Plugin/Command.ts:16
+Defined in: Plugin/Command.ts:15
 
 ## Methods
 
@@ -125,13 +129,13 @@ Defined in: Plugin/Command.ts:16
 
 **Returns:** [*Command*](plugin_command.command.md)
 
-Defined in: Plugin/Command.ts:49
+Defined in: Plugin/Command.ts:66
 
 ___
 
 ### command
 
-▸ **command**(`name`: *string*): *\_\_class*
+▸ **command**(`name`: *string*): *Pick*<[*SetComm*](bot_modules_command.setcomm.md), ``"alias"`` \| ``"desc"`` \| ``"reg"`` \| ``"admin"`` \| ``"action"`` \| ``"white"`` \| ``"black"``\>
 
 增加命令
 
@@ -141,9 +145,69 @@ ___
 | :------ | :------ |
 | `name` | *string* |
 
-**Returns:** *\_\_class*
+**Returns:** *Pick*<[*SetComm*](bot_modules_command.setcomm.md), ``"alias"`` \| ``"desc"`` \| ``"reg"`` \| ``"admin"`` \| ``"action"`` \| ``"white"`` \| ``"black"``\>
 
-Defined in: Plugin/Command.ts:62
+Defined in: Plugin/Command.ts:97
+
+___
+
+### getBlacklist
+
+▸ **getBlacklist**(): readonly *number*[]
+
+获取黑名单
+
+**Returns:** readonly *number*[]
+
+Defined in: Plugin/Command.ts:78
+
+___
+
+### getWhitelist
+
+▸ **getWhitelist**(): readonly *number*[]
+
+获取白名单
+
+**Returns:** readonly *number*[]
+
+Defined in: Plugin/Command.ts:38
+
+___
+
+### removeBlacklist
+
+▸ **removeBlacklist**(`list`: *number*[] \| readonly *number*[]): *void*
+
+移除黑名单
+
+#### Parameters:
+
+| Name | Type |
+| :------ | :------ |
+| `list` | *number*[] \| readonly *number*[] |
+
+**Returns:** *void*
+
+Defined in: Plugin/Command.ts:84
+
+___
+
+### removeWhitelist
+
+▸ **removeWhitelist**(`list`: *number*[] \| readonly *number*[]): *void*
+
+移除白名单
+
+#### Parameters:
+
+| Name | Type |
+| :------ | :------ |
+| `list` | *number*[] \| readonly *number*[] |
+
+**Returns:** *void*
+
+Defined in: Plugin/Command.ts:44
 
 ___
 
@@ -161,4 +225,4 @@ ___
 
 **Returns:** [*Command*](plugin_command.command.md)
 
-Defined in: Plugin/Command.ts:37
+Defined in: Plugin/Command.ts:26

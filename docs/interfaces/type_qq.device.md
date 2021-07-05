@@ -22,7 +22,7 @@
 
 客户端ID
 
-Defined in: [Type/QQ.ts:26](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/QQ.ts#L26)
+Defined in: Type/QQ.ts:26
 
 ___
 
@@ -32,7 +32,7 @@ ___
 
 设备类型
 
-Defined in: [Type/QQ.ts:34](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/QQ.ts#L34)
+Defined in: Type/QQ.ts:34
 
 ___
 
@@ -42,4 +42,4 @@ ___
 
 设备名称
 
-Defined in: [Type/QQ.ts:30](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/QQ.ts#L30)
+Defined in: Type/QQ.ts:30

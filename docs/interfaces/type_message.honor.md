@@ -21,7 +21,7 @@
 
 头像 URL
 
-Defined in: [Type/Message.ts:117](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Message.ts#L117)
+Defined in: Type/Message.ts:117
 
 ___
 
@@ -31,7 +31,7 @@ ___
 
 荣誉描述
 
-Defined in: [Type/Message.ts:121](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Message.ts#L121)
+Defined in: Type/Message.ts:121
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 昵称
 
-Defined in: [Type/Message.ts:113](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Message.ts#L113)
+Defined in: Type/Message.ts:113
 
 ___
 
@@ -51,4 +51,4 @@ ___
 
 QQ 号
 
-Defined in: [Type/Message.ts:109](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Message.ts#L109)
+Defined in: Type/Message.ts:109

@@ -49,7 +49,7 @@ BOT构造函数
 
 **Returns:** [*App*](bot_app.app.md)
 
-Defined in: [Bot/App.ts:13](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/App.ts#L13)
+Defined in: Bot/App.ts:13
 
 ## Properties
 
@@ -57,7 +57,7 @@ Defined in: [Bot/App.ts:13](https://github.com/blacktunes/xianyu-robot/blob/ba66
 
 • `Private` `Readonly` **Bot**: [*Bot*](bot_bot.bot.md)
 
-Defined in: [Bot/App.ts:31](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/App.ts#L31)
+Defined in: Bot/App.ts:31
 
 ___
 
@@ -65,7 +65,7 @@ ___
 
 • `Private` **\_pluginsList**: { `class`: *boolean* ; `config?`: *any* ; `plugin`: [*Plugin*](../interfaces/type_bot.plugin.md) \| [*PluginFunction*](../modules/type_bot.md#pluginfunction)  }[]= []
 
-Defined in: [Bot/App.ts:101](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/App.ts#L101)
+Defined in: Bot/App.ts:101
 
 ___
 
@@ -73,7 +73,7 @@ ___
 
 • `Private` **blacklist**: *Set*<number\>
 
-Defined in: [Bot/App.ts:34](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/App.ts#L34)
+Defined in: Bot/App.ts:34
 
 ___
 
@@ -81,7 +81,7 @@ ___
 
 • `Private` **isStart**: *boolean*= false
 
-Defined in: [Bot/App.ts:29](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/App.ts#L29)
+Defined in: Bot/App.ts:29
 
 ___
 
@@ -89,7 +89,7 @@ ___
 
 • `Private` **whitelist**: *Set*<number\>
 
-Defined in: [Bot/App.ts:33](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/App.ts#L33)
+Defined in: Bot/App.ts:33
 
 ## Methods
 
@@ -107,7 +107,7 @@ Defined in: [Bot/App.ts:33](https://github.com/blacktunes/xianyu-robot/blob/ba66
 
 **Returns:** [*App*](bot_app.app.md)
 
-Defined in: [Bot/App.ts:75](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/App.ts#L75)
+Defined in: Bot/App.ts:75
 
 ___
 
@@ -125,7 +125,7 @@ ___
 
 **Returns:** [*App*](bot_app.app.md)
 
-Defined in: [Bot/App.ts:58](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/App.ts#L58)
+Defined in: Bot/App.ts:58
 
 ___
 
@@ -135,7 +135,7 @@ ___
 
 **Returns:** *Promise*<void\>
 
-Defined in: [Bot/App.ts:178](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/App.ts#L178)
+Defined in: Bot/App.ts:178
 
 ___
 
@@ -145,7 +145,7 @@ ___
 
 **Returns:** *Promise*<void\>
 
-Defined in: [Bot/App.ts:243](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/App.ts#L243)
+Defined in: Bot/App.ts:245
 
 ___
 
@@ -155,7 +155,7 @@ ___
 
 **Returns:** *Promise*<void\>
 
-Defined in: [Bot/App.ts:279](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/App.ts#L279)
+Defined in: Bot/App.ts:281
 
 ___
 
@@ -173,7 +173,7 @@ ___
 
 **Returns:** [*App*](bot_app.app.md)
 
-Defined in: [Bot/App.ts:92](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/App.ts#L92)
+Defined in: Bot/App.ts:92
 
 ___
 
@@ -189,7 +189,7 @@ ___
 
 **Returns:** [*App*](bot_app.app.md)
 
-Defined in: [Bot/App.ts:84](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/App.ts#L84)
+Defined in: Bot/App.ts:84
 
 ___
 
@@ -207,7 +207,7 @@ ___
 
 **Returns:** [*App*](bot_app.app.md)
 
-Defined in: [Bot/App.ts:110](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/App.ts#L110)
+Defined in: Bot/App.ts:110
 
 ▸ **plugin**<T\>(`plugin`: T, `config?`: *ConstructorParameters*<T\>[``1``]): [*App*](bot_app.app.md)
 
@@ -228,7 +228,7 @@ Defined in: [Bot/App.ts:110](https://github.com/blacktunes/xianyu-robot/blob/ba6
 
 **Returns:** [*App*](bot_app.app.md)
 
-Defined in: [Bot/App.ts:116](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/App.ts#L116)
+Defined in: Bot/App.ts:116
 
 ___
 
@@ -238,7 +238,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: [Bot/App.ts:186](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/App.ts#L186)
+Defined in: Bot/App.ts:186
 
 ___
 
@@ -258,7 +258,7 @@ ___
 
 **Returns:** *Promise*<[*Bot*](bot_bot.bot.md)\>
 
-Defined in: [Bot/App.ts:143](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/App.ts#L143)
+Defined in: Bot/App.ts:143
 
 ___
 
@@ -276,4 +276,4 @@ ___
 
 **Returns:** [*App*](bot_app.app.md)
 
-Defined in: [Bot/App.ts:40](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/App.ts#L40)
+Defined in: Bot/App.ts:40

@@ -18,6 +18,7 @@
 - [Command](bot_bot.bot.md#command)
 - [Conn](bot_bot.bot.md#conn)
 - [Data](bot_bot.bot.md#data)
+- [Debug](bot_bot.bot.md#debug)
 - [Event](bot_bot.bot.md#event)
 - [Log](bot_bot.bot.md#log)
 - [Plugin](bot_bot.bot.md#plugin)
@@ -37,7 +38,7 @@
 
 **Returns:** [*Bot*](bot_bot.bot.md)
 
-Defined in: [Bot/Bot.ts:11](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/Bot.ts#L11)
+Defined in: Bot/Bot.ts:12
 
 ## Properties
 
@@ -47,7 +48,7 @@ Defined in: [Bot/Bot.ts:11](https://github.com/blacktunes/xianyu-robot/blob/ba66
 
 管理员命令
 
-Defined in: [Bot/Bot.ts:41](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/Bot.ts#L41)
+Defined in: Bot/Bot.ts:43
 
 ___
 
@@ -57,7 +58,7 @@ ___
 
 HTTP API
 
-Defined in: [Bot/Bot.ts:49](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/Bot.ts#L49)
+Defined in: Bot/Bot.ts:51
 
 ___
 
@@ -67,7 +68,7 @@ ___
 
 CQ码
 
-Defined in: [Bot/Bot.ts:29](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/Bot.ts#L29)
+Defined in: Bot/Bot.ts:31
 
 ___
 
@@ -77,7 +78,7 @@ ___
 
 命令对象
 
-Defined in: [Bot/Bot.ts:37](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/Bot.ts#L37)
+Defined in: Bot/Bot.ts:39
 
 ___
 
@@ -87,7 +88,7 @@ ___
 
 WS链接
 
-Defined in: [Bot/Bot.ts:45](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/Bot.ts#L45)
+Defined in: Bot/Bot.ts:47
 
 ___
 
@@ -97,7 +98,17 @@ ___
 
 Bot的部分属性
 
-Defined in: [Bot/Bot.ts:21](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/Bot.ts#L21)
+Defined in: Bot/Bot.ts:23
+
+___
+
+### Debug
+
+• **Debug**: [*Debug*](bot_modules_debug.debug.md)
+
+测试类
+
+Defined in: Bot/Bot.ts:59
 
 ___
 
@@ -107,7 +118,7 @@ ___
 
 消息事件
 
-Defined in: [Bot/Bot.ts:53](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/Bot.ts#L53)
+Defined in: Bot/Bot.ts:55
 
 ___
 
@@ -117,7 +128,7 @@ ___
 
 日志对象
 
-Defined in: [Bot/Bot.ts:25](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/Bot.ts#L25)
+Defined in: Bot/Bot.ts:27
 
 ___
 
@@ -127,4 +138,4 @@ ___
 
 插件对象
 
-Defined in: [Bot/Bot.ts:33](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/Bot.ts#L33)
+Defined in: Bot/Bot.ts:35

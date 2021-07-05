@@ -20,7 +20,7 @@
 
 文件名
 
-Defined in: [Type/File.ts:39](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/File.ts#L39)
+Defined in: Type/File.ts:39
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 文件大小
 
-Defined in: [Type/File.ts:43](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/File.ts#L43)
+Defined in: Type/File.ts:43
 
 ___
 
@@ -40,4 +40,4 @@ ___
 
 下载链接
 
-Defined in: [Type/File.ts:47](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/File.ts#L47)
+Defined in: Type/File.ts:47

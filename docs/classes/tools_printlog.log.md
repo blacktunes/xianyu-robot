@@ -48,7 +48,7 @@
 
 **Returns:** *void*
 
-Defined in: [Tools/PrintLog.ts:101](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Tools/PrintLog.ts#L101)
+Defined in: Tools/PrintLog.ts:104
 
 ___
 
@@ -67,7 +67,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: [Tools/PrintLog.ts:155](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Tools/PrintLog.ts#L155)
+Defined in: Tools/PrintLog.ts:158
 
 ___
 
@@ -86,7 +86,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: [Tools/PrintLog.ts:164](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Tools/PrintLog.ts#L164)
+Defined in: Tools/PrintLog.ts:167
 
 ___
 
@@ -105,7 +105,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: [Tools/PrintLog.ts:110](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Tools/PrintLog.ts#L110)
+Defined in: Tools/PrintLog.ts:113
 
 ___
 
@@ -124,7 +124,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: [Tools/PrintLog.ts:119](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Tools/PrintLog.ts#L119)
+Defined in: Tools/PrintLog.ts:122
 
 ___
 
@@ -143,7 +143,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: [Tools/PrintLog.ts:128](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Tools/PrintLog.ts#L128)
+Defined in: Tools/PrintLog.ts:131
 
 ___
 
@@ -162,7 +162,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: [Tools/PrintLog.ts:137](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Tools/PrintLog.ts#L137)
+Defined in: Tools/PrintLog.ts:140
 
 ___
 
@@ -181,7 +181,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: [Tools/PrintLog.ts:146](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Tools/PrintLog.ts#L146)
+Defined in: Tools/PrintLog.ts:149
 
 ___
 
@@ -198,7 +198,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: [Tools/PrintLog.ts:56](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Tools/PrintLog.ts#L56)
+Defined in: Tools/PrintLog.ts:56
 
 ___
 
@@ -218,4 +218,4 @@ ___
 
 **Returns:** *void*
 
-Defined in: [Tools/PrintLog.ts:92](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Tools/PrintLog.ts#L92)
+Defined in: Tools/PrintLog.ts:95

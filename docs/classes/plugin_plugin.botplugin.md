@@ -14,6 +14,7 @@
 
 - [Bot](plugin_plugin.botplugin.md#bot)
 - [Command](plugin_plugin.botplugin.md#command)
+- [config](plugin_plugin.botplugin.md#config)
 - [name](plugin_plugin.botplugin.md#name)
 
 ### Methods
@@ -58,6 +59,18 @@ ___
 与Bot.Command基本相同，但能设置统一设置
 
 Defined in: Plugin/Plugin.ts:27
+
+___
+
+### config
+
+• `Readonly` **config**: *object*= {}
+
+插件配置
+
+#### Type declaration:
+
+Defined in: Plugin/Plugin.ts:40
 
 ___
 

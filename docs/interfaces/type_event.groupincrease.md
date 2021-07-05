@@ -25,7 +25,7 @@
 
 群号
 
-Defined in: [Type/Event.ts:357](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Event.ts#L357)
+Defined in: Type/Event.ts:357
 
 ___
 
@@ -35,7 +35,7 @@ ___
 
 通知类型
 
-Defined in: [Type/Event.ts:349](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Event.ts#L349)
+Defined in: Type/Event.ts:349
 
 ___
 
@@ -45,7 +45,7 @@ ___
 
 操作者 QQ 号
 
-Defined in: [Type/Event.ts:361](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Event.ts#L361)
+Defined in: Type/Event.ts:361
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 上报类型
 
-Defined in: [Type/Event.ts:345](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Event.ts#L345)
+Defined in: Type/Event.ts:345
 
 ___
 
@@ -65,7 +65,7 @@ ___
 
 收到事件的机器人 QQ 号
 
-Defined in: [Type/Event.ts:341](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Event.ts#L341)
+Defined in: Type/Event.ts:341
 
 ___
 
@@ -75,7 +75,7 @@ ___
 
 事件子类型，分别表示管理员已同意入群、管理员邀请入群
 
-Defined in: [Type/Event.ts:353](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Event.ts#L353)
+Defined in: Type/Event.ts:353
 
 ___
 
@@ -85,7 +85,7 @@ ___
 
 事件发生的时间戳
 
-Defined in: [Type/Event.ts:337](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Event.ts#L337)
+Defined in: Type/Event.ts:337
 
 ___
 
@@ -95,4 +95,4 @@ ___
 
 加入者 QQ 号
 
-Defined in: [Type/Event.ts:365](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Event.ts#L365)
+Defined in: Type/Event.ts:365

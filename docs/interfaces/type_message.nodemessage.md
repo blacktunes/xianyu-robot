@@ -19,7 +19,7 @@
 
 #### Type declaration:
 
-Defined in: [Type/Message.ts:14](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Message.ts#L14)
+Defined in: Type/Message.ts:14
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 • **type**: ``"node"``
 
-Defined in: [Type/Message.ts:13](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Message.ts#L13)
+Defined in: Type/Message.ts:13

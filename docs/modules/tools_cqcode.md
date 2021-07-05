@@ -18,4 +18,4 @@
 
 • `Const` **CQCode**: [*CQCODE*](../classes/tools_cqcode.cqcode.md)
 
-Defined in: [Tools/CQCode.ts:238](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Tools/CQCode.ts#L238)
+Defined in: Tools/CQCode.ts:238

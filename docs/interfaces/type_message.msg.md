@@ -23,7 +23,7 @@
 
 消息内容
 
-Defined in: [Type/Message.ts:39](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Message.ts#L39)
+Defined in: Type/Message.ts:39
 
 ___
 
@@ -33,7 +33,7 @@ ___
 
 消息id
 
-Defined in: [Type/Message.ts:23](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Message.ts#L23)
+Defined in: Type/Message.ts:23
 
 ___
 
@@ -43,7 +43,7 @@ ___
 
 原始消息内容
 
-Defined in: [Type/Message.ts:43](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Message.ts#L43)
+Defined in: Type/Message.ts:43
 
 ___
 
@@ -53,7 +53,7 @@ ___
 
 消息真实id
 
-Defined in: [Type/Message.ts:27](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Message.ts#L27)
+Defined in: Type/Message.ts:27
 
 ___
 
@@ -63,7 +63,7 @@ ___
 
 发送者
 
-Defined in: [Type/Message.ts:31](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Message.ts#L31)
+Defined in: Type/Message.ts:31
 
 ___
 
@@ -73,4 +73,4 @@ ___
 
 发送时间
 
-Defined in: [Type/Message.ts:35](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Message.ts#L35)
+Defined in: Type/Message.ts:35

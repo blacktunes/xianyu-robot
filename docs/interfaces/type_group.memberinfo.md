@@ -34,7 +34,7 @@
 
 年龄
 
-Defined in: [Type/Group.ts:62](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Group.ts#L62)
+Defined in: Type/Group.ts:62
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 地区
 
-Defined in: [Type/Group.ts:66](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Group.ts#L66)
+Defined in: Type/Group.ts:66
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 群名片／备注
 
-Defined in: [Type/Group.ts:54](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Group.ts#L54)
+Defined in: Type/Group.ts:54
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 是否允许修改群名片
 
-Defined in: [Type/Group.ts:98](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Group.ts#L98)
+Defined in: Type/Group.ts:98
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 群号
 
-Defined in: [Type/Group.ts:42](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Group.ts#L42)
+Defined in: Type/Group.ts:42
 
 ___
 
@@ -84,7 +84,7 @@ ___
 
 加群时间戳
 
-Defined in: [Type/Group.ts:70](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Group.ts#L70)
+Defined in: Type/Group.ts:70
 
 ___
 
@@ -94,7 +94,7 @@ ___
 
 最后发言时间戳
 
-Defined in: [Type/Group.ts:74](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Group.ts#L74)
+Defined in: Type/Group.ts:74
 
 ___
 
@@ -104,7 +104,7 @@ ___
 
 成员等级
 
-Defined in: [Type/Group.ts:78](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Group.ts#L78)
+Defined in: Type/Group.ts:78
 
 ___
 
@@ -114,7 +114,7 @@ ___
 
 昵称
 
-Defined in: [Type/Group.ts:50](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Group.ts#L50)
+Defined in: Type/Group.ts:50
 
 ___
 
@@ -124,7 +124,7 @@ ___
 
 角色，owner 或 admin 或 member
 
-Defined in: [Type/Group.ts:82](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Group.ts#L82)
+Defined in: Type/Group.ts:82
 
 ___
 
@@ -134,7 +134,7 @@ ___
 
 性别，male 或 female 或 unknown
 
-Defined in: [Type/Group.ts:58](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Group.ts#L58)
+Defined in: Type/Group.ts:58
 
 ___
 
@@ -144,7 +144,7 @@ ___
 
 专属头衔
 
-Defined in: [Type/Group.ts:90](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Group.ts#L90)
+Defined in: Type/Group.ts:90
 
 ___
 
@@ -154,7 +154,7 @@ ___
 
 专属头衔过期时间戳
 
-Defined in: [Type/Group.ts:94](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Group.ts#L94)
+Defined in: Type/Group.ts:94
 
 ___
 
@@ -164,7 +164,7 @@ ___
 
 是否不良记录成员
 
-Defined in: [Type/Group.ts:86](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Group.ts#L86)
+Defined in: Type/Group.ts:86
 
 ___
 
@@ -174,4 +174,4 @@ ___
 
 QQ 号
 
-Defined in: [Type/Group.ts:46](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Group.ts#L46)
+Defined in: Type/Group.ts:46

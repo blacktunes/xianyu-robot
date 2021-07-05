@@ -53,6 +53,8 @@
 - [Status](type.md#status)
 - [VersionInfo](type.md#versioninfo)
 - [WebSocketConfig](type.md#websocketconfig)
+- [\_GroupMsg](type.md#_groupmsg)
+- [\_PrivateMsg](type.md#_privatemsg)
 
 ## References
 
@@ -335,3 +337,15 @@ ___
 ### WebSocketConfig
 
 Re-exports: [WebSocketConfig](../interfaces/type_bot.websocketconfig.md)
+
+___
+
+### \_GroupMsg
+
+Re-exports: [\_GroupMsg](../interfaces/type_event._groupmsg.md)
+
+___
+
+### \_PrivateMsg
+
+Re-exports: [\_PrivateMsg](../interfaces/type_event._privatemsg.md)

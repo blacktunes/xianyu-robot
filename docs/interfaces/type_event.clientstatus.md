@@ -21,7 +21,7 @@
 
 客户端信息
 
-Defined in: [Type/Event.ts:589](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Event.ts#L589)
+Defined in: Type/Event.ts:589
 
 ___
 
@@ -31,7 +31,7 @@ ___
 
 消息类型
 
-Defined in: [Type/Event.ts:585](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Event.ts#L585)
+Defined in: Type/Event.ts:585
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 当前是否在线
 
-Defined in: [Type/Event.ts:593](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Event.ts#L593)
+Defined in: Type/Event.ts:593
 
 ___
 
@@ -51,4 +51,4 @@ ___
 
 上报类型
 
-Defined in: [Type/Event.ts:581](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Event.ts#L581)
+Defined in: Type/Event.ts:581

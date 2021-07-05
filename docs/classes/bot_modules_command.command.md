@@ -33,7 +33,7 @@
 
 **Returns:** [*Command*](bot_modules_command.command.md)
 
-Defined in: [Bot/modules/Command.ts:6](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Command.ts#L6)
+Defined in: Bot/modules/Command.ts:6
 
 ## Properties
 
@@ -41,7 +41,7 @@ Defined in: [Bot/modules/Command.ts:6](https://github.com/blacktunes/xianyu-robo
 
 • `Private` **Bot**: [*Bot*](bot_bot.bot.md)
 
-Defined in: [Bot/modules/Command.ts:10](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Command.ts#L10)
+Defined in: Bot/modules/Command.ts:10
 
 ___
 
@@ -51,13 +51,13 @@ ___
 
 命令列表
 
-Defined in: [Bot/modules/Command.ts:14](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Command.ts#L14)
+Defined in: Bot/modules/Command.ts:14
 
 ## Methods
 
 ### command
 
-▸ **command**(`name`: *string*): *\_\_class*
+▸ **command**(`name`: *string*): [*SetComm*](bot_modules_command.setcomm.md)
 
 增加命令
 
@@ -67,6 +67,6 @@ Defined in: [Bot/modules/Command.ts:14](https://github.com/blacktunes/xianyu-rob
 | :------ | :------ |
 | `name` | *string* |
 
-**Returns:** *\_\_class*
+**Returns:** [*SetComm*](bot_modules_command.setcomm.md)
 
-Defined in: [Bot/modules/Command.ts:19](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Command.ts#L19)
+Defined in: Bot/modules/Command.ts:19

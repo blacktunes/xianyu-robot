@@ -35,7 +35,7 @@
 
 **Returns:** [*Comm*](bot_modules_command.comm.md)
 
-Defined in: [Bot/modules/Command.ts:124](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Command.ts#L124)
+Defined in: Bot/modules/Command.ts:38
 
 ## Properties
 
@@ -43,7 +43,7 @@ Defined in: [Bot/modules/Command.ts:124](https://github.com/blacktunes/xianyu-ro
 
 • **admin**: *boolean*= false
 
-Defined in: [Bot/modules/Command.ts:130](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Command.ts#L130)
+Defined in: Bot/modules/Command.ts:44
 
 ___
 
@@ -51,15 +51,15 @@ ___
 
 • **blacklist**: *Set*<number\>
 
-Defined in: [Bot/modules/Command.ts:141](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Command.ts#L141)
+Defined in: Bot/modules/Command.ts:55
 
 ___
 
 ### comm
 
-• **comm**: *string*
+• **comm**: *string*[]= []
 
-Defined in: [Bot/modules/Command.ts:128](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Command.ts#L128)
+Defined in: Bot/modules/Command.ts:42
 
 ___
 
@@ -67,7 +67,7 @@ ___
 
 • **desc**: *string*= '暂无描述'
 
-Defined in: [Bot/modules/Command.ts:131](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Command.ts#L131)
+Defined in: Bot/modules/Command.ts:45
 
 ___
 
@@ -82,7 +82,7 @@ ___
 | `group` | (`e`: [*GroupMsg*](../modules/type_event.md#groupmsg)) => [*Prevent*](../modules/type_bot.md#prevent)[] |
 | `private` | (`e`: [*PrivateMsg*](../modules/type_event.md#privatemsg)) => [*Prevent*](../modules/type_bot.md#prevent)[] |
 
-Defined in: [Bot/modules/Command.ts:133](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Command.ts#L133)
+Defined in: Bot/modules/Command.ts:47
 
 ___
 
@@ -90,7 +90,7 @@ ___
 
 • **group**: *string*
 
-Defined in: [Bot/modules/Command.ts:132](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Command.ts#L132)
+Defined in: Bot/modules/Command.ts:46
 
 ___
 
@@ -98,7 +98,7 @@ ___
 
 • **reg**: *RegExp* \| *NamedRegExp*
 
-Defined in: [Bot/modules/Command.ts:129](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Command.ts#L129)
+Defined in: Bot/modules/Command.ts:43
 
 ___
 
@@ -106,4 +106,4 @@ ___
 
 • **whitelist**: *Set*<number\>
 
-Defined in: [Bot/modules/Command.ts:140](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Command.ts#L140)
+Defined in: Bot/modules/Command.ts:54

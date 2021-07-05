@@ -23,7 +23,7 @@
 
 群号
 
-Defined in: [Type/Event.ts:202](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Event.ts#L202)
+Defined in: Type/Event.ts:202
 
 ___
 
@@ -33,7 +33,7 @@ ___
 
 被撤回的消息id
 
-Defined in: [Type/Event.ts:214](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Event.ts#L214)
+Defined in: Type/Event.ts:214
 
 ___
 
@@ -43,7 +43,7 @@ ___
 
 消息类型
 
-Defined in: [Type/Event.ts:198](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Event.ts#L198)
+Defined in: Type/Event.ts:198
 
 ___
 
@@ -53,7 +53,7 @@ ___
 
 操作者id
 
-Defined in: [Type/Event.ts:210](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Event.ts#L210)
+Defined in: Type/Event.ts:210
 
 ___
 
@@ -63,7 +63,7 @@ ___
 
 上报类型
 
-Defined in: [Type/Event.ts:194](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Event.ts#L194)
+Defined in: Type/Event.ts:194
 
 ___
 
@@ -73,4 +73,4 @@ ___
 
 消息发送者id
 
-Defined in: [Type/Event.ts:206](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Event.ts#L206)
+Defined in: Type/Event.ts:206

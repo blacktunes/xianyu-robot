@@ -24,7 +24,7 @@
 
 群号
 
-Defined in: [Type/Event.ts:248](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Event.ts#L248)
+Defined in: Type/Event.ts:248
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 荣誉类型
 
-Defined in: [Type/Event.ts:264](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Event.ts#L264)
+Defined in: Type/Event.ts:264
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 消息类型
 
-Defined in: [Type/Event.ts:244](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Event.ts#L244)
+Defined in: Type/Event.ts:244
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 	上报类型
 
-Defined in: [Type/Event.ts:240](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Event.ts#L240)
+Defined in: Type/Event.ts:240
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 提示类型
 
-Defined in: [Type/Event.ts:252](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Event.ts#L252)
+Defined in: Type/Event.ts:252
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 接受者id
 
-Defined in: [Type/Event.ts:260](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Event.ts#L260)
+Defined in: Type/Event.ts:260
 
 ___
 
@@ -84,4 +84,4 @@ ___
 
 发送者id
 
-Defined in: [Type/Event.ts:256](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Event.ts#L256)
+Defined in: Type/Event.ts:256

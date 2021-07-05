@@ -42,7 +42,7 @@
 
 **Returns:** [*Admin*](bot_modules_admin.admin.md)
 
-Defined in: [Bot/modules/Admin.ts:8](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Admin.ts#L8)
+Defined in: Bot/modules/Admin.ts:8
 
 ## Properties
 
@@ -50,7 +50,7 @@ Defined in: [Bot/modules/Admin.ts:8](https://github.com/blacktunes/xianyu-robot/
 
 • `Private` **Bot**: [*Bot*](bot_bot.bot.md)
 
-Defined in: [Bot/modules/Admin.ts:12](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Admin.ts#L12)
+Defined in: Bot/modules/Admin.ts:12
 
 ___
 
@@ -58,7 +58,7 @@ ___
 
 • **adminList**: *Set*<number\>
 
-Defined in: [Bot/modules/Admin.ts:14](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Admin.ts#L14)
+Defined in: Bot/modules/Admin.ts:14
 
 ___
 
@@ -68,7 +68,7 @@ ___
 
 被ban名单
 
-Defined in: [Bot/modules/Admin.ts:26](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Admin.ts#L26)
+Defined in: Bot/modules/Admin.ts:26
 
 ## Methods
 
@@ -84,7 +84,7 @@ Defined in: [Bot/modules/Admin.ts:26](https://github.com/blacktunes/xianyu-robot
 
 **Returns:** *void*
 
-Defined in: [Bot/modules/Admin.ts:15](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Admin.ts#L15)
+Defined in: Bot/modules/Admin.ts:15
 
 ___
 
@@ -102,7 +102,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: [Bot/modules/Admin.ts:83](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Admin.ts#L83)
+Defined in: Bot/modules/Admin.ts:83
 
 ___
 
@@ -118,7 +118,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: [Bot/modules/Admin.ts:71](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Admin.ts#L71)
+Defined in: Bot/modules/Admin.ts:71
 
 ___
 
@@ -138,7 +138,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: [Bot/modules/Admin.ts:33](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Admin.ts#L33)
+Defined in: Bot/modules/Admin.ts:33
 
 ___
 
@@ -154,7 +154,7 @@ ___
 
 **Returns:** *boolean*
 
-Defined in: [Bot/modules/Admin.ts:19](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Admin.ts#L19)
+Defined in: Bot/modules/Admin.ts:19
 
 ___
 
@@ -170,7 +170,7 @@ ___
 
 **Returns:** *boolean*
 
-Defined in: [Bot/modules/Admin.ts:67](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Admin.ts#L67)
+Defined in: Bot/modules/Admin.ts:67
 
 ___
 
@@ -186,4 +186,4 @@ ___
 
 **Returns:** *void*
 
-Defined in: [Bot/modules/Admin.ts:59](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Admin.ts#L59)
+Defined in: Bot/modules/Admin.ts:59

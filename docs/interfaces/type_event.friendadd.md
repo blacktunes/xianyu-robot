@@ -22,7 +22,7 @@
 
 通知类型
 
-Defined in: [Type/Event.ts:551](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Event.ts#L551)
+Defined in: Type/Event.ts:551
 
 ___
 
@@ -32,7 +32,7 @@ ___
 
 	上报类型
 
-Defined in: [Type/Event.ts:547](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Event.ts#L547)
+Defined in: Type/Event.ts:547
 
 ___
 
@@ -42,7 +42,7 @@ ___
 
 收到事件的机器人 QQ 号
 
-Defined in: [Type/Event.ts:543](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Event.ts#L543)
+Defined in: Type/Event.ts:543
 
 ___
 
@@ -52,7 +52,7 @@ ___
 
 	事件发生的时间戳
 
-Defined in: [Type/Event.ts:539](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Event.ts#L539)
+Defined in: Type/Event.ts:539
 
 ___
 
@@ -62,4 +62,4 @@ ___
 
 新添加好友 QQ 号
 
-Defined in: [Type/Event.ts:555](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Type/Event.ts#L555)
+Defined in: Type/Event.ts:555

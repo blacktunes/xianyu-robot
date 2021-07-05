@@ -58,6 +58,8 @@
 - [Status](index.md#status)
 - [VersionInfo](index.md#versioninfo)
 - [WebSocketConfig](index.md#websocketconfig)
+- [\_GroupMsg](index.md#_groupmsg)
+- [\_PrivateMsg](index.md#_privatemsg)
 - [decode](index.md#decode)
 - [default](index.md#default)
 - [encode](index.md#encode)
@@ -376,6 +378,18 @@ ___
 ### WebSocketConfig
 
 Re-exports: [WebSocketConfig](../interfaces/type_bot.websocketconfig.md)
+
+___
+
+### \_GroupMsg
+
+Re-exports: [\_GroupMsg](../interfaces/type_event._groupmsg.md)
+
+___
+
+### \_PrivateMsg
+
+Re-exports: [\_PrivateMsg](../interfaces/type_event._privatemsg.md)
 
 ___
 

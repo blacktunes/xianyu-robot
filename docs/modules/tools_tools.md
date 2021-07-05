@@ -30,7 +30,7 @@
 
 反转义后的字符串
 
-Defined in: [Tools/Tools.ts:55](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Tools/Tools.ts#L55)
+Defined in: Tools/Tools.ts:55
 
 ___
 
@@ -51,7 +51,7 @@ ___
 
 转义后的字符串
 
-Defined in: [Tools/Tools.ts:41](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Tools/Tools.ts#L41)
+Defined in: Tools/Tools.ts:41
 
 ___
 
@@ -74,7 +74,7 @@ ___
 | `date` | *string* |
 | `time` | *string* |
 
-Defined in: [Tools/Tools.ts:5](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Tools/Tools.ts#L5)
+Defined in: Tools/Tools.ts:5
 
 ___
 
@@ -92,7 +92,7 @@ ___
 
 **Returns:** *string*
 
-Defined in: [Tools/Tools.ts:27](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Tools/Tools.ts#L27)
+Defined in: Tools/Tools.ts:27
 
 ___
 
@@ -110,4 +110,4 @@ ___
 
 **Returns:** *Promise*<void\>
 
-Defined in: [Tools/Tools.ts:16](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Tools/Tools.ts#L16)
+Defined in: Tools/Tools.ts:16

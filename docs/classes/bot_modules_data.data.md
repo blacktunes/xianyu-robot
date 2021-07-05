@@ -13,7 +13,6 @@
 ### Properties
 
 - [Bot](bot_modules_data.data.md#bot)
-- [\_debug](bot_modules_data.data.md#_debug)
 - [\_noCommList](bot_modules_data.data.md#_nocommlist)
 - [friendList](bot_modules_data.data.md#friendlist)
 - [groupList](bot_modules_data.data.md#grouplist)
@@ -25,7 +24,6 @@
 
 ### Accessors
 
-- [debug](bot_modules_data.data.md#debug)
 - [noCommList](bot_modules_data.data.md#nocommlist)
 
 ### Methods
@@ -52,7 +50,7 @@
 
 **Returns:** [*Data*](bot_modules_data.data.md)
 
-Defined in: [Bot/modules/Data.ts:3](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Data.ts#L3)
+Defined in: Bot/modules/Data.ts:3
 
 ## Properties
 
@@ -60,15 +58,7 @@ Defined in: [Bot/modules/Data.ts:3](https://github.com/blacktunes/xianyu-robot/b
 
 • `Private` **Bot**: [*Bot*](bot_bot.bot.md)
 
-Defined in: [Bot/modules/Data.ts:9](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Data.ts#L9)
-
-___
-
-### \_debug
-
-• `Private` **\_debug**: *boolean*
-
-Defined in: [Bot/modules/Data.ts:11](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Data.ts#L11)
+Defined in: Bot/modules/Data.ts:9
 
 ___
 
@@ -78,7 +68,7 @@ ___
 
 不启用内置指令的群组列表
 
-Defined in: [Bot/modules/Data.ts:114](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Data.ts#L114)
+Defined in: Bot/modules/Data.ts:99
 
 ___
 
@@ -90,7 +80,7 @@ ___
 
 #### Type declaration:
 
-Defined in: [Bot/modules/Data.ts:84](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Data.ts#L84)
+Defined in: Bot/modules/Data.ts:69
 
 ___
 
@@ -102,7 +92,7 @@ ___
 
 #### Type declaration:
 
-Defined in: [Bot/modules/Data.ts:39](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Data.ts#L39)
+Defined in: Bot/modules/Data.ts:24
 
 ___
 
@@ -114,7 +104,7 @@ ___
 
 #### Type declaration:
 
-Defined in: [Bot/modules/Data.ts:56](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Data.ts#L56)
+Defined in: Bot/modules/Data.ts:41
 
 ___
 
@@ -124,7 +114,7 @@ ___
 
 Bot名称
 
-Defined in: [Bot/modules/Data.ts:29](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Data.ts#L29)
+Defined in: Bot/modules/Data.ts:14
 
 ___
 
@@ -134,7 +124,7 @@ ___
 
 不显示Log输出的群组列表
 
-Defined in: [Bot/modules/Data.ts:103](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Data.ts#L103)
+Defined in: Bot/modules/Data.ts:88
 
 ___
 
@@ -144,7 +134,7 @@ ___
 
 是否显示Log输出
 
-Defined in: [Bot/modules/Data.ts:98](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Data.ts#L98)
+Defined in: Bot/modules/Data.ts:83
 
 ___
 
@@ -154,33 +144,9 @@ ___
 
 Bot的登录QQ
 
-Defined in: [Bot/modules/Data.ts:34](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Data.ts#L34)
+Defined in: Bot/modules/Data.ts:19
 
 ## Accessors
-
-### debug
-
-• get **debug**(): *boolean*
-
-是否为调试模式
-
-**Returns:** *boolean*
-
-Defined in: [Bot/modules/Data.ts:22](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Data.ts#L22)
-
-• set **debug**(`debug`: *boolean*): *void*
-
-#### Parameters:
-
-| Name | Type |
-| :------ | :------ |
-| `debug` | *boolean* |
-
-**Returns:** *void*
-
-Defined in: [Bot/modules/Data.ts:13](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Data.ts#L13)
-
-___
 
 ### noCommList
 
@@ -188,7 +154,7 @@ ___
 
 **Returns:** *Set*<number\>
 
-Defined in: [Bot/modules/Data.ts:123](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Data.ts#L123)
+Defined in: Bot/modules/Data.ts:108
 
 • set **noCommList**(`list`: *Set*<number\>): *void*
 
@@ -200,7 +166,7 @@ Defined in: [Bot/modules/Data.ts:123](https://github.com/blacktunes/xianyu-robot
 
 **Returns:** *void*
 
-Defined in: [Bot/modules/Data.ts:115](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Data.ts#L115)
+Defined in: Bot/modules/Data.ts:100
 
 ## Methods
 
@@ -218,7 +184,7 @@ Defined in: [Bot/modules/Data.ts:115](https://github.com/blacktunes/xianyu-robot
 
 **Returns:** *void*
 
-Defined in: [Bot/modules/Data.ts:129](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Data.ts#L129)
+Defined in: Bot/modules/Data.ts:114
 
 ___
 
@@ -236,7 +202,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: [Bot/modules/Data.ts:107](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Data.ts#L107)
+Defined in: Bot/modules/Data.ts:92
 
 ___
 
@@ -248,7 +214,7 @@ ___
 
 **Returns:** *Promise*<void\>
 
-Defined in: [Bot/modules/Data.ts:74](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Data.ts#L74)
+Defined in: Bot/modules/Data.ts:59
 
 ___
 
@@ -258,7 +224,7 @@ ___
 
 **Returns:** *Promise*<void\>
 
-Defined in: [Bot/modules/Data.ts:87](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Data.ts#L87)
+Defined in: Bot/modules/Data.ts:72
 
 ___
 
@@ -276,7 +242,7 @@ ___
 
 **Returns:** *Promise*<void\>
 
-Defined in: [Bot/modules/Data.ts:64](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Data.ts#L64)
+Defined in: Bot/modules/Data.ts:49
 
 ___
 
@@ -288,4 +254,4 @@ ___
 
 **Returns:** *Promise*<void\>
 
-Defined in: [Bot/modules/Data.ts:45](https://github.com/blacktunes/xianyu-robot/blob/ba6672b/src/Bot/modules/Data.ts#L45)
+Defined in: Bot/modules/Data.ts:30
