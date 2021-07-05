@@ -30,8 +30,9 @@ export class Api {
    * @returns {Promise<number>} 成功返回message_id，失败返回retcode(100)
    */
   async sendPrivateMsg(user_id: number, message: Message, auto_escape: boolean = false): Promise<number> {
-      this.Bot.Log.logDebug(`发送消息至(${user_id}): ${JSON.stringify(message)}`)
+    const logMsg = JSON.stringify(message)
     if (this.Bot.Debug.debug) {
+      this.Bot.Log.logDebug(`发送消息至(${user_id}): ${logMsg}`)
       return 0
     }
 
@@ -46,10 +47,10 @@ export class Api {
     const name = white(this.Bot.Data.friendList[user_id] || '')
 
     if (result.status === 'ok') {
-      this.Bot.Log.logInfoSend(`发送消息至 ${name}(${white(user_id.toString())}): ${white(JSON.stringify(message))} (${white(result.data.message_id.toString())})`, 'API')
+      this.Bot.Log.logInfoSend(`发送消息至 ${name}(${white(user_id.toString())}): ${white(logMsg)} (${white(result.data.message_id.toString())})`, 'API')
       return result.data.message_id
     } else {
-      this.Bot.Log.logError(`发送消息至 ${name}(${white(user_id.toString())}): ${white(JSON.stringify(message))} 失败 (${result.retcode})`, 'API')
+      this.Bot.Log.logError(`发送消息至 ${name}(${white(user_id.toString())}): ${white(logMsg)} 失败 (${result.retcode})`, 'API')
       return result.retcode
     }
   }
@@ -62,8 +63,9 @@ export class Api {
    * @returns 成功返回message_id，失败返回retcode(100)
    */
   async sendGroupMsg(group_id: number, message: Message, auto_escape: boolean = false): Promise<number> {
-      this.Bot.Log.logDebug(`发送消息至群(${group_id}): ${JSON.stringify(message)}`)
+    const logMsg = JSON.stringify(message)
     if (this.Bot.Debug.debug) {
+      this.Bot.Log.logDebug(`发送消息至群(${group_id}): ${logMsg}`)
       return 0
     }
 
@@ -78,10 +80,10 @@ export class Api {
     const group_name = white(this.Bot.Data.groupList[group_id] || '')
 
     if (result.status === 'ok') {
-      this.Bot.Log.logInfoSend(`发送消息至群 ${group_name}${white(this.Bot.Data.groupList[group_id] || '')}(${white(group_id.toString())}): ${white(JSON.stringify(message))} (${result.data.message_id})`, 'API')
+      this.Bot.Log.logInfoSend(`发送消息至群 ${group_name}${white(this.Bot.Data.groupList[group_id] || '')}(${white(group_id.toString())}): ${white(logMsg)} (${result.data.message_id})`, 'API')
       return result.data.message_id
     } else {
-      this.Bot.Log.logError(`发送消息至群 ${group_name}${white(this.Bot.Data.groupList[group_id] || '')}(${white(group_id.toString())}): ${white(JSON.stringify(message))} 失败 (${result.retcode})`, 'API')
+      this.Bot.Log.logError(`发送消息至群 ${group_name}${white(this.Bot.Data.groupList[group_id] || '')}(${white(group_id.toString())}): ${white(logMsg)} 失败 (${result.retcode})`, 'API')
       return result.retcode
     }
   }
