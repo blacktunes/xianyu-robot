@@ -17,7 +17,7 @@ export class App {
    * @param dirname 插件设置保存位置
    */
   constructor(name: string = 'Bot', dirname: string = require.main.path) {
-    const dir = join(dirname, './config/')
+    const dir = join(dirname, '../config/')
     if (dirname) {
       if (!existsSync(dir)) {
         mkdirSync(dir)
@@ -190,21 +190,23 @@ export class App {
       .desc('查询所有可用指令')
       .action('group', e => {
         let msg = ''
-        const list = {}
+        const list = {
+          other: ''
+        }
         this.Bot.Command.list.forEach(comm => {
           if ((comm.blacklist.size > 0 && comm.blacklist.has(e.group_id)) || (comm.whitelist.size > 0 && !comm.whitelist.has(e.group_id))) return
 
           if (comm.group) {
             if (list[comm.group]) {
-              list[comm.group] += `\n${comm.comm}${comm.desc ? ` ${comm.desc}` : ''}${comm.admin ? ' [管理员]' : ''}`
+              list[comm.group] += `\n${comm.comm}${comm.desc ? ` ${comm.desc}` : ''}${comm.admin ? ' (管理员)' : ''}`
             } else {
-              list[comm.group] = `${comm.comm}${comm.desc ? ` ${comm.desc}` : ''}${comm.admin ? ' [管理员]' : ''}`
+              list[comm.group] = `${comm.comm}${comm.desc ? ` ${comm.desc}` : ''}${comm.admin ? ' (管理员)' : ''}`
             }
           } else {
             if (list['other']) {
-              list['other'] += `\n${comm.comm}${comm.desc ? ` ${comm.desc}` : ''}${comm.admin ? ' [管理员]' : ''}`
+              list['other'] += `\n${comm.comm}${comm.desc ? ` ${comm.desc}` : ''}${comm.admin ? ' (管理员)' : ''}`
             } else {
-              list['other'] = `${comm.comm}${comm.desc ? ` ${comm.desc}` : ''}${comm.admin ? ' [管理员]' : ''}`
+              list['other'] = `${comm.comm}${comm.desc ? ` ${comm.desc}` : ''}${comm.admin ? ' (管理员)' : ''}`
             }
           }
         })
@@ -216,7 +218,7 @@ export class App {
             msg += `${i}：\n${list[i]}\n----------`
           }
         }
-        msg += `\n其它指令：\n${list['other']}` || ''
+        msg += `${list.other ? '\n其它指令：\n' + list.other : ''}`
         this.Bot.Api.sendGroupMsg(e.group_id, msg)
         return true
       })
@@ -256,13 +258,13 @@ export class App {
       }
     })
 
-    let setting: any = {}
-    const configPath = join(this.Bot.Plugin.dirname, `./${this.Bot.Data.userId}-config.json`)
+    let config: any = {}
+    const configPath = join(this.Bot.Plugin.dirname, `./${this.Bot.Data.name}-config.json`)
     if (existsSync(configPath)) {
       try {
-        setting = readJSONSync(configPath)
-        for (let i in setting) {
-          this.Bot.Plugin.config[i] = setting[i]
+        config = readJSONSync(configPath)
+        for (let i in config) {
+          this.Bot.Plugin.config[i] = config[i]
         }
         this.Bot.Log.logNotice('本地配置加载成功', this.Bot.Data.name)
       } catch {

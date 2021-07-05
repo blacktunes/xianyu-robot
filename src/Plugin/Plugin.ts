@@ -29,9 +29,13 @@ export abstract class BotPlugin {
    * 初始化方法
    * 该方法会在Bot初始化完成后执行，请勿重复执行
    */
-  init(): void | Promise<void> {}
+  init(): void | Promise<void> { }
   /**
    * debug本文输出
    */
-  debug(): void {}
+  debug(): void { }
+  /**
+   * 插件配置
+   */
+  readonly config: { [name: string]: any } = {}
 }

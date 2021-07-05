@@ -8,21 +8,6 @@ export class Data {
 
   private Bot: Bot
 
-  private _debug: boolean
-
-  set debug(debug: boolean) {
-    this._debug = debug
-    if (this.debug) {
-      this.Bot.Log.logWarning(`已开启debug模式，所有api调用都不会真正执行`, 'DEBUG')
-    }
-  }
-  /**
-   * 是否为调试模式
-   */
-  get debug() {
-    return this._debug
-  }
-
   /**
    * Bot名称
    */
@@ -42,7 +27,7 @@ export class Data {
   /**
    * 更新群名缓存
    */
-  async updateGroupsList() {
+  async updateGroupsList(): Promise<void> {
     const list = await this.Bot.Api.getGroupList()
     list.forEach(group => {
       this.groupList[group.group_id] = group.group_name
@@ -61,7 +46,7 @@ export class Data {
   /**
    * 更新指定群组群员昵称缓存
    */
-  async updateGroupMemberList(group_id: number) {
+  async updateGroupMemberList(group_id: number): Promise<void> {
     const list = await this.Bot.Api.getGroupMemberList(group_id)
     this.groupMemberList[group_id] = {}
     list.forEach(user => {
@@ -71,7 +56,7 @@ export class Data {
   /**
    * 更新所有群组群员昵称缓存
    */
-  async updateAllGroupMemberList() {
+  async updateAllGroupMemberList(): Promise<void> {
     for (const i in this.groupList) {
       await this.updateGroupMemberList(Number(i))
     }
@@ -84,7 +69,7 @@ export class Data {
   friendList: {
     [user_id: number]: string
   } = {}
-  async updateFriendList() {
+  async updateFriendList(): Promise<void> {
     const list = await this.Bot.Api.getFriendList()
     list.forEach(user => {
       this.friendList[user.user_id] = user.remark || user.nickname
@@ -104,7 +89,7 @@ export class Data {
   /**
    * 增加不显示Log输出的群组
    */
-  setNoLog(list: number[]) {
+  setNoLog(list: number[]): void {
     this.noLogList = new Set(([...this.noLogList, ...list]))
   }
 
@@ -120,13 +105,13 @@ export class Data {
       }
     })
   }
-  get noCommList() {
+  get noCommList(): Set<number> {
     return this._noCommList
   }
   /**
    * 增加不启用内置指令的群组
    */
-  setNoComm(list: number[]) {
+  setNoComm(list: number[]): void {
     this.noCommList = new Set(([...this._noCommList, ...list]))
   }
 }

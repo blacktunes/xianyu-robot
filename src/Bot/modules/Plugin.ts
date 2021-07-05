@@ -24,16 +24,16 @@ export class Plugin {
    */
   config: PluginConfig = {}
 
-  setConfig<T>(name: string, config: T) {
+  setConfig<T>(name: string, config: T): void {
     this.config[name] = {
       ...config
     }
   }
 
-  saveConfig() {
+  saveConfig(): void {
     if (this.dirname) {
       try {
-        fs.writeJSONSync(path.join(this.dirname, `./${this.Bot.Data.userId}-config.json`), this.config, {
+        fs.writeJSONSync(path.join(this.dirname, `./${this.Bot.Data.name}-config.json`), this.config, {
           spaces: 2
         })
       } catch (err) {
@@ -43,10 +43,10 @@ export class Plugin {
     }
   }
 
-  getPlugin<T extends ClassPlugin | AnonymousPlugin>(name: string) {
-    const plugin = this.list.find(i => i.name === name) as T
+  getPlugin<T extends ClassPlugin | AnonymousPlugin>(name: string): Omit<T, 'init'> | undefined {
+    const plugin = this.list.find(i => i.name === name)
     if (plugin) {
-      return plugin as Omit<T, 'init'>
+      return plugin as T as Omit<T, 'init'>
     } else {
       this.Bot.Log.logDebug(`未找到 ${name}`, '插件')
       return undefined
