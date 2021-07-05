@@ -12,7 +12,7 @@ export class Command {
   private group: string
 
   private _whitelist: Set<number> = new Set<number>()
-  set whitelist(list: number[]) {
+  private set whitelist(list: number[]) {
     this._whitelist = new Set(([...this._whitelist, ...list]))
     this.Bot.Command.list.forEach(item => {
       if (item.group === this.group) {
@@ -20,16 +20,6 @@ export class Command {
       }
     })
   }
-  private _blacklist: Set<number> = new Set<number>()
-  set blacklist(list: number[]) {
-    this._blacklist = new Set(([...this._blacklist, ...list]))
-    this.Bot.Command.list.forEach(item => {
-      if (item.group === this.group) {
-        item.blacklist = new Set([...this._blacklist, ...item.blacklist])
-      }
-    })
-  }
-
   /**
    * 为插件指令增加白名单列表，请勿和黑名单同时使用
    */
@@ -43,6 +33,34 @@ export class Command {
     return this
   }
   /**
+   * 获取白名单
+   */
+  getWhitelist(): Readonly<number[]> {
+    return [...this._whitelist]
+  }
+  /**
+   * 移除白名单
+   */
+  removeWhitelist(list: number[] | readonly number[]) {
+    for (const id of list) {
+      this.Bot.Command.list.forEach(item => {
+        if (item.group === this.group) {
+          item.whitelist.delete(id)
+        }
+      })
+    }
+  }
+
+  private _blacklist: Set<number> = new Set<number>()
+  private set blacklist(list: number[]) {
+    this._blacklist = new Set(([...this._blacklist, ...list]))
+    this.Bot.Command.list.forEach(item => {
+      if (item.group === this.group) {
+        item.blacklist = new Set([...this._blacklist, ...item.blacklist])
+      }
+    })
+  }
+  /**
    * 为插件指令增加黑名单列表，请勿和白名单同时使用
    */
   black(list: number[]) {
@@ -53,6 +71,24 @@ export class Command {
     }
     this.blacklist = list
     return this
+  }
+  /**
+   * 获取黑名单
+   */
+  getBlacklist(): readonly number[] {
+    return [...this._blacklist]
+  }
+  /**
+   * 移除黑名单
+   */
+  removeBlacklist(list: number[]| readonly number[]) {
+    for (const id of list) {
+      this.Bot.Command.list.forEach(item => {
+        if (item.group === this.group) {
+          item.blacklist.delete(id)
+        }
+      })
+    }
   }
 
   /**
