@@ -15,10 +15,10 @@ interface NextMessageEvent {
 }
 
 export class Connect {
-  constructor(option?: WebSocketConfig) {
-    if (option) {
-      for (const key in option) {
-        this[key] = option[key]
+  constructor(config?: WebSocketConfig) {
+    if (config) {
+      for (const key in config) {
+        this[key] = config[key]
       }
     }
     this.connect()
@@ -64,6 +64,9 @@ export class Connect {
   }
 
   private handleMessage = async (data: any) => {
+    if (!data.message_type) {
+      PrintLog.logWarning(`收到无效事件 ${white(data.toString())}`, 'WS')
+    }
     for (const event of this.messageLogEvent) {
       if (event.type === `message.${data.message_type}`) {
         if (await event.fn(data)) return
