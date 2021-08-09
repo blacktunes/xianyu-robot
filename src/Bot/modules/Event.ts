@@ -109,7 +109,7 @@ export class Event {
           const operator_name = this.Bot.Data.groupMemberList[event.group_id] ? magenta(this.Bot.Data.groupMemberList[event.group_id][event.operator_id] || '') : ''
           const operator_id = magenta(event.operator_id.toString())
           const message_id = magenta(event.message_id.toString())
-          this.Bot.Log.logWarning(`群${group_name}(${group_id}) - ${operator_name}(${operator_id}) 撤回了 ${user_name}(${user_id}) 的一条消息 (${message_id})`, 'EVENT')
+          this.Bot.Log.logWarning(`群${group_name}(${group_id}) - ${operator_name}(${operator_id}) 撤回了${event.operator_id === event.user_id ? '' : ` ${user_name}(${user_id}) 的`}一条消息 (${message_id})`, 'EVENT')
         })
         .on('notice.friend_recall', event => {
           const user_name = magenta(this.Bot.Data.friendList[event.user_id] || '')

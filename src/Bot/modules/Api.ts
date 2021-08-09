@@ -80,10 +80,10 @@ export class Api {
     const group_name = white(this.Bot.Data.groupList[group_id] || '')
 
     if (result.status === 'ok') {
-      this.Bot.Log.logInfoSend(`发送消息至群 ${group_name}${white(this.Bot.Data.groupList[group_id] || '')}(${white(group_id.toString())}): ${white(logMsg)} (${result.data.message_id})`, 'API')
+      this.Bot.Log.logInfoSend(`发送消息至群 ${group_name}(${white(group_id.toString())}): ${white(logMsg)} (${result.data.message_id})`, 'API')
       return result.data.message_id
     } else {
-      this.Bot.Log.logError(`发送消息至群 ${group_name}${white(this.Bot.Data.groupList[group_id] || '')}(${white(group_id.toString())}): ${white(logMsg)} 失败 (${result.retcode})`, 'API')
+      this.Bot.Log.logError(`发送消息至群 ${group_name}(${white(group_id.toString())}): ${white(logMsg)} 失败 (${result.retcode})`, 'API')
       return result.retcode
     }
   }
@@ -107,10 +107,10 @@ export class Api {
     const group_name = white(this.Bot.Data.groupList[group_id] || '')
 
     if (result.status === 'ok') {
-      this.Bot.Log.logInfoSend(`发送合并转发至群 ${group_name}${white(this.Bot.Data.groupList[group_id] || '')}(${white(group_id.toString())})成功(${white(result.data.message_id.toString())})`, 'API')
+      this.Bot.Log.logInfoSend(`发送合并转发至群 ${group_name}(${white(group_id.toString())})成功(${white(result.data.message_id.toString())})`, 'API')
       return result.data.message_id
     } else {
-      this.Bot.Log.logError(`发送合并转发至群 ${group_name}${white(this.Bot.Data.groupList[group_id] || '')}(${white(group_id.toString())})失败`, 'API')
+      this.Bot.Log.logError(`发送合并转发至群 ${group_name}(${white(group_id.toString())})失败`, 'API')
       return result.retcode
     }
   }
