@@ -39,4 +39,4 @@ app.start()
 * [cq-websocket](https://github.com/momocow/node-cq-websocket)
 
 ### LICENSE
-若使用了本项目为**范本**开发项目或使用了项目代码请在**明显位置**声明**原作者**(https://github.com/blacktunes) 以及**本仓库**(https://github.com/blacktunes/xianyu-robot).
+本项目使用LGPL协议，仅作为库使用时不必开源，但出现对项目源码进行修改，则需要将你修改后的版本进行开源。
