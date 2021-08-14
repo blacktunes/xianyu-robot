@@ -1,5 +1,12 @@
 # Xianyu-robot(咸鱼王)
 
+## [4.13.2](https://github.com/blacktunes/xianyu-robot/compare/v4.13.1...v4.13.2) (2021-08-14)
+
+
+### 🐛 Bug 修复
+
+* 修复一些问题 ([a8fdb0a](https://github.com/blacktunes/xianyu-robot/commit/a8fdb0a))
+
 ## [4.13.1](https://github.com/blacktunes/xianyu-robot/compare/v4.13.0...v4.13.1) (2021-08-09)
 
 
