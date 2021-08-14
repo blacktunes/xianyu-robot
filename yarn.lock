@@ -4691,6 +4691,11 @@ mysql@^2.18.1:
     safe-buffer "5.1.2"
     sqlstring "2.3.1"
 
+named-regexp-groups@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.npmjs.org/named-regexp-groups/-/named-regexp-groups-1.0.5.tgz#14d1e45c2dfa6e0d7359265509f8305a5e02a1ba"
+  integrity sha512-oK8TaLTXw4dIUOvbxGAO+OZf8b+69DZgcZMbbfTX6GCzjm4vcc+8VrdZoHpttdJTVeuCV3aQVjKfv7k8Q5SLSg==
+
 nan@^2.12.1:
   version "2.14.2"
   resolved "https://registry.npmjs.org/nan/-/nan-2.14.2.tgz#f5376400695168f4cc694ac9393d0c9585eeea19"

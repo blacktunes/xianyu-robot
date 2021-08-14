@@ -140,7 +140,7 @@ export class App {
    * @param debug 是否开启debug
    * @param showLog 是否在控制台输出日志
    */
-  start(ws: WebSocketConfig, debug = false, showLog: boolean = true): Promise<Bot> {
+  start(ws: WebSocketConfig = {}, debug = false, showLog: boolean = true): Promise<Bot> {
     if (this.isStart) {
       this.Bot.Log.logWarning('请勿重复启动', this.Bot.Data.name)
       return
