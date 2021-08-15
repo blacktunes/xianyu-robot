@@ -1,5 +1,12 @@
 # Xianyu-robot(咸鱼王)
 
+# [4.14.0](https://github.com/blacktunes/xianyu-robot/compare/v4.13.2...v4.14.0) (2021-08-15)
+
+
+### ✨ 新功能
+
+* 增加配置文件是否保存本地选项 ([6ad5759](https://github.com/blacktunes/xianyu-robot/commit/6ad5759))
+
 ## [4.13.2](https://github.com/blacktunes/xianyu-robot/compare/v4.13.1...v4.13.2) (2021-08-14)
 
 
