@@ -15,10 +15,14 @@ export class App {
    * BOT构造函数
    * @param name 插件名
    * @param dirname 插件设置保存位置
+   * @param saveConfig 是否保存插件设置到本地
    */
-  constructor(name: string = 'Bot', dirname: string = require.main.path) {
-    const dir = join(dirname, '../config/')
-    if (dirname) {
+  constructor(name: string = 'Bot', dirname?: string, saveConfig: boolean = true) {
+    let dir: string
+    if (saveConfig) {
+      if (!dirname) {
+        dir = join(require.main.path, '../config/')
+      }
       if (!existsSync(dir)) {
         mkdirSync(dir)
       }
