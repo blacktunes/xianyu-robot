@@ -19,7 +19,7 @@ export class App {
    */
   constructor(name: string = 'Bot', dirname?: string | false) {
     let dir: string = null
-    if (dirname === false) {
+    if (dirname !== false) {
       if (!dirname) {
         dir = join(require.main.path, '../config/')
       } else {

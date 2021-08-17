@@ -32,10 +32,10 @@ export class Plugin {
 
   saveConfig(): void {
     if (this.dirname) {
-      if (!existsSync(this.dirname)) {
-        mkdirSync(this.dirname)
-      }
       try {
+        if (!existsSync(this.dirname)) {
+          mkdirSync(this.dirname)
+        }
         writeJSONSync(path.join(this.dirname, `./${this.Bot.Data.name}-config.json`), this.config, {
           spaces: 2
         })
