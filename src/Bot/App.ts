@@ -1,5 +1,5 @@
 import { magenta, white, yellow } from 'colors'
-import { existsSync, mkdirSync, readJSONSync } from 'fs-extra'
+import { existsSync, readJSONSync } from 'fs-extra'
 import { cpu, mem } from 'node-os-utils'
 import { join } from 'path'
 import { secondsFormat } from '..'
@@ -17,14 +17,13 @@ export class App {
    * @param dirname 插件设置保存位置
    * @param saveConfig 是否保存插件设置到本地
    */
-  constructor(name: string = 'Bot', dirname?: string, saveConfig: boolean = true) {
-    let dir: string
-    if (saveConfig) {
+  constructor(name: string = 'Bot', dirname?: string | false) {
+    let dir: string = null
+    if (dirname === false) {
       if (!dirname) {
         dir = join(require.main.path, '../config/')
-      }
-      if (!existsSync(dir)) {
-        mkdirSync(dir)
+      } else {
+        dir = dirname
       }
     }
     this.Bot = new Bot(name, dir)
@@ -262,17 +261,17 @@ export class App {
       }
     })
 
-    let config: any = {}
-    const configPath = join(this.Bot.Plugin.dirname, `./${this.Bot.Data.name}-config.json`)
-    if (existsSync(configPath)) {
-      try {
-        config = readJSONSync(configPath)
-        for (let i in config) {
-          this.Bot.Plugin.config[i] = config[i]
+    if (this.Bot.Plugin.dirname) {
+      let config: any = {}
+      const configPath = join(this.Bot.Plugin.dirname, `./${this.Bot.Data.name}-config.json`)
+      if (existsSync(configPath)) {
+        try {
+          config = readJSONSync(configPath)
+          this.Bot.Plugin.config = {...this.Bot.Plugin.config, ...config}
+          this.Bot.Log.logNotice('本地配置加载成功', this.Bot.Data.name)
+        } catch {
+          this.Bot.Log.logError('本地配置加载失败', this.Bot.Data.name)
         }
-        this.Bot.Log.logNotice('本地配置加载成功', this.Bot.Data.name)
-      } catch {
-        this.Bot.Log.logError('本地配置加载失败', this.Bot.Data.name)
       }
     }
 
