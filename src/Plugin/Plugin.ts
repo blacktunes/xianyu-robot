@@ -30,12 +30,4 @@ export abstract class BotPlugin {
    * 该方法会在Bot初始化完成后执行，请勿重复执行
    */
   init(): void | Promise<void> { }
-  /**
-   * debug本文输出
-   */
-  debug(): void { }
-  /**
-   * 插件配置
-   */
-  readonly config: { [name: string]: any } = {}
 }
