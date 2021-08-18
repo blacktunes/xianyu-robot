@@ -5,13 +5,13 @@
 
 **客户端请使用[go-cqhttp](https://github.com/Mrs4s/go-cqhttp)**
 
-#### 安装方法
+### 安装方法
 ```sh
 npm install -S xianyu-robot
 # yarn add xianyu-robot
 ```
 
-#### 使用方法
+### 使用方法
 推荐使用`TypeScript`开发以获得较为完整的类型提示
 ``` ts
 // TypeScript
@@ -29,11 +29,14 @@ const app = new App()
 app.start()
 ```
 
-#### 文档
+也可以考虑使用带插件的封装版本(**开发中**)
+ - [咸鱼Bot](https://github.com/blacktunes/xianyu-bot)
+
+### 文档
 [详细文档](https://blacktunes.github.io/xianyu-robot-doc/)
 
 
-#### 项目参考
+### 项目参考
 开发中大量参考了以下项目，在此表示感谢
 * [node-cq-robot](https://github.com/CaoMeiYouRen/node-cq-robot)
 * [cq-websocket](https://github.com/momocow/node-cq-websocket)
