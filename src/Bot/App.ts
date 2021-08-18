@@ -37,13 +37,13 @@ export class App {
       try {
         if (existsSync(jsonPath)) {
           const config = readJSONSync(jsonPath)
-          this.Bot.Plugin.config = config
+          this.Bot.Plugin.config = { ...this.Bot.Plugin.config, ...config }
           this.Bot.Log.logNotice('本地配置加载成功', this.Bot.Data.name)
           removeSync(jsonPath)
           writeSync(ymlPath, config)
         } else if (existsSync(ymlPath)) {
           const config = readSync(ymlPath)
-          this.Bot.Plugin.config = config
+          this.Bot.Plugin.config = { ...this.Bot.Plugin.config, ...config }
           this.Bot.Log.logNotice('本地配置加载成功', this.Bot.Data.name)
         }
       } catch {
