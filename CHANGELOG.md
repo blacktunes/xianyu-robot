@@ -1,5 +1,12 @@
 # Xianyu-robot(咸鱼王)
 
+# [4.15.0](https://github.com/blacktunes/xianyu-robot/compare/v4.14.2...v4.15.0) (2021-08-18)
+
+
+### ✨ 新功能
+
+* 完善本地配置相关功能 ([1165c14](https://github.com/blacktunes/xianyu-robot/commit/1165c14))
+
 ## [4.14.2](https://github.com/blacktunes/xianyu-robot/compare/v4.14.1...v4.14.2) (2021-08-17)
 
 
