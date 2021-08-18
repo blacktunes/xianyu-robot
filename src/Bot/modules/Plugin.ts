@@ -1,12 +1,14 @@
-import { existsSync, mkdirSync, writeJSONSync } from 'fs-extra'
+import { existsSync, mkdirSync } from 'fs-extra'
+import { writeSync } from 'node-yaml'
 import { AnonymousPlugin, BotPlugin as ClassPlugin, PluginConfig } from '../..'
 import { Bot } from '../Bot'
 import path = require('path')
-
+import { merge } from 'lodash'
 export class Plugin {
-  constructor(bot: Bot, dir: string) {
+  constructor(bot: Bot, dir: string, filename: string) {
     this.Bot = bot
     this.dirname = dir
+    this.filename = filename
   }
   private Bot: Bot
 
@@ -20,13 +22,25 @@ export class Plugin {
    */
   readonly dirname: string
   /**
+   * 本地设置文件名
+   */
+  readonly filename: string
+  /**
    * 插件设置
    */
-  config: PluginConfig = {}
+  config: PluginConfig = { config: {} }
 
   setConfig<T>(name: string, config: T): void {
-    this.config[name] = {
-      ...config
+    this.config.config[name] = merge(config, this.config.config[name])
+  }
+
+  getConfig<T>(name: string): T
+  getConfig<T extends { [key: string]: any }, K extends string>(name: string, key: K): T[K]
+  getConfig(name: string, key?: string) {
+    if (key) {
+      return this.config.config[name] && this.config.config[name][key] ? this.config.config[name][key] : null
+    } else {
+      return this.config.config[name] ? this.config.config[name] : null
     }
   }
 
@@ -36,12 +50,10 @@ export class Plugin {
         if (!existsSync(this.dirname)) {
           mkdirSync(this.dirname)
         }
-        writeJSONSync(path.join(this.dirname, `./${this.Bot.Data.name}-config.json`), this.config, {
-          spaces: 2
-        })
+        writeSync(path.join(this.dirname, `./${this.filename}.yml`), this.config)
       } catch (err) {
         console.error(err)
-        this.Bot.Log.logError('数据未写入JSON', '插件')
+        this.Bot.Log.logError('插件配置未保存', '插件')
       }
     }
   }

@@ -10,9 +10,9 @@ import { Event } from './modules/Event'
 import { Plugin } from './modules/Plugin'
 
 export class Bot {
-  constructor(name: string, dirname: string) {
+  constructor(name: string, dirname: string, filename: string) {
     this.Data = new Data(this, name)
-    this.Plugin = new Plugin(this, dirname)
+    this.Plugin = new Plugin(this, dirname, filename)
     this.Admin = new Admin(this)
     this.Command = new Command(this)
     this.Debug = new Debug(this)

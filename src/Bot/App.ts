@@ -1,6 +1,7 @@
 import { magenta, white, yellow } from 'colors'
-import { existsSync, readJSONSync } from 'fs-extra'
+import { existsSync, readJSONSync, removeSync } from 'fs-extra'
 import { cpu, mem } from 'node-os-utils'
+import { readSync, writeSync } from 'node-yaml'
 import { join } from 'path'
 import { secondsFormat } from '..'
 import { Connect } from '../Connect/Connect'
@@ -15,9 +16,8 @@ export class App {
    * BOT构造函数
    * @param name 插件名
    * @param dirname 插件设置保存位置
-   * @param saveConfig 是否保存插件设置到本地
    */
-  constructor(name: string = 'Bot', dirname?: string | false) {
+  constructor(name: string = 'Bot', dirname?: string | false, filename?: string) {
     let dir: string = null
     if (dirname !== false) {
       if (!dirname) {
@@ -26,7 +26,30 @@ export class App {
         dir = dirname
       }
     }
-    this.Bot = new Bot(name, dir)
+    if (!filename) {
+      filename = `${name}-config`
+    }
+    this.Bot = new Bot(name, dir, filename)
+
+    if (dir) {
+      const jsonPath = join(dir, `./${filename}.json`)
+      const ymlPath = join(dir, `./${filename}.yml`)
+      try {
+        if (existsSync(jsonPath)) {
+          const config = readJSONSync(jsonPath)
+          this.Bot.Plugin.config = config
+          this.Bot.Log.logNotice('本地配置加载成功', this.Bot.Data.name)
+          removeSync(jsonPath)
+          writeSync(ymlPath, config)
+        } else if (existsSync(ymlPath)) {
+          const config = readSync(ymlPath)
+          this.Bot.Plugin.config = config
+          this.Bot.Log.logNotice('本地配置加载成功', this.Bot.Data.name)
+        }
+      } catch {
+        this.Bot.Log.logError('本地配置加载失败', this.Bot.Data.name)
+      }
+    }
   }
 
   private isStart = false
@@ -260,20 +283,6 @@ export class App {
         })
       }
     })
-
-    if (this.Bot.Plugin.dirname) {
-      let config: any = {}
-      const configPath = join(this.Bot.Plugin.dirname, `./${this.Bot.Data.name}-config.json`)
-      if (existsSync(configPath)) {
-        try {
-          config = readJSONSync(configPath)
-          this.Bot.Plugin.config = {...this.Bot.Plugin.config, ...config}
-          this.Bot.Log.logNotice('本地配置加载成功', this.Bot.Data.name)
-        } catch {
-          this.Bot.Log.logError('本地配置加载失败', this.Bot.Data.name)
-        }
-      }
-    }
 
     await this.initPlugin()
     if (!this.Bot.Debug.debug) {
