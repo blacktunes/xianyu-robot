@@ -1,5 +1,13 @@
 # Xianyu-robot(咸鱼王)
 
+## [4.15.1](https://github.com/blacktunes/xianyu-robot/compare/v4.15.0...v4.15.1) (2021-08-18)
+
+
+### 🐛 Bug 修复
+
+* 修复本地配置格式错误导致的报错 ([a4ab539](https://github.com/blacktunes/xianyu-robot/commit/a4ab539))
+* 移除插件类无用属性 ([1488d46](https://github.com/blacktunes/xianyu-robot/commit/1488d46))
+
 # [4.15.0](https://github.com/blacktunes/xianyu-robot/compare/v4.14.2...v4.15.0) (2021-08-18)
 
 
