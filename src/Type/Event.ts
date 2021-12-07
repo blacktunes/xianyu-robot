@@ -74,7 +74,7 @@ export interface PrivateSender {
 }
 
 export type GroupMsg = _GroupMsg & {
-  nextMessage: (fn: (msg: string, event: GroupMsg, prevEvent: _GroupMsg) => Prevent) => void
+  nextMessage: (fn: (msg: string, event: GroupMsg) => Prevent) => void
 }
 
 // eslint-disable-next-line typescript/class-name-casing

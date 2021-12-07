@@ -9,7 +9,7 @@ export class Admin {
   constructor(bot: Bot) {
     this.Bot = bot
   }
-  private Bot: Bot
+  private Bot: Omit<Bot, 'Admin'>
 
   adminList: Set<number> = new Set<number>()
   addAdmin(admin_id: number[]) {

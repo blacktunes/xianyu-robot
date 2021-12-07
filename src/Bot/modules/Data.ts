@@ -6,7 +6,7 @@ export class Data {
     this.name = name
   }
 
-  private Bot: Bot
+  private Bot: Omit<Bot, 'Data'>
 
   /**
    * Bot名称

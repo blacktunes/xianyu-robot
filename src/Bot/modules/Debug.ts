@@ -7,7 +7,7 @@ export class Debug {
     this.Bot = Bot
   }
 
-  private Bot: Bot
+  private Bot: Omit<Bot, 'Debug'>
 
   private _debug: boolean
 

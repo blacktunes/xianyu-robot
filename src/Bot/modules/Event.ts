@@ -8,7 +8,7 @@ export class Event {
     this.Bot = Bot
     this.init()
   }
-  private Bot: Bot
+  private Bot: Omit<Bot, 'Event'>
 
   private init = () => {
     if (this.Bot.Data.showLog) {

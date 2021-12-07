@@ -8,7 +8,7 @@ export class Api {
     this.Bot = bot
   }
 
-  private Bot: Bot
+  private Bot: Omit<Bot, 'Api'>
 
   getApiStatus(): void {
     this.Bot.Conn.useAPI('get_status')

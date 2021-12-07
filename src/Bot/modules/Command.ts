@@ -7,7 +7,7 @@ export class Command {
   constructor(Bot: Bot) {
     this.Bot = Bot
   }
-  private Bot: Bot
+  private Bot: Omit<Bot, 'Command'>
   /**
    * 命令列表
    */
@@ -27,11 +27,11 @@ export class Command {
     const comm = new Comm(name)
     this.list.push(comm)
 
-    setCommLister(this.Bot, comm)
+    setCommLister(this.Bot as Bot, comm)
 
     this.Bot.Log.logNotice(`${comm.group ? `${yellow(comm.group)} - ` : ''}${yellow(name)} 已加载`, '指令')
 
-    return new SetComm(this.Bot, comm, repeat)
+    return new SetComm(this.Bot as Bot, comm, repeat)
   }
 }
 

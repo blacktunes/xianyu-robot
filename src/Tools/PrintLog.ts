@@ -53,6 +53,8 @@ export enum LogColor {
 }
 
 export class Log {
+  constructor(private name: string = '') { }
+
   private printLog(msg: string, level: LogColor = 0) {
     if (msg.length > 500) {
       msg = msg.slice(0, 500) + '...'
@@ -93,7 +95,7 @@ export class Log {
    * @param {string} content
    */
   sendLog(level: LogColor, content: string, type?: string) {
-    this.printLog(`${type ? `[${type}]` : '[日志]'} ${decode(content)}`, level)
+    this.printLog(`[${type || this.name || '日志'}] ${decode(content)}`, level)
   }
 
   /**

@@ -30,26 +30,6 @@ export class App {
       filename = `${name}-config`
     }
     this.Bot = new Bot(name, dir, filename)
-
-    if (dir) {
-      const jsonPath = join(dir, `./${filename}.json`)
-      const ymlPath = join(dir, `./${filename}.yml`)
-      try {
-        if (existsSync(jsonPath)) {
-          const config = readJSONSync(jsonPath)
-          this.Bot.Plugin.config = { ...this.Bot.Plugin.config, ...config }
-          this.Bot.Log.logNotice('本地配置加载成功', this.Bot.Data.name)
-          removeSync(jsonPath)
-          writeSync(ymlPath, config)
-        } else if (existsSync(ymlPath)) {
-          const config = readSync(ymlPath)
-          this.Bot.Plugin.config = { ...this.Bot.Plugin.config, ...config }
-          this.Bot.Log.logNotice('本地配置加载成功', this.Bot.Data.name)
-        }
-      } catch {
-        this.Bot.Log.logError('本地配置加载失败', this.Bot.Data.name)
-      }
-    }
   }
 
   private isStart = false
@@ -139,8 +119,8 @@ export class App {
    * @param plugin 插件类
    * @param config 插件设置
    */
-  plugin<T extends Plugin>(plugin: T, config?: ConstructorParameters<T>[1]): this
-  plugin<T extends Plugin>(plugin: T | PluginFunction, config?: ConstructorParameters<T>[1]): this {
+  plugin<T extends Plugin>(plugin: T, config?: InstanceType<T>['config']): this
+  plugin<T extends Plugin>(plugin: T | PluginFunction, config?: InstanceType<T>['config']): this {
     if (this.isStart) {
       this.Bot.Log.logWarning('请在应用启动前载入插件', this.Bot.Data.name)
       return this
@@ -271,7 +251,8 @@ export class App {
   private initBot = async (): Promise<void> => {
     this._pluginsList.forEach(item => {
       if (item.class) {
-        const _plugin = new (item.plugin as Plugin)(this.Bot, item.config)
+        const _plugin = new (item.plugin as Plugin)(this.Bot)
+        _plugin.setup(item.config)
         if (this.Bot.Plugin.list.some(i => i.name === _plugin.name)) {
           this.Bot.Log.logWarning(`发现重名插件 ${white(_plugin.name)}`, '插件')
         }
@@ -284,9 +265,30 @@ export class App {
       }
     })
 
+    if (this.Bot.Plugin.dirname) {
+      const jsonPath = join(this.Bot.Plugin.dirname, `./${this.Bot.Plugin.filename}.json`)
+      const ymlPath = join(this.Bot.Plugin.dirname, `./${this.Bot.Plugin.filename}.yml`)
+      try {
+        let config: { config: any } = { config: {} }
+        if (existsSync(jsonPath)) {
+          config = readJSONSync(jsonPath)
+          removeSync(jsonPath)
+          writeSync(ymlPath, config)
+        } else if (existsSync(ymlPath)) {
+          config = readSync(ymlPath)
+        }
+        for (const name in config.config) {
+          this.Bot.Plugin.setConfig(name, config.config[name])
+        }
+        this.Bot.Log.logNotice('本地配置加载成功', this.Bot.Data.name)
+      } catch {
+        this.Bot.Log.logError('本地配置加载失败', this.Bot.Data.name)
+      }
+    }
+
     await this.initPlugin()
+    this.Bot.Plugin.saveConfig()
     if (!this.Bot.Debug.debug) {
-      this.Bot.Plugin.saveConfig()
     }
   }
 

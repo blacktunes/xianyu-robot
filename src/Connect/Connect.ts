@@ -11,7 +11,7 @@ interface NextMessageEvent {
   type: string
   group_id?: number
   user_id: number
-  fn: (e: any) => Promise<void> | void
+  fn: (e: any) => Promise<Prevent> | Prevent
 }
 
 export class Connect {
@@ -55,9 +55,7 @@ export class Connect {
         group_id: data['group_id'] || null,
         user_id: data.user_id,
         fn: async (e) => {
-          if (!(await fn(e.message, e, data))) {
-            delete this.nextMessageEventList[id]
-          }
+          return await fn(e.message, e, data)
         }
       }
     }
@@ -76,13 +74,15 @@ export class Connect {
       data.nextMessage = this.setNextMessage(data, this.nextMessageEventList[i])
       if (this.nextMessageEventList[i].type === 'message.private') {
         if (this.nextMessageEventList[i].user_id === data.sender.user_id) {
-          await this.nextMessageEventList[i].fn(data)
-          return
+          const flag = await this.nextMessageEventList[i].fn(data)
+          delete this.nextMessageEventList[i]
+          if (flag) return
         }
       } else if (this.nextMessageEventList[i].type === 'message.group') {
         if (this.nextMessageEventList[i].user_id === data.sender.user_id && this.nextMessageEventList[i].group_id === data.group_id) {
-          await this.nextMessageEventList[i].fn(data)
-          return
+          const flag = await this.nextMessageEventList[i].fn(data)
+          delete this.nextMessageEventList[i]
+          if (flag) return
         }
       }
     }
