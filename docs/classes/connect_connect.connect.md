@@ -368,7 +368,7 @@ ___
 
 **Returns:** *Promise*<void\>
 
-Defined in: Connect/Connect.ts:66
+Defined in: Connect/Connect.ts:64
 
 ___
 

@@ -6,4 +6,20 @@
 
 ## Indexable
 
-▪ [name: *string*]: *any*
+▪ [key: *string*]: *any*
+
+## Table of contents
+
+### Properties
+
+- [config](type_bot.pluginconfig.md#config)
+
+## Properties
+
+### config
+
+• **config**: *object*
+
+#### Type declaration:
+
+Defined in: Type/Bot.ts:12

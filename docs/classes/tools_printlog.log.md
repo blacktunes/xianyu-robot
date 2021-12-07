@@ -27,9 +27,17 @@
 
 ### constructor
 
-\+ **new Log**(): [*Log*](tools_printlog.log.md)
+\+ **new Log**(`name?`: *string*): [*Log*](tools_printlog.log.md)
+
+#### Parameters:
+
+| Name | Type | Default value |
+| :------ | :------ | :------ |
+| `name` | *string* | '' |
 
 **Returns:** [*Log*](tools_printlog.log.md)
+
+Defined in: Tools/PrintLog.ts:55
 
 ## Methods
 
@@ -48,7 +56,7 @@
 
 **Returns:** *void*
 
-Defined in: Tools/PrintLog.ts:104
+Defined in: Tools/PrintLog.ts:106
 
 ___
 
@@ -67,7 +75,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: Tools/PrintLog.ts:158
+Defined in: Tools/PrintLog.ts:160
 
 ___
 
@@ -86,7 +94,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: Tools/PrintLog.ts:167
+Defined in: Tools/PrintLog.ts:169
 
 ___
 
@@ -105,7 +113,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: Tools/PrintLog.ts:113
+Defined in: Tools/PrintLog.ts:115
 
 ___
 
@@ -124,7 +132,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: Tools/PrintLog.ts:122
+Defined in: Tools/PrintLog.ts:124
 
 ___
 
@@ -143,7 +151,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: Tools/PrintLog.ts:131
+Defined in: Tools/PrintLog.ts:133
 
 ___
 
@@ -162,7 +170,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: Tools/PrintLog.ts:140
+Defined in: Tools/PrintLog.ts:142
 
 ___
 
@@ -181,7 +189,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: Tools/PrintLog.ts:149
+Defined in: Tools/PrintLog.ts:151
 
 ___
 
@@ -198,7 +206,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: Tools/PrintLog.ts:56
+Defined in: Tools/PrintLog.ts:58
 
 ___
 
@@ -218,4 +226,4 @@ ___
 
 **Returns:** *void*
 
-Defined in: Tools/PrintLog.ts:95
+Defined in: Tools/PrintLog.ts:97

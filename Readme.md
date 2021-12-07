@@ -29,9 +29,6 @@ const app = new App()
 app.start()
 ```
 
-也可以考虑使用带插件的封装版本(**开发中**)
- - [咸鱼Bot](https://github.com/blacktunes/xianyu-bot)
-
 ### 文档
 [详细文档](https://blacktunes.github.io/xianyu-robot-doc/)
 

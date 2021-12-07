@@ -73,7 +73,7 @@ Defined in: Bot/modules/Api.ts:6
 
 ### Bot
 
-• `Private` **Bot**: [*Bot*](bot_bot.bot.md)
+• `Private` **Bot**: *Pick*<[*Bot*](bot_bot.bot.md), ``"Admin"`` \| ``"Data"`` \| ``"Log"`` \| ``"CQCode"`` \| ``"Plugin"`` \| ``"Command"`` \| ``"Conn"`` \| ``"Event"`` \| ``"Debug"``\>
 
 Defined in: Bot/modules/Api.ts:11
 

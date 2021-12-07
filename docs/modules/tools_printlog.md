@@ -22,4 +22,4 @@
 
 • `Const` **PrintLog**: [*Log*](../classes/tools_printlog.log.md)
 
-Defined in: Tools/PrintLog.ts:172
+Defined in: Tools/PrintLog.ts:174

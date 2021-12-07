@@ -17,7 +17,7 @@
 
 • **init**: [*PluginFunction*](../modules/type_bot.md#pluginfunction)
 
-Defined in: Type/Bot.ts:22
+Defined in: Type/Bot.ts:25
 
 ___
 
@@ -25,4 +25,4 @@ ___
 
 • **name**: ``"匿名插件"``
 
-Defined in: Type/Bot.ts:21
+Defined in: Type/Bot.ts:24

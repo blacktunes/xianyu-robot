@@ -9,6 +9,7 @@
 - [Anonymous](index.md#anonymous)
 - [AnonymousPlugin](index.md#anonymousplugin)
 - [ApiRes](index.md#apires)
+- [Bot](index.md#bot)
 - [BotPlugin](index.md#botplugin)
 - [CQMessage](index.md#cqmessage)
 - [ClientStatus](index.md#clientstatus)
@@ -84,6 +85,12 @@ ___
 ### ApiRes
 
 Re-exports: [ApiRes](../interfaces/type_bot.apires.md)
+
+___
+
+### Bot
+
+Re-exports: [Bot](../classes/bot_bot.bot.md)
 
 ___
 

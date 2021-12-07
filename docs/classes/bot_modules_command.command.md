@@ -39,7 +39,7 @@ Defined in: Bot/modules/Command.ts:6
 
 ### Bot
 
-• `Private` **Bot**: [*Bot*](bot_bot.bot.md)
+• `Private` **Bot**: *Pick*<[*Bot*](bot_bot.bot.md), ``"Admin"`` \| ``"Data"`` \| ``"Log"`` \| ``"CQCode"`` \| ``"Plugin"`` \| ``"Conn"`` \| ``"Api"`` \| ``"Event"`` \| ``"Debug"``\>
 
 Defined in: Bot/modules/Command.ts:10
 

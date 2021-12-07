@@ -13,12 +13,13 @@
 ### Properties
 
 - [Bot](bot_modules_plugin.plugin.md#bot)
-- [config](bot_modules_plugin.plugin.md#config)
 - [dirname](bot_modules_plugin.plugin.md#dirname)
+- [filename](bot_modules_plugin.plugin.md#filename)
 - [list](bot_modules_plugin.plugin.md#list)
 
 ### Methods
 
+- [getConfig](bot_modules_plugin.plugin.md#getconfig)
 - [getPlugin](bot_modules_plugin.plugin.md#getplugin)
 - [saveConfig](bot_modules_plugin.plugin.md#saveconfig)
 - [setConfig](bot_modules_plugin.plugin.md#setconfig)
@@ -27,7 +28,7 @@
 
 ### constructor
 
-\+ **new Plugin**(`bot`: [*Bot*](bot_bot.bot.md), `dir`: *string*): [*Plugin*](bot_modules_plugin.plugin.md)
+\+ **new Plugin**(`bot`: [*Bot*](bot_bot.bot.md), `dir`: *string*, `filename`: *string*): [*Plugin*](bot_modules_plugin.plugin.md)
 
 #### Parameters:
 
@@ -35,28 +36,19 @@
 | :------ | :------ |
 | `bot` | [*Bot*](bot_bot.bot.md) |
 | `dir` | *string* |
+| `filename` | *string* |
 
 **Returns:** [*Plugin*](bot_modules_plugin.plugin.md)
 
-Defined in: Bot/modules/Plugin.ts:6
+Defined in: Bot/modules/Plugin.ts:8
 
 ## Properties
 
 ### Bot
 
-• `Private` **Bot**: [*Bot*](bot_bot.bot.md)
+• `Private` **Bot**: *Pick*<[*Bot*](bot_bot.bot.md), ``"Admin"`` \| ``"Data"`` \| ``"Log"`` \| ``"CQCode"`` \| ``"Command"`` \| ``"Conn"`` \| ``"Api"`` \| ``"Event"`` \| ``"Debug"``\>
 
-Defined in: Bot/modules/Plugin.ts:11
-
-___
-
-### config
-
-• **config**: [*PluginConfig*](../interfaces/type_bot.pluginconfig.md)= {}
-
-插件设置
-
-Defined in: Bot/modules/Plugin.ts:25
+Defined in: Bot/modules/Plugin.ts:14
 
 ___
 
@@ -66,7 +58,17 @@ ___
 
 本地设置保存位置
 
-Defined in: Bot/modules/Plugin.ts:21
+Defined in: Bot/modules/Plugin.ts:24
+
+___
+
+### filename
+
+• `Readonly` **filename**: *string*
+
+本地设置文件名
+
+Defined in: Bot/modules/Plugin.ts:28
 
 ___
 
@@ -76,9 +78,51 @@ ___
 
 插件列表
 
-Defined in: Bot/modules/Plugin.ts:16
+Defined in: Bot/modules/Plugin.ts:19
 
 ## Methods
+
+### getConfig
+
+▸ **getConfig**<T\>(`name`: *string*): T
+
+#### Type parameters:
+
+| Name |
+| :------ |
+| `T` |
+
+#### Parameters:
+
+| Name | Type |
+| :------ | :------ |
+| `name` | *string* |
+
+**Returns:** T
+
+Defined in: Bot/modules/Plugin.ts:37
+
+▸ **getConfig**<T, K\>(`name`: *string*, `key`: K): T[K]
+
+#### Type parameters:
+
+| Name | Type |
+| :------ | :------ |
+| `T` | *object* |
+| `K` | *string* |
+
+#### Parameters:
+
+| Name | Type |
+| :------ | :------ |
+| `name` | *string* |
+| `key` | K |
+
+**Returns:** T[K]
+
+Defined in: Bot/modules/Plugin.ts:38
+
+___
 
 ### getPlugin
 
@@ -98,7 +142,7 @@ Defined in: Bot/modules/Plugin.ts:16
 
 **Returns:** *Pick*<T, Exclude<keyof T, ``"init"``\>\>
 
-Defined in: Bot/modules/Plugin.ts:46
+Defined in: Bot/modules/Plugin.ts:72
 
 ___
 
@@ -108,27 +152,21 @@ ___
 
 **Returns:** *void*
 
-Defined in: Bot/modules/Plugin.ts:33
+Defined in: Bot/modules/Plugin.ts:48
 
 ___
 
 ### setConfig
 
-▸ **setConfig**<T\>(`name`: *string*, `config`: T): *void*
-
-#### Type parameters:
-
-| Name |
-| :------ |
-| `T` |
+▸ **setConfig**(`name`: *any*, `config`: *any*): *void*
 
 #### Parameters:
 
 | Name | Type |
 | :------ | :------ |
-| `name` | *string* |
-| `config` | T |
+| `name` | *any* |
+| `config` | *any* |
 
 **Returns:** *void*
 
-Defined in: Bot/modules/Plugin.ts:27
+Defined in: Bot/modules/Plugin.ts:30

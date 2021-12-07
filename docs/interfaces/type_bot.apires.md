@@ -19,7 +19,7 @@
 
 • `Optional` **data**: *any*
 
-Defined in: Type/Bot.ts:52
+Defined in: Type/Bot.ts:55
 
 ___
 
@@ -27,7 +27,7 @@ ___
 
 • `Optional` **msg**: *string*
 
-Defined in: Type/Bot.ts:55
+Defined in: Type/Bot.ts:58
 
 ___
 
@@ -35,7 +35,7 @@ ___
 
 • **retcode**: *number*
 
-Defined in: Type/Bot.ts:53
+Defined in: Type/Bot.ts:56
 
 ___
 
@@ -43,4 +43,4 @@ ___
 
 • **status**: *string*
 
-Defined in: Type/Bot.ts:54
+Defined in: Type/Bot.ts:57

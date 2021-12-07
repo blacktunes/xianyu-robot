@@ -56,7 +56,7 @@ Defined in: Bot/modules/Data.ts:3
 
 ### Bot
 
-• `Private` **Bot**: [*Bot*](bot_bot.bot.md)
+• `Private` **Bot**: *Pick*<[*Bot*](bot_bot.bot.md), ``"Admin"`` \| ``"Log"`` \| ``"CQCode"`` \| ``"Plugin"`` \| ``"Command"`` \| ``"Conn"`` \| ``"Api"`` \| ``"Event"`` \| ``"Debug"``\>
 
 Defined in: Bot/modules/Data.ts:9
 

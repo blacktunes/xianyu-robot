@@ -36,7 +36,7 @@
 
 ### GroupMsg
 
-Ƭ **GroupMsg**: [*\_GroupMsg*](../interfaces/type_event._groupmsg.md) & { `nextMessage`: (`fn`: (`msg`: *string*, `event`: [*GroupMsg*](type_event.md#groupmsg), `prevEvent`: [*\_GroupMsg*](../interfaces/type_event._groupmsg.md)) => [*Prevent*](type_bot.md#prevent)) => *void*  }
+Ƭ **GroupMsg**: [*\_GroupMsg*](../interfaces/type_event._groupmsg.md) & { `nextMessage`: (`fn`: (`msg`: *string*, `event`: [*GroupMsg*](type_event.md#groupmsg)) => [*Prevent*](type_bot.md#prevent)) => *void*  }
 
 Defined in: Type/Event.ts:76
 

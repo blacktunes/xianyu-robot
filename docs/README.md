@@ -7,13 +7,13 @@ xianyu-robot / [Exports](modules.md)
 
 **客户端请使用[go-cqhttp](https://github.com/Mrs4s/go-cqhttp)**
 
-#### 安装方法
+### 安装方法
 ```sh
 npm install -S xianyu-robot
 # yarn add xianyu-robot
 ```
 
-#### 使用方法
+### 使用方法
 推荐使用`TypeScript`开发以获得较为完整的类型提示
 ``` ts
 // TypeScript
@@ -31,13 +31,13 @@ const app = new App()
 app.start()
 ```
 
-#### 文档
+### 文档
 [详细文档](https://blacktunes.github.io/xianyu-robot-doc/)
 
-#### 项目参考
+### 项目参考
 开发中大量参考了以下项目，在此表示感谢
 * [node-cq-robot](https://github.com/CaoMeiYouRen/node-cq-robot)
 * [cq-websocket](https://github.com/momocow/node-cq-websocket)
 
 ### LICENSE
-若使用了本项目为**范本**开发项目或使用了项目代码请在**明显位置**声明**原作者**(https://github.com/blacktunes) 以及**本仓库**(https://github.com/blacktunes/xianyu-robot).
+本项目使用LGPL协议，仅作为库使用时不必开源，但出现对项目源码进行修改，则需要将你修改后的版本进行开源。

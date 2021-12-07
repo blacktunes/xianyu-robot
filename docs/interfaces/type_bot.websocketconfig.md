@@ -25,7 +25,7 @@
 
 API访问token
 
-Defined in: Type/Bot.ts:30
+Defined in: Type/Bot.ts:33
 
 ___
 
@@ -33,7 +33,7 @@ ___
 
 • `Optional` **host**: *string*
 
-Defined in: Type/Bot.ts:31
+Defined in: Type/Bot.ts:34
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 • `Optional` **port**: *number*
 
-Defined in: Type/Bot.ts:32
+Defined in: Type/Bot.ts:35
 
 ___
 
@@ -51,7 +51,7 @@ ___
 
 是否连线错误时自动重连
 
-Defined in: Type/Bot.ts:36
+Defined in: Type/Bot.ts:39
 
 ___
 
@@ -61,7 +61,7 @@ ___
 
 连续连线失败的次数不超过这个值
 
-Defined in: Type/Bot.ts:40
+Defined in: Type/Bot.ts:43
 
 ___
 
@@ -71,7 +71,7 @@ ___
 
 重复连线的延迟时间, 单位: ms
 
-Defined in: Type/Bot.ts:44
+Defined in: Type/Bot.ts:47
 
 ___
 
@@ -81,7 +81,7 @@ ___
 
 API超时时间, 单位: ms
 
-Defined in: Type/Bot.ts:48
+Defined in: Type/Bot.ts:51
 
 ___
 
@@ -89,4 +89,4 @@ ___
 
 • `Optional` **wss**: *boolean*
 
-Defined in: Type/Bot.ts:26
+Defined in: Type/Bot.ts:29

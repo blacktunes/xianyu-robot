@@ -35,7 +35,7 @@
 
 **Returns:** *void* \| *Promise*<void\>
 
-Defined in: Type/Bot.ts:18
+Defined in: Type/Bot.ts:21
 
 ___
 

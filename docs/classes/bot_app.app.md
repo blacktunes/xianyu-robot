@@ -36,7 +36,7 @@
 
 ### constructor
 
-\+ **new App**(`name?`: *string*, `dirname?`: *string*): [*App*](bot_app.app.md)
+\+ **new App**(`name?`: *string*, `dirname?`: *string* \| ``false``, `filename?`: *string*): [*App*](bot_app.app.md)
 
 BOT构造函数
 
@@ -45,11 +45,12 @@ BOT构造函数
 | Name | Type | Default value | Description |
 | :------ | :------ | :------ | :------ |
 | `name` | *string* | 'Bot' | 插件名 |
-| `dirname` | *string* | - | 插件设置保存位置 |
+| `dirname?` | *string* \| ``false`` | - | 插件设置保存位置 |
+| `filename?` | *string* | - | - |
 
 **Returns:** [*App*](bot_app.app.md)
 
-Defined in: Bot/App.ts:13
+Defined in: Bot/App.ts:14
 
 ## Properties
 
@@ -57,7 +58,7 @@ Defined in: Bot/App.ts:13
 
 • `Private` `Readonly` **Bot**: [*Bot*](bot_bot.bot.md)
 
-Defined in: Bot/App.ts:31
+Defined in: Bot/App.ts:37
 
 ___
 
@@ -65,7 +66,7 @@ ___
 
 • `Private` **\_pluginsList**: { `class`: *boolean* ; `config?`: *any* ; `plugin`: [*Plugin*](../interfaces/type_bot.plugin.md) \| [*PluginFunction*](../modules/type_bot.md#pluginfunction)  }[]= []
 
-Defined in: Bot/App.ts:101
+Defined in: Bot/App.ts:107
 
 ___
 
@@ -73,7 +74,7 @@ ___
 
 • `Private` **blacklist**: *Set*<number\>
 
-Defined in: Bot/App.ts:34
+Defined in: Bot/App.ts:40
 
 ___
 
@@ -81,7 +82,7 @@ ___
 
 • `Private` **isStart**: *boolean*= false
 
-Defined in: Bot/App.ts:29
+Defined in: Bot/App.ts:35
 
 ___
 
@@ -89,7 +90,7 @@ ___
 
 • `Private` **whitelist**: *Set*<number\>
 
-Defined in: Bot/App.ts:33
+Defined in: Bot/App.ts:39
 
 ## Methods
 
@@ -107,7 +108,7 @@ Defined in: Bot/App.ts:33
 
 **Returns:** [*App*](bot_app.app.md)
 
-Defined in: Bot/App.ts:75
+Defined in: Bot/App.ts:81
 
 ___
 
@@ -125,7 +126,7 @@ ___
 
 **Returns:** [*App*](bot_app.app.md)
 
-Defined in: Bot/App.ts:58
+Defined in: Bot/App.ts:64
 
 ___
 
@@ -135,7 +136,7 @@ ___
 
 **Returns:** *Promise*<void\>
 
-Defined in: Bot/App.ts:178
+Defined in: Bot/App.ts:184
 
 ___
 
@@ -145,7 +146,7 @@ ___
 
 **Returns:** *Promise*<void\>
 
-Defined in: Bot/App.ts:245
+Defined in: Bot/App.ts:251
 
 ___
 
@@ -155,7 +156,7 @@ ___
 
 **Returns:** *Promise*<void\>
 
-Defined in: Bot/App.ts:281
+Defined in: Bot/App.ts:295
 
 ___
 
@@ -173,7 +174,7 @@ ___
 
 **Returns:** [*App*](bot_app.app.md)
 
-Defined in: Bot/App.ts:92
+Defined in: Bot/App.ts:98
 
 ___
 
@@ -189,7 +190,7 @@ ___
 
 **Returns:** [*App*](bot_app.app.md)
 
-Defined in: Bot/App.ts:84
+Defined in: Bot/App.ts:90
 
 ___
 
@@ -207,9 +208,9 @@ ___
 
 **Returns:** [*App*](bot_app.app.md)
 
-Defined in: Bot/App.ts:110
+Defined in: Bot/App.ts:116
 
-▸ **plugin**<T\>(`plugin`: T, `config?`: *ConstructorParameters*<T\>[``1``]): [*App*](bot_app.app.md)
+▸ **plugin**<T\>(`plugin`: T, `config?`: *InstanceType*<T\>[``"config"``]): [*App*](bot_app.app.md)
 
 载入类插件
 
@@ -224,11 +225,11 @@ Defined in: Bot/App.ts:110
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `plugin` | T | 插件类 |
-| `config?` | *ConstructorParameters*<T\>[``1``] | 插件设置 |
+| `config?` | *InstanceType*<T\>[``"config"``] | 插件设置 |
 
 **Returns:** [*App*](bot_app.app.md)
 
-Defined in: Bot/App.ts:116
+Defined in: Bot/App.ts:122
 
 ___
 
@@ -238,13 +239,13 @@ ___
 
 **Returns:** *void*
 
-Defined in: Bot/App.ts:186
+Defined in: Bot/App.ts:192
 
 ___
 
 ### start
 
-▸ **start**(`ws`: [*WebSocketConfig*](../interfaces/type_bot.websocketconfig.md), `debug?`: *boolean*, `showLog?`: *boolean*): *Promise*<[*Bot*](bot_bot.bot.md)\>
+▸ **start**(`ws?`: [*WebSocketConfig*](../interfaces/type_bot.websocketconfig.md), `debug?`: *boolean*, `showLog?`: *boolean*): *Promise*<[*Bot*](bot_bot.bot.md)\>
 
 启动函数
 
@@ -252,13 +253,13 @@ ___
 
 | Name | Type | Default value | Description |
 | :------ | :------ | :------ | :------ |
-| `ws` | [*WebSocketConfig*](../interfaces/type_bot.websocketconfig.md) | - | 链接设置 |
+| `ws` | [*WebSocketConfig*](../interfaces/type_bot.websocketconfig.md) | {} | 链接设置 |
 | `debug` | *boolean* | false | 是否开启debug |
 | `showLog` | *boolean* | true | 是否在控制台输出日志 |
 
 **Returns:** *Promise*<[*Bot*](bot_bot.bot.md)\>
 
-Defined in: Bot/App.ts:143
+Defined in: Bot/App.ts:149
 
 ___
 
@@ -276,4 +277,4 @@ ___
 
 **Returns:** [*App*](bot_app.app.md)
 
-Defined in: Bot/App.ts:40
+Defined in: Bot/App.ts:46

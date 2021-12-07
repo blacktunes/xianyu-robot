@@ -25,4 +25,4 @@
 
 **Returns:** [*BotPlugin*](../classes/plugin_plugin.botplugin.md)
 
-Defined in: Type/Bot.ts:14
+Defined in: Type/Bot.ts:17

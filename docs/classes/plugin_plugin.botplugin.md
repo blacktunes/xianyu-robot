@@ -19,25 +19,24 @@
 
 ### Methods
 
-- [debug](plugin_plugin.botplugin.md#debug)
 - [init](plugin_plugin.botplugin.md#init)
+- [setup](plugin_plugin.botplugin.md#setup)
 
 ## Constructors
 
 ### constructor
 
-\+ **new BotPlugin**(`name`: *string*, `bot`: [*Bot*](bot_bot.bot.md)): [*BotPlugin*](plugin_plugin.botplugin.md)
+\+ **new BotPlugin**(`bot`: [*Bot*](bot_bot.bot.md)): [*BotPlugin*](plugin_plugin.botplugin.md)
 
 #### Parameters:
 
 | Name | Type |
 | :------ | :------ |
-| `name` | *string* |
 | `bot` | [*Bot*](bot_bot.bot.md) |
 
 **Returns:** [*BotPlugin*](plugin_plugin.botplugin.md)
 
-Defined in: Plugin/Plugin.ts:4
+Defined in: Plugin/Plugin.ts:5
 
 ## Properties
 
@@ -47,7 +46,7 @@ Defined in: Plugin/Plugin.ts:4
 
 Bot对象
 
-Defined in: Plugin/Plugin.ts:22
+Defined in: Plugin/Plugin.ts:14
 
 ___
 
@@ -58,43 +57,29 @@ ___
 插件命令
 与Bot.Command基本相同，但能设置统一设置
 
-Defined in: Plugin/Plugin.ts:27
+Defined in: Plugin/Plugin.ts:19
 
 ___
 
 ### config
 
-• `Readonly` **config**: *object*= {}
+• **config**: *any*= {}
 
-插件配置
+插件设置
 
-#### Type declaration:
-
-Defined in: Plugin/Plugin.ts:40
+Defined in: Plugin/Plugin.ts:12
 
 ___
 
 ### name
 
-• `Readonly` **name**: *string*
+• `Readonly` **name**: *string*= '未命名插件'
 
 插件名称
 
-Defined in: Plugin/Plugin.ts:18
+Defined in: Plugin/Plugin.ts:10
 
 ## Methods
-
-### debug
-
-▸ **debug**(): *void*
-
-debug本文输出
-
-**Returns:** *void*
-
-Defined in: Plugin/Plugin.ts:36
-
-___
 
 ### init
 
@@ -105,4 +90,23 @@ ___
 
 **Returns:** *void* \| *Promise*<void\>
 
-Defined in: Plugin/Plugin.ts:32
+Defined in: Plugin/Plugin.ts:34
+
+___
+
+### setup
+
+▸ **setup**(`config?`: *any*): *void*
+
+安装方法
+该方法会在实例化后执行，请勿重复执行
+
+#### Parameters:
+
+| Name | Type |
+| :------ | :------ |
+| `config?` | *any* |
+
+**Returns:** *void*
+
+Defined in: Plugin/Plugin.ts:24

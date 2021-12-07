@@ -27,7 +27,7 @@
 
 ### constructor
 
-\+ **new Bot**(`name`: *string*, `dirname`: *string*): [*Bot*](bot_bot.bot.md)
+\+ **new Bot**(`name`: *string*, `dirname`: *string*, `filename`: *string*): [*Bot*](bot_bot.bot.md)
 
 #### Parameters:
 
@@ -35,6 +35,7 @@
 | :------ | :------ |
 | `name` | *string* |
 | `dirname` | *string* |
+| `filename` | *string* |
 
 **Returns:** [*Bot*](bot_bot.bot.md)
 
@@ -48,7 +49,7 @@ Defined in: Bot/Bot.ts:12
 
 管理员命令
 
-Defined in: Bot/Bot.ts:43
+Defined in: Bot/Bot.ts:44
 
 ___
 
@@ -58,7 +59,7 @@ ___
 
 HTTP API
 
-Defined in: Bot/Bot.ts:51
+Defined in: Bot/Bot.ts:52
 
 ___
 
@@ -68,7 +69,7 @@ ___
 
 CQ码
 
-Defined in: Bot/Bot.ts:31
+Defined in: Bot/Bot.ts:32
 
 ___
 
@@ -78,7 +79,7 @@ ___
 
 命令对象
 
-Defined in: Bot/Bot.ts:39
+Defined in: Bot/Bot.ts:40
 
 ___
 
@@ -88,7 +89,7 @@ ___
 
 WS链接
 
-Defined in: Bot/Bot.ts:47
+Defined in: Bot/Bot.ts:48
 
 ___
 
@@ -98,7 +99,7 @@ ___
 
 Bot的部分属性
 
-Defined in: Bot/Bot.ts:23
+Defined in: Bot/Bot.ts:24
 
 ___
 
@@ -108,7 +109,7 @@ ___
 
 测试类
 
-Defined in: Bot/Bot.ts:59
+Defined in: Bot/Bot.ts:60
 
 ___
 
@@ -118,7 +119,7 @@ ___
 
 消息事件
 
-Defined in: Bot/Bot.ts:55
+Defined in: Bot/Bot.ts:56
 
 ___
 
@@ -128,7 +129,7 @@ ___
 
 日志对象
 
-Defined in: Bot/Bot.ts:27
+Defined in: Bot/Bot.ts:28
 
 ___
 
@@ -138,4 +139,4 @@ ___
 
 插件对象
 
-Defined in: Bot/Bot.ts:35
+Defined in: Bot/Bot.ts:36
