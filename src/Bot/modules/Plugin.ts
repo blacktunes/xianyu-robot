@@ -1,6 +1,6 @@
 import { existsSync, mkdirSync } from 'fs-extra'
 import { readSync, writeSync } from 'node-yaml'
-import { AnonymousPlugin, BotPlugin as ClassPlugin, PluginConfig } from '../..'
+import { AnonymousPlugin, BotPlugin as ClassPlugin } from '../..'
 import { Bot } from '../Bot'
 import path = require('path')
 import { merge } from 'lodash'
@@ -34,7 +34,7 @@ export class Plugin {
     }
   }
 
-  getConfig<T>(name: string): T
+  getConfig<T>(name: string): T | any
   getConfig<T extends { [key: string]: any }, K extends string>(name: string, key: K): T[K]
   getConfig(name: string, key?: string) {
     const plugin = this.getPlugin(name)
@@ -45,7 +45,13 @@ export class Plugin {
     }
   }
 
+  private saveFlag = false
   saveConfig(): void {
+    if (this.saveFlag) {
+      this.Bot.Log.logWarning('插件配置保存任务冲突', '插件')
+      return
+    }
+    this.saveFlag = true
     if (this.dirname) {
       try {
         if (!existsSync(this.dirname)) {
@@ -67,6 +73,7 @@ export class Plugin {
         this.Bot.Log.logError('插件配置未保存', '插件')
       }
     }
+    this.saveFlag = false
   }
 
   getPlugin<T extends ClassPlugin | AnonymousPlugin>(name: string): Omit<T, 'init'> | undefined {

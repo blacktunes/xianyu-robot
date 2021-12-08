@@ -8,8 +8,10 @@ export abstract class BotPlugin {
   }
   /** 插件名称 */
   readonly name: string = '未命名插件'
+  private _config: { [key: string]: any }
+  private _configProxy: { [key: string]: any }
   /** 插件设置 */
-  config: any = {}
+  config: { [key: string]: any } = {}
   /** Bot对象 */
   protected Bot: Bot
   /**
@@ -32,4 +34,44 @@ export abstract class BotPlugin {
    * 该方法会在Bot初始化完成后执行，请勿重复执行
    */
   init(): void | Promise<void> { }
+  private deepProxy(obj: { [key: string]: any }) {
+    if (typeof obj === 'object') {
+      for (let key in obj) {
+        if (typeof obj[key] === 'object') {
+          obj[key] = this.deepProxy(obj[key])
+        }
+      }
+    }
+    return new Proxy(obj, {
+      set: (target, key, value, receiver) => {
+        if (typeof value === 'object') {
+          value = this.deepProxy(value)
+        }
+        const flag = Reflect.set(target, key, value, receiver)
+        if (flag) {
+          this.Bot.Plugin.saveConfig()
+        }
+        return flag
+  
+      },
+      deleteProperty(target, key) {
+        return Reflect.deleteProperty(target, key)
+      }
+    })
+  }
+  /**
+   * 创建设置代理，在设置修改后自动保存本地配置
+   */
+  autoSave() {
+    this._config = this.config
+    this._configProxy = this.deepProxy(this._config)
+    Object.defineProperty(this, 'config', {
+      get: () => {
+        return this._configProxy
+      },
+      set: (value) => {
+        this._config = value
+      }
+    })
+  }
 }

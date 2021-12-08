@@ -253,6 +253,9 @@ export class App {
       if (item.class) {
         const _plugin = new (item.plugin as Plugin)(this.Bot)
         _plugin.setup(item.config)
+        _plugin.setup = (): void => {
+          this.Bot.Log.logWarning('请勿重复执行setup')
+        }
         if (this.Bot.Plugin.list.some(i => i.name === _plugin.name)) {
           this.Bot.Log.logWarning(`发现重名插件 ${white(_plugin.name)}`, '插件')
         }
@@ -298,15 +301,27 @@ export class App {
       for (let i in this.Bot.Plugin.list) {
         if (this.Bot.Plugin.list[i].name === '匿名插件') {
           await this.Bot.Plugin.list[i].init(this.Bot)
+          this.Bot.Log.logNotice(`${yellow(this.Bot.Plugin.list[i].name)} 已加载`, '插件')
         } else {
-          await (this.Bot.Plugin.list[i] as BotPlugin).init()
+          const plugin = this.Bot.Plugin.list[i] as BotPlugin
+          if (plugin.config.enable === undefined || plugin.config.enable) {
+            await plugin.init()
+            if (plugin.config.auto_save === undefined || plugin.config.auto_save) {
+              plugin.autoSave()
+            }
+            this.Bot.Log.logNotice(`${yellow(this.Bot.Plugin.list[i].name)} 已加载`, '插件')
+          } else {
+            this.Bot.Log.logWarning(`${white(this.Bot.Plugin.list[i].name)} 已被禁用`, '插件')
+          }
+          plugin.autoSave = (): void => {
+            this.Bot.Log.logWarning('请勿重复执行autoSave')
+          }
         }
         this.Bot.Plugin.list[i].init = (): void => {
-          this.Bot.Log.logWarning('请勿重复init', this.Bot.Data.name)
+          this.Bot.Log.logWarning('请勿重复执行init')
         }
-        this.Bot.Log.logNotice(`${yellow(this.Bot.Plugin.list[i].name)} 已加载`, '插件')
       }
-      this.Bot.Log.logNotice('插件初始化完成', this.Bot.Data.name)
+      this.Bot.Log.logNotice('插件初始化完成')
     }
   }
 }
