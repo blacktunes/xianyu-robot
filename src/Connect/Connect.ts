@@ -165,7 +165,7 @@ export class Connect {
       }
       if (data.echo) {
         if (this.APIList.has(data.echo)) {
-          this.APIList.get(data.echo)(data)
+          this.APIList.get(data.echo).fn(data)
         }
       }
     }
@@ -258,7 +258,7 @@ export class Connect {
     return this
   }
 
-  private getRes = (id: number) => {
+  private getRes = (id: number, apiName: string, params: any = {}) => {
     return new Promise<ApiRes>(resolve => {
       // let timer = setTimeout(() => {
       //   resolve({
@@ -267,15 +267,21 @@ export class Connect {
       //     msg: '请求超时'
       //   })
       // }, this.timeout)
-      this.APIList.set(id, (data: any) => {
-        resolve({
-          data: data.data,
-          retcode: data.retcode,
-          status: data.status
-        })
-        this.APIList.delete(id)
-        // clearTimeout(timer)
-        // timer = null
+      this.APIList.set(id, {
+        info: {
+          apiName,
+          params
+        },
+        fn: (data: any) => {
+          resolve({
+            data: data.data,
+            retcode: data.retcode,
+            status: data.status
+          })
+          this.APIList.delete(id)
+          // clearTimeout(timer)
+          // timer = null
+        }
       })
     })
   }
@@ -287,7 +293,7 @@ export class Connect {
     return this.messageEventList.message.length
   }
 
-  private APIList = new Map<number, Function>()
+  private APIList = new Map<number, { fn: Function, info: any }>()
   /**
    * 获取队列中未完成的消息数量
    */
@@ -307,7 +313,7 @@ export class Connect {
         params,
         echo: id
       }))
-      const res = await this.getRes(id)
+      const res = await this.getRes(id, apiName, params)
       if (errorLog && res.status !== 'ok') {
         PrintLog.logError(`${white(apiName)} 调用失败 recode: ${white(res.retcode.toString())} msg: ${white(res.msg || '未知错误')}`, 'WS')
       }
