@@ -1,10 +1,8 @@
+import { magenta } from 'colors'
 import { cancelJob, scheduleJob } from 'node-schedule'
 import { Bot } from '../Bot'
-import { magenta } from 'colors'
 
-/**
- * 管理员相关
- */
+/** 管理员相关 */
 export class Admin {
   constructor(bot: Bot) {
     this.Bot = bot
@@ -20,9 +18,7 @@ export class Admin {
     return this.adminList.has(id)
   }
 
-  /**
-   * 被ban名单
-   */
+  /** 被ban名单 */
   banlist: Set<number> = new Set<number>()
   /**
    * 禁用所有功能
@@ -34,7 +30,7 @@ export class Admin {
     if (!user_id || this.adminList.has(user_id)) {
       return
     }
-    const msg = `无路赛，禁用你所有功能${time}分钟`
+    const msg = this.Bot.Data.config.admin.ban.replace('[time]', time.toString())
     if (group_id) {
       this.Bot.Api.sendGroupMsg(group_id, `${this.Bot.CQCode.at(user_id)}${msg}`)
     } else {
@@ -42,15 +38,15 @@ export class Admin {
     }
     this.banlist.add(user_id)
     const user = group_id ? `(${group_id}) - (${user_id})` : `(${user_id})`
-    this.Bot.Log.logWarning(`${user}被禁用${time}分钟`, 'BAN')
+    this.Bot.Log.logWarning(`${user} 被禁用 ${time} 分钟`, 'BAN')
     scheduleJob('ban' + user_id.toString(), new Date(Date.now() + time * 60 * 1000), () => {
       if (this.banlist.has(user_id)) {
         this.banlist.delete(user_id)
-        this.Bot.Log.logWarning(`${user}已解除禁用`, 'BAN')
+        this.Bot.Log.logWarning(`${user} 已解除禁用`, 'BAN')
         if (group_id) {
-          this.Bot.Api.sendGroupMsg(group_id, `${this.Bot.CQCode.at(user_id)}放过你了，下次别这样了`)
+          this.Bot.Api.sendGroupMsg(group_id, this.Bot.Data.config.admin.group_lift_ban.replace('[id]', this.Bot.CQCode.at(user_id)))
         } else {
-          this.Bot.Api.sendPrivateMsg(user_id, '放过你了，下次别这样了')
+          this.Bot.Api.sendPrivateMsg(user_id, this.Bot.Data.config.admin.private_lift_ban)
         }
       }
     })
@@ -60,7 +56,7 @@ export class Admin {
     cancelJob('ban' + user_id.toString())
     if (this.banlist.has(user_id)) {
       this.banlist.delete(user_id)
-      this.Bot.Log.logWarning(`${user_id}已解除禁用`, 'BAN')
+      this.Bot.Log.logWarning(`${user_id} 已解除禁用`, 'BAN')
     }
   }
 
@@ -68,6 +64,7 @@ export class Admin {
     return this.banlist.has(user_id)
   }
 
+  /** 增加白名单列表，请勿和黑名单同时使用 */
   addWhitelist(group_list: number[]) {
     if (group_list.length < 1) return
     if (this.Bot.Conn.blacklist.size > 0) {
@@ -77,9 +74,7 @@ export class Admin {
     this.Bot.Conn.whitelist = new Set(([...this.Bot.Conn.whitelist, ...group_list]))
   }
 
-  /**
-   * 增加黑名单列表，请勿和白名单同时使用
-   */
+  /** 增加黑名单列表，请勿和白名单同时使用 */
   addBlacklist(group_list: number[]) {
     if (group_list.length < 1) return
     if (this.Bot.Conn.whitelist.size > 0) {

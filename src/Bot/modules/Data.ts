@@ -19,6 +19,17 @@ export class Data {
   userId: number = -1
 
   /**
+   * Bot的配置
+   */
+  config = {
+    admin: {
+      ban: '无路赛，禁用你所有功能[time]分钟',
+      group_lift_ban: '[id]放过你了，下次别这样了',
+      private_lift_ban: '放过你了，下次别这样了'
+    }
+  }
+
+  /**
    * 群名缓存
    */
   groupList: {
