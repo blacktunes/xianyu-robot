@@ -8,14 +8,10 @@ export class Command {
     this.Bot = Bot
   }
   private Bot: Omit<Bot, 'Command'>
-  /**
-   * 命令列表
-   */
+  /** 命令列表 */
   list: Comm[] = []
 
-  /**
-   * 增加命令
-   */
+  /** 增加命令 */
   command(name: string) {
     const repeat = this.list.some(item => {
       return item.comm.includes(name)
@@ -66,9 +62,8 @@ export class SetComm {
   private comm: Comm
   private repeat: boolean
   private plugin: boolean
-  /**
-   * 增加指令别名
-   */
+
+  /** 增加指令别名 */
   alias(name: string) {
     const repeat = this.Bot.Command.list.some(item => {
       return item.comm.includes(name)
@@ -79,39 +74,29 @@ export class SetComm {
       this.comm.comm.push(name)
     }
   }
-  /**
-   * 增加命令描述，重复调用会被覆盖
-   */
+  /** 增加命令描述，重复调用会被覆盖 */
   desc(text: string) {
     this.comm.desc = text
     return this
   }
-  /**
-   * 增加正则规则，调用后命令名将会失效
-   */
+  /** 增加正则规则，调用后命令名将会失效 */
   reg(reg: RegExp | NamedRegExp) {
     if (this.repeat) return this
     this.comm.reg = reg
     this.comm.desc += '(动态指令)'
     return this
   }
-  /**
-   * 是否为管理员指令
-   */
+  /** 是否为管理员指令 */
   admin(flag = true) {
     this.comm.admin = flag
     return this
   }
-  /**
-   * 设置命令分类
-   */
+  /** 设置命令分类 */
   group(name: string) {
     this.comm.group = name
     return this
   }
-  /**
-   * 增加命令处理方法，可添加多个
-   */
+  /** 增加命令处理方法，可添加多个 */
   action(type: 'private', fn: (e: PrivateMsg) => Prevent): this
   action(type: 'group', fn: (e: GroupMsg) => Prevent): this
   action(type: 'group' | 'private', fn: (e: any) => Prevent) {
@@ -123,9 +108,7 @@ export class SetComm {
     }
     return this
   }
-  /**
-   * 增加白名单列表，请勿和黑名单同时使用
-   */
+  /** 增加白名单列表，请勿和黑名单同时使用 */
   white(list: number[]) {
     if (this.repeat || list.length < 1) return this
     if (this.comm.blacklist.size > 0) {
@@ -135,9 +118,7 @@ export class SetComm {
     this.comm.whitelist = new Set(([...this.comm.whitelist, ...list]))
     return this
   }
-  /**
-   * 增加黑名单列表，请勿和白名单同时使用
-   */
+  /** 增加黑名单列表，请勿和白名单同时使用 */
   black(list: number[]) {
     if (this.repeat || list.length < 1) return this
     if (this.comm.whitelist.size > 0) {

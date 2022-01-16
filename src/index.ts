@@ -1,4 +1,5 @@
 export * from './Type'
+export * from './Plugin'
 export * from './Tools'
 
 import { App } from './Bot/App'

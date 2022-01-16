@@ -17,16 +17,12 @@ export class Debug {
       this.Bot.Log.logWarning(`已开启debug模式，所有api调用都不会真正执行`, 'DEBUG')
     }
   }
-  /**
-   * 是否为调试模式
-   */
+  /** 是否为调试模式 */
   get debug(): boolean {
     return this._debug
   }
 
-  /**
-   * 可以用于群消息相功能的测试
-   */
+  /** 可以用于群消息相功能的测试 */
   groupMsgTest(data: Partial<_GroupMsg>): void
   groupMsgTest(msg: string, user_id?: number, group_id?: number): void
   groupMsgTest(data: Partial<_GroupMsg> | string, user_id?: number, group_id?: number): void {
@@ -65,9 +61,7 @@ export class Debug {
     this.Bot.Conn.eventTest(test)
   }
 
-  /**
-   * 可以用于私聊消息相功能的测试
-   */
+  /** 可以用于私聊消息相功能的测试 */
   privateMsgTest(data: Partial<_PrivateMsg>): void
   privateMsgTest(msg: string, user_id?: number): void
   privateMsgTest(data: Partial<_PrivateMsg> | string, user_id?: number): void {

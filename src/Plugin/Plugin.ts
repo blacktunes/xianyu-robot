@@ -1,6 +1,7 @@
 import { Bot } from '../Bot/Bot'
 import { Command } from './Command'
 import { merge } from 'lodash'
+import { Log } from '../Tools'
 
 export abstract class BotPlugin {
   constructor(bot: Bot) {
@@ -20,6 +21,10 @@ export abstract class BotPlugin {
    */
   protected Command: Command
   /**
+   * 日志对象
+   */
+   protected Log: Log
+  /**
    * 安装方法
    * 该方法会在实例化后执行，请勿重复执行
    */
@@ -28,6 +33,7 @@ export abstract class BotPlugin {
       this.config = merge(this.config, config)
     }
     this.Command = new Command(this.name, this.Bot)
+    this.Log = new Log(this.name)
   }
   /**
    * 初始化方法

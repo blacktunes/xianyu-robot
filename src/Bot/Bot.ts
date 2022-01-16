@@ -18,44 +18,24 @@ export class Bot {
     this.Command = new Command(this)
     this.Debug = new Debug(this)
   }
-  /**
-   * Bot的部分属性
-   */
+  /** Bot的部分属性 */
   Data: Data
-  /**
-   * 日志对象
-   */
+  /** 日志对象 */
   Log: Log
-  /**
-   * CQ码
-   */
+  /** CQ码 */
   CQCode: CQCODE = CQCode
-  /**
-   * 插件对象
-   */
+  /** 插件对象 */
   Plugin: Plugin
-  /**
-   * 命令对象
-   */
+  /** 命令对象 */
   Command: Command
-  /**
-   * 管理员命令
-   */
+  /** 管理员命令 */
   Admin: Admin
-  /**
-   * WS链接
-   */
+  /** WS链接 */
   Conn: Connect
-  /**
-   * HTTP API
-   */
+  /** HTTP API */
   Api: Api
-  /**
-   * 消息事件
-   */
+  /** 消息事件 */
   Event: Event
-  /**
-   * 测试类
-   */
+  /** 测试类 */
   Debug: Debug
 }

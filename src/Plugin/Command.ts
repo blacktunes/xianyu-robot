@@ -20,9 +20,7 @@ export class Command {
       }
     })
   }
-  /**
-   * 为插件指令增加白名单列表，请勿和黑名单同时使用
-   */
+  /** 为插件指令增加白名单列表，请勿和黑名单同时使用 */
   white(list: number[]) {
     if (list.length < 1) return this
     if (this._blacklist.size > 0) {
@@ -32,15 +30,11 @@ export class Command {
     this.whitelist = list
     return this
   }
-  /**
-   * 获取白名单
-   */
+  /** 获取白名单 */
   getWhitelist(): Readonly<number[]> {
     return [...this._whitelist]
   }
-  /**
-   * 移除白名单
-   */
+  /** 移除白名单 */
   removeWhitelist(list: number[] | readonly number[]) {
     for (const id of list) {
       this.Bot.Command.list.forEach(item => {
@@ -60,9 +54,7 @@ export class Command {
       }
     })
   }
-  /**
-   * 为插件指令增加黑名单列表，请勿和白名单同时使用
-   */
+  /** 为插件指令增加黑名单列表，请勿和白名单同时使用 */
   black(list: number[]) {
     if (list.length < 1) return this
     if (this._whitelist.size > 0) {
@@ -72,15 +64,11 @@ export class Command {
     this.blacklist = list
     return this
   }
-  /**
-   * 获取黑名单
-   */
+  /** 获取黑名单 */
   getBlacklist(): readonly number[] {
     return [...this._blacklist]
   }
-  /**
-   * 移除黑名单
-   */
+  /** 移除黑名单 */
   removeBlacklist(list: number[]| readonly number[]) {
     for (const id of list) {
       this.Bot.Command.list.forEach(item => {
@@ -91,9 +79,7 @@ export class Command {
     }
   }
 
-  /**
-   * 增加命令
-   */
+  /** 增加命令 */
   command = (name: string) => {
     const repeat = this.Bot.Command.list.some(item => {
       return item.comm.includes(name)

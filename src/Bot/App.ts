@@ -1,12 +1,13 @@
 import { magenta, white, yellow } from 'colors'
 import { existsSync, readJSONSync, removeSync } from 'fs-extra'
+import { merge } from 'lodash'
 import { cpu, mem } from 'node-os-utils'
 import { readSync, writeSync } from 'node-yaml'
 import { join } from 'path'
 import { secondsFormat } from '..'
 import { Connect } from '../Connect/Connect'
-import { BotPlugin } from '../Tools'
-import { Plugin, PluginFunction, WebSocketConfig } from '../Type'
+import { BotPlugin } from '../Plugin'
+import { AnonymousPlugin, Plugin, PluginFunction, WebSocketConfig } from '../Type'
 import { Bot } from './Bot'
 import { Api } from './modules/Api'
 import { Event } from './modules/Event'
@@ -272,19 +273,27 @@ export class App {
       const jsonPath = join(this.Bot.Plugin.dirname, `./${this.Bot.Plugin.filename}.json`)
       const ymlPath = join(this.Bot.Plugin.dirname, `./${this.Bot.Plugin.filename}.yml`)
       try {
-        let config: { config: any } = { config: {} }
+        let config: { config?: any, plugin?: any, bot?: any } = { plugin: {}, bot: {} }
         if (existsSync(jsonPath)) {
           config = readJSONSync(jsonPath)
           removeSync(jsonPath)
           writeSync(ymlPath, config)
-        } else if (existsSync(ymlPath)) {
+        }
+        if (existsSync(ymlPath)) {
           config = readSync(ymlPath)
         }
-        for (const name in config.config) {
-          this.Bot.Plugin.setConfig(name, config.config[name])
+        if (config.config && Object.keys(config.config).length > 0) {
+          config.plugin = merge(config.plugin, config.config)
+          delete config.config
+          writeSync(ymlPath, config)
         }
+        for (const name in config.plugin) {
+          this.Bot.Plugin.setConfig(name, config.plugin[name])
+        }
+        merge(this.Bot.Data.config, config.bot)
         this.Bot.Log.logNotice('本地配置加载成功', this.Bot.Data.name)
-      } catch {
+      } catch (err) {
+        console.error(err)
         this.Bot.Log.logError('本地配置加载失败', this.Bot.Data.name)
       }
     }
@@ -299,25 +308,25 @@ export class App {
     if (this.Bot.Plugin.list.length > 0) {
       this.Bot.Log.logInfo('开始初始化插件', this.Bot.Data.name)
       for (let i in this.Bot.Plugin.list) {
-        if (this.Bot.Plugin.list[i].name === '匿名插件') {
-          await this.Bot.Plugin.list[i].init(this.Bot)
-          this.Bot.Log.logNotice(`${yellow(this.Bot.Plugin.list[i].name)} 已加载`, '插件')
+        const plugin = this.Bot.Plugin.list[i] as BotPlugin
+        if (plugin.name === '匿名插件') {
+          await (plugin as AnonymousPlugin).init(this.Bot)
+          this.Bot.Log.logNotice(`${yellow(plugin.name)} 已加载`, '插件')
         } else {
-          const plugin = this.Bot.Plugin.list[i] as BotPlugin
           if (plugin.config.enable === undefined || plugin.config.enable) {
             await plugin.init()
             if (plugin.config.auto_save === undefined || plugin.config.auto_save) {
               plugin.autoSave()
             }
-            this.Bot.Log.logNotice(`${yellow(this.Bot.Plugin.list[i].name)} 已加载`, '插件')
+            this.Bot.Log.logNotice(`${yellow(plugin.name)} 已加载`, '插件')
           } else {
-            this.Bot.Log.logWarning(`${white(this.Bot.Plugin.list[i].name)} 已被禁用`, '插件')
+            this.Bot.Log.logWarning(`${white(plugin.name)} 已被禁用`, '插件')
           }
           plugin.autoSave = (): void => {
             this.Bot.Log.logWarning('请勿重复执行autoSave')
           }
         }
-        this.Bot.Plugin.list[i].init = (): void => {
+        plugin.init = (): void => {
           this.Bot.Log.logWarning('请勿重复执行init')
         }
       }

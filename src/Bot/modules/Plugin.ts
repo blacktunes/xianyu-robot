@@ -1,6 +1,7 @@
 import { existsSync, mkdirSync } from 'fs-extra'
 import { readSync, writeSync } from 'node-yaml'
-import { AnonymousPlugin, BotPlugin as ClassPlugin } from '../..'
+import { AnonymousPlugin, } from '../../Type'
+import { BotPlugin } from '../../Plugin/Plugin'
 import { Bot } from '../Bot'
 import path = require('path')
 import { merge } from 'lodash'
@@ -13,21 +14,15 @@ export class Plugin {
   }
   private Bot: Omit<Bot, 'Plugin'>
 
-  /**
-   * 插件列表
-   */
-  list: (ClassPlugin | AnonymousPlugin)[] = []
+  /** 插件列表 */
+  list: (BotPlugin | AnonymousPlugin)[] = []
 
-  /**
-   * 本地设置保存位置
-   */
+  /** 本地设置保存位置 */
   readonly dirname: string
-  /**
-   * 本地设置文件名
-   */
+  /** 本地设置文件名 */
   readonly filename: string
 
-  setConfig(name, config: any) {
+  setConfig(name: string, config: any) {
     const plugin = this.getPlugin(name)
     if (plugin && plugin.name === name) {
       plugin['config'] = merge(plugin['config'], config)
@@ -57,10 +52,10 @@ export class Plugin {
         if (!existsSync(this.dirname)) {
           mkdirSync(this.dirname)
         }
-        let config = { config: {} }
+        let config = { plugin: {} }
         this.list.forEach(plugin => {
           if (plugin['config'] && Object.keys(plugin['config']).length > 0) {
-            config.config[plugin.name] = plugin['config']
+            config.plugin[plugin.name] = plugin['config']
           }
         })
         const ymlPath = path.join(this.dirname, `./${this.filename}.yml`)
@@ -76,7 +71,7 @@ export class Plugin {
     this.saveFlag = false
   }
 
-  getPlugin<T extends ClassPlugin | AnonymousPlugin>(name: string): Omit<T, 'init'> | undefined {
+  getPlugin<T extends BotPlugin | AnonymousPlugin>(name: string): Omit<T, 'init'> | undefined {
     const plugin = this.list.find(i => i.name === name)
     if (plugin) {
       return plugin as T as Omit<T, 'init'>
