@@ -72,9 +72,9 @@ Defined in: Connect/Connect.ts:17
 
 ### APIList
 
-• `Private` **APIList**: *Map*<number, Function\>
+• `Private` **APIList**: *Map*<number, { `fn`: Function ; `info`: *any*  }\>
 
-Defined in: Connect/Connect.ts:290
+Defined in: Connect/Connect.ts:296
 
 ___
 
@@ -312,7 +312,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: Connect/Connect.ts:332
+Defined in: Connect/Connect.ts:338
 
 ___
 
@@ -324,7 +324,7 @@ ___
 
 **Returns:** *number*
 
-Defined in: Connect/Connect.ts:286
+Defined in: Connect/Connect.ts:292
 
 ___
 
@@ -336,19 +336,21 @@ ___
 
 **Returns:** *number*
 
-Defined in: Connect/Connect.ts:294
+Defined in: Connect/Connect.ts:300
 
 ___
 
 ### getRes
 
-▸ `Private`**getRes**(`id`: *number*): *Promise*<[*ApiRes*](../interfaces/type_bot.apires.md)\>
+▸ `Private`**getRes**(`id`: *number*, `apiName`: *string*, `params?`: *any*): *Promise*<[*ApiRes*](../interfaces/type_bot.apires.md)\>
 
 #### Parameters:
 
-| Name | Type |
-| :------ | :------ |
-| `id` | *number* |
+| Name | Type | Default value |
+| :------ | :------ | :------ |
+| `id` | *number* | - |
+| `apiName` | *string* | - |
+| `params` | *any* | {} |
 
 **Returns:** *Promise*<[*ApiRes*](../interfaces/type_bot.apires.md)\>
 
@@ -380,7 +382,7 @@ WebSocket收否已经连接
 
 **Returns:** *boolean*
 
-Defined in: Connect/Connect.ts:324
+Defined in: Connect/Connect.ts:330
 
 ___
 
@@ -434,4 +436,4 @@ ___
 
 **Returns:** *Promise*<[*ApiRes*](../interfaces/type_bot.apires.md)\>
 
-Defined in: Connect/Connect.ts:302
+Defined in: Connect/Connect.ts:308

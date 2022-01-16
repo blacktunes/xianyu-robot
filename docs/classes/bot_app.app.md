@@ -50,7 +50,7 @@ BOT构造函数
 
 **Returns:** [*App*](bot_app.app.md)
 
-Defined in: Bot/App.ts:14
+Defined in: Bot/App.ts:15
 
 ## Properties
 
@@ -58,7 +58,7 @@ Defined in: Bot/App.ts:14
 
 • `Private` `Readonly` **Bot**: [*Bot*](bot_bot.bot.md)
 
-Defined in: Bot/App.ts:37
+Defined in: Bot/App.ts:38
 
 ___
 
@@ -66,7 +66,7 @@ ___
 
 • `Private` **\_pluginsList**: { `class`: *boolean* ; `config?`: *any* ; `plugin`: [*Plugin*](../interfaces/type_bot.plugin.md) \| [*PluginFunction*](../modules/type_bot.md#pluginfunction)  }[]= []
 
-Defined in: Bot/App.ts:107
+Defined in: Bot/App.ts:108
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 • `Private` **blacklist**: *Set*<number\>
 
-Defined in: Bot/App.ts:40
+Defined in: Bot/App.ts:41
 
 ___
 
@@ -82,7 +82,7 @@ ___
 
 • `Private` **isStart**: *boolean*= false
 
-Defined in: Bot/App.ts:35
+Defined in: Bot/App.ts:36
 
 ___
 
@@ -90,7 +90,7 @@ ___
 
 • `Private` **whitelist**: *Set*<number\>
 
-Defined in: Bot/App.ts:39
+Defined in: Bot/App.ts:40
 
 ## Methods
 
@@ -108,7 +108,7 @@ Defined in: Bot/App.ts:39
 
 **Returns:** [*App*](bot_app.app.md)
 
-Defined in: Bot/App.ts:81
+Defined in: Bot/App.ts:82
 
 ___
 
@@ -126,7 +126,7 @@ ___
 
 **Returns:** [*App*](bot_app.app.md)
 
-Defined in: Bot/App.ts:64
+Defined in: Bot/App.ts:65
 
 ___
 
@@ -136,7 +136,7 @@ ___
 
 **Returns:** *Promise*<void\>
 
-Defined in: Bot/App.ts:184
+Defined in: Bot/App.ts:185
 
 ___
 
@@ -146,7 +146,7 @@ ___
 
 **Returns:** *Promise*<void\>
 
-Defined in: Bot/App.ts:251
+Defined in: Bot/App.ts:252
 
 ___
 
@@ -156,7 +156,7 @@ ___
 
 **Returns:** *Promise*<void\>
 
-Defined in: Bot/App.ts:295
+Defined in: Bot/App.ts:307
 
 ___
 
@@ -174,7 +174,7 @@ ___
 
 **Returns:** [*App*](bot_app.app.md)
 
-Defined in: Bot/App.ts:98
+Defined in: Bot/App.ts:99
 
 ___
 
@@ -190,7 +190,7 @@ ___
 
 **Returns:** [*App*](bot_app.app.md)
 
-Defined in: Bot/App.ts:90
+Defined in: Bot/App.ts:91
 
 ___
 
@@ -208,7 +208,7 @@ ___
 
 **Returns:** [*App*](bot_app.app.md)
 
-Defined in: Bot/App.ts:116
+Defined in: Bot/App.ts:117
 
 ▸ **plugin**<T\>(`plugin`: T, `config?`: *InstanceType*<T\>[``"config"``]): [*App*](bot_app.app.md)
 
@@ -229,7 +229,7 @@ Defined in: Bot/App.ts:116
 
 **Returns:** [*App*](bot_app.app.md)
 
-Defined in: Bot/App.ts:122
+Defined in: Bot/App.ts:123
 
 ___
 
@@ -239,7 +239,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: Bot/App.ts:192
+Defined in: Bot/App.ts:193
 
 ___
 
@@ -259,7 +259,7 @@ ___
 
 **Returns:** *Promise*<[*Bot*](bot_bot.bot.md)\>
 
-Defined in: Bot/App.ts:149
+Defined in: Bot/App.ts:150
 
 ___
 
@@ -277,4 +277,4 @@ ___
 
 **Returns:** [*App*](bot_app.app.md)
 
-Defined in: Bot/App.ts:46
+Defined in: Bot/App.ts:47

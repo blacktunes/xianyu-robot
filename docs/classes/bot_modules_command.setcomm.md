@@ -45,7 +45,7 @@
 
 **Returns:** [*SetComm*](bot_modules_command.setcomm.md)
 
-Defined in: Bot/modules/Command.ts:58
+Defined in: Bot/modules/Command.ts:54
 
 ## Properties
 
@@ -53,7 +53,7 @@ Defined in: Bot/modules/Command.ts:58
 
 • `Private` **Bot**: [*Bot*](bot_bot.bot.md)
 
-Defined in: Bot/modules/Command.ts:65
+Defined in: Bot/modules/Command.ts:61
 
 ___
 
@@ -61,7 +61,7 @@ ___
 
 • `Private` **comm**: [*Comm*](bot_modules_command.comm.md)
 
-Defined in: Bot/modules/Command.ts:66
+Defined in: Bot/modules/Command.ts:62
 
 ___
 
@@ -69,7 +69,7 @@ ___
 
 • `Private` **plugin**: *boolean*
 
-Defined in: Bot/modules/Command.ts:68
+Defined in: Bot/modules/Command.ts:64
 
 ___
 
@@ -77,7 +77,7 @@ ___
 
 • `Private` **repeat**: *boolean*
 
-Defined in: Bot/modules/Command.ts:67
+Defined in: Bot/modules/Command.ts:63
 
 ## Methods
 
@@ -96,7 +96,7 @@ Defined in: Bot/modules/Command.ts:67
 
 **Returns:** [*SetComm*](bot_modules_command.setcomm.md)
 
-Defined in: Bot/modules/Command.ts:115
+Defined in: Bot/modules/Command.ts:100
 
 ▸ **action**(`type`: ``"group"``, `fn`: (`e`: [*GroupMsg*](../modules/type_event.md#groupmsg)) => [*Prevent*](../modules/type_bot.md#prevent)): [*SetComm*](bot_modules_command.setcomm.md)
 
@@ -109,7 +109,7 @@ Defined in: Bot/modules/Command.ts:115
 
 **Returns:** [*SetComm*](bot_modules_command.setcomm.md)
 
-Defined in: Bot/modules/Command.ts:116
+Defined in: Bot/modules/Command.ts:101
 
 ___
 
@@ -127,7 +127,7 @@ ___
 
 **Returns:** [*SetComm*](bot_modules_command.setcomm.md)
 
-Defined in: Bot/modules/Command.ts:101
+Defined in: Bot/modules/Command.ts:90
 
 ___
 
@@ -145,7 +145,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: Bot/modules/Command.ts:72
+Defined in: Bot/modules/Command.ts:67
 
 ___
 
@@ -163,7 +163,7 @@ ___
 
 **Returns:** [*SetComm*](bot_modules_command.setcomm.md)
 
-Defined in: Bot/modules/Command.ts:141
+Defined in: Bot/modules/Command.ts:122
 
 ___
 
@@ -181,7 +181,7 @@ ___
 
 **Returns:** [*SetComm*](bot_modules_command.setcomm.md)
 
-Defined in: Bot/modules/Command.ts:85
+Defined in: Bot/modules/Command.ts:78
 
 ___
 
@@ -199,7 +199,7 @@ ___
 
 **Returns:** [*SetComm*](bot_modules_command.setcomm.md)
 
-Defined in: Bot/modules/Command.ts:108
+Defined in: Bot/modules/Command.ts:95
 
 ___
 
@@ -217,7 +217,7 @@ ___
 
 **Returns:** [*SetComm*](bot_modules_command.setcomm.md)
 
-Defined in: Bot/modules/Command.ts:92
+Defined in: Bot/modules/Command.ts:83
 
 ___
 
@@ -235,4 +235,4 @@ ___
 
 **Returns:** [*SetComm*](bot_modules_command.setcomm.md)
 
-Defined in: Bot/modules/Command.ts:129
+Defined in: Bot/modules/Command.ts:112

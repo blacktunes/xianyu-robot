@@ -6,7 +6,6 @@
 
 ### References
 
-- [BotPlugin](tools.md#botplugin)
 - [Log](tools.md#log)
 - [LogColor](tools.md#logcolor)
 - [Mysql](tools.md#mysql)
@@ -18,12 +17,6 @@
 - [sleep](tools.md#sleep)
 
 ## References
-
-### BotPlugin
-
-Re-exports: [BotPlugin](../classes/plugin_plugin.botplugin.md)
-
-___
 
 ### Log
 

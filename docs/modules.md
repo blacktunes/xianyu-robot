@@ -17,6 +17,7 @@
 - [Bot/modules/Event](modules/bot_modules_event.md)
 - [Bot/modules/Plugin](modules/bot_modules_plugin.md)
 - [Connect/Connect](modules/connect_connect.md)
+- [Plugin](modules/plugin.md)
 - [Plugin/Command](modules/plugin_command.md)
 - [Plugin/Plugin](modules/plugin_plugin.md)
 - [Tools](modules/tools.md)

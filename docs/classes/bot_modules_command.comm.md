@@ -35,7 +35,7 @@
 
 **Returns:** [*Comm*](bot_modules_command.comm.md)
 
-Defined in: Bot/modules/Command.ts:38
+Defined in: Bot/modules/Command.ts:34
 
 ## Properties
 
@@ -43,7 +43,7 @@ Defined in: Bot/modules/Command.ts:38
 
 • **admin**: *boolean*= false
 
-Defined in: Bot/modules/Command.ts:44
+Defined in: Bot/modules/Command.ts:40
 
 ___
 
@@ -51,7 +51,7 @@ ___
 
 • **blacklist**: *Set*<number\>
 
-Defined in: Bot/modules/Command.ts:55
+Defined in: Bot/modules/Command.ts:51
 
 ___
 
@@ -59,7 +59,7 @@ ___
 
 • **comm**: *string*[]= []
 
-Defined in: Bot/modules/Command.ts:42
+Defined in: Bot/modules/Command.ts:38
 
 ___
 
@@ -67,7 +67,7 @@ ___
 
 • **desc**: *string*= '暂无描述'
 
-Defined in: Bot/modules/Command.ts:45
+Defined in: Bot/modules/Command.ts:41
 
 ___
 
@@ -82,7 +82,7 @@ ___
 | `group` | (`e`: [*GroupMsg*](../modules/type_event.md#groupmsg)) => [*Prevent*](../modules/type_bot.md#prevent)[] |
 | `private` | (`e`: [*PrivateMsg*](../modules/type_event.md#privatemsg)) => [*Prevent*](../modules/type_bot.md#prevent)[] |
 
-Defined in: Bot/modules/Command.ts:47
+Defined in: Bot/modules/Command.ts:43
 
 ___
 
@@ -90,7 +90,7 @@ ___
 
 • **group**: *string*
 
-Defined in: Bot/modules/Command.ts:46
+Defined in: Bot/modules/Command.ts:42
 
 ___
 
@@ -98,7 +98,7 @@ ___
 
 • **reg**: *RegExp* \| *NamedRegExp*
 
-Defined in: Bot/modules/Command.ts:43
+Defined in: Bot/modules/Command.ts:39
 
 ___
 
@@ -106,4 +106,4 @@ ___
 
 • **whitelist**: *Set*<number\>
 
-Defined in: Bot/modules/Command.ts:54
+Defined in: Bot/modules/Command.ts:50

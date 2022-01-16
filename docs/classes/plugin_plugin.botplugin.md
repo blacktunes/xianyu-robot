@@ -14,11 +14,16 @@
 
 - [Bot](plugin_plugin.botplugin.md#bot)
 - [Command](plugin_plugin.botplugin.md#command)
+- [Log](plugin_plugin.botplugin.md#log)
+- [\_config](plugin_plugin.botplugin.md#_config)
+- [\_configProxy](plugin_plugin.botplugin.md#_configproxy)
 - [config](plugin_plugin.botplugin.md#config)
 - [name](plugin_plugin.botplugin.md#name)
 
 ### Methods
 
+- [autoSave](plugin_plugin.botplugin.md#autosave)
+- [deepProxy](plugin_plugin.botplugin.md#deepproxy)
 - [init](plugin_plugin.botplugin.md#init)
 - [setup](plugin_plugin.botplugin.md#setup)
 
@@ -36,7 +41,7 @@
 
 **Returns:** [*BotPlugin*](plugin_plugin.botplugin.md)
 
-Defined in: Plugin/Plugin.ts:5
+Defined in: Plugin/Plugin.ts:6
 
 ## Properties
 
@@ -46,7 +51,7 @@ Defined in: Plugin/Plugin.ts:5
 
 Bot对象
 
-Defined in: Plugin/Plugin.ts:14
+Defined in: Plugin/Plugin.ts:17
 
 ___
 
@@ -57,17 +62,49 @@ ___
 插件命令
 与Bot.Command基本相同，但能设置统一设置
 
-Defined in: Plugin/Plugin.ts:19
+Defined in: Plugin/Plugin.ts:22
+
+___
+
+### Log
+
+• `Protected` **Log**: [*Log*](tools_printlog.log.md)
+
+日志对象
+
+Defined in: Plugin/Plugin.ts:26
+
+___
+
+### \_config
+
+• `Private` **\_config**: *object*
+
+#### Type declaration:
+
+Defined in: Plugin/Plugin.ts:12
+
+___
+
+### \_configProxy
+
+• `Private` **\_configProxy**: *object*
+
+#### Type declaration:
+
+Defined in: Plugin/Plugin.ts:13
 
 ___
 
 ### config
 
-• **config**: *any*= {}
+• **config**: *object*= {}
 
 插件设置
 
-Defined in: Plugin/Plugin.ts:12
+#### Type declaration:
+
+Defined in: Plugin/Plugin.ts:15
 
 ___
 
@@ -77,9 +114,37 @@ ___
 
 插件名称
 
-Defined in: Plugin/Plugin.ts:10
+Defined in: Plugin/Plugin.ts:11
 
 ## Methods
+
+### autoSave
+
+▸ **autoSave**(): *void*
+
+创建设置代理，在设置修改后自动保存本地配置
+
+**Returns:** *void*
+
+Defined in: Plugin/Plugin.ts:71
+
+___
+
+### deepProxy
+
+▸ `Private`**deepProxy**(`obj`: { [key: string]: *any*;  }): *object*
+
+#### Parameters:
+
+| Name | Type |
+| :------ | :------ |
+| `obj` | *object* |
+
+**Returns:** *object*
+
+Defined in: Plugin/Plugin.ts:43
+
+___
 
 ### init
 
@@ -90,7 +155,7 @@ Defined in: Plugin/Plugin.ts:10
 
 **Returns:** *void* \| *Promise*<void\>
 
-Defined in: Plugin/Plugin.ts:34
+Defined in: Plugin/Plugin.ts:42
 
 ___
 
@@ -109,4 +174,4 @@ ___
 
 **Returns:** *void*
 
-Defined in: Plugin/Plugin.ts:24
+Defined in: Plugin/Plugin.ts:31

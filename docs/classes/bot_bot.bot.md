@@ -49,7 +49,7 @@ Defined in: Bot/Bot.ts:12
 
 管理员命令
 
-Defined in: Bot/Bot.ts:44
+Defined in: Bot/Bot.ts:32
 
 ___
 
@@ -59,7 +59,7 @@ ___
 
 HTTP API
 
-Defined in: Bot/Bot.ts:52
+Defined in: Bot/Bot.ts:36
 
 ___
 
@@ -69,7 +69,7 @@ ___
 
 CQ码
 
-Defined in: Bot/Bot.ts:32
+Defined in: Bot/Bot.ts:26
 
 ___
 
@@ -79,7 +79,7 @@ ___
 
 命令对象
 
-Defined in: Bot/Bot.ts:40
+Defined in: Bot/Bot.ts:30
 
 ___
 
@@ -89,7 +89,7 @@ ___
 
 WS链接
 
-Defined in: Bot/Bot.ts:48
+Defined in: Bot/Bot.ts:34
 
 ___
 
@@ -99,7 +99,7 @@ ___
 
 Bot的部分属性
 
-Defined in: Bot/Bot.ts:24
+Defined in: Bot/Bot.ts:22
 
 ___
 
@@ -109,7 +109,7 @@ ___
 
 测试类
 
-Defined in: Bot/Bot.ts:60
+Defined in: Bot/Bot.ts:40
 
 ___
 
@@ -119,7 +119,7 @@ ___
 
 消息事件
 
-Defined in: Bot/Bot.ts:56
+Defined in: Bot/Bot.ts:38
 
 ___
 
@@ -129,7 +129,7 @@ ___
 
 日志对象
 
-Defined in: Bot/Bot.ts:28
+Defined in: Bot/Bot.ts:24
 
 ___
 
@@ -139,4 +139,4 @@ ___
 
 插件对象
 
-Defined in: Bot/Bot.ts:36
+Defined in: Bot/Bot.ts:28

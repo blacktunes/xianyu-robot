@@ -29,4 +29,4 @@
 
 **Returns:** *void*
 
-Defined in: Bot/modules/Command.ts:152
+Defined in: Bot/modules/Command.ts:133

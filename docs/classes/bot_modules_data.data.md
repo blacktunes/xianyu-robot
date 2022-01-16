@@ -14,6 +14,7 @@
 
 - [Bot](bot_modules_data.data.md#bot)
 - [\_noCommList](bot_modules_data.data.md#_nocommlist)
+- [config](bot_modules_data.data.md#config)
 - [friendList](bot_modules_data.data.md#friendlist)
 - [groupList](bot_modules_data.data.md#grouplist)
 - [groupMemberList](bot_modules_data.data.md#groupmemberlist)
@@ -68,7 +69,26 @@ ___
 
 不启用内置指令的群组列表
 
-Defined in: Bot/modules/Data.ts:99
+Defined in: Bot/modules/Data.ts:110
+
+___
+
+### config
+
+• **config**: *object*
+
+Bot的配置
+
+#### Type declaration:
+
+| Name | Type |
+| :------ | :------ |
+| `admin` | *object* |
+| `admin.ban` | *string* |
+| `admin.group_lift_ban` | *string* |
+| `admin.private_lift_ban` | *string* |
+
+Defined in: Bot/modules/Data.ts:24
 
 ___
 
@@ -80,7 +100,7 @@ ___
 
 #### Type declaration:
 
-Defined in: Bot/modules/Data.ts:69
+Defined in: Bot/modules/Data.ts:80
 
 ___
 
@@ -92,7 +112,7 @@ ___
 
 #### Type declaration:
 
-Defined in: Bot/modules/Data.ts:24
+Defined in: Bot/modules/Data.ts:35
 
 ___
 
@@ -104,7 +124,7 @@ ___
 
 #### Type declaration:
 
-Defined in: Bot/modules/Data.ts:41
+Defined in: Bot/modules/Data.ts:52
 
 ___
 
@@ -124,7 +144,7 @@ ___
 
 不显示Log输出的群组列表
 
-Defined in: Bot/modules/Data.ts:88
+Defined in: Bot/modules/Data.ts:99
 
 ___
 
@@ -134,7 +154,7 @@ ___
 
 是否显示Log输出
 
-Defined in: Bot/modules/Data.ts:83
+Defined in: Bot/modules/Data.ts:94
 
 ___
 
@@ -154,7 +174,7 @@ Defined in: Bot/modules/Data.ts:19
 
 **Returns:** *Set*<number\>
 
-Defined in: Bot/modules/Data.ts:108
+Defined in: Bot/modules/Data.ts:119
 
 • set **noCommList**(`list`: *Set*<number\>): *void*
 
@@ -166,7 +186,7 @@ Defined in: Bot/modules/Data.ts:108
 
 **Returns:** *void*
 
-Defined in: Bot/modules/Data.ts:100
+Defined in: Bot/modules/Data.ts:111
 
 ## Methods
 
@@ -184,7 +204,7 @@ Defined in: Bot/modules/Data.ts:100
 
 **Returns:** *void*
 
-Defined in: Bot/modules/Data.ts:114
+Defined in: Bot/modules/Data.ts:125
 
 ___
 
@@ -202,7 +222,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: Bot/modules/Data.ts:92
+Defined in: Bot/modules/Data.ts:103
 
 ___
 
@@ -214,7 +234,7 @@ ___
 
 **Returns:** *Promise*<void\>
 
-Defined in: Bot/modules/Data.ts:59
+Defined in: Bot/modules/Data.ts:70
 
 ___
 
@@ -224,7 +244,7 @@ ___
 
 **Returns:** *Promise*<void\>
 
-Defined in: Bot/modules/Data.ts:72
+Defined in: Bot/modules/Data.ts:83
 
 ___
 
@@ -242,7 +262,7 @@ ___
 
 **Returns:** *Promise*<void\>
 
-Defined in: Bot/modules/Data.ts:49
+Defined in: Bot/modules/Data.ts:60
 
 ___
 
@@ -254,4 +274,4 @@ ___
 
 **Returns:** *Promise*<void\>
 
-Defined in: Bot/modules/Data.ts:30
+Defined in: Bot/modules/Data.ts:41

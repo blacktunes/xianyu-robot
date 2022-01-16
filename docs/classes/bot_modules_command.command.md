@@ -51,7 +51,7 @@ ___
 
 命令列表
 
-Defined in: Bot/modules/Command.ts:14
+Defined in: Bot/modules/Command.ts:12
 
 ## Methods
 
@@ -69,4 +69,4 @@ Defined in: Bot/modules/Command.ts:14
 
 **Returns:** [*SetComm*](bot_modules_command.setcomm.md)
 
-Defined in: Bot/modules/Command.ts:19
+Defined in: Bot/modules/Command.ts:15

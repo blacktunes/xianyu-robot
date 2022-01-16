@@ -42,7 +42,7 @@
 
 **Returns:** [*Admin*](bot_modules_admin.admin.md)
 
-Defined in: Bot/modules/Admin.ts:8
+Defined in: Bot/modules/Admin.ts:6
 
 ## Properties
 
@@ -50,7 +50,7 @@ Defined in: Bot/modules/Admin.ts:8
 
 • `Private` **Bot**: *Pick*<[*Bot*](bot_bot.bot.md), ``"Data"`` \| ``"Log"`` \| ``"CQCode"`` \| ``"Plugin"`` \| ``"Command"`` \| ``"Conn"`` \| ``"Api"`` \| ``"Event"`` \| ``"Debug"``\>
 
-Defined in: Bot/modules/Admin.ts:12
+Defined in: Bot/modules/Admin.ts:10
 
 ___
 
@@ -58,7 +58,7 @@ ___
 
 • **adminList**: *Set*<number\>
 
-Defined in: Bot/modules/Admin.ts:14
+Defined in: Bot/modules/Admin.ts:12
 
 ___
 
@@ -68,7 +68,7 @@ ___
 
 被ban名单
 
-Defined in: Bot/modules/Admin.ts:26
+Defined in: Bot/modules/Admin.ts:22
 
 ## Methods
 
@@ -84,7 +84,7 @@ Defined in: Bot/modules/Admin.ts:26
 
 **Returns:** *void*
 
-Defined in: Bot/modules/Admin.ts:15
+Defined in: Bot/modules/Admin.ts:13
 
 ___
 
@@ -102,13 +102,15 @@ ___
 
 **Returns:** *void*
 
-Defined in: Bot/modules/Admin.ts:83
+Defined in: Bot/modules/Admin.ts:78
 
 ___
 
 ### addWhitelist
 
 ▸ **addWhitelist**(`group_list`: *number*[]): *void*
+
+增加白名单列表，请勿和黑名单同时使用
 
 #### Parameters:
 
@@ -118,7 +120,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: Bot/modules/Admin.ts:71
+Defined in: Bot/modules/Admin.ts:68
 
 ___
 
@@ -138,7 +140,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: Bot/modules/Admin.ts:33
+Defined in: Bot/modules/Admin.ts:29
 
 ___
 
@@ -154,7 +156,7 @@ ___
 
 **Returns:** *boolean*
 
-Defined in: Bot/modules/Admin.ts:19
+Defined in: Bot/modules/Admin.ts:17
 
 ___
 
@@ -170,7 +172,7 @@ ___
 
 **Returns:** *boolean*
 
-Defined in: Bot/modules/Admin.ts:67
+Defined in: Bot/modules/Admin.ts:63
 
 ___
 
@@ -186,4 +188,4 @@ ___
 
 **Returns:** *void*
 
-Defined in: Bot/modules/Admin.ts:59
+Defined in: Bot/modules/Admin.ts:55

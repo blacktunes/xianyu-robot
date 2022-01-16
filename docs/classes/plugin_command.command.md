@@ -63,7 +63,7 @@ ___
 
 • `Private` **\_blacklist**: *Set*<number\>
 
-Defined in: Plugin/Command.ts:54
+Defined in: Plugin/Command.ts:48
 
 ___
 
@@ -95,7 +95,7 @@ Defined in: Plugin/Command.ts:12
 
 **Returns:** *void*
 
-Defined in: Plugin/Command.ts:55
+Defined in: Plugin/Command.ts:49
 
 ___
 
@@ -129,7 +129,7 @@ Defined in: Plugin/Command.ts:15
 
 **Returns:** [*Command*](plugin_command.command.md)
 
-Defined in: Plugin/Command.ts:66
+Defined in: Plugin/Command.ts:58
 
 ___
 
@@ -147,7 +147,7 @@ ___
 
 **Returns:** *Pick*<[*SetComm*](bot_modules_command.setcomm.md), ``"alias"`` \| ``"desc"`` \| ``"reg"`` \| ``"admin"`` \| ``"action"`` \| ``"white"`` \| ``"black"``\>
 
-Defined in: Plugin/Command.ts:97
+Defined in: Plugin/Command.ts:83
 
 ___
 
@@ -159,7 +159,7 @@ ___
 
 **Returns:** readonly *number*[]
 
-Defined in: Plugin/Command.ts:78
+Defined in: Plugin/Command.ts:68
 
 ___
 
@@ -171,7 +171,7 @@ ___
 
 **Returns:** readonly *number*[]
 
-Defined in: Plugin/Command.ts:38
+Defined in: Plugin/Command.ts:34
 
 ___
 
@@ -189,7 +189,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: Plugin/Command.ts:84
+Defined in: Plugin/Command.ts:72
 
 ___
 
@@ -207,7 +207,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: Plugin/Command.ts:44
+Defined in: Plugin/Command.ts:38
 
 ___
 
@@ -225,4 +225,4 @@ ___
 
 **Returns:** [*Command*](plugin_command.command.md)
 
-Defined in: Plugin/Command.ts:26
+Defined in: Plugin/Command.ts:24

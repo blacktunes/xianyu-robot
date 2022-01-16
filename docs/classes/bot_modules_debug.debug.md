@@ -66,7 +66,7 @@ Defined in: Bot/modules/Debug.ts:12
 
 **Returns:** *boolean*
 
-Defined in: Bot/modules/Debug.ts:23
+Defined in: Bot/modules/Debug.ts:21
 
 • set **debug**(`debug`: *boolean*): *void*
 
@@ -96,7 +96,7 @@ Defined in: Bot/modules/Debug.ts:14
 
 **Returns:** *void*
 
-Defined in: Bot/modules/Debug.ts:30
+Defined in: Bot/modules/Debug.ts:26
 
 ▸ **groupMsgTest**(`msg`: *string*, `user_id?`: *number*, `group_id?`: *number*): *void*
 
@@ -110,7 +110,7 @@ Defined in: Bot/modules/Debug.ts:30
 
 **Returns:** *void*
 
-Defined in: Bot/modules/Debug.ts:31
+Defined in: Bot/modules/Debug.ts:27
 
 ___
 
@@ -128,7 +128,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: Bot/modules/Debug.ts:71
+Defined in: Bot/modules/Debug.ts:65
 
 ▸ **privateMsgTest**(`msg`: *string*, `user_id?`: *number*): *void*
 
@@ -141,4 +141,4 @@ Defined in: Bot/modules/Debug.ts:71
 
 **Returns:** *void*
 
-Defined in: Bot/modules/Debug.ts:72
+Defined in: Bot/modules/Debug.ts:66
