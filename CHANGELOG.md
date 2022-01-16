@@ -1,5 +1,14 @@
 # Xianyu-robot(咸鱼王)
 
+# [4.18.0](https://github.com/blacktunes/xianyu-robot/compare/v4.17.0...v4.18.0) (2022-01-16)
+
+
+### ✨ 新功能
+
+* 优化代码 ([13b4bde](https://github.com/blacktunes/xianyu-robot/commit/13b4bde))
+* 提取ban方法文本设置 ([577c0af](https://github.com/blacktunes/xianyu-robot/commit/577c0af))
+* 未完成消息添加API信息 ([6dc958d](https://github.com/blacktunes/xianyu-robot/commit/6dc958d))
+
 # [4.17.0](https://github.com/blacktunes/xianyu-robot/compare/v4.16.0...v4.17.0) (2021-12-08)
 
 
