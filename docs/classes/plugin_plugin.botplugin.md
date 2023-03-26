@@ -14,18 +14,23 @@
 
 - [Bot](plugin_plugin.botplugin.md#bot)
 - [Command](plugin_plugin.botplugin.md#command)
+- [Event](plugin_plugin.botplugin.md#event)
 - [Log](plugin_plugin.botplugin.md#log)
 - [\_config](plugin_plugin.botplugin.md#_config)
 - [\_configProxy](plugin_plugin.botplugin.md#_configproxy)
+- [blacklist](plugin_plugin.botplugin.md#blacklist)
 - [config](plugin_plugin.botplugin.md#config)
 - [name](plugin_plugin.botplugin.md#name)
+- [whitelist](plugin_plugin.botplugin.md#whitelist)
 
 ### Methods
 
 - [autoSave](plugin_plugin.botplugin.md#autosave)
+- [black](plugin_plugin.botplugin.md#black)
 - [deepProxy](plugin_plugin.botplugin.md#deepproxy)
 - [init](plugin_plugin.botplugin.md#init)
 - [setup](plugin_plugin.botplugin.md#setup)
+- [white](plugin_plugin.botplugin.md#white)
 
 ## Constructors
 
@@ -41,7 +46,7 @@
 
 **Returns:** [*BotPlugin*](plugin_plugin.botplugin.md)
 
-Defined in: Plugin/Plugin.ts:6
+Defined in: [Plugin/Plugin.ts:8](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Plugin/Plugin.ts#L8)
 
 ## Properties
 
@@ -51,18 +56,35 @@ Defined in: Plugin/Plugin.ts:6
 
 Bot对象
 
-Defined in: Plugin/Plugin.ts:17
+Defined in: [Plugin/Plugin.ts:115](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Plugin/Plugin.ts#L115)
 
 ___
 
 ### Command
 
-• `Protected` **Command**: [*Command*](plugin_command.command.md)
+• `Protected` **Command**: *object*
 
 插件命令
-与Bot.Command基本相同，但能设置统一设置
+与Bot.Command相同，但受插件黑白名单影响
 
-Defined in: Plugin/Plugin.ts:22
+#### Type declaration:
+
+| Name | Type |
+| :------ | :------ |
+| `command` | (`name`: *string*) => *Pick*<[*SetComm*](bot_modules_command.setcomm.md), ``"alias"`` \| ``"desc"`` \| ``"reg"`` \| ``"admin"`` \| ``"action"`` \| ``"white"`` \| ``"black"``\> |
+
+Defined in: [Plugin/Plugin.ts:121](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Plugin/Plugin.ts#L121)
+
+___
+
+### Event
+
+• `Protected` **Event**: [*Event*](plugin_event.event.md)
+
+事件
+与Bot.Event相同，但能设置统一设置
+
+Defined in: [Plugin/Plugin.ts:146](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Plugin/Plugin.ts#L146)
 
 ___
 
@@ -72,7 +94,7 @@ ___
 
 日志对象
 
-Defined in: Plugin/Plugin.ts:26
+Defined in: [Plugin/Plugin.ts:151](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Plugin/Plugin.ts#L151)
 
 ___
 
@@ -82,7 +104,7 @@ ___
 
 #### Type declaration:
 
-Defined in: Plugin/Plugin.ts:12
+Defined in: [Plugin/Plugin.ts:16](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Plugin/Plugin.ts#L16)
 
 ___
 
@@ -92,7 +114,24 @@ ___
 
 #### Type declaration:
 
-Defined in: Plugin/Plugin.ts:13
+Defined in: [Plugin/Plugin.ts:17](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Plugin/Plugin.ts#L17)
+
+___
+
+### blacklist
+
+• **blacklist**: *object*= {}
+
+黑名单
+
+#### Type declaration:
+
+| Name | Type |
+| :------ | :------ |
+| `group?` | *Set*<number\> |
+| `user?` | *Set*<number\> |
+
+Defined in: [Plugin/Plugin.ts:69](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Plugin/Plugin.ts#L69)
 
 ___
 
@@ -104,7 +143,7 @@ ___
 
 #### Type declaration:
 
-Defined in: Plugin/Plugin.ts:15
+Defined in: [Plugin/Plugin.ts:20](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Plugin/Plugin.ts#L20)
 
 ___
 
@@ -114,7 +153,24 @@ ___
 
 插件名称
 
-Defined in: Plugin/Plugin.ts:11
+Defined in: [Plugin/Plugin.ts:14](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Plugin/Plugin.ts#L14)
+
+___
+
+### whitelist
+
+• **whitelist**: *object*= {}
+
+白名单
+
+#### Type declaration:
+
+| Name | Type |
+| :------ | :------ |
+| `group?` | *Set*<number\> |
+| `user?` | *Set*<number\> |
+
+Defined in: [Plugin/Plugin.ts:23](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Plugin/Plugin.ts#L23)
 
 ## Methods
 
@@ -126,7 +182,26 @@ Defined in: Plugin/Plugin.ts:11
 
 **Returns:** *void*
 
-Defined in: Plugin/Plugin.ts:71
+Defined in: [Plugin/Plugin.ts:199](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Plugin/Plugin.ts#L199)
+
+___
+
+### black
+
+▸ **black**(`group_list?`: *number*[], `user_list?`: *number*[]): [*BotPlugin*](plugin_plugin.botplugin.md)
+
+增加黑名单列表
+
+#### Parameters:
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `group_list?` | *number*[] | 群聊黑名单 |
+| `user_list?` | *number*[] | 私聊黑名单 |
+
+**Returns:** [*BotPlugin*](plugin_plugin.botplugin.md)
+
+Defined in: [Plugin/Plugin.ts:78](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Plugin/Plugin.ts#L78)
 
 ___
 
@@ -142,7 +217,7 @@ ___
 
 **Returns:** *object*
 
-Defined in: Plugin/Plugin.ts:43
+Defined in: [Plugin/Plugin.ts:171](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Plugin/Plugin.ts#L171)
 
 ___
 
@@ -151,11 +226,11 @@ ___
 ▸ **init**(): *void* \| *Promise*<void\>
 
 初始化方法
-该方法会在Bot初始化完成后执行，请勿重复执行
+该方法会在Bot初始化完成后执行
 
 **Returns:** *void* \| *Promise*<void\>
 
-Defined in: Plugin/Plugin.ts:42
+Defined in: [Plugin/Plugin.ts:170](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Plugin/Plugin.ts#L170)
 
 ___
 
@@ -164,7 +239,7 @@ ___
 ▸ **setup**(`config?`: *any*): *void*
 
 安装方法
-该方法会在实例化后执行，请勿重复执行
+该方法会在实例化后执行
 
 #### Parameters:
 
@@ -174,4 +249,23 @@ ___
 
 **Returns:** *void*
 
-Defined in: Plugin/Plugin.ts:31
+Defined in: [Plugin/Plugin.ts:157](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Plugin/Plugin.ts#L157)
+
+___
+
+### white
+
+▸ **white**(`group_list?`: *number*[], `user_list?`: *number*[]): [*BotPlugin*](plugin_plugin.botplugin.md)
+
+增加白名单列表
+
+#### Parameters:
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `group_list?` | *number*[] | 群聊白名单 |
+| `user_list?` | *number*[] | 私聊白名单 |
+
+**Returns:** [*BotPlugin*](plugin_plugin.botplugin.md)
+
+Defined in: [Plugin/Plugin.ts:32](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Plugin/Plugin.ts#L32)

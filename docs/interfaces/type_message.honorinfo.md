@@ -18,4 +18,4 @@
 
 群号
 
-Defined in: Type/Message.ts:128
+Defined in: [Type/Message.ts:128](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Message.ts#L128)

@@ -33,7 +33,7 @@
 
 **Returns:** [*Command*](bot_modules_command.command.md)
 
-Defined in: Bot/modules/Command.ts:6
+Defined in: [Bot/modules/Command.ts:6](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Command.ts#L6)
 
 ## Properties
 
@@ -41,7 +41,7 @@ Defined in: Bot/modules/Command.ts:6
 
 • `Private` **Bot**: *Pick*<[*Bot*](bot_bot.bot.md), ``"Admin"`` \| ``"Data"`` \| ``"Log"`` \| ``"CQCode"`` \| ``"Plugin"`` \| ``"Conn"`` \| ``"Api"`` \| ``"Event"`` \| ``"Debug"``\>
 
-Defined in: Bot/modules/Command.ts:10
+Defined in: [Bot/modules/Command.ts:10](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Command.ts#L10)
 
 ___
 
@@ -51,7 +51,7 @@ ___
 
 命令列表
 
-Defined in: Bot/modules/Command.ts:12
+Defined in: [Bot/modules/Command.ts:12](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Command.ts#L12)
 
 ## Methods
 
@@ -69,4 +69,4 @@ Defined in: Bot/modules/Command.ts:12
 
 **Returns:** [*SetComm*](bot_modules_command.setcomm.md)
 
-Defined in: Bot/modules/Command.ts:15
+Defined in: [Bot/modules/Command.ts:15](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Command.ts#L15)

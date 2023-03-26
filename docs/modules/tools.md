@@ -15,6 +15,7 @@
 - [getTime](tools.md#gettime)
 - [secondsFormat](tools.md#secondsformat)
 - [sleep](tools.md#sleep)
+- [timeDifference](tools.md#timedifference)
 
 ## References
 
@@ -69,3 +70,9 @@ ___
 ### sleep
 
 Re-exports: [sleep](tools_tools.md#sleep)
+
+___
+
+### timeDifference
+
+Re-exports: [timeDifference](tools_tools.md#timedifference)

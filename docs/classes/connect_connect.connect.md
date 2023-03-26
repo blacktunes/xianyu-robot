@@ -13,6 +13,7 @@
 ### Properties
 
 - [APIList](connect_connect.connect.md#apilist)
+- [Data](connect_connect.connect.md#data)
 - [\_messageID](connect_connect.connect.md#_messageid)
 - [accessToken](connect_connect.connect.md#accesstoken)
 - [blacklist](connect_connect.connect.md#blacklist)
@@ -24,6 +25,7 @@
 - [host](connect_connect.connect.md#host)
 - [messageEventList](connect_connect.connect.md#messageeventlist)
 - [messageLogEvent](connect_connect.connect.md#messagelogevent)
+- [name](connect_connect.connect.md#name)
 - [nextMessageEventList](connect_connect.connect.md#nextmessageeventlist)
 - [nextMessageID](connect_connect.connect.md#nextmessageid)
 - [port](connect_connect.connect.md#port)
@@ -56,17 +58,18 @@
 
 ### constructor
 
-\+ **new Connect**(`config?`: [*WebSocketConfig*](../interfaces/type_bot.websocketconfig.md)): [*Connect*](connect_connect.connect.md)
+\+ **new Connect**(`data`: [*Data*](bot_modules_data.data.md), `config?`: [*WebSocketConfig*](../interfaces/type_bot.websocketconfig.md)): [*Connect*](connect_connect.connect.md)
 
 #### Parameters:
 
 | Name | Type |
 | :------ | :------ |
+| `data` | [*Data*](bot_modules_data.data.md) |
 | `config?` | [*WebSocketConfig*](../interfaces/type_bot.websocketconfig.md) |
 
 **Returns:** [*Connect*](connect_connect.connect.md)
 
-Defined in: Connect/Connect.ts:17
+Defined in: [Connect/Connect.ts:18](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Connect/Connect.ts#L18)
 
 ## Properties
 
@@ -74,7 +77,15 @@ Defined in: Connect/Connect.ts:17
 
 • `Private` **APIList**: *Map*<number, { `fn`: Function ; `info`: *any*  }\>
 
-Defined in: Connect/Connect.ts:296
+Defined in: [Connect/Connect.ts:315](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Connect/Connect.ts#L315)
+
+___
+
+### Data
+
+• `Private` **Data**: [*Data*](bot_modules_data.data.md)
+
+Defined in: [Connect/Connect.ts:30](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Connect/Connect.ts#L30)
 
 ___
 
@@ -82,7 +93,7 @@ ___
 
 • `Private` **\_messageID**: *number*= 1
 
-Defined in: Connect/Connect.ts:39
+Defined in: [Connect/Connect.ts:46](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Connect/Connect.ts#L46)
 
 ___
 
@@ -90,15 +101,24 @@ ___
 
 • `Private` **accessToken**: *string*= ''
 
-Defined in: Connect/Connect.ts:28
+Defined in: [Connect/Connect.ts:35](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Connect/Connect.ts#L35)
 
 ___
 
 ### blacklist
 
-• **blacklist**: *Set*<number\>
+• **blacklist**: *object*= {}
 
-Defined in: Connect/Connect.ts:46
+黑名单
+
+#### Type declaration:
+
+| Name | Type |
+| :------ | :------ |
+| `group?` | *Set*<number\> |
+| `user?` | *Set*<number\> |
+
+Defined in: [Connect/Connect.ts:58](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Connect/Connect.ts#L58)
 
 ___
 
@@ -106,7 +126,7 @@ ___
 
 • `Private` **client**: *any*
 
-Defined in: Connect/Connect.ts:189
+Defined in: [Connect/Connect.ts:208](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Connect/Connect.ts#L208)
 
 ___
 
@@ -114,7 +134,7 @@ ___
 
 • `Private` **closeEventList**: () => *void*[]= []
 
-Defined in: Connect/Connect.ts:192
+Defined in: [Connect/Connect.ts:211](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Connect/Connect.ts#L211)
 
 ___
 
@@ -122,7 +142,7 @@ ___
 
 • `Private` **connEventList**: () => *void*[]= []
 
-Defined in: Connect/Connect.ts:190
+Defined in: [Connect/Connect.ts:209](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Connect/Connect.ts#L209)
 
 ___
 
@@ -130,7 +150,7 @@ ___
 
 • `Private` **connectTimes**: *number*= 0
 
-Defined in: Connect/Connect.ts:38
+Defined in: [Connect/Connect.ts:45](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Connect/Connect.ts#L45)
 
 ___
 
@@ -138,7 +158,7 @@ ___
 
 • `Private` **errorEventList**: (`error`: Error) => *void*[]= []
 
-Defined in: Connect/Connect.ts:191
+Defined in: [Connect/Connect.ts:210](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Connect/Connect.ts#L210)
 
 ___
 
@@ -146,7 +166,7 @@ ___
 
 • `Private` **host**: *string*= '127.0.0.1'
 
-Defined in: Connect/Connect.ts:29
+Defined in: [Connect/Connect.ts:36](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Connect/Connect.ts#L36)
 
 ___
 
@@ -164,7 +184,7 @@ ___
 | `other` | MessageEvent[] |
 | `request` | MessageEvent[] |
 
-Defined in: Connect/Connect.ts:193
+Defined in: [Connect/Connect.ts:212](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Connect/Connect.ts#L212)
 
 ___
 
@@ -172,7 +192,15 @@ ___
 
 • `Private` **messageLogEvent**: MessageEvent[]= []
 
-Defined in: Connect/Connect.ts:206
+Defined in: [Connect/Connect.ts:225](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Connect/Connect.ts#L225)
+
+___
+
+### name
+
+• `Private` **name**: *string*= 'WS'
+
+Defined in: [Connect/Connect.ts:32](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Connect/Connect.ts#L32)
 
 ___
 
@@ -182,7 +210,7 @@ ___
 
 #### Type declaration:
 
-Defined in: Connect/Connect.ts:207
+Defined in: [Connect/Connect.ts:226](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Connect/Connect.ts#L226)
 
 ___
 
@@ -190,7 +218,7 @@ ___
 
 • `Private` **nextMessageID**: *number*= 1
 
-Defined in: Connect/Connect.ts:43
+Defined in: [Connect/Connect.ts:50](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Connect/Connect.ts#L50)
 
 ___
 
@@ -198,7 +226,7 @@ ___
 
 • `Private` **port**: *number*= 6700
 
-Defined in: Connect/Connect.ts:30
+Defined in: [Connect/Connect.ts:37](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Connect/Connect.ts#L37)
 
 ___
 
@@ -212,9 +240,9 @@ ___
 
 **Returns:** *void*
 
-Defined in: Connect/Connect.ts:36
+Defined in: [Connect/Connect.ts:43](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Connect/Connect.ts#L43)
 
-Defined in: Connect/Connect.ts:36
+Defined in: [Connect/Connect.ts:43](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Connect/Connect.ts#L43)
 
 ___
 
@@ -222,7 +250,7 @@ ___
 
 • `Private` **reconnection**: *boolean*= true
 
-Defined in: Connect/Connect.ts:31
+Defined in: [Connect/Connect.ts:38](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Connect/Connect.ts#L38)
 
 ___
 
@@ -230,7 +258,7 @@ ___
 
 • `Private` **reconnectionAttempts**: *number*= 1000
 
-Defined in: Connect/Connect.ts:32
+Defined in: [Connect/Connect.ts:39](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Connect/Connect.ts#L39)
 
 ___
 
@@ -238,15 +266,24 @@ ___
 
 • `Private` **reconnectionDelay**: *number*= 1000
 
-Defined in: Connect/Connect.ts:33
+Defined in: [Connect/Connect.ts:40](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Connect/Connect.ts#L40)
 
 ___
 
 ### whitelist
 
-• **whitelist**: *Set*<number\>
+• **whitelist**: *object*= {}
 
-Defined in: Connect/Connect.ts:45
+白名单
+
+#### Type declaration:
+
+| Name | Type |
+| :------ | :------ |
+| `group?` | *Set*<number\> |
+| `user?` | *Set*<number\> |
+
+Defined in: [Connect/Connect.ts:53](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Connect/Connect.ts#L53)
 
 ___
 
@@ -254,7 +291,7 @@ ___
 
 • `Private` **wss**: *boolean*= false
 
-Defined in: Connect/Connect.ts:27
+Defined in: [Connect/Connect.ts:34](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Connect/Connect.ts#L34)
 
 ## Accessors
 
@@ -264,7 +301,7 @@ Defined in: Connect/Connect.ts:27
 
 **Returns:** *number*
 
-Defined in: Connect/Connect.ts:40
+Defined in: [Connect/Connect.ts:47](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Connect/Connect.ts#L47)
 
 ## Methods
 
@@ -286,7 +323,7 @@ message消息的log参数true时有最高优先度，同时用于控制被Ban拦
 
 **Returns:** [*Connect*](connect_connect.connect.md)
 
-Defined in: Connect/Connect.ts:216
+Defined in: [Connect/Connect.ts:235](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Connect/Connect.ts#L235)
 
 ___
 
@@ -296,7 +333,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: Connect/Connect.ts:101
+Defined in: [Connect/Connect.ts:118](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Connect/Connect.ts#L118)
 
 ___
 
@@ -312,7 +349,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: Connect/Connect.ts:338
+Defined in: [Connect/Connect.ts:357](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Connect/Connect.ts#L357)
 
 ___
 
@@ -324,7 +361,7 @@ ___
 
 **Returns:** *number*
 
-Defined in: Connect/Connect.ts:292
+Defined in: [Connect/Connect.ts:311](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Connect/Connect.ts#L311)
 
 ___
 
@@ -336,7 +373,7 @@ ___
 
 **Returns:** *number*
 
-Defined in: Connect/Connect.ts:300
+Defined in: [Connect/Connect.ts:319](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Connect/Connect.ts#L319)
 
 ___
 
@@ -354,7 +391,7 @@ ___
 
 **Returns:** *Promise*<[*ApiRes*](../interfaces/type_bot.apires.md)\>
 
-Defined in: Connect/Connect.ts:261
+Defined in: [Connect/Connect.ts:280](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Connect/Connect.ts#L280)
 
 ___
 
@@ -370,7 +407,7 @@ ___
 
 **Returns:** *Promise*<void\>
 
-Defined in: Connect/Connect.ts:64
+Defined in: [Connect/Connect.ts:79](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Connect/Connect.ts#L79)
 
 ___
 
@@ -382,23 +419,24 @@ WebSocket收否已经连接
 
 **Returns:** *boolean*
 
-Defined in: Connect/Connect.ts:330
+Defined in: [Connect/Connect.ts:349](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Connect/Connect.ts#L349)
 
 ___
 
 ### isSkip
 
-▸ `Private`**isSkip**(`group_id`: *number*): *boolean*
+▸ `Private`**isSkip**(`type`: ``"private"`` \| ``"group"``, `id`: *number*): *boolean*
 
 #### Parameters:
 
 | Name | Type |
 | :------ | :------ |
-| `group_id` | *number* |
+| `type` | ``"private"`` \| ``"group"`` |
+| `id` | *number* |
 
 **Returns:** *boolean*
 
-Defined in: Connect/Connect.ts:97
+Defined in: [Connect/Connect.ts:112](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Connect/Connect.ts#L112)
 
 ___
 
@@ -415,7 +453,7 @@ ___
 
 **Returns:** (`fn`: (`msg`: *string*, `event`: *any*, `prevEvent`: *any*) => [*Prevent*](../modules/type_bot.md#prevent)) => *void*
 
-Defined in: Connect/Connect.ts:48
+Defined in: [Connect/Connect.ts:63](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Connect/Connect.ts#L63)
 
 ___
 
@@ -436,4 +474,4 @@ ___
 
 **Returns:** *Promise*<[*ApiRes*](../interfaces/type_bot.apires.md)\>
 
-Defined in: Connect/Connect.ts:308
+Defined in: [Connect/Connect.ts:327](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Connect/Connect.ts#L327)

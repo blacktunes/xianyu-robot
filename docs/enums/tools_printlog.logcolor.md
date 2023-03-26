@@ -28,7 +28,7 @@
 级别：调试
 颜色：灰色
 
-Defined in: Tools/PrintLog.ts:13
+Defined in: [Tools/PrintLog.ts:13](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/PrintLog.ts#L13)
 
 ___
 
@@ -39,7 +39,7 @@ ___
 级别：错误
 颜色：红色
 
-Defined in: Tools/PrintLog.ts:43
+Defined in: [Tools/PrintLog.ts:43](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/PrintLog.ts#L43)
 
 ___
 
@@ -50,7 +50,7 @@ ___
 级别：致命错误
 颜色：品红
 
-Defined in: Tools/PrintLog.ts:48
+Defined in: [Tools/PrintLog.ts:48](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/PrintLog.ts#L48)
 
 ___
 
@@ -61,7 +61,7 @@ ___
 级别：信息
 颜色：白色
 
-Defined in: Tools/PrintLog.ts:18
+Defined in: [Tools/PrintLog.ts:18](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/PrintLog.ts#L18)
 
 ___
 
@@ -72,7 +72,7 @@ ___
 级别：通知
 颜色：青色
 
-Defined in: Tools/PrintLog.ts:23
+Defined in: [Tools/PrintLog.ts:23](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/PrintLog.ts#L23)
 
 ___
 
@@ -83,7 +83,7 @@ ___
 级别：信息(接收)
 颜色：蓝色
 
-Defined in: Tools/PrintLog.ts:28
+Defined in: [Tools/PrintLog.ts:28](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/PrintLog.ts#L28)
 
 ___
 
@@ -94,7 +94,7 @@ ___
 级别：信息(发送)
 颜色：绿色
 
-Defined in: Tools/PrintLog.ts:33
+Defined in: [Tools/PrintLog.ts:33](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/PrintLog.ts#L33)
 
 ___
 
@@ -105,4 +105,4 @@ ___
 级别：警告
 颜色：黄色
 
-Defined in: Tools/PrintLog.ts:38
+Defined in: [Tools/PrintLog.ts:38](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/PrintLog.ts#L38)

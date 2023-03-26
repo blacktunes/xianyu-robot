@@ -24,7 +24,7 @@
 
 群号
 
-Defined in: Type/Event.ts:291
+Defined in: [Type/Event.ts:291](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L291)
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 通知类型
 
-Defined in: Type/Event.ts:283
+Defined in: [Type/Event.ts:283](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L283)
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 上报类型
 
-Defined in: Type/Event.ts:279
+Defined in: [Type/Event.ts:279](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L279)
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 收到事件的机器人 QQ 号
 
-Defined in: Type/Event.ts:275
+Defined in: [Type/Event.ts:275](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L275)
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 事件子类型，分别表示设置和取消管理员
 
-Defined in: Type/Event.ts:287
+Defined in: [Type/Event.ts:287](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L287)
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 事件发生的时间戳
 
-Defined in: Type/Event.ts:271
+Defined in: [Type/Event.ts:271](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L271)
 
 ___
 
@@ -84,4 +84,4 @@ ___
 
 管理员 QQ 号
 
-Defined in: Type/Event.ts:295
+Defined in: [Type/Event.ts:295](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L295)

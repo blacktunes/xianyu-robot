@@ -21,7 +21,7 @@
 
 	年龄
 
-Defined in: Type/Event.ts:73
+Defined in: [Type/Event.ts:73](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L73)
 
 ___
 
@@ -31,7 +31,7 @@ ___
 
 昵称
 
-Defined in: Type/Event.ts:65
+Defined in: [Type/Event.ts:65](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L65)
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 性别，male 或 female 或 unknown
 
-Defined in: Type/Event.ts:69
+Defined in: [Type/Event.ts:69](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L69)
 
 ___
 
@@ -51,4 +51,4 @@ ___
 
 发送者 QQ 号
 
-Defined in: Type/Event.ts:61
+Defined in: [Type/Event.ts:61](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L61)

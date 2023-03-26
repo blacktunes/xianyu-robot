@@ -37,7 +37,7 @@
 
 **Returns:** [*Log*](tools_printlog.log.md)
 
-Defined in: Tools/PrintLog.ts:55
+Defined in: [Tools/PrintLog.ts:55](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/PrintLog.ts#L55)
 
 ## Methods
 
@@ -56,7 +56,7 @@ Defined in: Tools/PrintLog.ts:55
 
 **Returns:** *void*
 
-Defined in: Tools/PrintLog.ts:106
+Defined in: [Tools/PrintLog.ts:106](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/PrintLog.ts#L106)
 
 ___
 
@@ -75,7 +75,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: Tools/PrintLog.ts:160
+Defined in: [Tools/PrintLog.ts:160](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/PrintLog.ts#L160)
 
 ___
 
@@ -94,7 +94,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: Tools/PrintLog.ts:169
+Defined in: [Tools/PrintLog.ts:169](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/PrintLog.ts#L169)
 
 ___
 
@@ -113,7 +113,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: Tools/PrintLog.ts:115
+Defined in: [Tools/PrintLog.ts:115](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/PrintLog.ts#L115)
 
 ___
 
@@ -132,7 +132,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: Tools/PrintLog.ts:124
+Defined in: [Tools/PrintLog.ts:124](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/PrintLog.ts#L124)
 
 ___
 
@@ -151,7 +151,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: Tools/PrintLog.ts:133
+Defined in: [Tools/PrintLog.ts:133](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/PrintLog.ts#L133)
 
 ___
 
@@ -170,7 +170,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: Tools/PrintLog.ts:142
+Defined in: [Tools/PrintLog.ts:142](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/PrintLog.ts#L142)
 
 ___
 
@@ -189,7 +189,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: Tools/PrintLog.ts:151
+Defined in: [Tools/PrintLog.ts:151](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/PrintLog.ts#L151)
 
 ___
 
@@ -206,7 +206,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: Tools/PrintLog.ts:58
+Defined in: [Tools/PrintLog.ts:58](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/PrintLog.ts#L58)
 
 ___
 
@@ -226,4 +226,4 @@ ___
 
 **Returns:** *void*
 
-Defined in: Tools/PrintLog.ts:97
+Defined in: [Tools/PrintLog.ts:97](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/PrintLog.ts#L97)

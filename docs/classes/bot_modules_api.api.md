@@ -67,7 +67,7 @@
 
 **Returns:** [*Api*](bot_modules_api.api.md)
 
-Defined in: Bot/modules/Api.ts:6
+Defined in: [Bot/modules/Api.ts:5](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Api.ts#L5)
 
 ## Properties
 
@@ -75,7 +75,7 @@ Defined in: Bot/modules/Api.ts:6
 
 • `Private` **Bot**: *Pick*<[*Bot*](bot_bot.bot.md), ``"Admin"`` \| ``"Data"`` \| ``"Log"`` \| ``"CQCode"`` \| ``"Plugin"`` \| ``"Command"`` \| ``"Conn"`` \| ``"Event"`` \| ``"Debug"``\>
 
-Defined in: Bot/modules/Api.ts:11
+Defined in: [Bot/modules/Api.ts:10](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Api.ts#L10)
 
 ## Methods
 
@@ -94,7 +94,7 @@ Defined in: Bot/modules/Api.ts:11
 
 **Returns:** *Promise*<{ `level`: ``1`` \| ``2`` \| ``3``  }\>
 
-Defined in: Bot/modules/Api.ts:921
+Defined in: [Bot/modules/Api.ts:928](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Api.ts#L928)
 
 ___
 
@@ -112,7 +112,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: Bot/modules/Api.ts:879
+Defined in: [Bot/modules/Api.ts:886](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Api.ts#L886)
 
 ___
 
@@ -130,7 +130,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: Bot/modules/Api.ts:122
+Defined in: [Bot/modules/Api.ts:129](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Api.ts#L129)
 
 ___
 
@@ -140,7 +140,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: Bot/modules/Api.ts:13
+Defined in: [Bot/modules/Api.ts:12](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Api.ts#L12)
 
 ___
 
@@ -158,7 +158,7 @@ ___
 
 **Returns:** *Promise*<[*EssenceMsg*](../interfaces/type_message.essencemsg.md)[]\>
 
-Defined in: Bot/modules/Api.ts:895
+Defined in: [Bot/modules/Api.ts:902](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Api.ts#L902)
 
 ___
 
@@ -176,7 +176,7 @@ ___
 
 **Returns:** *Promise*<[*Message*](../modules/type_message.md#message)[]\>
 
-Defined in: Bot/modules/Api.ts:177
+Defined in: [Bot/modules/Api.ts:184](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Api.ts#L184)
 
 ___
 
@@ -188,7 +188,7 @@ ___
 
 **Returns:** *Promise*<[*QQInfo*](../interfaces/type_qq.qqinfo.md)[]\>
 
-Defined in: Bot/modules/Api.ts:528
+Defined in: [Bot/modules/Api.ts:535](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Api.ts#L535)
 
 ___
 
@@ -206,7 +206,7 @@ ___
 
 **Returns:** *Promise*<{ `can_at_all`: *boolean* ; `remain_at_all_count_for_group`: *number* ; `remain_at_all_count_for_uin`: *number*  }\>
 
-Defined in: Bot/modules/Api.ts:776
+Defined in: [Bot/modules/Api.ts:783](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Api.ts#L783)
 
 ___
 
@@ -231,7 +231,7 @@ ___
 
 **Returns:** *Promise*<[*HonorInfo*](../interfaces/type_message.honorinfo.md) & [*HonorItem*](../interfaces/type_message.honoritem.md)[T]\>
 
-Defined in: Bot/modules/Api.ts:674
+Defined in: [Bot/modules/Api.ts:681](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Api.ts#L681)
 
 ___
 
@@ -250,7 +250,7 @@ ___
 
 **Returns:** *Promise*<[*GroupInfo*](../interfaces/type_group.groupinfo.md)\>
 
-Defined in: Bot/modules/Api.ts:550
+Defined in: [Bot/modules/Api.ts:557](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Api.ts#L557)
 
 ___
 
@@ -262,7 +262,7 @@ ___
 
 **Returns:** *Promise*<[*GroupInfo*](../interfaces/type_group.groupinfo.md)[]\>
 
-Defined in: Bot/modules/Api.ts:582
+Defined in: [Bot/modules/Api.ts:589](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Api.ts#L589)
 
 ___
 
@@ -282,7 +282,7 @@ ___
 
 **Returns:** *Promise*<[*MemberInfo*](../interfaces/type_group.memberinfo.md)\>
 
-Defined in: Bot/modules/Api.ts:605
+Defined in: [Bot/modules/Api.ts:612](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Api.ts#L612)
 
 ___
 
@@ -300,7 +300,7 @@ ___
 
 **Returns:** *Promise*<[*MemberInfo*](../interfaces/type_group.memberinfo.md)[]\>
 
-Defined in: Bot/modules/Api.ts:648
+Defined in: [Bot/modules/Api.ts:655](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Api.ts#L655)
 
 ___
 
@@ -319,7 +319,7 @@ ___
 
 **Returns:** *Promise*<{ `messages`: [*Message*](../modules/type_message.md#message)[]  }\>
 
-Defined in: Bot/modules/Api.ts:837
+Defined in: [Bot/modules/Api.ts:844](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Api.ts#L844)
 
 ___
 
@@ -337,7 +337,7 @@ ___
 
 **Returns:** *Promise*<[*ImageInfo*](../interfaces/type_file.imageinfo.md)\>
 
-Defined in: Bot/modules/Api.ts:199
+Defined in: [Bot/modules/Api.ts:206](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Api.ts#L206)
 
 ___
 
@@ -349,13 +349,13 @@ ___
 
 **Returns:** *Promise*<{ `nickname`: *string* ; `user_id`: *number*  }\>
 
-Defined in: Bot/modules/Api.ts:464
+Defined in: [Bot/modules/Api.ts:471](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Api.ts#L471)
 
 ___
 
 ### getMsg
 
-▸ **getMsg**(`message_id`: *number*): *Promise*<[*Msg*](../interfaces/type_message.msg.md)\>
+▸ **getMsg**(`message_id`: *string* \| *number*): *Promise*<[*Msg*](../interfaces/type_message.msg.md)\>
 
 获取消息
 
@@ -363,11 +363,11 @@ ___
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `message_id` | *number* | 消息 ID |
+| `message_id` | *string* \| *number* | 消息 ID |
 
 **Returns:** *Promise*<[*Msg*](../interfaces/type_message.msg.md)\>
 
-Defined in: Bot/modules/Api.ts:138
+Defined in: [Bot/modules/Api.ts:145](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Api.ts#L145)
 
 ___
 
@@ -385,7 +385,7 @@ ___
 
 **Returns:** *Promise*<{ `clients`: [*Device*](../interfaces/type_qq.device.md)[]  }\>
 
-Defined in: Bot/modules/Api.ts:813
+Defined in: [Bot/modules/Api.ts:820](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Api.ts#L820)
 
 ___
 
@@ -397,7 +397,7 @@ ___
 
 **Returns:** *Promise*<[*Status*](../interfaces/type_message.status.md)\>
 
-Defined in: Bot/modules/Api.ts:757
+Defined in: [Bot/modules/Api.ts:764](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Api.ts#L764)
 
 ___
 
@@ -416,7 +416,7 @@ ___
 
 **Returns:** *Promise*<[*PrivateSender*](../interfaces/type_event.privatesender.md) & { `qid?`: *number*  }\>
 
-Defined in: Bot/modules/Api.ts:501
+Defined in: [Bot/modules/Api.ts:508](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Api.ts#L508)
 
 ___
 
@@ -428,7 +428,7 @@ ___
 
 **Returns:** *Promise*<[*VersionInfo*](../interfaces/type_message.versioninfo.md)\>
 
-Defined in: Bot/modules/Api.ts:739
+Defined in: [Bot/modules/Api.ts:746](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Api.ts#L746)
 
 ___
 
@@ -447,7 +447,7 @@ ___
 
 **Returns:** *Promise*<number\>
 
-Defined in: Bot/modules/Api.ts:96
+Defined in: [Bot/modules/Api.ts:99](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Api.ts#L99)
 
 ___
 
@@ -469,7 +469,7 @@ ___
 
 成功返回message_id，失败返回retcode(100)
 
-Defined in: Bot/modules/Api.ts:65
+Defined in: [Bot/modules/Api.ts:66](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Api.ts#L66)
 
 ___
 
@@ -491,7 +491,7 @@ ___
 
 成功返回message_id，失败返回retcode(100)
 
-Defined in: Bot/modules/Api.ts:32
+Defined in: [Bot/modules/Api.ts:31](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Api.ts#L31)
 
 ___
 
@@ -509,7 +509,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: Bot/modules/Api.ts:863
+Defined in: [Bot/modules/Api.ts:870](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Api.ts#L870)
 
 ___
 
@@ -529,7 +529,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: Bot/modules/Api.ts:427
+Defined in: [Bot/modules/Api.ts:434](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Api.ts#L434)
 
 ___
 
@@ -550,7 +550,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: Bot/modules/Api.ts:447
+Defined in: [Bot/modules/Api.ts:454](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Api.ts#L454)
 
 ___
 
@@ -570,7 +570,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: Bot/modules/Api.ts:315
+Defined in: [Bot/modules/Api.ts:322](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Api.ts#L322)
 
 ___
 
@@ -590,7 +590,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: Bot/modules/Api.ts:273
+Defined in: [Bot/modules/Api.ts:280](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Api.ts#L280)
 
 ___
 
@@ -610,7 +610,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: Bot/modules/Api.ts:250
+Defined in: [Bot/modules/Api.ts:257](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Api.ts#L257)
 
 ___
 
@@ -630,7 +630,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: Bot/modules/Api.ts:339
+Defined in: [Bot/modules/Api.ts:346](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Api.ts#L346)
 
 ___
 
@@ -650,7 +650,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: Bot/modules/Api.ts:227
+Defined in: [Bot/modules/Api.ts:234](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Api.ts#L234)
 
 ___
 
@@ -669,7 +669,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: Bot/modules/Api.ts:381
+Defined in: [Bot/modules/Api.ts:388](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Api.ts#L388)
 
 ___
 
@@ -688,7 +688,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: Bot/modules/Api.ts:361
+Defined in: [Bot/modules/Api.ts:368](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Api.ts#L368)
 
 ___
 
@@ -709,7 +709,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: Bot/modules/Api.ts:403
+Defined in: [Bot/modules/Api.ts:410](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Api.ts#L410)
 
 ___
 
@@ -728,4 +728,4 @@ ___
 
 **Returns:** *void*
 
-Defined in: Bot/modules/Api.ts:294
+Defined in: [Bot/modules/Api.ts:301](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Api.ts#L301)

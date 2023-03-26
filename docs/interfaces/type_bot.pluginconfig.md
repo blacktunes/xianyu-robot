@@ -22,4 +22,4 @@
 
 #### Type declaration:
 
-Defined in: Type/Bot.ts:12
+Defined in: [Type/Bot.ts:12](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Bot.ts#L12)

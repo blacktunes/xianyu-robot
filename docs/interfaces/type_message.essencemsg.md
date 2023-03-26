@@ -24,7 +24,7 @@
 
 消息ID
 
-Defined in: Type/Message.ts:247
+Defined in: [Type/Message.ts:247](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Message.ts#L247)
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 操作者QQ 号
 
-Defined in: Type/Message.ts:235
+Defined in: [Type/Message.ts:235](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Message.ts#L235)
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 操作者昵称
 
-Defined in: Type/Message.ts:239
+Defined in: [Type/Message.ts:239](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Message.ts#L239)
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 精华设置时间
 
-Defined in: Type/Message.ts:243
+Defined in: [Type/Message.ts:243](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Message.ts#L243)
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 发送者QQ 号
 
-Defined in: Type/Message.ts:223
+Defined in: [Type/Message.ts:223](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Message.ts#L223)
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 发送者昵称
 
-Defined in: Type/Message.ts:227
+Defined in: [Type/Message.ts:227](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Message.ts#L227)
 
 ___
 
@@ -84,4 +84,4 @@ ___
 
 	消息发送时间
 
-Defined in: Type/Message.ts:231
+Defined in: [Type/Message.ts:231](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Message.ts#L231)

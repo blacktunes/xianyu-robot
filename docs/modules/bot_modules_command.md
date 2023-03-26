@@ -29,4 +29,4 @@
 
 **Returns:** *void*
 
-Defined in: Bot/modules/Command.ts:133
+Defined in: [Bot/modules/Command.ts:203](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Command.ts#L203)

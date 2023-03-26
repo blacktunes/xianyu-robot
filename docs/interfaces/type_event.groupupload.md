@@ -24,7 +24,7 @@
 
 文件信息
 
-Defined in: Type/Event.ts:435
+Defined in: [Type/Event.ts:435](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L435)
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 群号
 
-Defined in: Type/Event.ts:427
+Defined in: [Type/Event.ts:427](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L427)
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 通知类型
 
-Defined in: Type/Event.ts:423
+Defined in: [Type/Event.ts:423](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L423)
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 上报类型
 
-Defined in: Type/Event.ts:419
+Defined in: [Type/Event.ts:419](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L419)
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 收到事件的机器人 QQ 号
 
-Defined in: Type/Event.ts:415
+Defined in: [Type/Event.ts:415](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L415)
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 事件发生的时间戳
 
-Defined in: Type/Event.ts:411
+Defined in: [Type/Event.ts:411](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L411)
 
 ___
 
@@ -84,4 +84,4 @@ ___
 
 发送者 QQ 号
 
-Defined in: Type/Event.ts:431
+Defined in: [Type/Event.ts:431](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L431)

@@ -21,7 +21,7 @@
 
 busid（目前不清楚有什么作用）
 
-Defined in: Type/File.ts:32
+Defined in: [Type/File.ts:32](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/File.ts#L32)
 
 ___
 
@@ -31,7 +31,7 @@ ___
 
 文件 ID
 
-Defined in: Type/File.ts:20
+Defined in: [Type/File.ts:20](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/File.ts#L20)
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 文件名
 
-Defined in: Type/File.ts:24
+Defined in: [Type/File.ts:24](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/File.ts#L24)
 
 ___
 
@@ -51,4 +51,4 @@ ___
 
 文件大小（字节数）
 
-Defined in: Type/File.ts:28
+Defined in: [Type/File.ts:28](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/File.ts#L28)

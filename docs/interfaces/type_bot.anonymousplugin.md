@@ -17,7 +17,7 @@
 
 • **init**: [*PluginFunction*](../modules/type_bot.md#pluginfunction)
 
-Defined in: Type/Bot.ts:25
+Defined in: [Type/Bot.ts:25](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Bot.ts#L25)
 
 ___
 
@@ -25,4 +25,4 @@ ___
 
 • **name**: ``"匿名插件"``
 
-Defined in: Type/Bot.ts:24
+Defined in: [Type/Bot.ts:24](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Bot.ts#L24)

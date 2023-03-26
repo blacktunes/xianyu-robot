@@ -21,7 +21,7 @@
 
 文件数据
 
-Defined in: Type/Event.ts:574
+Defined in: [Type/Event.ts:574](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L574)
 
 ___
 
@@ -31,7 +31,7 @@ ___
 
 消息类型
 
-Defined in: Type/Event.ts:566
+Defined in: [Type/Event.ts:566](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L566)
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 上报类型
 
-Defined in: Type/Event.ts:562
+Defined in: [Type/Event.ts:562](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L562)
 
 ___
 
@@ -51,4 +51,4 @@ ___
 
 发送者id
 
-Defined in: Type/Event.ts:570
+Defined in: [Type/Event.ts:570](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L570)

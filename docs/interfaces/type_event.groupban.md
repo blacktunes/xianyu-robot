@@ -26,7 +26,7 @@
 
 禁言时长，单位秒
 
-Defined in: Type/Event.ts:404
+Defined in: [Type/Event.ts:404](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L404)
 
 ___
 
@@ -36,7 +36,7 @@ ___
 
 群号
 
-Defined in: Type/Event.ts:392
+Defined in: [Type/Event.ts:392](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L392)
 
 ___
 
@@ -46,7 +46,7 @@ ___
 
 通知类型
 
-Defined in: Type/Event.ts:384
+Defined in: [Type/Event.ts:384](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L384)
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 操作者 QQ 号
 
-Defined in: Type/Event.ts:396
+Defined in: [Type/Event.ts:396](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L396)
 
 ___
 
@@ -66,7 +66,7 @@ ___
 
 上报类型
 
-Defined in: Type/Event.ts:380
+Defined in: [Type/Event.ts:380](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L380)
 
 ___
 
@@ -76,7 +76,7 @@ ___
 
 收到事件的机器人 QQ 号
 
-Defined in: Type/Event.ts:376
+Defined in: [Type/Event.ts:376](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L376)
 
 ___
 
@@ -86,7 +86,7 @@ ___
 
 事件子类型，分别表示禁言、解除禁言
 
-Defined in: Type/Event.ts:388
+Defined in: [Type/Event.ts:388](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L388)
 
 ___
 
@@ -96,7 +96,7 @@ ___
 
 事件发生的时间戳
 
-Defined in: Type/Event.ts:372
+Defined in: [Type/Event.ts:372](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L372)
 
 ___
 
@@ -106,4 +106,4 @@ ___
 
 被禁言 QQ 号
 
-Defined in: Type/Event.ts:400
+Defined in: [Type/Event.ts:400](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L400)

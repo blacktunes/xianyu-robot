@@ -25,7 +25,7 @@
 
 群号
 
-Defined in: Type/Event.ts:322
+Defined in: [Type/Event.ts:322](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L322)
 
 ___
 
@@ -35,7 +35,7 @@ ___
 
 通知类型
 
-Defined in: Type/Event.ts:314
+Defined in: [Type/Event.ts:314](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L314)
 
 ___
 
@@ -45,7 +45,7 @@ ___
 
 操作者 QQ 号（如果是主动退群，则和 user_id 相同）
 
-Defined in: Type/Event.ts:326
+Defined in: [Type/Event.ts:326](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L326)
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 上报类型
 
-Defined in: Type/Event.ts:310
+Defined in: [Type/Event.ts:310](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L310)
 
 ___
 
@@ -65,7 +65,7 @@ ___
 
 收到事件的机器人 QQ 号
 
-Defined in: Type/Event.ts:306
+Defined in: [Type/Event.ts:306](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L306)
 
 ___
 
@@ -75,7 +75,7 @@ ___
 
 事件子类型，分别表示主动退群、成员被踢、登录号被踢
 
-Defined in: Type/Event.ts:318
+Defined in: [Type/Event.ts:318](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L318)
 
 ___
 
@@ -85,7 +85,7 @@ ___
 
 事件发生的时间戳
 
-Defined in: Type/Event.ts:302
+Defined in: [Type/Event.ts:302](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L302)
 
 ___
 
@@ -95,4 +95,4 @@ ___
 
 离开者 QQ 号
 
-Defined in: Type/Event.ts:330
+Defined in: [Type/Event.ts:330](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L330)

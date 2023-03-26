@@ -21,8 +21,6 @@
 ### Methods
 
 - [addAdmin](bot_modules_admin.admin.md#addadmin)
-- [addBlacklist](bot_modules_admin.admin.md#addblacklist)
-- [addWhitelist](bot_modules_admin.admin.md#addwhitelist)
 - [ban](bot_modules_admin.admin.md#ban)
 - [isAdmin](bot_modules_admin.admin.md#isadmin)
 - [isBan](bot_modules_admin.admin.md#isban)
@@ -42,7 +40,7 @@
 
 **Returns:** [*Admin*](bot_modules_admin.admin.md)
 
-Defined in: Bot/modules/Admin.ts:6
+Defined in: [Bot/modules/Admin.ts:6](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Admin.ts#L6)
 
 ## Properties
 
@@ -50,7 +48,7 @@ Defined in: Bot/modules/Admin.ts:6
 
 • `Private` **Bot**: *Pick*<[*Bot*](bot_bot.bot.md), ``"Data"`` \| ``"Log"`` \| ``"CQCode"`` \| ``"Plugin"`` \| ``"Command"`` \| ``"Conn"`` \| ``"Api"`` \| ``"Event"`` \| ``"Debug"``\>
 
-Defined in: Bot/modules/Admin.ts:10
+Defined in: [Bot/modules/Admin.ts:10](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Admin.ts#L10)
 
 ___
 
@@ -58,7 +56,7 @@ ___
 
 • **adminList**: *Set*<number\>
 
-Defined in: Bot/modules/Admin.ts:12
+Defined in: [Bot/modules/Admin.ts:12](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Admin.ts#L12)
 
 ___
 
@@ -68,7 +66,7 @@ ___
 
 被ban名单
 
-Defined in: Bot/modules/Admin.ts:22
+Defined in: [Bot/modules/Admin.ts:22](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Admin.ts#L22)
 
 ## Methods
 
@@ -84,43 +82,7 @@ Defined in: Bot/modules/Admin.ts:22
 
 **Returns:** *void*
 
-Defined in: Bot/modules/Admin.ts:13
-
-___
-
-### addBlacklist
-
-▸ **addBlacklist**(`group_list`: *number*[]): *void*
-
-增加黑名单列表，请勿和白名单同时使用
-
-#### Parameters:
-
-| Name | Type |
-| :------ | :------ |
-| `group_list` | *number*[] |
-
-**Returns:** *void*
-
-Defined in: Bot/modules/Admin.ts:78
-
-___
-
-### addWhitelist
-
-▸ **addWhitelist**(`group_list`: *number*[]): *void*
-
-增加白名单列表，请勿和黑名单同时使用
-
-#### Parameters:
-
-| Name | Type |
-| :------ | :------ |
-| `group_list` | *number*[] |
-
-**Returns:** *void*
-
-Defined in: Bot/modules/Admin.ts:68
+Defined in: [Bot/modules/Admin.ts:13](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Admin.ts#L13)
 
 ___
 
@@ -140,7 +102,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: Bot/modules/Admin.ts:29
+Defined in: [Bot/modules/Admin.ts:29](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Admin.ts#L29)
 
 ___
 
@@ -156,7 +118,7 @@ ___
 
 **Returns:** *boolean*
 
-Defined in: Bot/modules/Admin.ts:17
+Defined in: [Bot/modules/Admin.ts:17](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Admin.ts#L17)
 
 ___
 
@@ -172,7 +134,7 @@ ___
 
 **Returns:** *boolean*
 
-Defined in: Bot/modules/Admin.ts:63
+Defined in: [Bot/modules/Admin.ts:63](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Admin.ts#L63)
 
 ___
 
@@ -188,4 +150,4 @@ ___
 
 **Returns:** *void*
 
-Defined in: Bot/modules/Admin.ts:55
+Defined in: [Bot/modules/Admin.ts:55](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Admin.ts#L55)

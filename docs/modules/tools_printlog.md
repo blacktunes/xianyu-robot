@@ -22,4 +22,4 @@
 
 • `Const` **PrintLog**: [*Log*](../classes/tools_printlog.log.md)
 
-Defined in: Tools/PrintLog.ts:174
+Defined in: [Tools/PrintLog.ts:174](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/PrintLog.ts#L174)

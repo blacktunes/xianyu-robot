@@ -30,7 +30,7 @@
 
 匿名信息，如果不是匿名消息则为 null
 
-Defined in: Type/Event.ts:117
+Defined in: [Type/Event.ts:117](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L117)
 
 ___
 
@@ -40,7 +40,7 @@ ___
 
 字体
 
-Defined in: Type/Event.ts:129
+Defined in: [Type/Event.ts:129](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L129)
 
 ___
 
@@ -50,7 +50,7 @@ ___
 
 群号
 
-Defined in: Type/Event.ts:109
+Defined in: [Type/Event.ts:109](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L109)
 
 ___
 
@@ -60,7 +60,7 @@ ___
 
 消息内容
 
-Defined in: Type/Event.ts:121
+Defined in: [Type/Event.ts:121](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L121)
 
 ___
 
@@ -70,7 +70,7 @@ ___
 
 消息 ID
 
-Defined in: Type/Event.ts:105
+Defined in: [Type/Event.ts:105](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L105)
 
 ___
 
@@ -80,7 +80,7 @@ ___
 
 消息类型
 
-Defined in: Type/Event.ts:97
+Defined in: [Type/Event.ts:97](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L97)
 
 ___
 
@@ -90,7 +90,7 @@ ___
 
 上报类型
 
-Defined in: Type/Event.ts:93
+Defined in: [Type/Event.ts:93](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L93)
 
 ___
 
@@ -100,7 +100,7 @@ ___
 
 原始消息内容
 
-Defined in: Type/Event.ts:125
+Defined in: [Type/Event.ts:125](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L125)
 
 ___
 
@@ -110,7 +110,7 @@ ___
 
 收到事件的机器人 QQ 号
 
-Defined in: Type/Event.ts:89
+Defined in: [Type/Event.ts:89](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L89)
 
 ___
 
@@ -120,7 +120,7 @@ ___
 
 发送人信息
 
-Defined in: Type/Event.ts:133
+Defined in: [Type/Event.ts:133](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L133)
 
 ___
 
@@ -130,7 +130,7 @@ ___
 
 消息子类型，正常消息是 normal，匿名消息是 anonymous，系统提示（如「管理员已禁止群内匿名聊天」）是 notice
 
-Defined in: Type/Event.ts:101
+Defined in: [Type/Event.ts:101](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L101)
 
 ___
 
@@ -140,7 +140,7 @@ ___
 
 事件发生的时间戳
 
-Defined in: Type/Event.ts:85
+Defined in: [Type/Event.ts:85](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L85)
 
 ___
 
@@ -150,4 +150,4 @@ ___
 
 发送者 QQ 号
 
-Defined in: Type/Event.ts:113
+Defined in: [Type/Event.ts:113](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L113)

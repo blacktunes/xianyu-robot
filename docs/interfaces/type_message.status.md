@@ -22,7 +22,7 @@
 
 • **app\_enabled**: ``true``
 
-Defined in: Type/Message.ts:174
+Defined in: [Type/Message.ts:174](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Message.ts#L174)
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 • **app\_good**: ``true``
 
-Defined in: Type/Message.ts:176
+Defined in: [Type/Message.ts:176](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Message.ts#L176)
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 • **app\_initialized**: ``true``
 
-Defined in: Type/Message.ts:173
+Defined in: [Type/Message.ts:173](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Message.ts#L173)
 
 ___
 
@@ -46,7 +46,7 @@ ___
 
 • **good**: *boolean*
 
-Defined in: Type/Message.ts:181
+Defined in: [Type/Message.ts:181](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Message.ts#L181)
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 BOT是否在线
 
-Defined in: Type/Message.ts:180
+Defined in: [Type/Message.ts:180](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Message.ts#L180)
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 • **plugins\_good**: ``true``
 
-Defined in: Type/Message.ts:175
+Defined in: [Type/Message.ts:175](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Message.ts#L175)
 
 ___
 
@@ -74,4 +74,4 @@ ___
 
 	运行统计
 
-Defined in: Type/Message.ts:185
+Defined in: [Type/Message.ts:185](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Message.ts#L185)

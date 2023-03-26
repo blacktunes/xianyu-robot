@@ -11,6 +11,7 @@
 - [getTime](tools_tools.md#gettime)
 - [secondsFormat](tools_tools.md#secondsformat)
 - [sleep](tools_tools.md#sleep)
+- [timeDifference](tools_tools.md#timedifference)
 
 ## Functions
 
@@ -30,7 +31,7 @@
 
 反转义后的字符串
 
-Defined in: Tools/Tools.ts:55
+Defined in: [Tools/Tools.ts:72](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/Tools.ts#L72)
 
 ___
 
@@ -51,7 +52,7 @@ ___
 
 转义后的字符串
 
-Defined in: Tools/Tools.ts:41
+Defined in: [Tools/Tools.ts:57](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/Tools.ts#L57)
 
 ___
 
@@ -74,7 +75,7 @@ ___
 | `date` | *string* |
 | `time` | *string* |
 
-Defined in: Tools/Tools.ts:5
+Defined in: [Tools/Tools.ts:5](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/Tools.ts#L5)
 
 ___
 
@@ -92,7 +93,7 @@ ___
 
 **Returns:** *string*
 
-Defined in: Tools/Tools.ts:27
+Defined in: [Tools/Tools.ts:27](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/Tools.ts#L27)
 
 ___
 
@@ -110,4 +111,23 @@ ___
 
 **Returns:** *Promise*<void\>
 
-Defined in: Tools/Tools.ts:16
+Defined in: [Tools/Tools.ts:16](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/Tools.ts#L16)
+
+___
+
+### timeDifference
+
+▸ `Const`**timeDifference**(`startTime`: Date, `endTime?`: Date): *string*
+
+时间天数差
+
+#### Parameters:
+
+| Name | Type |
+| :------ | :------ |
+| `startTime` | Date |
+| `endTime?` | Date |
+
+**Returns:** *string*
+
+Defined in: [Tools/Tools.ts:38](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/Tools.ts#L38)

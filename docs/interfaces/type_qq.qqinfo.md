@@ -22,7 +22,7 @@ QQ信息
 
 昵称
 
-Defined in: Type/QQ.ts:12
+Defined in: [Type/QQ.ts:12](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/QQ.ts#L12)
 
 ___
 
@@ -32,7 +32,7 @@ ___
 
 备注
 
-Defined in: Type/QQ.ts:16
+Defined in: [Type/QQ.ts:16](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/QQ.ts#L16)
 
 ___
 
@@ -42,4 +42,4 @@ ___
 
 QQ号
 
-Defined in: Type/QQ.ts:8
+Defined in: [Type/QQ.ts:8](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/QQ.ts#L8)

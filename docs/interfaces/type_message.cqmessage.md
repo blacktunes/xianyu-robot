@@ -19,7 +19,7 @@
 
 #### Type declaration:
 
-Defined in: Type/Message.ts:5
+Defined in: [Type/Message.ts:5](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Message.ts#L5)
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 • **type**: *string*
 
-Defined in: Type/Message.ts:4
+Defined in: [Type/Message.ts:4](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Message.ts#L4)

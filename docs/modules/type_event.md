@@ -38,7 +38,7 @@
 
 Ƭ **GroupMsg**: [*\_GroupMsg*](../interfaces/type_event._groupmsg.md) & { `nextMessage`: (`fn`: (`msg`: *string*, `event`: [*GroupMsg*](type_event.md#groupmsg)) => [*Prevent*](type_bot.md#prevent)) => *void*  }
 
-Defined in: Type/Event.ts:76
+Defined in: [Type/Event.ts:76](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L76)
 
 ___
 
@@ -46,4 +46,4 @@ ___
 
 Ƭ **PrivateMsg**: [*\_PrivateMsg*](../interfaces/type_event._privatemsg.md) & { `nextMessage`: (`fn`: (`msg`: *string*, `event`: [*PrivateMsg*](type_event.md#privatemsg), `prevEvent`: [*\_PrivateMsg*](../interfaces/type_event._privatemsg.md)) => [*Prevent*](type_bot.md#prevent)) => *void*  }
 
-Defined in: Type/Event.ts:5
+Defined in: [Type/Event.ts:5](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L5)

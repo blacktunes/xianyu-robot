@@ -24,7 +24,7 @@
 
 验证信息
 
-Defined in: Type/Event.ts:462
+Defined in: [Type/Event.ts:462](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L462)
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 请求 flag，在调用处理请求的 API 时需要传入
 
-Defined in: Type/Event.ts:466
+Defined in: [Type/Event.ts:466](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L466)
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 上报类型
 
-Defined in: Type/Event.ts:450
+Defined in: [Type/Event.ts:450](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L450)
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 请求类型
 
-Defined in: Type/Event.ts:454
+Defined in: [Type/Event.ts:454](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L454)
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 收到事件的机器人 QQ 号
 
-Defined in: Type/Event.ts:446
+Defined in: [Type/Event.ts:446](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L446)
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 事件发生的时间戳
 
-Defined in: Type/Event.ts:442
+Defined in: [Type/Event.ts:442](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L442)
 
 ___
 
@@ -84,4 +84,4 @@ ___
 
 发送请求的 QQ 号
 
-Defined in: Type/Event.ts:458
+Defined in: [Type/Event.ts:458](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L458)

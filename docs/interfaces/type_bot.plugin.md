@@ -25,4 +25,4 @@
 
 **Returns:** [*BotPlugin*](../classes/plugin_plugin.botplugin.md)
 
-Defined in: Type/Bot.ts:17
+Defined in: [Type/Bot.ts:17](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Bot.ts#L17)

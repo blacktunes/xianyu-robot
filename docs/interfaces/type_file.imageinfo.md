@@ -20,7 +20,7 @@
 
 图片文件原名
 
-Defined in: Type/File.ts:9
+Defined in: [Type/File.ts:9](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/File.ts#L9)
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 图片源文件大小
 
-Defined in: Type/File.ts:5
+Defined in: [Type/File.ts:5](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/File.ts#L5)
 
 ___
 
@@ -40,4 +40,4 @@ ___
 
 图片下载地址
 
-Defined in: Type/File.ts:13
+Defined in: [Type/File.ts:13](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/File.ts#L13)

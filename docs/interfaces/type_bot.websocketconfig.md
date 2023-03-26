@@ -25,7 +25,7 @@
 
 API访问token
 
-Defined in: Type/Bot.ts:33
+Defined in: [Type/Bot.ts:33](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Bot.ts#L33)
 
 ___
 
@@ -33,7 +33,7 @@ ___
 
 • `Optional` **host**: *string*
 
-Defined in: Type/Bot.ts:34
+Defined in: [Type/Bot.ts:34](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Bot.ts#L34)
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 • `Optional` **port**: *number*
 
-Defined in: Type/Bot.ts:35
+Defined in: [Type/Bot.ts:35](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Bot.ts#L35)
 
 ___
 
@@ -51,7 +51,7 @@ ___
 
 是否连线错误时自动重连
 
-Defined in: Type/Bot.ts:39
+Defined in: [Type/Bot.ts:39](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Bot.ts#L39)
 
 ___
 
@@ -61,7 +61,7 @@ ___
 
 连续连线失败的次数不超过这个值
 
-Defined in: Type/Bot.ts:43
+Defined in: [Type/Bot.ts:43](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Bot.ts#L43)
 
 ___
 
@@ -71,7 +71,7 @@ ___
 
 重复连线的延迟时间, 单位: ms
 
-Defined in: Type/Bot.ts:47
+Defined in: [Type/Bot.ts:47](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Bot.ts#L47)
 
 ___
 
@@ -81,7 +81,7 @@ ___
 
 API超时时间, 单位: ms
 
-Defined in: Type/Bot.ts:51
+Defined in: [Type/Bot.ts:51](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Bot.ts#L51)
 
 ___
 
@@ -89,4 +89,4 @@ ___
 
 • `Optional` **wss**: *boolean*
 
-Defined in: Type/Bot.ts:29
+Defined in: [Type/Bot.ts:29](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Bot.ts#L29)

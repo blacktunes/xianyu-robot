@@ -35,7 +35,7 @@
 
 **Returns:** *void* \| *Promise*<void\>
 
-Defined in: Type/Bot.ts:21
+Defined in: [Type/Bot.ts:21](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Bot.ts#L21)
 
 ___
 
@@ -46,4 +46,4 @@ ___
 是否阻止消息传递
 true为阻止
 
-Defined in: Type/Bot.ts:8
+Defined in: [Type/Bot.ts:8](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Bot.ts#L8)

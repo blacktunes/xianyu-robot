@@ -32,7 +32,7 @@
 
 **Returns:** [*Mysql*](tools_mysql.mysql.md)
 
-Defined in: Tools/Mysql.ts:3
+Defined in: [Tools/Mysql.ts:3](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/Mysql.ts#L3)
 
 ## Properties
 
@@ -40,7 +40,7 @@ Defined in: Tools/Mysql.ts:3
 
 • **Pool**: Pool= null
 
-Defined in: Tools/Mysql.ts:13
+Defined in: [Tools/Mysql.ts:13](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/Mysql.ts#L13)
 
 ## Methods
 
@@ -59,4 +59,4 @@ Defined in: Tools/Mysql.ts:13
 
 **Returns:** *Promise*<any\>
 
-Defined in: Tools/Mysql.ts:20
+Defined in: [Tools/Mysql.ts:20](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/Mysql.ts#L20)

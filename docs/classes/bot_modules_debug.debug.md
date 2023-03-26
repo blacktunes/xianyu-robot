@@ -38,7 +38,7 @@
 
 **Returns:** [*Debug*](bot_modules_debug.debug.md)
 
-Defined in: Bot/modules/Debug.ts:5
+Defined in: [Bot/modules/Debug.ts:5](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Debug.ts#L5)
 
 ## Properties
 
@@ -46,7 +46,7 @@ Defined in: Bot/modules/Debug.ts:5
 
 • `Private` **Bot**: *Pick*<[*Bot*](bot_bot.bot.md), ``"Admin"`` \| ``"Data"`` \| ``"Log"`` \| ``"CQCode"`` \| ``"Plugin"`` \| ``"Command"`` \| ``"Conn"`` \| ``"Api"`` \| ``"Event"``\>
 
-Defined in: Bot/modules/Debug.ts:10
+Defined in: [Bot/modules/Debug.ts:10](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Debug.ts#L10)
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 • `Private` **\_debug**: *boolean*
 
-Defined in: Bot/modules/Debug.ts:12
+Defined in: [Bot/modules/Debug.ts:12](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Debug.ts#L12)
 
 ## Accessors
 
@@ -66,7 +66,7 @@ Defined in: Bot/modules/Debug.ts:12
 
 **Returns:** *boolean*
 
-Defined in: Bot/modules/Debug.ts:21
+Defined in: [Bot/modules/Debug.ts:21](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Debug.ts#L21)
 
 • set **debug**(`debug`: *boolean*): *void*
 
@@ -78,7 +78,7 @@ Defined in: Bot/modules/Debug.ts:21
 
 **Returns:** *void*
 
-Defined in: Bot/modules/Debug.ts:14
+Defined in: [Bot/modules/Debug.ts:14](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Debug.ts#L14)
 
 ## Methods
 
@@ -96,7 +96,7 @@ Defined in: Bot/modules/Debug.ts:14
 
 **Returns:** *void*
 
-Defined in: Bot/modules/Debug.ts:26
+Defined in: [Bot/modules/Debug.ts:26](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Debug.ts#L26)
 
 ▸ **groupMsgTest**(`msg`: *string*, `user_id?`: *number*, `group_id?`: *number*): *void*
 
@@ -110,7 +110,7 @@ Defined in: Bot/modules/Debug.ts:26
 
 **Returns:** *void*
 
-Defined in: Bot/modules/Debug.ts:27
+Defined in: [Bot/modules/Debug.ts:27](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Debug.ts#L27)
 
 ___
 
@@ -128,7 +128,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: Bot/modules/Debug.ts:65
+Defined in: [Bot/modules/Debug.ts:65](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Debug.ts#L65)
 
 ▸ **privateMsgTest**(`msg`: *string*, `user_id?`: *number*): *void*
 
@@ -141,4 +141,4 @@ Defined in: Bot/modules/Debug.ts:65
 
 **Returns:** *void*
 
-Defined in: Bot/modules/Debug.ts:66
+Defined in: [Bot/modules/Debug.ts:66](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Debug.ts#L66)

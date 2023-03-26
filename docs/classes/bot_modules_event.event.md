@@ -13,6 +13,7 @@
 ### Properties
 
 - [Bot](bot_modules_event.event.md#bot)
+- [sendEvent](bot_modules_event.event.md#sendevent)
 
 ### Methods
 
@@ -34,7 +35,7 @@
 
 **Returns:** [*Event*](bot_modules_event.event.md)
 
-Defined in: Bot/modules/Event.ts:6
+Defined in: [Bot/modules/Event.ts:5](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Event.ts#L5)
 
 ## Properties
 
@@ -42,7 +43,22 @@ Defined in: Bot/modules/Event.ts:6
 
 • `Private` **Bot**: *Pick*<[*Bot*](bot_bot.bot.md), ``"Admin"`` \| ``"Data"`` \| ``"Log"`` \| ``"CQCode"`` \| ``"Plugin"`` \| ``"Command"`` \| ``"Conn"`` \| ``"Api"`` \| ``"Debug"``\>
 
-Defined in: Bot/modules/Event.ts:11
+Defined in: [Bot/modules/Event.ts:10](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Event.ts#L10)
+
+___
+
+### sendEvent
+
+• **sendEvent**: *object*
+
+#### Type declaration:
+
+| Name | Type |
+| :------ | :------ |
+| `group` | (`group_id`: *number*, `message`: [*Message*](../modules/type_message.md#message)) => [*Prevent*](../modules/type_bot.md#prevent)[] |
+| `private` | (`user_id`: *number*, `message`: [*Message*](../modules/type_message.md#message)) => [*Prevent*](../modules/type_bot.md#prevent)[] |
+
+Defined in: [Bot/modules/Event.ts:276](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Event.ts#L276)
 
 ## Methods
 
@@ -52,7 +68,7 @@ Defined in: Bot/modules/Event.ts:11
 
 **Returns:** *void*
 
-Defined in: Bot/modules/Event.ts:13
+Defined in: [Bot/modules/Event.ts:12](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Event.ts#L12)
 
 ___
 
@@ -71,7 +87,7 @@ WS链接或断开
 
 **Returns:** [*Event*](bot_modules_event.event.md)
 
-Defined in: Bot/modules/Event.ts:191
+Defined in: [Bot/modules/Event.ts:190](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Event.ts#L190)
 
 ▸ **on**(`type`: ``"ws.error"``, `fn`: (`error`: Error) => [*Prevent*](../modules/type_bot.md#prevent)): [*Event*](bot_modules_event.event.md)
 
@@ -86,7 +102,7 @@ WS链接错误
 
 **Returns:** [*Event*](bot_modules_event.event.md)
 
-Defined in: Bot/modules/Event.ts:195
+Defined in: [Bot/modules/Event.ts:194](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Event.ts#L194)
 
 ▸ **on**(`type`: ``"message.private"``, `fn`: (`e`: [*PrivateMsg*](../modules/type_event.md#privatemsg)) => [*Prevent*](../modules/type_bot.md#prevent), `log?`: *boolean*): [*Event*](bot_modules_event.event.md)
 
@@ -102,7 +118,7 @@ Defined in: Bot/modules/Event.ts:195
 
 **Returns:** [*Event*](bot_modules_event.event.md)
 
-Defined in: Bot/modules/Event.ts:199
+Defined in: [Bot/modules/Event.ts:198](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Event.ts#L198)
 
 ▸ **on**(`type`: ``"message.group"``, `fn`: (`e`: [*GroupMsg*](../modules/type_event.md#groupmsg)) => [*Prevent*](../modules/type_bot.md#prevent), `log?`: *boolean*): [*Event*](bot_modules_event.event.md)
 
@@ -118,7 +134,7 @@ Defined in: Bot/modules/Event.ts:199
 
 **Returns:** [*Event*](bot_modules_event.event.md)
 
-Defined in: Bot/modules/Event.ts:203
+Defined in: [Bot/modules/Event.ts:202](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Event.ts#L202)
 
 ▸ **on**(`type`: ``"notice.group_upload"``, `fn`: (`e`: [*GroupUpload*](../interfaces/type_event.groupupload.md)) => [*Prevent*](../modules/type_bot.md#prevent)): [*Event*](bot_modules_event.event.md)
 
@@ -133,7 +149,7 @@ Defined in: Bot/modules/Event.ts:203
 
 **Returns:** [*Event*](bot_modules_event.event.md)
 
-Defined in: Bot/modules/Event.ts:207
+Defined in: [Bot/modules/Event.ts:206](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Event.ts#L206)
 
 ▸ **on**(`type`: ``"notice.group_admin"``, `fn`: (`e`: [*GroupAdmin*](../interfaces/type_event.groupadmin.md)) => [*Prevent*](../modules/type_bot.md#prevent)): [*Event*](bot_modules_event.event.md)
 
@@ -148,7 +164,7 @@ Defined in: Bot/modules/Event.ts:207
 
 **Returns:** [*Event*](bot_modules_event.event.md)
 
-Defined in: Bot/modules/Event.ts:211
+Defined in: [Bot/modules/Event.ts:210](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Event.ts#L210)
 
 ▸ **on**(`type`: ``"notice.group_decrease"``, `fn`: (`e`: [*GroupDecrease*](../interfaces/type_event.groupdecrease.md)) => [*Prevent*](../modules/type_bot.md#prevent)): [*Event*](bot_modules_event.event.md)
 
@@ -163,7 +179,7 @@ Defined in: Bot/modules/Event.ts:211
 
 **Returns:** [*Event*](bot_modules_event.event.md)
 
-Defined in: Bot/modules/Event.ts:215
+Defined in: [Bot/modules/Event.ts:214](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Event.ts#L214)
 
 ▸ **on**(`type`: ``"notice.group_increase"``, `fn`: (`e`: [*GroupIncrease*](../interfaces/type_event.groupincrease.md)) => [*Prevent*](../modules/type_bot.md#prevent)): [*Event*](bot_modules_event.event.md)
 
@@ -178,7 +194,7 @@ Defined in: Bot/modules/Event.ts:215
 
 **Returns:** [*Event*](bot_modules_event.event.md)
 
-Defined in: Bot/modules/Event.ts:219
+Defined in: [Bot/modules/Event.ts:218](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Event.ts#L218)
 
 ▸ **on**(`type`: ``"notice.group_ban"``, `fn`: (`e`: [*GroupBan*](../interfaces/type_event.groupban.md)) => [*Prevent*](../modules/type_bot.md#prevent)): [*Event*](bot_modules_event.event.md)
 
@@ -193,7 +209,7 @@ Defined in: Bot/modules/Event.ts:219
 
 **Returns:** [*Event*](bot_modules_event.event.md)
 
-Defined in: Bot/modules/Event.ts:223
+Defined in: [Bot/modules/Event.ts:222](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Event.ts#L222)
 
 ▸ **on**(`type`: ``"notice.friend_add"``, `fn`: (`e`: [*FriendAdd*](../interfaces/type_event.friendadd.md)) => [*Prevent*](../modules/type_bot.md#prevent)): [*Event*](bot_modules_event.event.md)
 
@@ -208,7 +224,7 @@ Defined in: Bot/modules/Event.ts:223
 
 **Returns:** [*Event*](bot_modules_event.event.md)
 
-Defined in: Bot/modules/Event.ts:227
+Defined in: [Bot/modules/Event.ts:226](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Event.ts#L226)
 
 ▸ **on**(`type`: ``"notice.group_recall"``, `fn`: (`e`: [*GroupRecall*](../interfaces/type_event.grouprecall.md)) => [*Prevent*](../modules/type_bot.md#prevent)): [*Event*](bot_modules_event.event.md)
 
@@ -223,7 +239,7 @@ Defined in: Bot/modules/Event.ts:227
 
 **Returns:** [*Event*](bot_modules_event.event.md)
 
-Defined in: Bot/modules/Event.ts:231
+Defined in: [Bot/modules/Event.ts:230](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Event.ts#L230)
 
 ▸ **on**(`type`: ``"notice.friend_recall"``, `fn`: (`e`: [*FriendRecall*](../interfaces/type_event.friendrecall.md)) => [*Prevent*](../modules/type_bot.md#prevent)): [*Event*](bot_modules_event.event.md)
 
@@ -238,7 +254,7 @@ Defined in: Bot/modules/Event.ts:231
 
 **Returns:** [*Event*](bot_modules_event.event.md)
 
-Defined in: Bot/modules/Event.ts:235
+Defined in: [Bot/modules/Event.ts:234](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Event.ts#L234)
 
 ▸ **on**(`type`: ``"notice.notify"``, `fn`: (`e`: [*GroupNotify*](../interfaces/type_event.groupnotify.md)) => [*Prevent*](../modules/type_bot.md#prevent)): [*Event*](bot_modules_event.event.md)
 
@@ -253,7 +269,7 @@ Defined in: Bot/modules/Event.ts:235
 
 **Returns:** [*Event*](bot_modules_event.event.md)
 
-Defined in: Bot/modules/Event.ts:239
+Defined in: [Bot/modules/Event.ts:238](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Event.ts#L238)
 
 ▸ **on**(`type`: ``"notice.group_card"``, `fn`: (`e`: [*GroupCard*](../interfaces/type_event.groupcard.md)) => [*Prevent*](../modules/type_bot.md#prevent)): [*Event*](bot_modules_event.event.md)
 
@@ -268,7 +284,7 @@ Defined in: Bot/modules/Event.ts:239
 
 **Returns:** [*Event*](bot_modules_event.event.md)
 
-Defined in: Bot/modules/Event.ts:243
+Defined in: [Bot/modules/Event.ts:242](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Event.ts#L242)
 
 ▸ **on**(`type`: ``"notice.offline_file"``, `fn`: (`e`: [*OfflineFile*](../interfaces/type_event.offlinefile.md)) => [*Prevent*](../modules/type_bot.md#prevent)): [*Event*](bot_modules_event.event.md)
 
@@ -283,7 +299,7 @@ Defined in: Bot/modules/Event.ts:243
 
 **Returns:** [*Event*](bot_modules_event.event.md)
 
-Defined in: Bot/modules/Event.ts:247
+Defined in: [Bot/modules/Event.ts:246](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Event.ts#L246)
 
 ▸ **on**(`type`: ``"request.friend"``, `fn`: (`e`: [*Friend*](../interfaces/type_event.friend.md)) => [*Prevent*](../modules/type_bot.md#prevent)): [*Event*](bot_modules_event.event.md)
 
@@ -298,7 +314,7 @@ Defined in: Bot/modules/Event.ts:247
 
 **Returns:** [*Event*](bot_modules_event.event.md)
 
-Defined in: Bot/modules/Event.ts:251
+Defined in: [Bot/modules/Event.ts:250](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Event.ts#L250)
 
 ▸ **on**(`type`: ``"request.group"``, `fn`: (`e`: [*Group*](../interfaces/type_event.group.md)) => [*Prevent*](../modules/type_bot.md#prevent)): [*Event*](bot_modules_event.event.md)
 
@@ -313,7 +329,7 @@ Defined in: Bot/modules/Event.ts:251
 
 **Returns:** [*Event*](bot_modules_event.event.md)
 
-Defined in: Bot/modules/Event.ts:255
+Defined in: [Bot/modules/Event.ts:254](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Event.ts#L254)
 
 ▸ **on**(`type`: ``"notice.client_status"``, `fn`: (`e`: [*ClientStatus*](../interfaces/type_event.clientstatus.md)) => [*Prevent*](../modules/type_bot.md#prevent)): [*Event*](bot_modules_event.event.md)
 
@@ -328,7 +344,7 @@ Defined in: Bot/modules/Event.ts:255
 
 **Returns:** [*Event*](bot_modules_event.event.md)
 
-Defined in: Bot/modules/Event.ts:259
+Defined in: [Bot/modules/Event.ts:258](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Event.ts#L258)
 
 ▸ **on**(`type`: ``"notice.essence"``, `fn`: (`e`: [*Essence*](../interfaces/type_event.essence.md)) => [*Prevent*](../modules/type_bot.md#prevent)): [*Event*](bot_modules_event.event.md)
 
@@ -343,7 +359,7 @@ Defined in: Bot/modules/Event.ts:259
 
 **Returns:** [*Event*](bot_modules_event.event.md)
 
-Defined in: Bot/modules/Event.ts:263
+Defined in: [Bot/modules/Event.ts:262](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Event.ts#L262)
 
 ▸ **on**(`type`: ``"meta_event.heartbeat"``, `fn`: (`e?`: *any*) => [*Prevent*](../modules/type_bot.md#prevent)): [*Event*](bot_modules_event.event.md)
 
@@ -358,7 +374,7 @@ Defined in: Bot/modules/Event.ts:263
 
 **Returns:** [*Event*](bot_modules_event.event.md)
 
-Defined in: Bot/modules/Event.ts:267
+Defined in: [Bot/modules/Event.ts:266](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Event.ts#L266)
 
 ▸ **on**(`type`: *string*, `fn`: (`e`: *any*) => [*Prevent*](../modules/type_bot.md#prevent)): [*Event*](bot_modules_event.event.md)
 
@@ -373,7 +389,7 @@ Defined in: Bot/modules/Event.ts:267
 
 **Returns:** [*Event*](bot_modules_event.event.md)
 
-Defined in: Bot/modules/Event.ts:271
+Defined in: [Bot/modules/Event.ts:270](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Event.ts#L270)
 
 ___
 
@@ -392,7 +408,7 @@ ___
 
 **Returns:** [*Event*](bot_modules_event.event.md)
 
-Defined in: Bot/modules/Event.ts:280
+Defined in: [Bot/modules/Event.ts:287](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Event.ts#L287)
 
 ▸ **onSendMessage**(`type`: ``"sendGroupMsg"``, `fn`: (`group_id`: *number*, `message`: [*Message*](../modules/type_message.md#message)) => *void*): [*Event*](bot_modules_event.event.md)
 
@@ -405,4 +421,4 @@ Defined in: Bot/modules/Event.ts:280
 
 **Returns:** [*Event*](bot_modules_event.event.md)
 
-Defined in: Bot/modules/Event.ts:281
+Defined in: [Bot/modules/Event.ts:288](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Event.ts#L288)

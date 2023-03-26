@@ -41,7 +41,7 @@
 
 **Returns:** [*Plugin*](bot_modules_plugin.plugin.md)
 
-Defined in: Bot/modules/Plugin.ts:9
+Defined in: [Bot/modules/Plugin.ts:9](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Plugin.ts#L9)
 
 ## Properties
 
@@ -49,7 +49,7 @@ Defined in: Bot/modules/Plugin.ts:9
 
 • `Private` **Bot**: *Pick*<[*Bot*](bot_bot.bot.md), ``"Admin"`` \| ``"Data"`` \| ``"Log"`` \| ``"CQCode"`` \| ``"Command"`` \| ``"Conn"`` \| ``"Api"`` \| ``"Event"`` \| ``"Debug"``\>
 
-Defined in: Bot/modules/Plugin.ts:15
+Defined in: [Bot/modules/Plugin.ts:15](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Plugin.ts#L15)
 
 ___
 
@@ -59,7 +59,7 @@ ___
 
 本地设置保存位置
 
-Defined in: Bot/modules/Plugin.ts:21
+Defined in: [Bot/modules/Plugin.ts:21](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Plugin.ts#L21)
 
 ___
 
@@ -69,7 +69,7 @@ ___
 
 本地设置文件名
 
-Defined in: Bot/modules/Plugin.ts:23
+Defined in: [Bot/modules/Plugin.ts:23](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Plugin.ts#L23)
 
 ___
 
@@ -79,7 +79,7 @@ ___
 
 插件列表
 
-Defined in: Bot/modules/Plugin.ts:18
+Defined in: [Bot/modules/Plugin.ts:18](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Plugin.ts#L18)
 
 ___
 
@@ -87,7 +87,7 @@ ___
 
 • `Private` **saveFlag**: *boolean*= false
 
-Defined in: Bot/modules/Plugin.ts:43
+Defined in: [Bot/modules/Plugin.ts:43](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Plugin.ts#L43)
 
 ## Methods
 
@@ -109,7 +109,7 @@ Defined in: Bot/modules/Plugin.ts:43
 
 **Returns:** *any*
 
-Defined in: Bot/modules/Plugin.ts:32
+Defined in: [Bot/modules/Plugin.ts:32](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Plugin.ts#L32)
 
 ▸ **getConfig**<T, K\>(`name`: *string*, `key`: K): T[K]
 
@@ -129,7 +129,7 @@ Defined in: Bot/modules/Plugin.ts:32
 
 **Returns:** T[K]
 
-Defined in: Bot/modules/Plugin.ts:33
+Defined in: [Bot/modules/Plugin.ts:33](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Plugin.ts#L33)
 
 ___
 
@@ -151,7 +151,7 @@ ___
 
 **Returns:** *Pick*<T, Exclude<keyof T, ``"init"``\>\>
 
-Defined in: Bot/modules/Plugin.ts:74
+Defined in: [Bot/modules/Plugin.ts:74](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Plugin.ts#L74)
 
 ___
 
@@ -161,7 +161,7 @@ ___
 
 **Returns:** *void*
 
-Defined in: Bot/modules/Plugin.ts:44
+Defined in: [Bot/modules/Plugin.ts:44](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Plugin.ts#L44)
 
 ___
 
@@ -178,4 +178,4 @@ ___
 
 **Returns:** *void*
 
-Defined in: Bot/modules/Plugin.ts:25
+Defined in: [Bot/modules/Plugin.ts:25](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Plugin.ts#L25)

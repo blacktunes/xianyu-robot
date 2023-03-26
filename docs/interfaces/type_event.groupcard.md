@@ -23,7 +23,7 @@
 
 新名片
 
-Defined in: Type/Event.ts:528
+Defined in: [Type/Event.ts:528](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L528)
 
 ___
 
@@ -33,7 +33,7 @@ ___
 
 旧名片
 
-Defined in: Type/Event.ts:532
+Defined in: [Type/Event.ts:532](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L532)
 
 ___
 
@@ -43,7 +43,7 @@ ___
 
 群号
 
-Defined in: Type/Event.ts:520
+Defined in: [Type/Event.ts:520](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L520)
 
 ___
 
@@ -53,7 +53,7 @@ ___
 
 消息类型
 
-Defined in: Type/Event.ts:516
+Defined in: [Type/Event.ts:516](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L516)
 
 ___
 
@@ -63,7 +63,7 @@ ___
 
 上报类型
 
-Defined in: Type/Event.ts:512
+Defined in: [Type/Event.ts:512](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L512)
 
 ___
 
@@ -73,4 +73,4 @@ ___
 
 成员id
 
-Defined in: Type/Event.ts:524
+Defined in: [Type/Event.ts:524](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Event.ts#L524)

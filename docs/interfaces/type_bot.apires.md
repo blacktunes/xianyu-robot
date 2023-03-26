@@ -19,7 +19,7 @@
 
 • `Optional` **data**: *any*
 
-Defined in: Type/Bot.ts:55
+Defined in: [Type/Bot.ts:55](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Bot.ts#L55)
 
 ___
 
@@ -27,7 +27,7 @@ ___
 
 • `Optional` **msg**: *string*
 
-Defined in: Type/Bot.ts:58
+Defined in: [Type/Bot.ts:58](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Bot.ts#L58)
 
 ___
 
@@ -35,7 +35,7 @@ ___
 
 • **retcode**: *number*
 
-Defined in: Type/Bot.ts:56
+Defined in: [Type/Bot.ts:56](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Bot.ts#L56)
 
 ___
 
@@ -43,4 +43,4 @@ ___
 
 • **status**: *string*
 
-Defined in: Type/Bot.ts:57
+Defined in: [Type/Bot.ts:57](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Type/Bot.ts#L57)

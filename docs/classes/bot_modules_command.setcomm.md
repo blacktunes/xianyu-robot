@@ -45,7 +45,7 @@
 
 **Returns:** [*SetComm*](bot_modules_command.setcomm.md)
 
-Defined in: Bot/modules/Command.ts:54
+Defined in: [Bot/modules/Command.ts:60](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Command.ts#L60)
 
 ## Properties
 
@@ -53,7 +53,7 @@ Defined in: Bot/modules/Command.ts:54
 
 • `Private` **Bot**: [*Bot*](bot_bot.bot.md)
 
-Defined in: Bot/modules/Command.ts:61
+Defined in: [Bot/modules/Command.ts:67](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Command.ts#L67)
 
 ___
 
@@ -61,7 +61,7 @@ ___
 
 • `Private` **comm**: [*Comm*](bot_modules_command.comm.md)
 
-Defined in: Bot/modules/Command.ts:62
+Defined in: [Bot/modules/Command.ts:68](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Command.ts#L68)
 
 ___
 
@@ -69,7 +69,7 @@ ___
 
 • `Private` **plugin**: *boolean*
 
-Defined in: Bot/modules/Command.ts:64
+Defined in: [Bot/modules/Command.ts:70](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Command.ts#L70)
 
 ___
 
@@ -77,7 +77,7 @@ ___
 
 • `Private` **repeat**: *boolean*
 
-Defined in: Bot/modules/Command.ts:63
+Defined in: [Bot/modules/Command.ts:69](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Command.ts#L69)
 
 ## Methods
 
@@ -96,7 +96,7 @@ Defined in: Bot/modules/Command.ts:63
 
 **Returns:** [*SetComm*](bot_modules_command.setcomm.md)
 
-Defined in: Bot/modules/Command.ts:100
+Defined in: [Bot/modules/Command.ts:106](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Command.ts#L106)
 
 ▸ **action**(`type`: ``"group"``, `fn`: (`e`: [*GroupMsg*](../modules/type_event.md#groupmsg)) => [*Prevent*](../modules/type_bot.md#prevent)): [*SetComm*](bot_modules_command.setcomm.md)
 
@@ -109,7 +109,7 @@ Defined in: Bot/modules/Command.ts:100
 
 **Returns:** [*SetComm*](bot_modules_command.setcomm.md)
 
-Defined in: Bot/modules/Command.ts:101
+Defined in: [Bot/modules/Command.ts:107](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Command.ts#L107)
 
 ___
 
@@ -127,7 +127,7 @@ ___
 
 **Returns:** [*SetComm*](bot_modules_command.setcomm.md)
 
-Defined in: Bot/modules/Command.ts:90
+Defined in: [Bot/modules/Command.ts:96](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Command.ts#L96)
 
 ___
 
@@ -145,25 +145,26 @@ ___
 
 **Returns:** *void*
 
-Defined in: Bot/modules/Command.ts:67
+Defined in: [Bot/modules/Command.ts:73](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Command.ts#L73)
 
 ___
 
 ### black
 
-▸ **black**(`list`: *number*[]): [*SetComm*](bot_modules_command.setcomm.md)
+▸ **black**(`group_list?`: *number*[], `user_list?`: *number*[]): [*SetComm*](bot_modules_command.setcomm.md)
 
-增加黑名单列表，请勿和白名单同时使用
+增加黑名单列表
 
 #### Parameters:
 
-| Name | Type |
-| :------ | :------ |
-| `list` | *number*[] |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `group_list?` | *number*[] | 群聊黑名单 |
+| `user_list?` | *number*[] | 私聊黑名单 |
 
 **Returns:** [*SetComm*](bot_modules_command.setcomm.md)
 
-Defined in: Bot/modules/Command.ts:122
+Defined in: [Bot/modules/Command.ts:164](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Command.ts#L164)
 
 ___
 
@@ -181,7 +182,7 @@ ___
 
 **Returns:** [*SetComm*](bot_modules_command.setcomm.md)
 
-Defined in: Bot/modules/Command.ts:78
+Defined in: [Bot/modules/Command.ts:84](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Command.ts#L84)
 
 ___
 
@@ -199,7 +200,7 @@ ___
 
 **Returns:** [*SetComm*](bot_modules_command.setcomm.md)
 
-Defined in: Bot/modules/Command.ts:95
+Defined in: [Bot/modules/Command.ts:101](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Command.ts#L101)
 
 ___
 
@@ -217,22 +218,23 @@ ___
 
 **Returns:** [*SetComm*](bot_modules_command.setcomm.md)
 
-Defined in: Bot/modules/Command.ts:83
+Defined in: [Bot/modules/Command.ts:89](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Command.ts#L89)
 
 ___
 
 ### white
 
-▸ **white**(`list`: *number*[]): [*SetComm*](bot_modules_command.setcomm.md)
+▸ **white**(`group_list?`: *number*[], `user_list?`: *number*[]): [*SetComm*](bot_modules_command.setcomm.md)
 
-增加白名单列表，请勿和黑名单同时使用
+增加白名单列表
 
 #### Parameters:
 
-| Name | Type |
-| :------ | :------ |
-| `list` | *number*[] |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `group_list?` | *number*[] | 群聊白名单 |
+| `user_list?` | *number*[] | 私聊白名单 |
 
 **Returns:** [*SetComm*](bot_modules_command.setcomm.md)
 
-Defined in: Bot/modules/Command.ts:112
+Defined in: [Bot/modules/Command.ts:122](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/modules/Command.ts#L122)

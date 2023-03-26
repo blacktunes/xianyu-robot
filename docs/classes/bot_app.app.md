@@ -26,9 +26,7 @@
 - [initBot](bot_app.app.md#initbot)
 - [initPlugin](bot_app.app.md#initplugin)
 - [noLog](bot_app.app.md#nolog)
-- [noSysComm](bot_app.app.md#nosyscomm)
 - [plugin](bot_app.app.md#plugin)
-- [setSysCommand](bot_app.app.md#setsyscommand)
 - [start](bot_app.app.md#start)
 - [white](bot_app.app.md#white)
 
@@ -50,7 +48,7 @@ BOT构造函数
 
 **Returns:** [*App*](bot_app.app.md)
 
-Defined in: Bot/App.ts:15
+Defined in: [Bot/App.ts:14](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/App.ts#L14)
 
 ## Properties
 
@@ -58,7 +56,7 @@ Defined in: Bot/App.ts:15
 
 • `Private` `Readonly` **Bot**: [*Bot*](bot_bot.bot.md)
 
-Defined in: Bot/App.ts:38
+Defined in: [Bot/App.ts:37](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/App.ts#L37)
 
 ___
 
@@ -66,15 +64,22 @@ ___
 
 • `Private` **\_pluginsList**: { `class`: *boolean* ; `config?`: *any* ; `plugin`: [*Plugin*](../interfaces/type_bot.plugin.md) \| [*PluginFunction*](../modules/type_bot.md#pluginfunction)  }[]= []
 
-Defined in: Bot/App.ts:108
+Defined in: [Bot/App.ts:148](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/App.ts#L148)
 
 ___
 
 ### blacklist
 
-• `Private` **blacklist**: *Set*<number\>
+• `Private` **blacklist**: *object*= {}
 
-Defined in: Bot/App.ts:41
+#### Type declaration:
+
+| Name | Type |
+| :------ | :------ |
+| `group?` | *Set*<number\> |
+| `user?` | *Set*<number\> |
+
+Defined in: [Bot/App.ts:43](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/App.ts#L43)
 
 ___
 
@@ -82,15 +87,22 @@ ___
 
 • `Private` **isStart**: *boolean*= false
 
-Defined in: Bot/App.ts:36
+Defined in: [Bot/App.ts:35](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/App.ts#L35)
 
 ___
 
 ### whitelist
 
-• `Private` **whitelist**: *Set*<number\>
+• `Private` **whitelist**: *object*= {}
 
-Defined in: Bot/App.ts:40
+#### Type declaration:
+
+| Name | Type |
+| :------ | :------ |
+| `group?` | *Set*<number\> |
+| `user?` | *Set*<number\> |
+
+Defined in: [Bot/App.ts:39](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/App.ts#L39)
 
 ## Methods
 
@@ -108,25 +120,26 @@ Defined in: Bot/App.ts:40
 
 **Returns:** [*App*](bot_app.app.md)
 
-Defined in: Bot/App.ts:82
+Defined in: [Bot/App.ts:129](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/App.ts#L129)
 
 ___
 
 ### black
 
-▸ **black**(`group_list`: *number*[]): [*App*](bot_app.app.md)
+▸ **black**(`group_list?`: *number*[], `user_list?`: *number*[]): [*App*](bot_app.app.md)
 
-增加黑名单列表，请勿和白名单同时使用
+增加黑名单列表
 
 #### Parameters:
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `group_list` | *number*[] | 黑名单列表 |
+| `group_list?` | *number*[] | 群聊黑名单 |
+| `user_list?` | *number*[] | 私聊黑名单 |
 
 **Returns:** [*App*](bot_app.app.md)
 
-Defined in: Bot/App.ts:65
+Defined in: [Bot/App.ts:92](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/App.ts#L92)
 
 ___
 
@@ -136,7 +149,7 @@ ___
 
 **Returns:** *Promise*<void\>
 
-Defined in: Bot/App.ts:185
+Defined in: [Bot/App.ts:229](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/App.ts#L229)
 
 ___
 
@@ -146,7 +159,7 @@ ___
 
 **Returns:** *Promise*<void\>
 
-Defined in: Bot/App.ts:252
+Defined in: [Bot/App.ts:237](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/App.ts#L237)
 
 ___
 
@@ -156,7 +169,7 @@ ___
 
 **Returns:** *Promise*<void\>
 
-Defined in: Bot/App.ts:307
+Defined in: [Bot/App.ts:292](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/App.ts#L292)
 
 ___
 
@@ -174,23 +187,7 @@ ___
 
 **Returns:** [*App*](bot_app.app.md)
 
-Defined in: Bot/App.ts:99
-
-___
-
-### noSysComm
-
-▸ **noSysComm**(`group_list`: *number*[]): [*App*](bot_app.app.md)
-
-#### Parameters:
-
-| Name | Type |
-| :------ | :------ |
-| `group_list` | *number*[] |
-
-**Returns:** [*App*](bot_app.app.md)
-
-Defined in: Bot/App.ts:91
+Defined in: [Bot/App.ts:141](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/App.ts#L141)
 
 ___
 
@@ -208,7 +205,7 @@ ___
 
 **Returns:** [*App*](bot_app.app.md)
 
-Defined in: Bot/App.ts:117
+Defined in: [Bot/App.ts:157](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/App.ts#L157)
 
 ▸ **plugin**<T\>(`plugin`: T, `config?`: *InstanceType*<T\>[``"config"``]): [*App*](bot_app.app.md)
 
@@ -229,17 +226,7 @@ Defined in: Bot/App.ts:117
 
 **Returns:** [*App*](bot_app.app.md)
 
-Defined in: Bot/App.ts:123
-
-___
-
-### setSysCommand
-
-▸ `Private`**setSysCommand**(): *void*
-
-**Returns:** *void*
-
-Defined in: Bot/App.ts:193
+Defined in: [Bot/App.ts:163](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/App.ts#L163)
 
 ___
 
@@ -259,22 +246,23 @@ ___
 
 **Returns:** *Promise*<[*Bot*](bot_bot.bot.md)\>
 
-Defined in: Bot/App.ts:150
+Defined in: [Bot/App.ts:190](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/App.ts#L190)
 
 ___
 
 ### white
 
-▸ **white**(`group_list`: *number*[]): [*App*](bot_app.app.md)
+▸ **white**(`group_list?`: *number*[], `user_list?`: *number*[]): [*App*](bot_app.app.md)
 
-增加白名单列表，请勿和黑名单同时使用
+增加白名单列表
 
 #### Parameters:
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `group_list` | *number*[] | 白名单列表 |
+| `group_list?` | *number*[] | 群聊白名单 |
+| `user_list?` | *number*[] | 私聊白名单 |
 
 **Returns:** [*App*](bot_app.app.md)
 
-Defined in: Bot/App.ts:47
+Defined in: [Bot/App.ts:53](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Bot/App.ts#L53)

@@ -60,7 +60,7 @@ CQ码
 
 **Returns:** *string*
 
-Defined in: Tools/CQCode.ts:44
+Defined in: [Tools/CQCode.ts:44](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/CQCode.ts#L44)
 
 ___
 
@@ -84,7 +84,7 @@ xml大图
 
 **Returns:** *string*
 
-Defined in: Tools/CQCode.ts:224
+Defined in: [Tools/CQCode.ts:224](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/CQCode.ts#L224)
 
 ___
 
@@ -106,7 +106,7 @@ ___
 
 **Returns:** *string*
 
-Defined in: Tools/CQCode.ts:76
+Defined in: [Tools/CQCode.ts:76](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/CQCode.ts#L76)
 
 ___
 
@@ -127,7 +127,7 @@ ___
 
 **Returns:** [*NodeMessage*](../interfaces/type_message.nodemessage.md)
 
-Defined in: Tools/CQCode.ts:186
+Defined in: [Tools/CQCode.ts:186](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/CQCode.ts#L186)
 
 ___
 
@@ -148,7 +148,7 @@ ___
 
 **Returns:** *string*
 
-Defined in: Tools/CQCode.ts:113
+Defined in: [Tools/CQCode.ts:113](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/CQCode.ts#L113)
 
 ___
 
@@ -167,7 +167,7 @@ https://github.com/kyubotics/coolq-http-api/wiki/%E8%A1%A8%E6%83%85-CQ-%E7%A0%81
 
 **Returns:** *string*
 
-Defined in: Tools/CQCode.ts:13
+Defined in: [Tools/CQCode.ts:13](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/CQCode.ts#L13)
 
 ___
 
@@ -185,7 +185,7 @@ ___
 
 **Returns:** *string*
 
-Defined in: Tools/CQCode.ts:161
+Defined in: [Tools/CQCode.ts:161](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/CQCode.ts#L161)
 
 ___
 
@@ -205,7 +205,7 @@ ___
 
 **Returns:** *string*
 
-Defined in: Tools/CQCode.ts:153
+Defined in: [Tools/CQCode.ts:153](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/CQCode.ts#L153)
 
 ___
 
@@ -227,7 +227,7 @@ ___
 
 **Returns:** *string*
 
-Defined in: Tools/CQCode.ts:88
+Defined in: [Tools/CQCode.ts:88](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/CQCode.ts#L88)
 
 ___
 
@@ -246,7 +246,7 @@ ___
 
 **Returns:** *string*
 
-Defined in: Tools/CQCode.ts:210
+Defined in: [Tools/CQCode.ts:210](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/CQCode.ts#L210)
 
 ___
 
@@ -265,7 +265,7 @@ ___
 
 **Returns:** *string*
 
-Defined in: Tools/CQCode.ts:64
+Defined in: [Tools/CQCode.ts:64](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/CQCode.ts#L64)
 
 ___
 
@@ -284,7 +284,7 @@ ___
 
 **Returns:** [*NodeMessage*](../interfaces/type_message.nodemessage.md)
 
-Defined in: Tools/CQCode.ts:170
+Defined in: [Tools/CQCode.ts:170](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/CQCode.ts#L170)
 
 ___
 
@@ -302,7 +302,7 @@ ___
 
 **Returns:** *string*
 
-Defined in: Tools/CQCode.ts:129
+Defined in: [Tools/CQCode.ts:129](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/CQCode.ts#L129)
 
 ___
 
@@ -324,7 +324,7 @@ ___
 
 **Returns:** *string*
 
-Defined in: Tools/CQCode.ts:25
+Defined in: [Tools/CQCode.ts:25](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/CQCode.ts#L25)
 
 ___
 
@@ -342,7 +342,7 @@ ___
 
 **Returns:** *string*
 
-Defined in: Tools/CQCode.ts:121
+Defined in: [Tools/CQCode.ts:121](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/CQCode.ts#L121)
 
 ___
 
@@ -360,7 +360,7 @@ ___
 
 **Returns:** *string*
 
-Defined in: Tools/CQCode.ts:102
+Defined in: [Tools/CQCode.ts:102](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/CQCode.ts#L102)
 
 ___
 
@@ -381,7 +381,7 @@ ___
 
 **Returns:** *string*
 
-Defined in: Tools/CQCode.ts:55
+Defined in: [Tools/CQCode.ts:55](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/CQCode.ts#L55)
 
 ___
 
@@ -400,7 +400,7 @@ ___
 
 **Returns:** *string*
 
-Defined in: Tools/CQCode.ts:233
+Defined in: [Tools/CQCode.ts:233](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/CQCode.ts#L233)
 
 ___
 
@@ -420,7 +420,7 @@ ___
 
 **Returns:** *string*
 
-Defined in: Tools/CQCode.ts:35
+Defined in: [Tools/CQCode.ts:35](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/CQCode.ts#L35)
 
 ___
 
@@ -438,4 +438,4 @@ ___
 
 **Returns:** *string*
 
-Defined in: Tools/CQCode.ts:201
+Defined in: [Tools/CQCode.ts:201](https://github.com/blacktunes/xianyu-robot/blob/2c773a6/src/Tools/CQCode.ts#L201)
