@@ -1,3 +1,4 @@
+import { Data } from './../Bot/modules/Data';
 import { white } from 'colors'
 import { w3cwebsocket } from 'websocket'
 import { ApiRes, Prevent, WebSocketConfig } from '..'
@@ -15,14 +16,20 @@ interface NextMessageEvent {
 }
 
 export class Connect {
-  constructor(config?: WebSocketConfig) {
+  constructor(data: Data, config?: WebSocketConfig) {
     if (config) {
       for (const key in config) {
         this[key] = config[key]
       }
     }
+    this.Data = data
+    this.name = `${data.name}][WS`
     this.connect()
   }
+
+  private Data: Data
+
+  private name = 'WS'
 
   private wss = false
   private accessToken = ''
@@ -42,8 +49,16 @@ export class Connect {
   }
   private nextMessageID = 1
 
-  whitelist: Set<number> = new Set<number>()
-  blacklist: Set<number> = new Set<number>()
+  /** 白名单 */
+  whitelist: {
+    group?: Set<number>
+    user?: Set<number>
+  } = {}
+  /** 黑名单 */
+  blacklist: {
+    group?: Set<number>
+    user?: Set<number>
+  } = {}
 
   private setNextMessage = (data: PrivateMsg | GroupMsg, event: MessageEvent | NextMessageEvent) => {
     return (fn: (msg: string, event: any, prevEvent: any) => Prevent) => {
@@ -63,7 +78,7 @@ export class Connect {
 
   private handleMessage = async (data: any) => {
     if (!data.message_type) {
-      PrintLog.logWarning(`收到无效事件 ${white(data.toString())}`, 'WS')
+      PrintLog.logWarning(`收到无效事件 ${white(data.toString())}`, this.name)
     }
     for (const event of this.messageLogEvent) {
       if (event.type === `message.${data.message_type}`) {
@@ -94,15 +109,17 @@ export class Connect {
     }
   }
 
-  private isSkip = (group_id: number) => {
-    return (this.whitelist.size > 0 && !this.whitelist.has(group_id)) || (this.blacklist.size > 0 && this.blacklist.has(group_id))
+  private isSkip = (type: 'group' | 'private', id: number) => {
+    if (this.blacklist[type] && this.blacklist[type].has(id)) return true
+    if (this.whitelist[type] && !this.whitelist[type].has(id)) return true
+    return false
   }
 
   private connect = () => {
     if (this.connectTimes > 0) {
-      PrintLog.logInfo(`正在尝试第${this.connectTimes}次重新链接`, 'WS')
+      PrintLog.logInfo(`正在尝试第${this.connectTimes}次重新链接`, this.name)
     } else {
-      PrintLog.logInfo(`正在尝试链接`, 'WS')
+      PrintLog.logInfo(`正在尝试链接`, this.name)
     }
     if (this.client) {
       this.client.close()
@@ -110,9 +127,9 @@ export class Connect {
     this.client = new w3cwebsocket(`${this.wss ? 'wss' : 'ws'}://${this.host}:${this.port}${this.accessToken ? '?access_token=' + this.accessToken : ''}`)
     this.client.onopen = () => {
       if (this.connectTimes > 0) {
-        PrintLog.logNotice(`第${this.connectTimes}次重新链接成功`, 'WS')
+        PrintLog.logNotice(`第${this.connectTimes}次重新链接成功`, this.name)
       } else {
-        PrintLog.logNotice('websocket连接成功', 'WS')
+        PrintLog.logNotice('websocket连接成功', this.name)
       }
       if (this.ready) {
         this.ready()
@@ -123,7 +140,7 @@ export class Connect {
       })
       this.connectTimes = 0
       this.client.onclose = () => {
-        PrintLog.logWarning('websocket连接已断开', 'WS')
+        PrintLog.logWarning('websocket连接已断开', this.name)
         this.closeEventList.forEach(fn => {
           fn()
         })
@@ -135,7 +152,8 @@ export class Connect {
     }
     this.client.onmessage = async (message) => {
       const data = JSON.parse(decode((JSON.stringify(JSON.parse(message.data.toString())))))
-      if (data.group_id && this.isSkip(data.group_id)) return
+      if (data.group_id && this.isSkip('group', data.group_id)) return
+      if (data.user_id && this.isSkip('private', data.user_id)) return
       if (data.post_type) {
         if (data.post_type === 'message') {
           this.handleMessage(data)
@@ -171,16 +189,17 @@ export class Connect {
     }
     this.client.onerror = (error) => {
       if (this.connectTimes > 0) {
-        PrintLog.logFatal(`第${this.connectTimes}次重新链接失败`, 'WS')
+        PrintLog.logFatal(`第${this.connectTimes}次重新链接失败`, this.name)
       } else {
-        PrintLog.logFatal('websocket发生错误', 'WS')
+        PrintLog.logFatal('websocket发生错误', this.name)
       }
       this.errorEventList.forEach(fn => {
         fn(error)
       })
+      if (!this.reconnection) return
       ++this.connectTimes
       if (this.connectTimes > this.reconnectionAttempts) {
-        PrintLog.logError('重试次数过多', 'WS')
+        PrintLog.logError('重试次数过多', this.name)
       } else {
         setTimeout(this.connect, this.reconnectionDelay)
       }
@@ -315,11 +334,11 @@ export class Connect {
       }))
       const res = await this.getRes(id, apiName, params)
       if (errorLog && res.status !== 'ok') {
-        PrintLog.logError(`${white(apiName)} 调用失败 recode: ${white(res.retcode.toString())} msg: ${white(res.msg || '未知错误')}`, 'WS')
+        PrintLog.logError(`${white(apiName)} 调用失败 recode: ${white(res.retcode.toString())} msg: ${white(res.msg || '未知错误')}`, this.name)
       }
       return res
     } else {
-      PrintLog.logError(`WebSocket连接还未建立，无法调用 ${white(apiName)}`, 'WS')
+      PrintLog.logError(`WebSocket连接还未建立，无法调用 ${white(apiName)}`, this.name)
       return { retcode: 500, status: 'failed', msg: 'WebSocket尚未链接' }
     }
   }
@@ -336,7 +355,8 @@ export class Connect {
   }
 
   eventTest = (data: _PrivateMsg | _GroupMsg): void => {
-    if (data['group_id'] && this.isSkip(data['group_id'])) return
+    if (data['group_id'] && this.isSkip('group', data['group_id'])) return
+    if (data['user_id'] && this.isSkip('private', data['user_id'])) return
     this.handleMessage(data)
   }
 }

@@ -63,24 +63,4 @@ export class Admin {
   isBan(user_id: number | null) {
     return this.banlist.has(user_id)
   }
-
-  /** 增加白名单列表，请勿和黑名单同时使用 */
-  addWhitelist(group_list: number[]) {
-    if (group_list.length < 1) return
-    if (this.Bot.Conn.blacklist.size > 0) {
-      this.Bot.Log.logWarning(`已设置黑名单，该白名单 ${magenta(group_list.toString())} 设置无效`, 'Admin')
-      return
-    }
-    this.Bot.Conn.whitelist = new Set(([...this.Bot.Conn.whitelist, ...group_list]))
-  }
-
-  /** 增加黑名单列表，请勿和白名单同时使用 */
-  addBlacklist(group_list: number[]) {
-    if (group_list.length < 1) return
-    if (this.Bot.Conn.whitelist.size > 0) {
-      this.Bot.Log.logWarning(`已设置白名单，该黑名单 ${magenta(group_list.toString())} 设置无效`, 'Admin')
-      return
-    }
-    this.Bot.Conn.blacklist = new Set(([...this.Bot.Conn.blacklist, ...group_list]))
-  }
 }

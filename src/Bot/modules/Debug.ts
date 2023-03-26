@@ -1,4 +1,4 @@
-import { _PrivateMsg } from './../../Type/Event';
+import { _PrivateMsg } from './../../Type/Event'
 import { _GroupMsg } from '../../Type/Event'
 import { Bot } from '../Bot'
 

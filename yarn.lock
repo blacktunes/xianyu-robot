@@ -4514,7 +4514,7 @@ node-schedule@^1.3.2:
 
 node-yaml@^4.0.1:
   version "4.0.1"
-  resolved "https://registry.npmjs.org/node-yaml/-/node-yaml-4.0.1.tgz#3675d27c275fbea9c02e2b0faa18bb1699444cb3"
+  resolved "https://registry.npmmirror.com/node-yaml/-/node-yaml-4.0.1.tgz#3675d27c275fbea9c02e2b0faa18bb1699444cb3"
   integrity sha512-ZPKi3OexXdiklsRW9g4P7jAxHAhoBRZCFmIDMQ89clLhMz+MTJuCM9y5f1R7Ru75H84hWJouwpxVOq1SdRTe7A==
   dependencies:
     co "4.6.0"

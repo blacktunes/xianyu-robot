@@ -45,6 +45,12 @@ export class Data {
     })
     this.Bot.Log.logNotice('群名缓存已更新', '缓存')
   }
+  /**
+   * 获取群名
+   */
+  getGroupName(group_id: number) {
+    return this.groupList[group_id] || String(group_id)
+  }
 
   /**
    * 群员昵称缓存
@@ -73,6 +79,12 @@ export class Data {
     }
     this.Bot.Log.logNotice('群员昵称缓存已更新', '缓存')
   }
+  /**
+   * 获取指定群员昵称
+   */
+  getGroupMenberName(group_id: number, user_id: number) {
+    return this.groupMemberList?.[group_id]?.[user_id] || String(user_id)
+  }
 
   /**
    * 好友昵称缓存
@@ -100,29 +112,13 @@ export class Data {
   /**
    * 增加不显示Log输出的群组
    */
-  setNoLog(list: number[]): void {
-    this.noLogList = new Set(([...this.noLogList, ...list]))
-  }
-
-  /**
-   * 不启用内置指令的群组列表
-   */
-  private _noCommList: Set<number> = new Set<number>()
-  set noCommList(list: Set<number>) {
-    this._noCommList = list
-    this.Bot.Command.list.forEach(item => {
-      if (item.group === '内置指令') {
-        item.blacklist = this._noCommList
-      }
-    })
-  }
-  get noCommList(): Set<number> {
-    return this._noCommList
+  setNoLog(group_id: number): void {
+    this.noLogList.add(group_id)
   }
   /**
-   * 增加不启用内置指令的群组
+   * 移除不显示Log输出的群组
    */
-  setNoComm(list: number[]): void {
-    this.noCommList = new Set(([...this._noCommList, ...list]))
+  removeNoLog(group_id: number): void {
+    this.noLogList.delete(group_id)
   }
 }

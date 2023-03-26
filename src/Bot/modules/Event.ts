@@ -1,7 +1,6 @@
 import { cyan, magenta, red, white } from 'colors'
 import { ClientStatus, Essence, Friend, FriendAdd, FriendRecall, Group, GroupAdmin, GroupBan, GroupCard, GroupDecrease, GroupIncrease, GroupMsg, GroupNotify, GroupRecall, GroupUpload, Message, OfflineFile, Prevent, PrivateMsg } from '../../Type'
 import { Bot } from '../Bot'
-import { emitter } from './Emitter'
 
 export class Event {
   constructor(Bot: Bot) {
@@ -274,15 +273,26 @@ export class Event {
     return this
   }
 
+  sendEvent: {
+    group: ((group_id: number, message: Message) => Prevent)[]
+    private: ((user_id: number, message: Message) => Prevent)[]
+  } = {
+    group: [],
+    private: []
+  }
+
   /**
    * 发送消息完成事件
    */
   onSendMessage(type: 'sendPrivateMsg', fn: (user_id: number, message: Message) => void): this
   onSendMessage(type: 'sendGroupMsg', fn: (group_id: number, message: Message) => void): this
   onSendMessage(type: 'sendPrivateMsg' | 'sendGroupMsg', fn: any) {
-    emitter.on(type, (arg1, arg2) => {
-      fn(arg1, arg2)
-    })
+    if (type === 'sendGroupMsg') {
+      this.sendEvent.group.push(fn)
+    }
+    if (type === 'sendPrivateMsg') {
+      this.sendEvent.private.push(fn)
+    }
     return this
   }
 }

@@ -1,7 +1,6 @@
 import { red, white, yellow } from 'colors'
 import { Device, EssenceMsg, GroupInfo, HonorInfo, HonorItem, HonorType, ImageInfo, MemberInfo, Message, Msg, NodeMessage, PrivateSender, QQInfo, Status, VersionInfo } from '../../Type'
 import { Bot } from '../Bot'
-import { emitter } from './Emitter'
 
 export class Api {
   constructor(bot: Bot) {
@@ -42,7 +41,9 @@ export class Api {
       auto_escape
     })
 
-    emitter.emit('sendPrivateMsg', user_id, message)
+    for (const i in this.Bot.Event.sendEvent.private) {
+      if (await (this.Bot.Event.sendEvent.private[i])(user_id, message)) break
+    }
 
     const name = white(this.Bot.Data.friendList[user_id] || '')
 
@@ -75,7 +76,9 @@ export class Api {
       auto_escape
     })
 
-    emitter.emit('sendGroupMsg', group_id, message)
+    for (const i in this.Bot.Event.sendEvent.group) {
+      if (await (this.Bot.Event.sendEvent.group[i])(group_id, message)) break
+    }
 
     const group_name = white(this.Bot.Data.groupList[group_id] || '')
 
@@ -103,6 +106,10 @@ export class Api {
       group_id,
       messages
     })
+
+    for (const i in this.Bot.Event.sendEvent.group) {
+      if (await (this.Bot.Event.sendEvent.group[i])(group_id, '')) break
+    }
 
     const group_name = white(this.Bot.Data.groupList[group_id] || '')
 
@@ -135,7 +142,7 @@ export class Api {
    * 获取消息
    * @param message_id 消息 ID
    */
-  async getMsg(message_id: number): Promise<Msg | undefined> {
+  async getMsg(message_id: number | string): Promise<Msg | undefined> {
     if (this.Bot.Debug.debug) {
       this.Bot.Log.logDebug(`获取消息 (${message_id})`)
       return {

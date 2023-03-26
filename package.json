@@ -14,7 +14,7 @@
     "docs": "rimraf docs && typedoc src/ --out ./docs"
   },
   "author": "Blacktunes",
-  "license": "GPL-3.0",
+  "license": " LGPL-3.0",
   "keywords": [
     "qq-robot",
     "go-cqhttp",

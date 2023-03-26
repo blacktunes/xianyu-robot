@@ -95,7 +95,7 @@ export class Log {
    * @param {string} content
    */
   sendLog(level: LogColor, content: string, type?: string) {
-    this.printLog(`[${type || this.name || '日志'}] ${decode(content)}`, level)
+    this.printLog(`${this.name ? `[${this.name}]` : ''}[${type || '日志'}] ${decode(content)}`, level)
   }
 
   /**
